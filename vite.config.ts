@@ -3,6 +3,7 @@ import react, { reactCompilerPreset } from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
 import autoprefixer from 'autoprefixer'
 import babel from '@rolldown/plugin-babel'
+import tailwindcss from '@tailwindcss/vite'
 import { fileURLToPath, URL } from 'node:url'
 import { createHtmlPlugin } from 'vite-plugin-html'
 
@@ -22,12 +23,13 @@ export default defineConfig(conf => {
     envPrefix,
     plugins: [
       react(),
+      tailwindcss(),
       babel({ presets: [reactCompilerPreset()] }),
       svgr(),
       createHtmlPlugin({
         inject: {
           data: {
-
+            appName: getEnv('ENV_APP_NAME')
           }
         }
       }),

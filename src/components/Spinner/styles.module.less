@@ -1,0 +1,37 @@
+.spinner {
+  display: inline-block;
+  color: currentColor;
+
+  @keyframes global-keyframes-spin {
+    to {
+      transform: rotate(1turn)
+    }
+  }
+
+  svg {
+    fill: currentColor;
+    animation: global-keyframes-spin .45s linear infinite;
+  }
+}
+
+.infinity-spin,
+.rotating-lines {
+  display: inline-block;
+  color: var(--primaryColor);
+}
+
+.infinity-spin {
+  svg {
+    width: 1em;
+    height: 0.5em;
+  }
+}
+
+.rotating-lines {
+  color: currentColor;
+
+  svg {
+    width: 1em;
+    height: 1em;
+  }
+}
