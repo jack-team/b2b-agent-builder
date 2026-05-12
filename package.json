@@ -28,7 +28,10 @@
     "tailwindcss": "^4.2.4",
     "zustand": "^5.0.13",
     "classnames": "^2.5.1",
-    "rc-field-form": "^2.7.1"
+    "rc-field-form": "^2.7.1",
+    "eventemitter3": "^5.0.1",
+    "humps": "^2.0.1",
+    "qs": "^6.15.1"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
@@ -38,6 +41,8 @@
     "@types/node": "^24.12.2",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
+    "@types/humps": "^2.0.1",
+    "@types/qs": "^6.15.1",
     "@vitejs/plugin-react": "^6.0.1",
     "autoprefixer": "^10.5.0",
     "babel-plugin-react-compiler": "^1.0.0",

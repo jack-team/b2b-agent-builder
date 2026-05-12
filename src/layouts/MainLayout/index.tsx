@@ -19,7 +19,7 @@ const MainLayout: FC = () => {
   return (
     <div className="h-full flex">
       <MainMenu collapsed={menuCollapsed} />
-      <div className="flex-1 h-full bg-[#f6f6f6] flex flex-col">
+      <div className="flex-1 h-full bg-[var(--bg-color-primary)] flex flex-col">
         <div className="h-[60px] bg-[#fff] flex items-center px-[16px]">
           <Button
             type="text"
