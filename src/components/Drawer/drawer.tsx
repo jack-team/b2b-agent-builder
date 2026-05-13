@@ -11,12 +11,12 @@ const Drawer: FC<CustomDrawerProps> = (props) => {
 
   const [open, setOpen] = useSafeState(false);
   const emitter = useMemo(() => new EventEmitter<DrawerEventType>(), []);
-  
+
   const onOpen = useMemoizedFn(() => setOpen(true));
   const onClose = useMemoizedFn(() => setOpen(false));
 
   const afterOpenChange = useMemoizedFn((open: boolean) => {
-    emitter.emit(open ? 'afterOpen': 'afterClose');
+    emitter.emit(open ? 'afterOpen' : 'afterClose');
   });
 
   const triggerElement = useMemo(() => {
@@ -37,6 +37,7 @@ const Drawer: FC<CustomDrawerProps> = (props) => {
         open={open}
         onClose={onClose}
         destroyOnHidden
+        push={{ distance: 100 }}
         rootClassName={styles.drawer}
         afterOpenChange={afterOpenChange}
         mask={{ closable: false, blur: false }}

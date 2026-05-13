@@ -1,0 +1,257 @@
+import type { FC } from 'react';
+import { Tag, Button, Space, Row, Col } from 'antd';
+import { PlusOutlined, UndoOutlined, SaveOutlined } from '@ant-design/icons';
+import { ProForm, ProCard, ProFormSelect, ProFormText, ProFormRadio, ProFormUploadDragger, ProFormTextArea, ProFormCheckbox, ProFormSlider } from '@ant-design/pro-components';
+import type { ProColumns } from '@ant-design/pro-table';
+import { DrawerContainer } from '@/components/Drawer';
+import TagsInput from '@/components/TagsInput';
+
+const UpdateKnowledge: FC = () => {
+  return (
+    <DrawerContainer
+      title="Update Knowledge"
+      extra={
+        <Space size={16}>
+          <Button icon={<UndoOutlined />}>Reset</Button>
+          <Button type="primary" icon={<SaveOutlined />}>Save</Button>
+        </Space>
+      }
+    >
+      <ProForm submitter={false}>
+        <Row gutter={24}>
+          <Col span={10}>
+            <ProCard title="Learn New Knowledge">
+              <ProFormSelect
+                name="knowledge_type"
+                label="Knowledge Type"
+              />
+              <ProFormRadio.Group
+                name="addition_method"
+                label="Addition method"
+                options={[
+                  {
+                    label: 'Import',
+                    value: 'import',
+                  },
+                  {
+                    label: 'Manual',
+                    value: 'manual',
+                  },
+                ]}
+              />
+              <ProFormUploadDragger
+                name="document"
+                label="Document"
+              />
+              <ProFormTextArea
+                name="document_text"
+                label="Document"
+              />
+              <ProFormText
+                name="knowledge_name"
+                label="Title"
+              />
+              <ProFormText
+                name="knowledge_tags"
+                label="Tags"
+              />
+              <ProFormSelect
+                name="link_to_existing_knowledge"
+                label="Link to existing knowledge"
+              />
+              <Row gutter={12}>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="automatic_vectorization"
+                    label="Automatic vectorization"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="auto_over_duplicates"
+                    label="Auto-overwrite duplicates"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="data_cleaning"
+                    label="Data cleaning"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+              </Row>
+            </ProCard>
+            <ProCard title="Data Cleaning Rules" className="mt-[24px]">
+              <Row gutter={12}>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="strip_blanks"
+                    label="Strip blanks"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="remove_special_characters"
+                    label="Remove special characters"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="merge_extra_line_breaks"
+                    label="Merge extra line breaks"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="blocked_word_filtering"
+                    label="Blocked word filtering"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+              </Row>
+              <ProFormText
+                name="custom_clean_regex"
+                label="Custom clean regex"
+              />
+            </ProCard>
+          </Col>
+          <Col span={14}>
+            <ProCard title="Extraction rules">
+              <Row gutter={12}>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="entity_extraction_rules"
+                    label="Entity extraction"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="relation_extraction_rules"
+                    label="Relation extraction"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="keyword_extraction_rules"
+                    label="Keyword extraction"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+                <Col span={12}>
+                  <ProFormCheckbox
+                    name="summarize"
+                    label="Summarize"
+                  >
+                    Enable
+                  </ProFormCheckbox>
+                </Col>
+              </Row>
+              <ProFormSlider
+                name="extraction_depth"
+                label="Extraction depth"
+                min={0}
+                max={100}
+                initialValue={50}
+              />
+            </ProCard>
+            <ProCard title="Vector config" className="mt-[24px]">
+              <Row gutter={12}>
+                <Col span={12}>
+                  <ProFormSelect
+                    name="vector_model"
+                    label="Model"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormSelect
+                    name="embedding_dimension"
+                    label="Embedding dimension"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormText
+                    name="chunk_size"
+                    label="Chunk size"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormText
+                    name="chunk_overlap_size"
+                    label="Chunk overlap size"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormText
+                    name="vector_store_type"
+                    label="Vector store type"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormText
+                    name="top_k"
+                    label="Top K"
+                  />
+                </Col>
+              </Row>
+            </ProCard>
+            <ProCard title="Knowledge Graph Schema" className="mt-[24px]">
+              <Row gutter={12}>
+                <Col span={12}>
+                  <ProFormSelect
+                    name="entity_type"
+                    label="Entity type"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormSelect
+                    name="entity_relation_type"
+                    label="Entity relation type"
+                  />
+                </Col>
+              </Row>
+              <Row gutter={12}>
+                <Col span={12}>
+                  <ProFormSelect
+                    name="graph_store_engine"
+                    label="Graph store engine"
+                  />
+                  <ProForm.Item
+                    name="required_entity_attributes"
+                    label=" Required entity attributes"
+                  >
+                    <TagsInput />
+                  </ProForm.Item>
+                </Col>
+                <Col span={12}>
+                  <ProFormTextArea
+                    name="schema"
+                    label="Schema (JSON)"
+                  />
+                </Col>
+              </Row>
+            </ProCard>
+          </Col>
+        </Row>
+      </ProForm>
+    </DrawerContainer>
+  );
+};
+
+export default UpdateKnowledge;

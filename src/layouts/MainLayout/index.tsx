@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Suspense } from 'react';
-import { Button } from 'antd';
+import { Button, Avatar } from 'antd';
 import { Outlet } from 'react-router-dom';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import Spinner from '@/components/Spinner';
@@ -20,7 +20,7 @@ const MainLayout: FC = () => {
     <div className="h-full flex">
       <MainMenu collapsed={menuCollapsed} />
       <div className="flex-1 h-full bg-[var(--bg-color-primary)] flex flex-col">
-        <div className="h-[60px] bg-[#fff] flex items-center px-[16px]">
+        <div className="h-[60px] bg-[#fff] flex items-center justify-between px-[16px]">
           <Button
             type="text"
             size="large"
@@ -30,6 +30,12 @@ const MainLayout: FC = () => {
               <MenuFoldOutlined />
             }
           />
+          <div className="h-full py-[6px]">
+            <div className="flex items-center gap-[8px] cursor-pointer h-full px-[12px] rounded-[12px] hover:bg-[#f5f5f5]">
+              <Avatar size={24} />
+              <div>578091306@qq.com</div>
+            </div>
+          </div>
         </div>
         <div className="flex-1 overflow-auto">
           <Suspense fallback={renderLoading()}>

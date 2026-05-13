@@ -1,4 +1,5 @@
 import { type FC, Fragment } from 'react';
+import en_US from 'antd/es/locale/en_US';
 import { ConfigProvider, App as AntApp } from 'antd';
 import StyledVariables from './components/StyledVariables';
 import { useThemeStore } from '@/store/theme';
@@ -12,7 +13,7 @@ const App: FC = () => {
   return (
     <Fragment>
       <StyledVariables variables={appTheme} />
-      <ConfigProvider theme={antdTheme}>
+      <ConfigProvider theme={antdTheme} locale={en_US}>
         <AntApp className="h-full">
           <AppRouter />
         </AntApp>
