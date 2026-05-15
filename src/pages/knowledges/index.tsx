@@ -8,7 +8,7 @@ import GraphVisualization from './components/GraphVisualization';
 import ImportIcon from '@/assets/svg-icons/page/import.svg?react';
 import TableIcon from '@/assets/svg-icons/page/table.svg?react';
 import DataGrid from './components/DataGrid';
-import KnowledgeSources from './components/KnowledgeSources';
+import KnowledgeSources from '@/bsComponents/KnowledgeSources';
 
 const Knowledges: FC = () => {
   const { t } = useTranslation();
@@ -19,7 +19,7 @@ const Knowledges: FC = () => {
       extra={
         <Space size={16}>
           <Drawer
-            size="70vw"
+            size="var(--drawer-width)"
             trigger={(
               <Button type="primary" icon={<TableIcon />}>
                 Knowledge Sources

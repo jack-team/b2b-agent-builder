@@ -1,8 +1,7 @@
 import type { FC } from 'react';
-import { Tag, Button, Space, Row, Col } from 'antd';
-import { PlusOutlined, UndoOutlined, SaveOutlined } from '@ant-design/icons';
+import { Button, Space, Row, Col } from 'antd';
+import { UndoOutlined, SaveOutlined } from '@ant-design/icons';
 import { ProForm, ProCard, ProFormSelect, ProFormText, ProFormRadio, ProFormUploadDragger, ProFormTextArea, ProFormCheckbox, ProFormSlider } from '@ant-design/pro-components';
-import type { ProColumns } from '@ant-design/pro-table';
 import { DrawerContainer } from '@/components/Drawer';
 import TagsInput from '@/components/TagsInput';
 
@@ -19,7 +18,7 @@ const UpdateKnowledge: FC = () => {
     >
       <ProForm submitter={false}>
         <Row gutter={24}>
-          <Col span={10}>
+          <Col span={11}>
             <ProCard title="Learn New Knowledge">
               <ProFormSelect
                 name="knowledge_type"
@@ -127,7 +126,7 @@ const UpdateKnowledge: FC = () => {
               />
             </ProCard>
           </Col>
-          <Col span={14}>
+          <Col span={13}>
             <ProCard title="Extraction rules">
               <Row gutter={12}>
                 <Col span={12}>

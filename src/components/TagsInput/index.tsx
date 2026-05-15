@@ -12,7 +12,7 @@ const TagsInput: FC<TagsInputProps> = (props) => {
   const [text, setText] = useSafeState<string>('');
 
   const handleAdd = useMemoizedFn(() => {
-    if (text) {
+    if (text && onChange) {
       onChange([...value, text]);
       setText('');
     }
@@ -25,7 +25,9 @@ const TagsInput: FC<TagsInputProps> = (props) => {
   );
 
   const onDelete = useMemoizedFn((tag: string) => {
-    onChange(value.filter((item) => item !== tag));
+    if (onChange) {
+      onChange(value.filter((item) => item !== tag));
+    }
   });
 
   return (
@@ -45,8 +47,18 @@ const TagsInput: FC<TagsInputProps> = (props) => {
         </div>
       )}
       <Space.Compact className="w-full">
-        <Input onChange={handleChange} value={text} />
-        <Button type="primary" onClick={handleAdd} disabled={!text.trim()}>Add</Button>
+        <Input
+          value={text}
+          onChange={handleChange}
+          placeholder="Please enter"
+        />
+        <Button
+          type="primary"
+          onClick={handleAdd}
+          disabled={!text.trim()}
+        >
+          Add
+        </Button>
       </Space.Compact>
     </div>
   );

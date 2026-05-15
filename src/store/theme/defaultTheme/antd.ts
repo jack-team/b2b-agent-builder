@@ -30,8 +30,14 @@ export default<ConfigProviderProps['theme']> {
     },
     Table: {
       headerBg: 'transparent',
-      headerSplitColor: 'transparent',
-      cellFontSize: 14,
-    }
+      headerSplitColor: 'transparent'
+    },
+    Input: {
+      borderRadius: 4,
+      colorBorder: '#E5E5E5'
+    },
+    Card: {
+      paddingLG: 16
+    },
   }
 };

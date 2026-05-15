@@ -37,7 +37,7 @@ const Drawer: FC<CustomDrawerProps> = (props) => {
         open={open}
         onClose={onClose}
         destroyOnHidden
-        push={{ distance: 100 }}
+        push={{ distance: 0 }}
         rootClassName={styles.drawer}
         afterOpenChange={afterOpenChange}
         mask={{ closable: false, blur: false }}

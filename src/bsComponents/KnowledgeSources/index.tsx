@@ -1,10 +1,10 @@
 import type { FC } from 'react';
 import { Tag, Button, Space, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { ProTable, ProCard } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
-import UpdateKnowledge from '../UpdateKnowledge';
+import UpdateKnowledge from '@/bsComponents/UpdateKnowledge';
 
 interface KnowledgeSource {
   key: string;
@@ -43,13 +43,47 @@ const mockData: KnowledgeSource[] = [
     keywords: ['Workflow', 'Relationship', 'Orchestration'],
     status: 'disabled',
   },
+  {
+    key: '5',
+    documentName: 'AI Agent Agent Orchestration and Automation ...',
+    type: 'Document',
+    keywords: ['Workflow', 'Relationship', 'Orchestration'],
+    status: 'disabled',
+  },
+  {
+    key: '6',
+    documentName: 'AI Agent Agent Orchestration and Automation ...',
+    type: 'Document',
+    keywords: ['Workflow', 'Relationship', 'Orchestration'],
+    status: 'disabled',
+  },
+  {
+    key: '7',
+    documentName: 'AI Agent Agent Orchestration and Automation ...',
+    type: 'Document',
+    keywords: ['Workflow', 'Relationship', 'Orchestration'],
+    status: 'disabled',
+  },
+  {
+    key: '8',
+    documentName: 'AI Agent Agent Orchestration and Automation ...',
+    type: 'Document',
+    keywords: ['Workflow', 'Relationship', 'Orchestration'],
+    status: 'disabled',
+  },
+  {
+    key: '9',
+    documentName: 'AI Agent Agent Orchestration and Automation ...',
+    type: 'Document',
+    keywords: ['Workflow', 'Relationship', 'Orchestration'],
+    status: 'disabled',
+  },
 ];
 
 const columns: ProColumns<KnowledgeSource>[] = [
   {
     title: 'Document Name',
     dataIndex: 'documentName',
-    ellipsis: true,
   },
   {
     title: 'Type',
@@ -79,6 +113,7 @@ const columns: ProColumns<KnowledgeSource>[] = [
   },
   {
     title: 'Actions',
+    hideInSearch: true,
     dataIndex: 'actions',
     width: 140,
     render: () => (
@@ -91,33 +126,46 @@ const columns: ProColumns<KnowledgeSource>[] = [
 ];
 
 const KnowledgeSources: FC = () => {
+  const renderNewKnowledgeButton = () => (
+    <Drawer
+      size="var(--drawer-width)"
+      trigger={
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+        >
+          New Knowledge
+        </Button>
+      }
+    >
+      <UpdateKnowledge />
+    </Drawer>
+  );
+
   return (
-    <DrawerContainer title="Knowledge Sources">
+    <DrawerContainer
+      title="Knowledge Sources"
+      extra={renderNewKnowledgeButton()}
+    >
       <ProTable
+        size="medium"
         columns={columns}
         toolBarRender={false}
         dataSource={mockData}
         search={{
           layout: 'vertical'
         }}
+        tableViewRender={({ dataSource = [] }, dom) => {
+          if (!dataSource.length) {
+            return (
+              <div className="py-[56px]">
+                <Empty>{renderNewKnowledgeButton()}</Empty>
+              </div>
+            );
+          }
+          return dom;
+        }}
       />
-      <ProCard className="mt-[24px] p-[24px]">
-        <Empty description="No Data Available"  >
-          <Drawer
-            size="80vw"
-            trigger={
-              <Button
-                type="primary"
-                icon={<PlusOutlined />}
-              >
-                Update Knowledge
-              </Button>
-            }
-          >
-            <UpdateKnowledge />
-          </Drawer>
-        </Empty>
-      </ProCard>
     </DrawerContainer>
   );
 };
