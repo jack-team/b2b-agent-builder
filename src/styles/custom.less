@@ -1,17 +1,28 @@
+@gay-box-color: #f9f9f9;
+
 .ant-form {
   .ant-form-item {
-    padding: 16px;
+    padding: 12px;
   }
 
   .ant-form-item:not(.ant-pro-query-filter-actions) {
     border-radius: 8px;
-    background: rgba(204, 204, 204, 0.1);
+    background: @gay-box-color;
   }
 }
 
 .ant-pro-card {
-  border-radius: 8px;
+  border-radius: 12px;
+
+  .ant-pro-card-header {
+    padding-inline: 16px;
+  }
+
+  .ant-pro-card-body {
+    padding: 16px;
+  }
 }
+
 
 .ant-pro-table {
   .ant-pro-form {
@@ -24,4 +35,24 @@
     padding-bottom: 16px !important;
     padding-inline: 16px !important;
   }
+}
+
+.gay-box {
+  padding: 12px;
+  border-radius: 8px;
+  background: @gay-box-color;
+}
+
+.ant-pro-form-list-item {
+  .ant-form-item {
+    padding: 0;
+  }
+}
+
+.ant-pro-form-list-container {
+  width: 100%;
+}
+
+.ant-pro-form-list-action {
+  height: auto;
 }

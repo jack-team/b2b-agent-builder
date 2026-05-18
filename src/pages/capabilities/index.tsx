@@ -91,7 +91,7 @@ const Capabilities: FC = () => {
       title={t('menu.capabilities')}
       extra={
         <Drawer
-          size="var(--drawer-width)"
+          size={700}
           trigger={<Button type="primary">+ New Provider</Button>}>
           <MCPServerConfig />
         </Drawer>

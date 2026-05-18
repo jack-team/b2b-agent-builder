@@ -1,9 +1,8 @@
 import type { FC } from 'react';
-import { Button, Space, Row, Col, Card } from 'antd';
-import { PlusOutlined, MinusCircleOutlined } from '@ant-design/icons';
-import { ProForm, ProCard, ProFormSelect, ProFormText, ProFormUploadDragger, ProFormTextArea } from '@ant-design/pro-components';
+import { Button, Space, Row, Col } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
+import { ProForm, ProCard, ProFormSelect, ProFormText, ProFormUploadDragger, ProFormCheckbox, ProFormList } from '@ant-design/pro-components';
 import { DrawerContainer } from '@/components/Drawer';
-
 interface MCPServerConfigProps {
   onClose?: () => void;
 }
@@ -19,150 +18,160 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
       }
       onClose={onClose}
     >
-      <Card>
-              <ProForm submitter={false}>
-        <ProFormText
-          name="mcp_server_name"
-          label="MCP server name"
-          initialValue="Production"
-        />
-
-        <Row gutter={16}>
-          <Col span={12}>
-            <ProFormSelect
-              name="status"
-              label="Status"
-              initialValue="enable"
-              options={[
-                { value: 'enable', label: 'Enable' },
-                { value: 'disable', label: 'Disable' },
-              ]}
-            />
-          </Col>
-          <Col span={12}>
-            <ProFormText
-              name="timeout"
-              label="Timeout (ms)"
-              initialValue="30000"
-            />
-          </Col>
-        </Row>
-
-        <ProFormSelect
-          name="transport"
-          label="Transport"
-          initialValue="stdio"
-          options={[
-            { value: 'stdio', label: 'Stdio' },
-            { value: 'http', label: 'HTTP' },
-            { value: 'websocket', label: 'Websocket' },
-          ]}
-        />
-
-        <ProCard title="Standard Input/Output" className="mt-[24px]">
-          <Row gutter={16}>
-            <Col span={12}>
-              <ProFormText
-                name="command"
-                label="Command"
-                initialValue="python"
-              />
-            </Col>
-            <Col span={12}>
-              <ProFormText
-                name="working_directory"
-                label="Working directory"
-                initialValue="/opt/workspace"
-              />
-            </Col>
-          </Row>
-          <ProForm.Item
-            name="arguments"
-            label="Arguments"
-            fieldProps={{
-              rows: 4,
-            }}
-          >
-            <ProFormTextArea
-              initialValue="python /opt/workspace -m y -s\n-s"
-            />
-          </ProForm.Item>
-          <Button type="link" icon={<PlusOutlined />}>
-            + Add argument
-          </Button>
-        </ProCard>
-
-        <ProCard title="Internalizable Connection" className="mt-[24px]">
-          <ProFormUploadDragger
-            name="internalizable_source_package"
-            label="Internalizable Source package"
-            fieldProps={{
-              maxCount: 1,
-            }}
+      <ProCard>
+        <ProForm submitter={false}>
+          <ProFormText
+            name="mcp_server_name"
+            label="MCP server name"
+            initialValue="Production"
           />
           <Row gutter={16}>
             <Col span={12}>
-              <ProFormText
-                name="package_name"
-                label="Package name"
-              />
+              <ProFormCheckbox
+                name="status"
+                label="Status"
+                initialValue="enable"
+              >
+                Enable
+              </ProFormCheckbox>
             </Col>
             <Col span={12}>
               <ProFormText
-                name="class_name"
-                label="Class name"
+                name="timeout"
+                label="Timeout (ms)"
+                initialValue="30000"
               />
             </Col>
           </Row>
-          <Button type="link" icon={<PlusOutlined />}>
-            + Add new variable
-          </Button>
-          <ProFormText
-            name="url_internal"
-            label="URL"
+          <ProFormSelect
+            name="transport"
+            label="Transport"
+            initialValue="stdio"
+            options={[
+              { value: 'stdio', label: 'Stdio' },
+              { value: 'http', label: 'HTTP' },
+              { value: 'websocket', label: 'Websocket' },
+            ]}
           />
-          <ProFormText
-            name="authorization_token_internal"
-            label="Authorization token"
-          />
-        </ProCard>
-
-        <ProCard title="Remote Connection" className="mt-[24px]">
-          <ProFormText
-            name="url_remote"
-            label="URL"
-          />
-          <ProFormText
-            name="authorization_token_remote"
-            label="Authorization token"
-          />
-        </ProCard>
-
-        <ProCard title="Environment variable" className="mt-[24px]">
-          <Row gutter={16}>
-            <Col span={10}>
-              <ProFormText
-                name="variable_name"
-                label="Variable name"
+          <div className="gay-box mt-[16px]">
+            <ProCard title="Standard Input/Output">
+              <Row gutter={16}>
+                <Col span={12}>
+                  <ProFormText
+                    name="command"
+                    label="Command"
+                    initialValue="python"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormText
+                    name="working_directory"
+                    label="Working directory"
+                    initialValue="/opt/workspace"
+                  />
+                </Col>
+              </Row>
+              <ProFormList
+                name="arguments"
+                label="Arguments"
+                creatorButtonProps={{
+                  type: 'link',
+                  icon: <PlusOutlined />,
+                  creatorButtonText: 'Add new argument',
+                }}
+              >
+                <ProFormText
+                  name="argument"
+                  initialValue="-m y -s"
+                  className="w-full"
+                />
+              </ProFormList>
+            </ProCard>
+          </div>
+          <div className="gay-box mt-[16px]">
+            <ProCard title="Internalizable Connection" >
+              <ProFormUploadDragger
+                name="internalizable_source_package"
+                label="Internalizable Source package"
+                fieldProps={{
+                  maxCount: 1,
+                }}
               />
-            </Col>
-            <Col span={10}>
+              <ProFormList
+                initialValue={[{}]}
+                name="internalizable_source_package1"
+                label="Internalizable Source package"
+                creatorButtonProps={{
+                  type: 'link',
+                  icon: <PlusOutlined />,
+                  creatorButtonText: 'Add new variable',
+                }}
+              >
+                <Row gutter={16}>
+                  <Col span={12}>
+                    <ProFormText
+                      name="package_name"
+                      placeholder="Package name"
+                    />
+                  </Col>
+                  <Col span={12}>
+                    <ProFormText
+                      name="class_name"
+                      placeholder="Class name"
+                    />
+                  </Col>
+                </Row>
+              </ProFormList>
               <ProFormText
-                name="variable_value"
-                label="Value"
+                name="url_internal"
+                label="URL"
               />
-            </Col>
-            <Col span={4}>
-              <Button danger icon={<MinusCircleOutlined />} />
-            </Col>
-          </Row>
-          <Button type="link" icon={<PlusOutlined />}>
-            + Add new variable
-          </Button>
-        </ProCard>
-      </ProForm>
-      </Card>
-
+              <ProFormText
+                name="authorization_token_internal"
+                label="Authorization token"
+              />
+            </ProCard>
+          </div>
+          <div className="gay-box mt-[16px]">
+            <ProCard title="Remote Connection">
+              <ProFormText
+                name="url_remote"
+                label="URL"
+              />
+              <ProFormText
+                name="authorization_token_remote"
+                label="Authorization token"
+              />
+            </ProCard>
+          </div>
+          <div className="mt-[16px]">
+            <ProFormList
+              name="environment_variables"
+              label="Environment variables"
+              creatorButtonProps={{
+                type: 'link',
+                icon: <PlusOutlined />,
+                creatorButtonText: 'Add new variable',
+              }}
+            >
+              <Row gutter={16}>
+                <Col span={12}>
+                  <ProFormText
+                    name="variable_name"
+                    placeholder="Variable name"
+                  />
+                </Col>
+                <Col span={12}>
+                  <ProFormText
+                    name="variable_value"
+                    placeholder="Value"
+                  />
+                </Col>
+              </Row>
+            </ProFormList>
+          </div>
+        </ProForm>
+      </ProCard>
     </DrawerContainer>
   );
 };
