@@ -1,15 +1,12 @@
 import type { FC } from 'react';
 import { Suspense } from 'react';
-import { Button, Avatar } from 'antd';
+import { Layout } from 'antd';
 import { Outlet } from 'react-router-dom';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import Spinner from '@/components/Spinner';
-import { useAppStore } from '@/store/app';
+import LayoutHeader from './header';
 import MainMenu from './menu';
 
 const MainLayout: FC = () => {
-  const { menuCollapsed, toggleMenu } = useAppStore();
-
   const renderLoading = () => (
     <div className="h-full flex items-center justify-center text-[160px]">
       <Spinner type="infinity-spin" />
@@ -17,33 +14,17 @@ const MainLayout: FC = () => {
   );
 
   return (
-    <div className="h-full flex">
-      <MainMenu collapsed={menuCollapsed} />
-      <div className="flex-1 h-full bg-[var(--bg-color-primary)] flex flex-col">
-        <div className="h-[60px] bg-[#fff] flex items-center justify-between px-[16px]">
-          <Button
-            type="text"
-            size="large"
-            onClick={toggleMenu}
-            icon={menuCollapsed ?
-              <MenuUnfoldOutlined /> :
-              <MenuFoldOutlined />
-            }
-          />
-          <div className="h-full py-[6px]">
-            <div className="flex items-center gap-[8px] cursor-pointer h-full px-[12px] rounded-[12px] hover:bg-[#f5f5f5]">
-              <Avatar size={24} />
-              <div>578091306@qq.com</div>
-            </div>
-          </div>
-        </div>
-        <div className="flex-1 overflow-auto">
+    <Layout className="h-full">
+      <MainMenu />
+      <Layout className="bg-[var(--bg-color-primary)]">
+        <LayoutHeader />
+        <Layout.Content className="overflow-y-auto">
           <Suspense fallback={renderLoading()}>
             <Outlet />
           </Suspense>
-        </div>
-      </div>
-    </div>
+        </Layout.Content>
+      </Layout>
+    </Layout>
   );
 };
 

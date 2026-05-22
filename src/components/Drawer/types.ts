@@ -9,6 +9,7 @@ export type CustomDrawerProps = {
 } & Omit<DrawerProps, 'open' | 'mask'>;
 
 export type DrawerContextTypes = {
+  isRoot?: boolean;
   emitter?: EventEmitter<DrawerEventType>;
 };
 

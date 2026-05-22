@@ -4,15 +4,16 @@ import appTheme from './app';
 const colorPrimary = appTheme.colorPrimary;
 const bgColorPrimary = appTheme.bgColorPrimary;
 
-export default<ConfigProviderProps['theme']> {
+export default <ConfigProviderProps['theme']>{
   token: {
     colorPrimary,
-    colorText: appTheme.textColorPrimary
+    colorText: appTheme.textPrimary
   },
   components: {
     Menu: {
-      itemHeight: 55,
-      itemSelectedColor: colorPrimary,
+      fontSize: 15,
+      itemHeight: 48,
+      darkItemColor: '#999'
     },
     Form: {
       itemMarginBottom: 16,
@@ -21,23 +22,27 @@ export default<ConfigProviderProps['theme']> {
     Button: {
       borderRadiusSM: 6,
       paddingInlineSM: 8,
-      defaultBg: bgColorPrimary,
-      defaultBorderColor: bgColorPrimary,
+      primaryShadow: 'none',
+      fontSize: 12,
+      fontWeight: 550,
+      borderRadius: 8
     },
     Tabs: {
       cardBg: bgColorPrimary,
       cardActiveBg: bgColorPrimary,
     },
-    Table: {
-      headerBg: 'transparent',
-      headerSplitColor: 'transparent'
-    },
     Input: {
-      borderRadius: 4,
-      colorBorder: '#E5E5E5'
+      borderRadius: 8
+    },
+    Select: {
+      borderRadius: 8
     },
     Card: {
       paddingLG: 16
     },
+    Layout: {
+      headerBg: '#fff',
+      headerPadding: '0 16px'
+    }
   }
 };

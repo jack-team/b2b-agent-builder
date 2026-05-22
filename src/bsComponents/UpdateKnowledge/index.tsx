@@ -4,6 +4,8 @@ import { UndoOutlined, SaveOutlined } from '@ant-design/icons';
 import { ProForm, ProCard, ProFormSelect, ProFormText, ProFormRadio, ProFormUploadDragger, ProFormTextArea, ProFormCheckbox, ProFormSlider } from '@ant-design/pro-components';
 import { DrawerContainer } from '@/components/Drawer';
 import TagsInput from '@/components/TagsInput';
+import KnowledgeTypeSelect from '@/bsComponents/KnowledgeTypeSelect';
+
 
 const UpdateKnowledge: FC = () => {
   return (
@@ -20,7 +22,7 @@ const UpdateKnowledge: FC = () => {
         <Row gutter={24}>
           <Col span={11}>
             <ProCard title="Learn New Knowledge">
-              <ProFormSelect
+              <KnowledgeTypeSelect
                 name="knowledge_type"
                 label="Knowledge Type"
               />

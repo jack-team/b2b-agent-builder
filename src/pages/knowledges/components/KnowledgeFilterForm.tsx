@@ -84,6 +84,7 @@ const KnowledgeFilterForm: FC = () => {
       </Space>
       <ProFormTextArea
         rows={5}
+        readonly
         name="queryStatement"
         label="Query statement preview"
         initialValue="MATCH (m:User)-[r:Has]->(n) WHERE n.age > 18 RETURN * LIMIT 10"

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 
 const GraphVisualization: FC = () => {
   return (
-    <div>
+    <div className="p-[12px]">
       GraphVisualization
     </div>
   );

@@ -115,11 +115,10 @@ const columns: ProColumns<KnowledgeSource>[] = [
     title: 'Actions',
     hideInSearch: true,
     dataIndex: 'actions',
-    width: 140,
+    width: 100,
     render: () => (
       <Space size={12}>
-        <Button size="small">Edit</Button>
-        <Button danger size="small">Delete</Button>
+        <Button danger type="link" size="small">Delete</Button>
       </Space>
     ),
   },
@@ -134,7 +133,7 @@ const KnowledgeSources: FC = () => {
           type="primary"
           icon={<PlusOutlined />}
         >
-          New Knowledge
+          Update Knowledges  
         </Button>
       }
     >

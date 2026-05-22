@@ -1,10 +1,9 @@
-import { hexToRgba } from '@/utils';
-
-const colorPrimary = '#7948EA';
+const colorPrimary = '#10B981';
 
 export default {
   colorPrimary,
-  bgColorPrimary: hexToRgba(colorPrimary, 0.05),
+  bgColorPrimary: '#F7F9FA',
   textColorPrimary: '#383838',
-  borderColorPrimary: '#e8e8e8'
+  borderColorPrimary: '#e3e3e3',
+  textPrimary: '#0F172A'
 }

@@ -1,15 +1,18 @@
+import cls from 'classnames';
 import EventEmitter from 'eventemitter3';
 import { Drawer as AntdDrawer } from 'antd';
 import { useSafeState, useMemoizedFn } from 'ahooks';
-import { type FC, cloneElement, Fragment, useMemo, useEffect } from 'react';
+import { type FC, cloneElement, useMemo, useEffect } from 'react';
 import type { CustomDrawerProps, DrawerEventType } from './types';
 import { DrawerContext } from './context';
+import { useDrawerContext } from './hooks';
 import styles from './styles.module.less';
 
 const Drawer: FC<CustomDrawerProps> = (props) => {
   const { trigger, closable = false, children, ...rest } = props;
 
   const [open, setOpen] = useSafeState(false);
+  const { isRoot = true } = useDrawerContext();
   const emitter = useMemo(() => new EventEmitter<DrawerEventType>(), []);
 
   const onOpen = useMemoizedFn(() => setOpen(true));
@@ -31,23 +34,21 @@ const Drawer: FC<CustomDrawerProps> = (props) => {
   }, [emitter]);
 
   return (
-    <Fragment>
+    <DrawerContext.Provider value={{ emitter, isRoot: false }}>
       <AntdDrawer
         {...rest}
         open={open}
         onClose={onClose}
         destroyOnHidden
         push={{ distance: 0 }}
-        rootClassName={styles.drawer}
         afterOpenChange={afterOpenChange}
         mask={{ closable: false, blur: false }}
+        rootClassName={cls(styles.drawer, !isRoot && styles.transparent)}
       >
-        <DrawerContext.Provider value={{ emitter }}>
-          {children}
-        </DrawerContext.Provider>
+        {children}
       </AntdDrawer>
       {triggerElement}
-    </Fragment>
+    </DrawerContext.Provider>
   )
 };
 

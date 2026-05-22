@@ -1,55 +1,33 @@
-import { Menu } from 'antd';
-import cls from 'classnames';
 import { type FC } from 'react';
-import { useNavigate } from 'react-router';
+import { Menu, Layout } from 'antd';
+import { useNavigate, Link } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { useAppStore } from '@/store/app';
 import { useMenu } from './hooks';
+import { icons } from './icons';
 
-import llmIcon from '@/assets/svg-icons/menu/llm.svg?react';
-import usersIcon from '@/assets/svg-icons/menu/users.svg?react';
-import settingIcon from '@/assets/svg-icons/menu/setting.svg?react';
-import analysisIcon from '@/assets/svg-icons/menu/analysis.svg?react';
-import merchantIcon from '@/assets/svg-icons/menu/merchant.svg?react';
-import dashboardIcon from '@/assets/svg-icons/menu/dashboard.svg?react';
-import knowledgeIcon from '@/assets/svg-icons/menu/knowledge.svg?react';
-import memoriesIcon from '@/assets/svg-icons/menu/memories.svg?react';
-import permissionIcon from '@/assets/svg-icons/menu/permission.svg?react'
-import capabilityIcon from '@/assets/svg-icons/menu/capability.svg?react';
-import orchestrationIcon from '@/assets/svg-icons/menu/orchestration.svg?react';
-interface AppMenuProps {
-  collapsed: boolean;
-}
+import styles from './styles.module.less';
 
-const icons = {
-  llm: llmIcon,
-  users: usersIcon,
-  merchant: merchantIcon,
-  dashboard: dashboardIcon,
-  knowledge: knowledgeIcon,
-  memories: memoriesIcon,
-  analysis: analysisIcon,
-  setting: settingIcon,
-  capability: capabilityIcon,
-  permission: permissionIcon,
-  orchestration: orchestrationIcon
-}
-
-const AppMenu: FC<AppMenuProps> = (props) => {
-  const { collapsed } = props;
+const AppMenu: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const { menuCollapsed } = useAppStore();
   const { menus, selectedKeys } = useMenu();
 
   return (
-    <div className={cls('flex flex-col h-full', collapsed ? 'w-[90px]' : 'w-[300px]')}>
-      <div className="flex items-center justify-center bg-[var(--color-primary)] h-[60px] text-[#fff]">
-        Logo
+    <Layout.Sider
+      theme="light"
+      className="px-[4px] border-r-[1px] border-[var(--border-color-primary)]"
+      collapsed={menuCollapsed}
+    >
+      <div className="flex items-center justify-center h-[64px]">
+        <Link to="/dashboard">
+          <img src="/favicon.svg" className="h-[24px]" alt="logo" />
+        </Link>
       </div>
       <Menu
-        theme="light"
         mode="inline"
-        className="flex-1 app-menu"
-        inlineCollapsed={collapsed}
+        className={styles.menus}
         selectedKeys={selectedKeys}
         items={menus.map(item => {
           const iconName = item.icon as keyof typeof icons;
@@ -62,7 +40,7 @@ const AppMenu: FC<AppMenuProps> = (props) => {
           };
         })}
       />
-    </div>
+    </Layout.Sider>
   );
 };
 
