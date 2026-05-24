@@ -1,5 +1,5 @@
 import { type FC, type PropsWithChildren } from 'react';
-import { Space, Button } from 'antd';
+import { Space, Button, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 type TableActionsProps = {
@@ -13,28 +13,33 @@ const TableActions: FC<PropsWithChildren<TableActionsProps>> = (props) => {
   return (
     <Space size={12}>
       {!!onEdit && (
-        <Button
-          size="small"
-          color="default"
-          variant="filled"
-          onClick={onEdit}
-        >
-          <EditOutlined />
-        </Button>
+        <Tooltip title="Edit">
+          <Button
+            size="small"
+            color="default"
+            variant="filled"
+            onClick={onEdit}
+          >
+            <EditOutlined />
+          </Button>
+        </Tooltip>
+
       )}
       {!!onDelete && (
-        <Button
-          size="small"
-          color="danger"
-          variant="filled"
-          onClick={onDelete}
-        >
-          <DeleteOutlined />
-        </Button>
+        <Tooltip title="Delete">
+          <Button
+            size="small"
+            color="danger"
+            variant="filled"
+            onClick={onDelete}
+          >
+            <DeleteOutlined />
+          </Button>
+        </Tooltip>
       )}
       {children}
     </Space>
-  )
+  );
 }
 
 export default TableActions;

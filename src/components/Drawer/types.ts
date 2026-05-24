@@ -19,6 +19,7 @@ export type DrawerContextTypes = {
 
 export type DrawerContainerProps = {
   title?: string;
+  loading?: boolean;
   extra?: JSX.Element;
   onClose?: () => void;
   onCloseBefore?: () => Promise<boolean>;

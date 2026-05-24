@@ -9,7 +9,7 @@ const KnowledgeFilterForm: FC = () => {
       submitter={false}
     >
       <Row gutter={16}>
-        <Col span={8}>
+        <Col span={6}>
           <ProFormSelect
             label="Matching method"
             name="matchingMethod"
@@ -20,15 +20,13 @@ const KnowledgeFilterForm: FC = () => {
             ]}
           />
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <ProFormText label="Node name" name="nodeName" />
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <ProFormText label="Node label" name="nodeLabel" />
         </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={8}>
+        <Col span={6}>
           <ProFormSelect
             label="Relation type"
             name="relationType"
@@ -39,10 +37,10 @@ const KnowledgeFilterForm: FC = () => {
             ]}
           />
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <ProFormText label="Related Node" name="relatedNode" />
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <ProFormSelect
             label="Return fields"
             name="returnFields"
@@ -54,9 +52,7 @@ const KnowledgeFilterForm: FC = () => {
             ]}
           />
         </Col>
-      </Row>
-      <Row gutter={16}>
-        <Col span={8}>
+         <Col span={6}>
           <ProFormSelect
             label="Match conditions"
             name="matchConditions"
@@ -67,7 +63,7 @@ const KnowledgeFilterForm: FC = () => {
             ]}
           />
         </Col>
-        <Col span={8}>
+        <Col span={6}>
           <ProFormText label="Max Records" name="maxRecords" />
         </Col>
       </Row>

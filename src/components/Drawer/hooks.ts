@@ -1,6 +1,7 @@
 import * as uuid from 'uuid';
 import { useContext, useEffect, useMemo } from 'react';
-import { useMemoizedFn } from 'ahooks';
+import { useLocation } from 'react-router-dom';
+import { useMemoizedFn, useUpdateEffect } from 'ahooks';
 import { DrawerContext } from './context';
 import { useDrawerStore } from './store'
 import type { DrawerEventType, CustomDrawerSize } from './types';
@@ -33,6 +34,7 @@ export const useListenEvent = (type: DrawerEventType, listener: () => void) => {
 
 export const useTopMost = (size: CustomDrawerSize) => {
   const uid = useMemo(() => uuid.v4(), []);
+  const { pathname } = useLocation();
   const { items = [], ...actions } = useDrawerStore();
 
   const openDrawer = useMemoizedFn(() => {
@@ -49,6 +51,8 @@ export const useTopMost = (size: CustomDrawerSize) => {
       hasShadow
     }
   }, [items, uid]);
+
+  useUpdateEffect(() => actions.clear(), [pathname]);
 
   return {
     ...result,

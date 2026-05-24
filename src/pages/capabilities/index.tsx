@@ -1,9 +1,11 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Tag, Button, Space } from 'antd';
+import { ToolOutlined } from '@ant-design/icons';
+import { Tag, Button, Space, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import Drawer from '@/components/Drawer';
+import TableActions from '@/components/TableActions';
 import MCPServerConfig from '@/bsComponents/MCPServerConfig';
 
 interface Capability {
@@ -75,9 +77,18 @@ const columns: ProColumns<Capability>[] = [
     hideInSearch: true,
     render: () => (
       <Space size={12}>
-        <Button size="small">Edit</Button>
-        <Button danger size="small">Delete</Button>
-        <Button size="small">Tools</Button>
+        <TableActions
+          onDelete={() => { }}
+          onEdit={() => { }}
+        />
+        <Tooltip title="Tools">
+          <Button
+            size="small"
+            color="primary"
+            variant="filled"
+            icon={<ToolOutlined />}
+          />
+        </Tooltip>
       </Space>
     ),
   },
@@ -91,7 +102,6 @@ const Capabilities: FC = () => {
       title={t('menu.capabilities')}
       extra={
         <Drawer
-          size={700}
           trigger={<Button type="primary">+ New Provider</Button>}>
           <MCPServerConfig />
         </Drawer>

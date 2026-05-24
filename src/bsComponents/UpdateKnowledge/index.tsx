@@ -26,7 +26,7 @@ const UpdateKnowledge: FC = () => {
       extra={
         <Space size={16}>
           <Button icon={<UndoOutlined />}>Reset</Button>
-          <Button type="primary" icon={<SaveOutlined />}>Save</Button>
+          <Button type="primary" icon={<SaveOutlined />} loading>Save</Button>
         </Space>
       }
     >

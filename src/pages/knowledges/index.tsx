@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { Button, Space, Tabs } from 'antd';
+import { Button, Space, Tabs, Row, Col } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { PageContainer, ProCard } from '@ant-design/pro-components';
 import Drawer from '@/components/Drawer';
@@ -40,24 +40,33 @@ const Knowledges: FC = () => {
         </Space>
       }
     >
-      <ProCard title="Filters">
-        <KnowledgeFilterForm />
-      </ProCard>
-      <Tabs
-        className="card-tabs mt-[24px]"
-        items={[
-          {
-            key: 'graph_visualization',
-            label: 'Graph Visualization',
-            children: <GraphVisualization />,
-          },
-          {
-            key: 'data_grid',
-            label: 'Data Grid',
-            children: <DataGrid />,
-          }
-        ]}
-      />
+      <Row gutter={[0, 16]}>
+        <Col span={24}>
+          <ProCard
+            title="Filters"
+            collapsible="icon"
+          >
+            <KnowledgeFilterForm />
+          </ProCard>
+        </Col>
+        <Col span={24}>
+          <Tabs
+            className="card-tabs"
+            items={[
+              {
+                key: 'data_grid',
+                label: 'Data Grid',
+                children: <DataGrid />,
+              },
+              {
+                key: 'graph_visualization',
+                label: 'Graph Visualization',
+                children: <GraphVisualization />,
+              }
+            ]}
+          />
+        </Col>
+      </Row>
     </PageContainer>
   );
 };

@@ -52,7 +52,6 @@ const Drawer: FC<CustomDrawerProps> = (props) => {
       <AntdDrawer
         {...rest}
         open={open}
-        onClose={onClose}
         destroyOnHidden
         push={{ distance: 0 }}
         afterOpenChange={afterOpenChange}

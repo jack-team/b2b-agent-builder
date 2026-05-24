@@ -8,12 +8,14 @@ export type ItemType = {
 
 type DrawerState = {
   items: ItemType[];
+  clear: () => void;
   closeDrawer: () => void;
   openDrawer: (id: string, size: string) => void;
 };
 
 export const useDrawerStore = create<DrawerState>((set, get) => ({
   items: [],
+  clear: () => set({ items: [] }),
   openDrawer: (id, size) => {
     const { items } = get();
     const laster = items[items.length - 1];
@@ -36,7 +38,7 @@ export const useDrawerStore = create<DrawerState>((set, get) => ({
 
     if (laster) {
       laster.shadow = true;
-      
+
       const lasterPrevIndex = lasterIndex - 1;
       const lasterPrev = items[lasterPrevIndex];
 

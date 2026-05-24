@@ -1,10 +1,11 @@
 import { type FC, Fragment } from 'react';
 import en_US from 'antd/es/locale/en_US';
 import { ConfigProvider, App as AntApp } from 'antd';
-import StyledVariables from './components/StyledVariables';
+import Spinner from '@/components/Spinner';
+import StyledVariables from '@/components/StyledVariables';
 import { useThemeStore } from '@/store/theme';
-import { AppRouter } from './routes';
-import './App.less';
+import { AppRouter } from '@/routes';
+import '@/App.less';
 
 const App: FC = () => {
   const appTheme = useThemeStore(s => s.appTheme);
@@ -13,7 +14,11 @@ const App: FC = () => {
   return (
     <Fragment>
       <StyledVariables variables={appTheme} />
-      <ConfigProvider theme={antdTheme} locale={en_US}>
+      <ConfigProvider
+        theme={antdTheme}
+        locale={en_US}
+        button={{ loadingIcon: <Spinner /> }}
+      >
         <AntApp className="h-full">
           <AppRouter />
         </AntApp>

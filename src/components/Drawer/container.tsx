@@ -1,12 +1,13 @@
 import type { FC, PropsWithChildren } from 'react';
 import { useMemoizedFn } from 'ahooks';
 import { useDrawerClose } from './hooks';
+import Spinner from '@/components/Spinner';
 import type { DrawerContainerProps } from './types';
 import IconBack from '@/assets/icon_back.svg?react';
 import styles from './styles.module.less';
 
 const DrawerContainer: FC<PropsWithChildren<DrawerContainerProps>> = (props) => {
-  const { onCloseBefore } = props;
+  const { onCloseBefore, loading = false } = props;
   const closeDrawer = useDrawerClose();
 
   const handleClose = useMemoizedFn(async () => {
@@ -24,7 +25,14 @@ const DrawerContainer: FC<PropsWithChildren<DrawerContainerProps>> = (props) => 
         <div className={styles.drawer_header_extra}>{props.extra}</div>
       </div>
       <div className={styles.drawer_content}>
-        {props.children}
+        <div className={styles.drawer_content_children}>
+          {props.children}
+        </div>
+        {loading && (
+          <div className={styles.drawer_loading}>
+            <Spinner type="rotating-lines" />
+          </div>
+        )}
       </div>
     </div>
   );
