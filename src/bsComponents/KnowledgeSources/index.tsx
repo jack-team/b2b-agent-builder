@@ -1,10 +1,11 @@
 import type { FC } from 'react';
-import { Tag, Button, Space, Empty } from 'antd';
+import { Tag, Button, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
 import UpdateKnowledge from '@/bsComponents/UpdateKnowledge';
+import TableActions from '@/components/TableActions';
 
 interface KnowledgeSource {
   key: string;
@@ -35,49 +36,7 @@ const mockData: KnowledgeSource[] = [
     type: 'Document',
     keywords: ['Color system', 'Design', 'UI', 'UX'],
     status: 'enabled',
-  },
-  {
-    key: '4',
-    documentName: 'AI Agent Agent Orchestration and Automation ...',
-    type: 'Document',
-    keywords: ['Workflow', 'Relationship', 'Orchestration'],
-    status: 'disabled',
-  },
-  {
-    key: '5',
-    documentName: 'AI Agent Agent Orchestration and Automation ...',
-    type: 'Document',
-    keywords: ['Workflow', 'Relationship', 'Orchestration'],
-    status: 'disabled',
-  },
-  {
-    key: '6',
-    documentName: 'AI Agent Agent Orchestration and Automation ...',
-    type: 'Document',
-    keywords: ['Workflow', 'Relationship', 'Orchestration'],
-    status: 'disabled',
-  },
-  {
-    key: '7',
-    documentName: 'AI Agent Agent Orchestration and Automation ...',
-    type: 'Document',
-    keywords: ['Workflow', 'Relationship', 'Orchestration'],
-    status: 'disabled',
-  },
-  {
-    key: '8',
-    documentName: 'AI Agent Agent Orchestration and Automation ...',
-    type: 'Document',
-    keywords: ['Workflow', 'Relationship', 'Orchestration'],
-    status: 'disabled',
-  },
-  {
-    key: '9',
-    documentName: 'AI Agent Agent Orchestration and Automation ...',
-    type: 'Document',
-    keywords: ['Workflow', 'Relationship', 'Orchestration'],
-    status: 'disabled',
-  },
+  }
 ];
 
 const columns: ProColumns<KnowledgeSource>[] = [
@@ -112,14 +71,13 @@ const columns: ProColumns<KnowledgeSource>[] = [
     ),
   },
   {
+    align: 'center',
     title: 'Actions',
     hideInSearch: true,
     dataIndex: 'actions',
     width: 100,
     render: () => (
-      <Space size={12}>
-        <Button danger type="link" size="small">Delete</Button>
-      </Space>
+      <TableActions onDelete={() => {}}/>
     ),
   },
 ];
@@ -127,7 +85,6 @@ const columns: ProColumns<KnowledgeSource>[] = [
 const KnowledgeSources: FC = () => {
   const renderNewKnowledgeButton = () => (
     <Drawer
-      size="var(--drawer-width)"
       trigger={
         <Button
           type="primary"

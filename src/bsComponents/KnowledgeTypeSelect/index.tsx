@@ -1,6 +1,8 @@
 import type { FC } from 'react';
 import { Divider } from 'antd';
 import { ProFormSelect } from '@ant-design/pro-components';
+import Drawer from '@/components/Drawer';
+import KnowledgeTypeManager from '../KnowledgeTypeManager';
 import type { KnowledgeTypeSelectProps } from './types';
 
 const KnowledgeTypeSelect: FC<KnowledgeTypeSelectProps> = (props) => {
@@ -23,7 +25,10 @@ const KnowledgeTypeSelect: FC<KnowledgeTypeSelectProps> = (props) => {
   const renderNewTypeBtn = () => {
     return (
       <div className="px-[8px] py-[4px]">
-        还没有知识库类型，<a>点击添加</a>
+        还没有知识库类型，
+        <Drawer trigger={<a>点击添加</a>}>
+          <KnowledgeTypeManager />
+        </Drawer>
       </div>
     );
   }

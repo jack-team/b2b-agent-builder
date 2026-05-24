@@ -7,7 +7,8 @@ const bgColorPrimary = appTheme.bgColorPrimary;
 export default <ConfigProviderProps['theme']>{
   token: {
     colorPrimary,
-    colorText: appTheme.textPrimary
+    colorText: appTheme.textColorPrimary,
+    colorTextSecondary: appTheme.textColorSecondary
   },
   components: {
     Menu: {
@@ -20,7 +21,7 @@ export default <ConfigProviderProps['theme']>{
       labelFontSize: 14
     },
     Button: {
-      borderRadiusSM: 6,
+      borderRadiusSM: 8,
       paddingInlineSM: 8,
       primaryShadow: 'none',
       fontSize: 12,
@@ -43,6 +44,14 @@ export default <ConfigProviderProps['theme']>{
     Layout: {
       headerBg: '#fff',
       headerPadding: '0 16px'
+    },
+    Tag: {
+      fontSize: 12,
+      fontSizeSM: 12,
+      colorText: appTheme.textColorSecondary
+    },
+    Drawer: {
+      colorBgMask: 'rgba(0,0,0,.15)'
     }
   }
 };

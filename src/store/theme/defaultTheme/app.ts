@@ -1,9 +1,9 @@
-const colorPrimary = '#10B981';
+const colorPrimary = '#155aef';
 
 export default {
   colorPrimary,
   bgColorPrimary: '#F7F9FA',
-  textColorPrimary: '#383838',
-  borderColorPrimary: '#e3e3e3',
-  textPrimary: '#0F172A'
+  textColorPrimary: '#101828',
+  textColorSecondary: '#354052',
+  borderColorPrimary: '#E9EBF0'
 }

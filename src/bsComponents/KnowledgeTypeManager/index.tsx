@@ -1,9 +1,12 @@
 import type { FC } from 'react';
-import { Tag, Button, Space, Empty } from 'antd';
-import { PlusOutlined, EditOutlined } from '@ant-design/icons';
+import { Tag, Button, Empty } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { DrawerContainer } from '@/components/Drawer';
+import Drawer from '@/components/Drawer';
+import TableActions from '@/components/TableActions';
+import KnowledgeTypeEdit from './edit';
 
 interface KnowledgeType {
   key: string;
@@ -55,92 +58,95 @@ const mockData: KnowledgeType[] = [
     code: 'product',
     description: 'Any tangible or intangible item that is offered for ...',
     status: 'enabled',
-  },
-  {
-    key: '7',
-    typeName: 'User',
-    code: 'user',
-    description: 'The User type identifies a person, account, or agent ...',
-    status: 'enabled',
-  },
-  {
-    key: '8',
-    typeName: 'Company',
-    code: 'company',
-    description: 'A commercial organization or business entity, such ...',
-    status: 'disabled',
-  },
-  {
-    key: '9',
-    typeName: 'Product',
-    code: 'product',
-    description: 'Any tangible or intangible item that is offered for ...',
-    status: 'enabled',
-  },
-  {
-    key: '10',
-    typeName: 'User',
-    code: 'user',
-    description: 'The User type identifies a person, account, or agent ...',
-    status: 'enabled',
-  },
-  {
-    key: '11',
-    typeName: 'Company',
-    code: 'company',
-    description: 'A commercial organization or business entity, such ...',
-    status: 'disabled',
-  },
-  {
-    key: '12',
-    typeName: 'Product',
-    code: 'product',
-    description: 'Any tangible or intangible item that is offered for ...',
-    status: 'enabled',
-  },
-  {
-    key: '13',
-    typeName: 'User',
-    code: 'user',
-    description: 'The User type identifies a person, account, or agent ...',
-    status: 'enabled',
-  },
-  {
-    key: '14',
-    typeName: 'Company',
-    code: 'company',
-    description: 'A commercial organization or business entity, such ...',
-    status: 'disabled',
-  },
-  {
-    key: '15',
-    typeName: 'Product',
-    code: 'product',
-    description: 'Any tangible or intangible item that is offered for ...',
-    status: 'enabled',
-  },
-  {
-    key: '16',
-    typeName: 'User',
-    code: 'user',
-    description: 'The User type identifies a person, account, or agent ...',
-    status: 'enabled',
-  },
-  {
-    key: '17',
-    typeName: 'Company',
-    code: 'company',
-    description: 'A commercial organization or business entity, such ...',
-    status: 'disabled',
-  },
+  }
 ];
 
 const columns: ProColumns<KnowledgeType>[] = [
   {
     title: 'Type Name',
     dataIndex: 'typeName',
-    search: {
-      placeholder: 'Type Name',
-    },
   },
   {
+    title: 'Code',
+    dataIndex: 'code'
+  },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+  },
+  {
+    title: 'Status',
+    dataIndex: 'status',
+    render: (_dom, record) => (
+      <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
+        {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
+      </Tag>
+    ),
+  },
+  {
+    title: 'Actions',
+    hideInSearch: true,
+    dataIndex: 'actions',
+    width: 120,
+    render: () => (
+      <TableActions
+        onDelete={() => { }}
+        onEdit={() => { }}
+      />
+    ),
+  },
+];
+
+const KnowledgeTypeManager: FC = () => {
+  const renderNewTypeButton = () => (
+    <Drawer
+      size="small"
+      trigger={
+        <Button
+          type="primary"
+          icon={<PlusOutlined />}
+        >
+          Create
+        </Button>
+      }
+    >
+      <KnowledgeTypeEdit />
+    </Drawer>
+  );
+
+  return (
+    <DrawerContainer
+      title="Knowledge Types"
+      extra={renderNewTypeButton()}
+    >
+      <ProTable
+        size="medium"
+        columns={columns}
+        toolBarRender={false}
+        dataSource={mockData}
+        search={{
+          layout: 'vertical',
+        }}
+        pagination={{
+          pageSize: 6,
+          showSizeChanger: false,
+          showTotal: (total, range) => `${range[0]}-${range[1]} / ${total}`,
+        }}
+        tableViewRender={({ dataSource = [] }, dom) => {
+          if (!dataSource.length) {
+            return (
+              <div className="py-[56px]">
+                <Empty description="No Data Available">
+                  {renderNewTypeButton()}
+                </Empty>
+              </div>
+            );
+          }
+          return dom;
+        }}
+      />
+    </DrawerContainer>
+  );
+};
+
+export default KnowledgeTypeManager;

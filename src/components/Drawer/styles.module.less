@@ -1,4 +1,8 @@
 .drawer {
+  --drawer-width-large: calc(100vw * 0.75);
+  --drawer-width-medium: calc(100vw * 0.5);
+  --drawer-width-small: calc(100vw * 0.382);
+
   :global {
     .ant-drawer-header {
       display: none;
@@ -7,12 +11,24 @@
     .ant-drawer-body {
       padding: 0;
     }
+
+    .ant-drawer-mask {
+      transition: none;
+    }
   }
 
   &.transparent {
     :global {
       .ant-drawer-mask {
         background-color: transparent;
+      }
+    }
+  }
+
+  &.no_shadow {
+    :global {
+      .ant-drawer-content-wrapper {
+        box-shadow: none;
       }
     }
   }

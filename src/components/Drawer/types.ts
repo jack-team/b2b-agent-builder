@@ -4,9 +4,12 @@ import type EventEmitter from 'eventemitter3';
 
 export type DrawerEventType = 'close' | 'afterOpen' | 'afterClose';
 
+export type CustomDrawerSize = 'large' | 'medium' | 'small';
+
 export type CustomDrawerProps = {
   trigger: JSX.Element;
-} & Omit<DrawerProps, 'open' | 'mask'>;
+  size?: CustomDrawerSize
+} & Omit<DrawerProps, 'open' | 'mask' | 'size'>;
 
 export type DrawerContextTypes = {
   isRoot?: boolean;

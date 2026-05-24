@@ -1,11 +1,23 @@
 import type { FC } from 'react';
 import { Button, Space, Row, Col } from 'antd';
 import { UndoOutlined, SaveOutlined } from '@ant-design/icons';
-import { ProForm, ProCard, ProFormSelect, ProFormText, ProFormRadio, ProFormUploadDragger, ProFormTextArea, ProFormCheckbox, ProFormSlider } from '@ant-design/pro-components';
-import { DrawerContainer } from '@/components/Drawer';
-import TagsInput from '@/components/TagsInput';
-import KnowledgeTypeSelect from '@/bsComponents/KnowledgeTypeSelect';
+import {
+  ProForm,
+  ProCard,
+  ProFormText,
+  ProFormRadio,
+  ProFormSelect,
+  ProFormSlider,
+  ProFormTextArea,
+  ProFormCheckbox,
+  ProFormDependency
+} from '@ant-design/pro-components';
 
+import TagsInput from '@/components/TagsInput';
+import { DrawerContainer } from '@/components/Drawer';
+import KnowledgeTypeSelect from '@/bsComponents/KnowledgeTypeSelect';
+import RemoteFormItem from '@/components/RemoteFormItem';
+import { AdditionMethodMap, AdditionMethod } from './enum';
 
 const UpdateKnowledge: FC = () => {
   return (
@@ -19,7 +31,7 @@ const UpdateKnowledge: FC = () => {
       }
     >
       <ProForm submitter={false}>
-        <Row gutter={24}>
+        <Row gutter={16}>
           <Col span={11}>
             <ProCard title="Learn New Knowledge">
               <KnowledgeTypeSelect
@@ -29,25 +41,33 @@ const UpdateKnowledge: FC = () => {
               <ProFormRadio.Group
                 name="addition_method"
                 label="Addition method"
-                options={[
-                  {
-                    label: 'Import',
-                    value: 'import',
-                  },
-                  {
-                    label: 'Manual',
-                    value: 'manual',
-                  },
-                ]}
+                valueEnum={AdditionMethodMap}
+                initialValue={AdditionMethod.Manual}
               />
-              <ProFormUploadDragger
-                name="document"
-                label="Document"
-              />
-              <ProFormTextArea
-                name="document_text"
-                label="Document"
-              />
+              <ProFormDependency name={['addition_method']}>
+                {(values) => {
+                  const { addition_method } = values;
+                  switch (addition_method) {
+                    case AdditionMethod.Manual:
+                      return (
+                        <ProFormTextArea
+                          name="document"
+                          label="Document"
+                        />
+                      );
+                    case AdditionMethod.Remote:
+                      return (
+                        <div className="gay-box mb-[16px]">
+                          <ProCard title="Remote document">
+                            <RemoteFormItem name="remote_doc"/>
+                          </ProCard>
+                        </div>
+                      );
+                    default:
+                      return null;
+                  }
+                }}
+              </ProFormDependency>
               <ProFormText
                 name="knowledge_name"
                 label="Title"
@@ -87,7 +107,7 @@ const UpdateKnowledge: FC = () => {
                 </Col>
               </Row>
             </ProCard>
-            <ProCard title="Data Cleaning Rules" className="mt-[24px]">
+            <ProCard title="Data Cleaning Rules" className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormCheckbox
@@ -172,7 +192,7 @@ const UpdateKnowledge: FC = () => {
                 initialValue={50}
               />
             </ProCard>
-            <ProCard title="Vector config" className="mt-[24px]">
+            <ProCard title="Vector config" className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormSelect
@@ -212,7 +232,7 @@ const UpdateKnowledge: FC = () => {
                 </Col>
               </Row>
             </ProCard>
-            <ProCard title="Knowledge Graph Schema" className="mt-[24px]">
+            <ProCard title="Knowledge Graph Schema" className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormSelect

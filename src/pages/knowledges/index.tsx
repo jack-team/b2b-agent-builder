@@ -20,7 +20,6 @@ const Knowledges: FC = () => {
       extra={
         <Space size={16}>
           <Drawer
-            size="var(--drawer-width)"
             trigger={(
               <Button icon={<ImportIcon />}>
                 Update Knowledges
@@ -30,7 +29,6 @@ const Knowledges: FC = () => {
             <UpdateKnowledges />
           </Drawer>
           <Drawer
-            size="var(--drawer-width)"
             trigger={(
               <Button type="primary" icon={<TableIcon />}>
                 Knowledge Sources
