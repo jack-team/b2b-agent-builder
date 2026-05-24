@@ -7,12 +7,16 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
+        index: true,
+        Component: lazy(() => import('@/pages/auth')),
+      },
+      {
+        path: '/auth',
+        Component: lazy(() => import('@/pages/auth')),
+      },
+      {
         element: <MainLayout />,
         children: [
-          {
-            index: true,
-            Component: lazy(() => import('@/pages/dashboard')),
-          },
           {
             path: '/dashboard',
             Component: lazy(() => import('@/pages/dashboard')),
