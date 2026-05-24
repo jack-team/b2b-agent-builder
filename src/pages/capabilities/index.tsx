@@ -7,6 +7,7 @@ import type { ProColumns } from '@ant-design/pro-table';
 import Drawer from '@/components/Drawer';
 import TableActions from '@/components/TableActions';
 import MCPServerConfig from '@/bsComponents/MCPServerConfig';
+import MCPTools from '@/bsComponents/MCPTools';
 
 interface Capability {
   key: string;
@@ -82,12 +83,16 @@ const columns: ProColumns<Capability>[] = [
           onEdit={() => { }}
         />
         <Tooltip title="Tools">
-          <Button
-            size="small"
-            color="primary"
-            variant="filled"
-            icon={<ToolOutlined />}
-          />
+          <Drawer size="large" trigger={
+            <Button
+              size="small"
+              color="primary"
+              variant="filled"
+              icon={<ToolOutlined />}
+            />
+          }>
+            <MCPTools />
+          </Drawer>
         </Tooltip>
       </Space>
     ),
