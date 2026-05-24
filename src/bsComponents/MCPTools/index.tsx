@@ -150,16 +150,9 @@ const columns: ProColumns<Tool>[] = [
 ];
 
 const MCPTools: FC = () => {
-  const renderNewToolButton = () => (
-    <Button type="primary" icon={<PlusOutlined />}>
-      New Tool
-    </Button>
-  );
-
   return (
     <DrawerContainer
       title="Shopify MCP Tools"
-      extra={renderNewToolButton()}
     >
       <ProTable
         size="medium"
@@ -178,9 +171,7 @@ const MCPTools: FC = () => {
           if (!dataSource.length) {
             return (
               <div className="py-[56px]">
-                <Empty description="No Data Available">
-                  {renderNewToolButton()}
-                </Empty>
+                <Empty description="No Data Available" />
               </div>
             );
           }

@@ -33,7 +33,7 @@ const UpdateKnowledge: FC = () => {
       <ProForm submitter={false}>
         <Row gutter={16}>
           <Col span={11}>
-            <ProCard title="Learn New Knowledge">
+            <ProCard size="small"title="Learn New Knowledge">
               <KnowledgeTypeSelect
                 name="knowledge_type"
                 label="Knowledge Type"
@@ -58,7 +58,7 @@ const UpdateKnowledge: FC = () => {
                     case AdditionMethod.Remote:
                       return (
                         <div className="gay-box mb-[16px]">
-                          <ProCard title="Remote document">
+                          <ProCard size="small"title="Remote document">
                             <RemoteFormItem name="remote_doc"/>
                           </ProCard>
                         </div>
@@ -107,7 +107,7 @@ const UpdateKnowledge: FC = () => {
                 </Col>
               </Row>
             </ProCard>
-            <ProCard title="Data Cleaning Rules" className="mt-[16px]">
+            <ProCard size="small" title="Data Cleaning Rules" className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormCheckbox
@@ -149,7 +149,7 @@ const UpdateKnowledge: FC = () => {
             </ProCard>
           </Col>
           <Col span={13}>
-            <ProCard title="Extraction rules">
+            <ProCard size="small" title="Extraction rules">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormCheckbox
@@ -192,7 +192,7 @@ const UpdateKnowledge: FC = () => {
                 initialValue={50}
               />
             </ProCard>
-            <ProCard title="Vector config" className="mt-[16px]">
+            <ProCard size="small" title="Vector config" className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormSelect
@@ -232,7 +232,7 @@ const UpdateKnowledge: FC = () => {
                 </Col>
               </Row>
             </ProCard>
-            <ProCard title="Knowledge Graph Schema" className="mt-[16px]">
+            <ProCard size="small" title="Knowledge Graph Schema" className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormSelect

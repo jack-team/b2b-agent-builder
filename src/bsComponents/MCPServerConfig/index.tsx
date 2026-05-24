@@ -1,8 +1,20 @@
 import type { FC } from 'react';
 import { Button, Space, Row, Col } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { ProForm, ProCard, ProFormSelect, ProFormText, ProFormUploadDragger, ProFormCheckbox, ProFormList } from '@ant-design/pro-components';
+import {
+  ProForm,
+  ProCard,
+  ProFormSelect,
+  ProFormText,
+  ProFormUploadDragger,
+  ProFormCheckbox,
+  ProFormList
+} from '@ant-design/pro-components';
+
+import Drawer from '@/components/Drawer';
 import { DrawerContainer } from '@/components/Drawer';
+import AvailableTools from '../AvailableTools';
+
 interface MCPServerConfigProps {
   onClose?: () => void;
 }
@@ -13,12 +25,14 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
       title="MCP Server Configuration"
       extra={
         <Space size={16}>
-          <Button type="primary">Next</Button>
+          <Drawer size="medium" trigger={<Button type="primary">Next</Button>}>
+            <AvailableTools />
+          </Drawer>
         </Space>
       }
       onClose={onClose}
     >
-      <ProCard>
+      <ProCard size="small">
         <ProForm submitter={false}>
           <ProFormText
             name="mcp_server_name"
@@ -54,7 +68,7 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
             ]}
           />
           <div className="gay-box mt-[16px]">
-            <ProCard title="Standard Input/Output">
+            <ProCard size="small" title="Standard Input/Output">
               <Row gutter={16}>
                 <Col span={12}>
                   <ProFormText
@@ -89,7 +103,7 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
             </ProCard>
           </div>
           <div className="gay-box mt-[16px]">
-            <ProCard title="Internalizable Connection" >
+            <ProCard  size="small" title="Internalizable Connection" >
               <ProFormUploadDragger
                 name="internalizable_source_package"
                 label="Internalizable Source package"
@@ -133,7 +147,7 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
             </ProCard>
           </div>
           <div className="gay-box mt-[16px]">
-            <ProCard title="Remote Connection">
+            <ProCard size="small"title="Remote Connection">
               <ProFormText
                 name="url_remote"
                 label="URL"
