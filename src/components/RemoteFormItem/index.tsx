@@ -17,12 +17,15 @@ const RemoteFormItem: FC<RemoteFormItemProps> = (props) => {
 
   return (
     <Fragment>
-      <ProFormText name={[...parentName, 'url']} label="URL" />
+      <ProFormText
+        label="URL"
+        name={[...parentName, 'url']}
+        rules={[{ required: true }]}
+      />
       <ProFormList
         label="Headers"
         initialValue={[{}]}
         name={[...parentName, 'headers']}
-
         creatorButtonProps={{
           type: 'link',
           icon: <PlusOutlined />,
@@ -31,10 +34,18 @@ const RemoteFormItem: FC<RemoteFormItemProps> = (props) => {
       >
         <Row gutter={12}>
           <Col span={12}>
-            <ProFormText name="key" placeholder="Key" />
+            <ProFormText
+              name="key"
+              label="Key"
+              rules={[{ required: true }]}
+            />
           </Col>
           <Col span={12}>
-            <ProFormText name="value" placeholder="Value" />
+            <ProFormText
+              name="value"
+              label="Value"
+              rules={[{ required: true }]}
+            />
           </Col>
         </Row>
       </ProFormList>

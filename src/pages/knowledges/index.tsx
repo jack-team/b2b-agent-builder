@@ -1,18 +1,23 @@
 import type { FC } from 'react';
-import { Button, Space, Tabs, Row, Col } from 'antd';
+import { useSafeState } from 'ahooks';
 import { useTranslation } from 'react-i18next';
-import { PageContainer, ProCard } from '@ant-design/pro-components';
+import { Button, Space, Tabs, Row, Col } from 'antd';
+import { PageContainer, ProCard, ProForm } from '@ant-design/pro-components';
+
 import Drawer from '@/components/Drawer';
 import KnowledgeFilterForm from './components/KnowledgeFilterForm';
 import GraphVisualization from './components/GraphVisualization';
 import ImportIcon from '@/assets/svg-icons/page/import.svg?react';
 import TableIcon from '@/assets/svg-icons/page/table.svg?react';
-import DataGrid from './components/DataGrid';
 import KnowledgeSources from '@/bsComponents/KnowledgeSources';
 import UpdateKnowledges from '@/bsComponents/UpdateKnowledge';
+import DataGrid from './components/DataGrid';
 
 const Knowledges: FC = () => {
   const { t } = useTranslation();
+  const [form] = ProForm.useForm();
+  const [searchParams, setSearchParams] = useSafeState<Record<string, any>>({});
+
 
   return (
     <PageContainer
@@ -30,7 +35,10 @@ const Knowledges: FC = () => {
           </Drawer>
           <Drawer
             trigger={(
-              <Button type="primary" icon={<TableIcon />}>
+              <Button
+                type="primary"
+                icon={<TableIcon />}
+              >
                 Knowledge Sources
               </Button>
             )}
@@ -46,7 +54,10 @@ const Knowledges: FC = () => {
             title="Filters"
             collapsible="icon"
           >
-            <KnowledgeFilterForm />
+            <KnowledgeFilterForm
+              form={form}
+              onSearch={setSearchParams}
+            />
           </ProCard>
         </Col>
         <Col span={24}>

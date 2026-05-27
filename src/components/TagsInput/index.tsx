@@ -1,6 +1,6 @@
 import type { FC, ChangeEvent } from 'react';
 import { useSafeState, useMemoizedFn } from 'ahooks';
-import { Input, Tag, Space, Button } from 'antd'
+import { Input, Tag, Space, Button, message } from 'antd'
 
 type TagsInputProps = {
   value?: string[];
@@ -12,10 +12,12 @@ const TagsInput: FC<TagsInputProps> = (props) => {
   const [text, setText] = useSafeState<string>('');
 
   const handleAdd = useMemoizedFn(() => {
-    if (text && onChange) {
-      onChange([...value, text]);
-      setText('');
+    const txt = text.trim();
+    if (value.findIndex(v => v === txt) > -1) {
+     return message.error('存在相同的标签，请勿重复添加!');
     }
+    onChange?.([...value, txt]);
+    requestAnimationFrame(() => setText(''));
   });
 
   const handleChange = useMemoizedFn(
@@ -39,7 +41,7 @@ const TagsInput: FC<TagsInputProps> = (props) => {
               key={tag}
               closable
               onClose={() => onDelete(tag)}
-              className="bg-[var(--bg-color-primary)]"
+              className="bg-[var(--bg-color-secondary)]"
             >
               {tag}
             </Tag>

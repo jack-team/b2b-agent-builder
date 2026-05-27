@@ -53,50 +53,48 @@ const AvailableTools: FC = () => {
       }
     >
       <ProForm form={form} submitter={false} className="h-full">
-        <ProCard className={styles.box}>
-          <div className="gay-box h-full flex gap-[16px] overflow-hidden">
-            <div className="h-full w-[40%]">
-              <ProCard title="Tools" size="small" className={styles.box}>
-                <ProFormText
-                  name="keyword"
-                  fieldProps={{ prefix: <SearchOutlined /> }}
-                  placeholder="Tool name / Description keyword"
-                />
-                <div className={styles.tool_list}>
-                  <ProForm.Item>
-                    <div className="flex flex-col gap-[8px]">
-                      {tools.map(item => {
-                        return (
-                          <ToolItem
-                            key={item.key}
-                            title={item.name}
-                            selected={item.key === selectedTool?.key}
-                            onSelect={() => setSelectedTool(item)}
-                          />
-                        );
-                      })}
-                    </div>
-                  </ProForm.Item>
-                </div>
-              </ProCard>
-            </div>
-            <div className="h-full w-[60%]">
-              <ProCard title="Tool Details" size="small" className={styles.box}>
-                {!selectedTool ? (
-                  <div className="flex items-center justify-center h-full">
-                    Select a tool to view details
+        <div className=" h-full flex gap-[16px] overflow-hidden">
+          <div className="h-full w-[40%]">
+            <ProCard title="Tools" size="small" className={styles.box}>
+              <ProFormText
+                name="keyword"
+                fieldProps={{ prefix: <SearchOutlined /> }}
+                placeholder="Tool name / Description keyword"
+              />
+              <div className={styles.tool_list}>
+                <ProForm.Item>
+                  <div className="flex flex-col gap-[8px]">
+                    {tools.map(item => {
+                      return (
+                        <ToolItem
+                          key={item.key}
+                          title={item.name}
+                          selected={item.key === selectedTool?.key}
+                          onSelect={() => setSelectedTool(item)}
+                        />
+                      );
+                    })}
                   </div>
-                ) : (
-                  <>
-                    <ProFormText name={['tool', 'name']} label="Name" />
-                    <ProFormTextArea name={['tool', 'description']} label="Description" />
-                    <ProFormCheckbox name={['tool', 'status']} label="Status" />
-                  </>
-                )}
-              </ProCard>
-            </div>
+                </ProForm.Item>
+              </div>
+            </ProCard>
           </div>
-        </ProCard>
+          <div className="h-full w-[60%]">
+            <ProCard title="Tool Details" size="small" className={styles.box}>
+              {!selectedTool ? (
+                <div className="flex items-center justify-center h-full">
+                  Select a tool to view details
+                </div>
+              ) : (
+                <>
+                  <ProFormText name={['tool', 'name']} label="Name" />
+                  <ProFormTextArea name={['tool', 'description']} label="Description" />
+                  <ProFormCheckbox name={['tool', 'status']} label="Status" />
+                </>
+              )}
+            </ProCard>
+          </div>
+        </div>
       </ProForm>
     </DrawerContainer>
   );

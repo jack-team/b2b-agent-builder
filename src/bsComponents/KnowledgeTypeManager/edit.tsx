@@ -1,8 +1,16 @@
 import { type FC } from 'react';
-import { Button, Row, Col } from 'antd';
+import { Button, Row, Col, Space, Input } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import { DrawerContainer } from '@/components/Drawer';
-import { ProCard, ProForm, ProFormSelect, ProFormText, ProFormCheckbox, ProFormTextArea } from '@ant-design/pro-components';
+import KnowledgeTypeSelect from '../KnowledgeTypeSelect';
+
+import {
+  ProCard,
+  ProForm,
+  ProFormText,
+  ProFormCheckbox,
+  ProFormTextArea
+} from '@ant-design/pro-components';
 
 const KnowledgeTypeEdit: FC = () => {
   return (
@@ -19,20 +27,28 @@ const KnowledgeTypeEdit: FC = () => {
     >
       <ProForm submitter={false}>
         <ProCard>
-          <ProFormSelect
+          <KnowledgeTypeSelect
             label="Parent"
             name="parent"
+            rules={[{ required: true }]}
           />
           <ProFormText
             label="Name"
             name="name"
+            rules={[{ required: true }]}
           />
           <Row gutter={16}>
             <Col span={16}>
-              <ProFormText
+              <ProForm.Item
                 label="Code"
                 name="code"
-              />
+                rules={[{ required: true }]}
+              >
+                <Space.Compact className="w-full">
+                  <Input readOnly placeholder="Please enter" />
+                  <Button type="primary">生成</Button>
+                </Space.Compact>
+              </ProForm.Item>
             </Col>
             <Col span={8}>
               <ProFormCheckbox

@@ -1,10 +1,35 @@
 import type { FC } from 'react';
 import { Row, Col, Button, Space } from 'antd';
-import { ProForm, ProFormSelect, ProFormText, ProFormTextArea } from '@ant-design/pro-components';
+import {
+  ProForm,
+  ProFormSelect,
+  ProFormText,
+  ProFormTextArea,
+  type FormInstance
+} from '@ant-design/pro-components';
+import { useMemoizedFn } from 'ahooks';
 
-const KnowledgeFilterForm: FC = () => {
+type KnowledgeFilterFormProps = {
+  form: FormInstance;
+  onSearch?: (formData: Record<string, any>) => void;
+}
+
+const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
+  const { form } = props;
+
+  const onReset = useMemoizedFn(() => {
+    form.resetFields();
+    onSubmit();
+  });
+
+  const onSubmit = useMemoizedFn(() => {
+    const formData = form.getFieldsValue();
+    props.onSearch?.(formData);
+  });
+
   return (
     <ProForm
+      form={form}
       layout="vertical"
       submitter={false}
     >
@@ -38,7 +63,10 @@ const KnowledgeFilterForm: FC = () => {
           />
         </Col>
         <Col span={6}>
-          <ProFormText label="Related Node" name="relatedNode" />
+          <ProFormText
+            label="Related Node"
+            name="relatedNode"
+          />
         </Col>
         <Col span={6}>
           <ProFormSelect
@@ -52,7 +80,7 @@ const KnowledgeFilterForm: FC = () => {
             ]}
           />
         </Col>
-         <Col span={6}>
+        <Col span={6}>
           <ProFormSelect
             label="Match conditions"
             name="matchConditions"
@@ -71,10 +99,18 @@ const KnowledgeFilterForm: FC = () => {
         <Button type="primary" size="small">
           Build query statement
         </Button>
-        <Button type="primary" size="small">
+        <Button
+          type="primary"
+          size="small"
+          onClick={onSubmit}
+        >
           Query
         </Button>
-        <Button type="default" size="small">
+        <Button
+          type="default"
+          size="small"
+          onClick={onReset}
+        >
           Reset
         </Button>
       </Space>

@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { Tag, Button, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { ProTable } from '@ant-design/pro-components';
+import { ProTable, ProForm } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
 import UpdateKnowledge from '@/bsComponents/UpdateKnowledge';
@@ -77,7 +77,7 @@ const columns: ProColumns<KnowledgeSource>[] = [
     dataIndex: 'actions',
     width: 100,
     render: () => (
-      <TableActions onDelete={() => {}}/>
+      <TableActions onDelete={() => { }} />
     ),
   },
 ];
@@ -90,7 +90,7 @@ const KnowledgeSources: FC = () => {
           type="primary"
           icon={<PlusOutlined />}
         >
-          Update Knowledges  
+          Update Knowledges
         </Button>
       }
     >
@@ -108,9 +108,7 @@ const KnowledgeSources: FC = () => {
         columns={columns}
         toolBarRender={false}
         dataSource={mockData}
-        search={{
-          layout: 'vertical'
-        }}
+        search={{ layout: 'vertical' }}
         tableViewRender={({ dataSource = [] }, dom) => {
           if (!dataSource.length) {
             return (

@@ -10,7 +10,8 @@ import {
   ProFormSlider,
   ProFormTextArea,
   ProFormCheckbox,
-  ProFormDependency
+  ProFormDependency,
+  type FormInstance
 } from '@ant-design/pro-components';
 
 import TagsInput from '@/components/TagsInput';
@@ -19,7 +20,11 @@ import KnowledgeTypeSelect from '@/bsComponents/KnowledgeTypeSelect';
 import RemoteFormItem from '@/components/RemoteFormItem';
 import { AdditionMethodMap, AdditionMethod } from './enum';
 
-const UpdateKnowledge: FC = () => {
+type UpdateKnowledgeProps = {
+  form?: FormInstance
+}
+
+const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
   return (
     <DrawerContainer
       title="Update Knowledge"
@@ -30,19 +35,28 @@ const UpdateKnowledge: FC = () => {
         </Space>
       }
     >
-      <ProForm submitter={false}>
+      <ProForm
+        submitter={false}
+        form={props.form}
+      >
         <Row gutter={16}>
           <Col span={11}>
-            <ProCard size="small"title="Learn New Knowledge">
+            <ProCard size="small" title="Learn New Knowledge">
               <KnowledgeTypeSelect
                 name="knowledge_type"
                 label="Knowledge Type"
+                rules={[
+                  { required: true }
+                ]}
               />
               <ProFormRadio.Group
                 name="addition_method"
                 label="Addition method"
                 valueEnum={AdditionMethodMap}
                 initialValue={AdditionMethod.Manual}
+                rules={[
+                  { required: true }
+                ]}
               />
               <ProFormDependency name={['addition_method']}>
                 {(values) => {
@@ -53,13 +67,16 @@ const UpdateKnowledge: FC = () => {
                         <ProFormTextArea
                           name="document"
                           label="Document"
+                          rules={[
+                            { required: true }
+                          ]}
                         />
                       );
                     case AdditionMethod.Remote:
                       return (
                         <div className="gay-box mb-[16px]">
-                          <ProCard size="small"title="Remote document">
-                            <RemoteFormItem name="remote_doc"/>
+                          <ProCard size="small" title="Remote document">
+                            <RemoteFormItem name="remote_doc" />
                           </ProCard>
                         </div>
                       );
@@ -71,11 +88,15 @@ const UpdateKnowledge: FC = () => {
               <ProFormText
                 name="knowledge_name"
                 label="Title"
+                extra="不填写标题，标题将会在保存之后自动生成。"
               />
-              <ProFormText
+              <ProForm.Item
                 name="knowledge_tags"
                 label="Tags"
-              />
+                extra="不填写标签，标签将会在保存之后自动生成。"
+              >
+                <TagsInput />
+              </ProForm.Item>
               <ProFormSelect
                 name="link_to_existing_knowledge"
                 label="Link to existing knowledge"
@@ -188,8 +209,9 @@ const UpdateKnowledge: FC = () => {
                 name="extraction_depth"
                 label="Extraction depth"
                 min={0}
-                max={100}
-                initialValue={50}
+                max={10}
+                step={1}
+                initialValue={1}
               />
             </ProCard>
             <ProCard size="small" title="Vector config" className="mt-[16px]">

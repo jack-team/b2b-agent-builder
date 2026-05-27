@@ -1,46 +1,38 @@
 import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { RootLayout, MainLayout } from '../layouts';
+import { NoAuthWrapper, AuthWrapper } from '@/components/AuthWrapper';
+import RouteError from '@/components/RouteError';
+import { MainLayout } from '@/layouts';
+import { mainRoutes } from './main';
 
 const router = createBrowserRouter([
   {
-    element: <RootLayout />,
+    path: '/',
+    errorElement: <RouteError />,
     children: [
       {
-        index: true,
-        Component: lazy(() => import('@/pages/auth')),
+        path: '/',
+        element: <NoAuthWrapper />,
+        children: [{
+          path: '/',
+          element: <MainLayout />,
+          children: mainRoutes
+        }]
       },
       {
-        path: '/auth',
-        Component: lazy(() => import('@/pages/auth')),
-      },
-      {
-        element: <MainLayout />,
-        children: [
-          {
-            path: '/dashboard',
-            Component: lazy(() => import('@/pages/dashboard')),
-          },
-          {
-            path: '/knowledges',
-            Component: lazy(() => import('@/pages/knowledges')),
-          },
-          {
-            path: '/capabilities',
-            Component: lazy(() => import('@/pages/capabilities')),
-          },
-          {
-            path: '/llm',
-            Component: lazy(() => import('@/pages/llm')),
-          }
-        ],
+        path: '/',
+        element: <AuthWrapper />,
+        children: [{
+          path: '/auth',
+          Component: lazy(() => import('@/pages/auth'))
+        }]
       },
       {
         path: '*',
-        Component: lazy(() => import('@/pages/notFound')),
-      },
-    ],
-  },
+        Component: lazy(() => import('@/pages/notFound'))
+      }
+    ]
+  }
 ]);
 
 export const AppRouter = () => {

@@ -1,6 +1,6 @@
-import type { FC } from 'react';
 import { Divider } from 'antd';
-import { ProFormSelect } from '@ant-design/pro-components';
+import { type FC, Fragment } from 'react';
+import { ProFormCascader } from '@ant-design/pro-components';
 import Drawer from '@/components/Drawer';
 import KnowledgeTypeManager from '../KnowledgeTypeManager';
 import type { KnowledgeTypeSelectProps } from './types';
@@ -24,7 +24,7 @@ const KnowledgeTypeSelect: FC<KnowledgeTypeSelectProps> = (props) => {
 
   const renderNewTypeBtn = () => {
     return (
-      <div className="px-[8px] py-[4px]">
+      <div className="py-[4px]">
         还没有知识库类型，
         <Drawer trigger={<a>点击添加</a>}>
           <KnowledgeTypeManager />
@@ -34,22 +34,24 @@ const KnowledgeTypeSelect: FC<KnowledgeTypeSelectProps> = (props) => {
   }
 
   return (
-    <ProFormSelect
+    <ProFormCascader
       {...props}
-      options={options}
       fieldProps={{
+        options: options,
         notFoundContent: renderNewTypeBtn(),
-        dropdownRender: (menu) => (
-          <>
+        popupRender: (menu) => (
+          <Fragment>
             {menu}
-            {options.length && (
-              <>
-                <Divider className="my-[4px]" />
-                {renderNewTypeBtn()}
-              </>
+            {options.length > 0 && (
+              <Fragment>
+                <Divider className="m-[0px]!" />
+                <div className="py-[6px] px-[12px]">
+                  {renderNewTypeBtn()}
+                </div>
+              </Fragment>
             )}
-          </>
-        ),
+          </Fragment>
+        )
       }}
     />
   )

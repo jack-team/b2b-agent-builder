@@ -1,42 +1,55 @@
-import { type FC, type PropsWithChildren } from 'react';
+import { type FC, type PropsWithChildren, type ReactElement } from 'react';
 import { Space, Button, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
 type TableActionsProps = {
   onEdit?: () => void;
-  onDelete?: () => void
+  onDelete?: () => void;
+  showEdit?: boolean;
+  showDel?: boolean;
+  renderEditBtn?: (btn: ReactElement) => ReactElement;
+  renderDelBtn?: (btn: ReactElement) => ReactElement;
 }
 
 const TableActions: FC<PropsWithChildren<TableActionsProps>> = (props) => {
-  const { children, onDelete, onEdit } = props;
+  const {
+    children,
+    showEdit = true,
+    showDel = true,
+    renderEditBtn,
+    renderDelBtn
+  } = props;
+
+  const editBtn = (
+    <Tooltip title="Edit">
+      <Button
+        size="small"
+        color="default"
+        variant="filled"
+        onClick={props.onEdit}
+      >
+        <EditOutlined />
+      </Button>
+    </Tooltip>
+  );
+
+  const delBtn = (
+    <Tooltip title="Delete">
+      <Button
+        size="small"
+        color="danger"
+        variant="filled"
+        onClick={props.onDelete}
+      >
+        <DeleteOutlined />
+      </Button>
+    </Tooltip>
+  );
 
   return (
     <Space size={12}>
-      {!!onEdit && (
-        <Tooltip title="Edit">
-          <Button
-            size="small"
-            color="default"
-            variant="filled"
-            onClick={onEdit}
-          >
-            <EditOutlined />
-          </Button>
-        </Tooltip>
-
-      )}
-      {!!onDelete && (
-        <Tooltip title="Delete">
-          <Button
-            size="small"
-            color="danger"
-            variant="filled"
-            onClick={onDelete}
-          >
-            <DeleteOutlined />
-          </Button>
-        </Tooltip>
-      )}
+      {showEdit && renderEditBtn?.(editBtn) || editBtn}
+      {showDel && renderDelBtn?.(delBtn) || delBtn}
       {children}
     </Space>
   );

@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, JSX } from 'react';
 import { Tag, Button, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
@@ -61,63 +61,62 @@ const mockData: KnowledgeType[] = [
   }
 ];
 
-const columns: ProColumns<KnowledgeType>[] = [
-  {
-    title: 'Type Name',
-    dataIndex: 'typeName',
-  },
-  {
-    title: 'Code',
-    dataIndex: 'code'
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: (_dom, record) => (
-      <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
-        {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
-      </Tag>
-    ),
-  },
-  {
-    title: 'Actions',
-    hideInSearch: true,
-    dataIndex: 'actions',
-    width: 120,
-    render: () => (
-      <TableActions
-        onDelete={() => { }}
-        onEdit={() => { }}
-      />
-    ),
-  },
-];
-
 const KnowledgeTypeManager: FC = () => {
-  const renderNewTypeButton = () => (
-    <Drawer
-      size="small"
-      trigger={
-        <Button
-          type="primary"
-          icon={<PlusOutlined />}
-        >
-          Create
-        </Button>
-      }
-    >
-      <KnowledgeTypeEdit />
-    </Drawer>
+
+  const renderDrawerForm = (trigger: JSX.Element) => {
+    return (
+      <Drawer
+        size="small"
+        trigger={trigger}
+      >
+        <KnowledgeTypeEdit />
+      </Drawer>
+    );
+  }
+
+  const renderCreateNew = () => (
+    renderDrawerForm(<Button type="primary" icon={<PlusOutlined />}>Create</Button>)
   );
+
+  const columns: ProColumns<KnowledgeType>[] = [
+    {
+      title: 'Type Name',
+      dataIndex: 'typeName',
+    },
+    {
+      title: 'Code',
+      dataIndex: 'code'
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      render: (_dom, record) => (
+        <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
+          {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
+        </Tag>
+      ),
+    },
+    {
+      title: 'Actions',
+      hideInSearch: true,
+      dataIndex: 'actions',
+      width: 120,
+      render: () => (
+        <TableActions
+          renderEditBtn={renderDrawerForm}
+        />
+      ),
+    },
+  ];
 
   return (
     <DrawerContainer
       title="Knowledge Types"
-      extra={renderNewTypeButton()}
+      extra={renderCreateNew()}
     >
       <ProTable
         size="medium"
@@ -137,7 +136,7 @@ const KnowledgeTypeManager: FC = () => {
             return (
               <div className="py-[56px]">
                 <Empty description="No Data Available">
-                  {renderNewTypeButton()}
+                  {renderCreateNew()}
                 </Empty>
               </div>
             );

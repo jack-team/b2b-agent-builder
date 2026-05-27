@@ -1,5 +1,6 @@
 import { type FC, cloneElement } from 'react';
 import { Avatar, Dropdown, theme } from 'antd';
+import { useUserStore } from '@/store/user';
 
 type MenuElement = React.ReactElement<{
   style: React.CSSProperties;
@@ -7,16 +8,26 @@ type MenuElement = React.ReactElement<{
 
 const UserCenter: FC = () => {
   const { token } = theme.useToken();
+  const logout = useUserStore(s => s.logout)
 
   const renderAvatar = (size: number) => {
-    return <Avatar size={size} src="https://picsum.photos/200/300?grayscale" />;
+    return (
+      <Avatar
+        size={size}
+        src="https://picsum.photos/200/300?grayscale"
+      />
+    );
   }
 
   return (
     <Dropdown
       menu={{
         items: [
-          { key: 'logout', label: 'Logout' }
+          {
+            key: 'logout',
+            label: 'Logout',
+            onClick: logout
+          }
         ]
       }}
       popupRender={(menu) => (

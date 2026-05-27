@@ -52,6 +52,9 @@ export default <ConfigProviderProps['theme']>{
     },
     Drawer: {
       colorBgMask: 'rgba(0,0,0,.15)'
+    },
+    Cascader: {
+      dropdownHeight: 'auto'
     }
   }
 };

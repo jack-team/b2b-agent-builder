@@ -55,7 +55,7 @@ const RegisterForm: FC = () => {
         formItemProps={{ className: 'no-card' }}
         rules={[{ required: true }]}
       />
-      <Button type="primary" htmlType="submit" block>
+      <Button type="primary" block>
         Create Account
       </Button>
     </ProForm>
