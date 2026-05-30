@@ -1,32 +1,37 @@
-import { type FC, Fragment } from 'react';
+import { type FC, useMemo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { useChartConfigs } from './hooks';
 import type { ChartProps } from './types';
-import Tooltip from './tooltip';
 import XAxis from './xAxis';
 import SplitLines from './splitLins';
 import styles from './styles.module.less';
 
+const DEFAULT_PADDING = {
+  top: '24px',
+  right: '100px',
+  bottom: '33.33%',
+  left: '40px'
+}
+
 const Chart: FC<ChartProps> = (props) => {
+  const { padding, ...reset } = props;
+
+  const _padding = useMemo(() => {
+    return { ...DEFAULT_PADDING, ...padding };
+  }, [padding]);
+
   const {
     ready,
     option,
-    xValues,
-    yValues,
     dateRanges,
-    chartsRef,
-    activeIndex,
     onChartReady,
     handleDownplay,
     handleGlobalout,
-    handlePointHighlight,
-    BOTTOM_OFFSET,
-    LEFT_OFFSET,
-    RIGHT_OFFSET
-  } = useChartConfigs(props);
+    handlePointHighlight
+  } = useChartConfigs({ ...reset, padding: _padding });
 
-  const boxWidth = `calc(100% - ${LEFT_OFFSET} - ${RIGHT_OFFSET})`;
-  const boxHeight = `calc(100% - ${BOTTOM_OFFSET} + 2px)`;
+  const boxWidth = `calc(100% - ${_padding.left} - ${_padding.right})`;
+  const boxHeight = `calc(100% - ${_padding.bottom} + 2px)`;
 
   return (
     <div className={styles.container}>
@@ -44,25 +49,15 @@ const Chart: FC<ChartProps> = (props) => {
             }}
           />
           {ready && (
-            <Fragment>
-              {activeIndex > -1 && (
-                <Tooltip
-                  xValues={xValues}
-                  yValues={yValues}
-                  chartsRef={chartsRef}
-                  activeIndex={activeIndex}
-                />
-              )}
-              <SplitLines
-                left={LEFT_OFFSET}
-                width={boxWidth}
-                height={boxHeight}
-              />
-            </Fragment>
+            <SplitLines
+              left={_padding.left}
+              width={boxWidth}
+              height={boxHeight}
+            />
           )}
         </div>
       </div>
-      <div style={{ marginLeft: LEFT_OFFSET, width: boxWidth }}>
+      <div style={{ marginLeft: _padding.left, width: boxWidth }}>
         <XAxis dateRanges={dateRanges} />
       </div>
     </div>

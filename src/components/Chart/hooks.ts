@@ -1,17 +1,11 @@
 import { useMemo, useRef } from 'react';
 import * as ReactEcharts from 'echarts-for-react';
 import { useMemoizedFn, useSafeState } from 'ahooks';
-import type { ChartProps, EChartsHighlightParams } from './types';
+import type { ChartProps, EChartsHighlightParams, FormatterParams } from './types';
 import { splitIntoSegments } from './helper';
 
-const TOP_OFFSET = '8px';
-const BOTTOM_OFFSET = '33.33%';
-
-const LEFT_OFFSET = '12px';
-const RIGHT_OFFSET = '100px';
-
 export const useChartConfigs = (props: ChartProps) => {
-  const { datas: _datas = [] } = props;
+  const { datas: _datas = [], padding } = props;
   const [ready, setReady] = useSafeState(false);
   const [activeIndex, setActiveIndex] = useSafeState(-1);
   const chartsRef = useRef<ReactEcharts.EChartsInstance>(null);
@@ -127,10 +121,7 @@ export const useChartConfigs = (props: ChartProps) => {
         }
       },
       grid: {
-        top: TOP_OFFSET,
-        left: LEFT_OFFSET,
-        right: RIGHT_OFFSET,
-        bottom: BOTTOM_OFFSET,
+        ...padding,
         containLabel: true
       },
       xAxis: {
@@ -153,10 +144,10 @@ export const useChartConfigs = (props: ChartProps) => {
       },
       series: [
         {
+          zlevel: 10,
           type: 'line',
           showSymbol: false,
           data: yValues,
-          zlevel: 10,
           lineStyle: {
             width: 2,
             color: props.lineColor,
@@ -173,19 +164,41 @@ export const useChartConfigs = (props: ChartProps) => {
           },
           label: {
             show: true,
-            formatter: (params: any) => {
+            formatter: (params: FormatterParams) => {
               return yValues[params.dataIndex] + ' USDT';
             },
-            position: 'right', // 标签显示在点的上方
-            offset: [0, 0], // [x轴偏移, y轴偏移]
+            position: 'right',
+            offset: [0, 0],
             fontWeight: 'bold',
             fontSize: 12,
             color: '#fff'
           }
-        }
+        },
+        {
+          zlevel: 11,
+          type: 'line',
+          data: yValues,
+          symbol: 'none',
+          smooth: true,
+          lineStyle: {
+            width: 2,
+            color: 'transparent',
+          },
+          label: {
+            show: true,
+            formatter: (params: FormatterParams) => {
+              return xValues[params.dataIndex];
+            },
+            position: 'top',
+            fontSize: 12,
+            color: '#fff',
+            offset: [0, -6],
+            fontWeight: 'bold',
+          }
+        },
       ]
     }
-  }, [xValues, yValues]);
+  }, [xValues, yValues, padding]);
 
   return {
     ready,
@@ -200,10 +213,6 @@ export const useChartConfigs = (props: ChartProps) => {
     handleGlobalout,
     handleDownplay,
     highlightLastPoint,
-    handlePointHighlight,
-    TOP_OFFSET,
-    BOTTOM_OFFSET,
-    LEFT_OFFSET,
-    RIGHT_OFFSET
+    handlePointHighlight
   }
 }

@@ -4,11 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Table, Tag, Button } from 'antd';
 import Chart from '@/components/Chart';
 
-const datas = Array.from({ length: 2 }).map((_, i) => {
+
+
+const datas = Array.from({ length: 30 }).map((_, i) => {
   const d = dayjs().subtract(i, 'day');
   return {
     date: d.format('YYYY-MM-DD'),
-    value: 11000
+    value: Math.floor(Math.random() * 100) + 1
   }
 }).reverse();
 
@@ -53,7 +55,13 @@ const LLM: FC = () => {
       <h1 className="text-2xl font-bold mb-6">{t('menu.largeLanguageModels')}</h1>
 
       <div style={{ height: 240, width: 550, background: '#222', margin: 'auto', padding:'10px 0' }}>
-        <Chart datas={datas} lineColor="#73d13d" />
+        <Chart 
+        datas={datas}
+         lineColor="#73d13d" 
+         padding={{
+          left: '40px'
+         }}
+         />
       </div>
 
       {/* <Table columns={columns} dataSource={data} rowKey="id" /> */}
