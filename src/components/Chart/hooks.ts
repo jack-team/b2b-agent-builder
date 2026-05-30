@@ -6,8 +6,8 @@ import { splitIntoSegments } from './helper';
 
 export const useChartConfigs = (props: ChartProps) => {
   const { datas: _datas = [], padding } = props;
+
   const [ready, setReady] = useSafeState(false);
-  const [activeIndex, setActiveIndex] = useSafeState(-1);
   const chartsRef = useRef<ReactEcharts.EChartsInstance>(null);
 
   // 数据，如果只有一条数据，补一条相同点的数据，筹齐两条
@@ -59,13 +59,12 @@ export const useChartConfigs = (props: ChartProps) => {
   });
 
   // 取消高亮最后一个点
-  const cancelLastPoint = useMemoizedFn(() => {
+  const clearLastPoint = useMemoizedFn(() => {
     tooglePointHighlight('downplay');
   });
 
   // 鼠标移出charts 区域以外触发
   const handleGlobalout = useMemoizedFn(() => {
-    setActiveIndex(-1);
     highlightLastPoint();
   });
 
@@ -75,9 +74,7 @@ export const useChartConfigs = (props: ChartProps) => {
       const { batch = [] } = params;
       if (!batch.length) return;
       const [{ dataIndex }] = batch;
-
-      cancelLastPoint();
-      setActiveIndex(dataIndex);
+      clearLastPoint();
       tooglePointHighlight('highlight', dataIndex);
     }
   );
@@ -203,12 +200,10 @@ export const useChartConfigs = (props: ChartProps) => {
   return {
     ready,
     option,
-    chartsRef,
     segments,
     xValues,
     yValues,
     dateRanges,
-    activeIndex,
     onChartReady,
     handleGlobalout,
     handleDownplay,
