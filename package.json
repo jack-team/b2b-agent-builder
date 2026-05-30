@@ -32,7 +32,9 @@
     "eventemitter3": "^5.0.1",
     "humps": "^2.0.1",
     "qs": "^6.15.1",
-    "uuid": "^14.0.0"
+    "uuid": "^14.0.0",
+    "echarts-for-react": "3.0.6",
+    "echarts": "6.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",

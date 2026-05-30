@@ -1,6 +1,16 @@
 import type { FC } from 'react';
+import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { Table, Tag, Button } from 'antd';
+import Chart from '@/components/Chart';
+
+const datas = Array.from({ length: 2 }).map((_, i) => {
+  const d = dayjs().subtract(i, 'day');
+  return {
+    date: d.format('YYYY-MM-DD'),
+    value: 11000
+  }
+}).reverse();
 
 const LLM: FC = () => {
   const { t } = useTranslation();
@@ -39,9 +49,14 @@ const LLM: FC = () => {
   ];
 
   return (
-    <div className="p-6">
+    <div className="p-6" style={{background: '#333'}}>
       <h1 className="text-2xl font-bold mb-6">{t('menu.largeLanguageModels')}</h1>
-      <Table columns={columns} dataSource={data} rowKey="id" />
+
+      <div style={{ height: 240, width: 550, background: '#222', margin: 'auto', padding:'10px 0' }}>
+        <Chart datas={datas} lineColor="#73d13d" />
+      </div>
+
+      {/* <Table columns={columns} dataSource={data} rowKey="id" /> */}
     </div>
   );
 };
