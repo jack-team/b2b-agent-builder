@@ -6,8 +6,8 @@ import { splitIntoSegments } from './helper';
 
 export const useChartConfigs = (props: ChartProps) => {
   const { datas: _datas = [], padding } = props;
-
   const [ready, setReady] = useSafeState(false);
+  const [activeIndex, setActiveIndex] = useSafeState(-1);
   const chartsRef = useRef<ReactEcharts.EChartsInstance>(null);
 
   // 数据，如果只有一条数据，补一条相同点的数据，筹齐两条
@@ -66,6 +66,7 @@ export const useChartConfigs = (props: ChartProps) => {
   // 鼠标移出charts 区域以外触发
   const handleGlobalout = useMemoizedFn(() => {
     highlightLastPoint();
+    setActiveIndex(-1);
   });
 
   // 点高亮的时候触发
@@ -76,6 +77,7 @@ export const useChartConfigs = (props: ChartProps) => {
       const [{ dataIndex }] = batch;
       clearLastPoint();
       tooglePointHighlight('highlight', dataIndex);
+      requestAnimationFrame(() => setActiveIndex(dataIndex));
     }
   );
 
@@ -84,7 +86,9 @@ export const useChartConfigs = (props: ChartProps) => {
     (params: EChartsHighlightParams) => {
       const { batch = [] } = params;
       if (!batch.length) return;
-      handleGlobalout();
+
+      highlightLastPoint();
+      setActiveIndex(-1);
     }
   );
 
@@ -111,9 +115,7 @@ export const useChartConfigs = (props: ChartProps) => {
         axisPointer: {
           type: 'line',
           lineStyle: {
-            width: 1,
-            color: '#FF0000',
-            type: 'dashed'
+            width: 0
           }
         }
       },
@@ -203,7 +205,9 @@ export const useChartConfigs = (props: ChartProps) => {
     segments,
     xValues,
     yValues,
+    chartsRef,
     dateRanges,
+    activeIndex,
     onChartReady,
     handleGlobalout,
     handleDownplay,

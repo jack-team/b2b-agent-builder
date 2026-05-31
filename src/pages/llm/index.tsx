@@ -6,11 +6,11 @@ import Chart from '@/components/Chart';
 
 
 
-const datas = Array.from({ length: 30 }).map((_, i) => {
+const datas = Array.from({ length: 5 }).map((_, i) => {
   const d = dayjs().subtract(i, 'day');
   return {
     date: d.format('YYYY-MM-DD'),
-    value: Math.floor(Math.random() * 100) + 1
+    value: Math.floor(Math.random() * 100)
   }
 }).reverse();
 
@@ -59,7 +59,7 @@ const LLM: FC = () => {
         datas={datas}
          lineColor="#73d13d" 
          padding={{
-          left: '40px'
+          left: '40px',
          }}
          />
       </div>

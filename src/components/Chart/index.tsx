@@ -1,9 +1,10 @@
-import { type FC, useMemo } from 'react';
+import { type FC, useMemo, Fragment, memo } from 'react';
 import ReactEcharts from 'echarts-for-react';
 import { useChartConfigs } from './hooks';
 import type { ChartProps } from './types';
 import XAxis from './xAxis';
 import SplitLines from './splitLins';
+import IndicatorLine from './indicatorLine';
 import styles from './styles.module.less';
 
 const DEFAULT_PADDING = {
@@ -23,6 +24,9 @@ const Chart: FC<ChartProps> = (props) => {
   const {
     ready,
     option,
+    yValues,
+    chartsRef,
+    activeIndex,
     dateRanges,
     onChartReady,
     handleDownplay,
@@ -49,11 +53,18 @@ const Chart: FC<ChartProps> = (props) => {
             }}
           />
           {ready && (
-            <SplitLines
-              left={_padding.left}
-              width={boxWidth}
-              height={boxHeight}
-            />
+            <Fragment>
+              <SplitLines
+                left={_padding.left}
+                width={boxWidth}
+                height={boxHeight}
+              />
+              <IndicatorLine
+                yValues={yValues}
+                chartsRef={chartsRef}
+                activeIndex={activeIndex}
+              />
+            </Fragment>
           )}
         </div>
       </div>
@@ -64,4 +75,4 @@ const Chart: FC<ChartProps> = (props) => {
   );
 }
 
-export default Chart;
+export default memo(Chart);

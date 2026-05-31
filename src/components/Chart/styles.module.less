@@ -50,3 +50,16 @@
     background: @line-color;
   }
 }
+
+.indicator_line {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  border-left: 1px dashed @line-color;
+
+  &.indicator_line_hide {
+    opacity: 0;
+  }
+}
