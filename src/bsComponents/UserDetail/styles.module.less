@@ -1,0 +1,179 @@
+.summary {
+  padding: 20px 24px;
+  margin-bottom: 16px;
+  background: #fff;
+  border-radius: 12px;
+  border: 0.5px solid var(--border-color-primary);
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.summary_main {
+  flex: 1;
+  display: flex;
+  gap: 20px;
+  min-width: 0;
+}
+
+.summary_info {
+  flex: 1;
+  min-width: 0;
+}
+
+.summary_name {
+  margin: 0 0 4px;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  color: var(--primaryColor);
+}
+
+.summary_job {
+  margin: 0 0 12px;
+  font-size: 13px;
+  color: #616161;
+}
+
+.summary_meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  color: #616161;
+}
+
+.summary_badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.summary_stats {
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.stat_row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.stat_label {
+  color: #616161;
+  white-space: nowrap;
+}
+
+.stat_value {
+  color: var(--primaryColor);
+  font-weight: 500;
+  text-align: right;
+}
+
+.field_row {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-color-primary);
+  font-size: 13px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.field_label {
+  width: 140px;
+  flex-shrink: 0;
+  color: #616161;
+}
+
+.field_value {
+  flex: 1;
+  text-align: right;
+  color: var(--primaryColor);
+  font-weight: 500;
+}
+
+.role_section {
+  margin-bottom: 12px;
+}
+
+.section_title {
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--primaryColor);
+}
+
+.role_tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.role_option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 13px;
+  color: var(--primaryColor);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.role_dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.role_check {
+  margin-left: auto;
+  color: #22c55e;
+  font-size: 14px;
+}
+
+.operation_badges {
+  display: flex;
+  gap: 6px;
+}
+
+.operation_badge {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.operation_c {
+  background: #22c55e;
+}
+
+.operation_r {
+  background: #3b82f6;
+}
+
+.operation_u {
+  background: #f97316;
+}
+
+.operation_d {
+  background: #ef4444;
+}

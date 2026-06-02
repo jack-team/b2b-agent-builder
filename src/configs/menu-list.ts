@@ -18,5 +18,10 @@ export const menuList = [
     "path": "/llm",
     "title": "menu.largeLanguageModels",
     "icon": "llm"
+  },
+  {
+    "path": "/users",
+    "title": "menu.users",
+    "icon": "users"
   }
 ]
