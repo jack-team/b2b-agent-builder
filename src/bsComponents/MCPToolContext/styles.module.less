@@ -1,0 +1,47 @@
+.layout {
+  height: 100%;
+  display: flex;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.sidebar {
+  width: 240px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.menu_list {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu_item {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 8px;
+  font-size: 12px;
+  border: 1px solid var(--border-color-primary);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.menu_item_active {
+  background: var(--color-primary);
+  color: #fff;
+  border-color: var(--color-primary);
+}
+
+.main {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}

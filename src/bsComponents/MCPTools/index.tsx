@@ -1,9 +1,10 @@
-import type { FC } from 'react';
+import type { FC, JSX } from 'react';
 import { Tag, Button, Space, Empty } from 'antd';
-import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
-import { DrawerContainer } from '@/components/Drawer';
+import Drawer, { DrawerContainer } from '@/components/Drawer';
+import MCPToolConfig from '@/bsComponents/MCPToolConfig';
+import MCPToolContext from '@/bsComponents/MCPToolContext';
 
 interface Tool {
   key: string;
@@ -117,39 +118,53 @@ const mockData: Tool[] = [
   },
 ];
 
-const columns: ProColumns<Tool>[] = [
-  {
-    title: 'Tool Name',
-    dataIndex: 'toolName'
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: (_dom, record) => (
-      <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
-        {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
-      </Tag>
-    ),
-  },
-  {
-    title: 'Actions',
-    hideInSearch: true,
-    dataIndex: 'actions',
-    width: 200,
-    render: () => (
-      <Space size={8}>
-        <Button size="small">Config</Button>
-        <Button size="small">Execution Context</Button>
-      </Space>
-    ),
-  },
-];
-
 const MCPTools: FC = () => {
+  const renderToolConfigDrawer = (trigger: JSX.Element) => (
+    <Drawer size="small" trigger={trigger}>
+      <MCPToolConfig />
+    </Drawer>
+  );
+
+  const renderExecutionContextDrawer = (trigger: JSX.Element) => (
+    <Drawer size="large" trigger={trigger}>
+      <MCPToolContext />
+    </Drawer>
+  );
+
+  const columns: ProColumns<Tool>[] = [
+    {
+      title: 'Tool Name',
+      dataIndex: 'toolName',
+    },
+    {
+      title: 'Description',
+      dataIndex: 'description',
+    },
+    {
+      title: 'Status',
+      dataIndex: 'status',
+      render: (_dom, record) => (
+        <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
+          {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
+        </Tag>
+      ),
+    },
+    {
+      title: 'Actions',
+      hideInSearch: true,
+      dataIndex: 'actions',
+      width: 200,
+      render: () => (
+        <Space size={8}>
+          {renderToolConfigDrawer(<Button size="small">Config</Button>)}
+          {renderExecutionContextDrawer(
+            <Button size="small">Execution Context</Button>,
+          )}
+        </Space>
+      ),
+    },
+  ];
+
   return (
     <DrawerContainer
       title="Shopify MCP Tools"
