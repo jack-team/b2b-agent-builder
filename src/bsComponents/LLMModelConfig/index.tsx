@@ -75,130 +75,126 @@ const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
         initialValues={getInitialValues(record)}
         onFinish={handleFinish}
       >
-        <div className="gay-box mb-[16px]">
-          <ProCard size="small" title="Basic Information">
+        <ProCard size="small" title="Basic Information">
+          <Row gutter={16}>
+            <Col span={12}>
+              <ProFormText
+                name="modelName"
+                label="Model name"
+                rules={[{ required: true, message: 'Please enter model name' }]}
+              />
+            </Col>
+            <Col span={12}>
+              <ProFormText
+                name="modelId"
+                label="Model ID"
+                rules={[{ required: true, message: 'Please enter model ID' }]}
+              />
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <ProFormSelect
+                name="apiProtocol"
+                label="API Protocol"
+                options={[
+                  { value: 'openai_compatible', label: 'OpenAI Compatible' },
+                  { value: 'anthropic', label: 'Anthropic' },
+                  { value: 'custom', label: 'Custom' },
+                ]}
+              />
+            </Col>
+            <Col span={12}>
+              <ProFormCheckbox
+                name="status"
+                label="Status"
+              >
+                Enable
+              </ProFormCheckbox>
+            </Col>
+          </Row>
+          <ProFormText
+            name="apiUrl"
+            label="API URL"
+            rules={[{ required: true, message: 'Please enter API URL' }]}
+          />
+          <ProFormText.Password
+            name="apiKey"
+            label="API Key"
+          />
+          <ProFormText.Password
+            name="secret"
+            label="Secret"
+          />
+          <ProFormList
+            name="headers"
+            label="Headers"
+            creatorButtonProps={{
+              type: 'link',
+              icon: <PlusOutlined />,
+              creatorButtonText: '+ New header',
+            }}
+          >
             <Row gutter={16}>
               <Col span={12}>
                 <ProFormText
-                  name="modelName"
-                  label="Model name"
-                  rules={[{ required: true, message: 'Please enter model name' }]}
+                  name="key"
+                  placeholder="Key"
                 />
               </Col>
               <Col span={12}>
                 <ProFormText
-                  name="modelId"
-                  label="Model ID"
-                  rules={[{ required: true, message: 'Please enter model ID' }]}
+                  name="value"
+                  placeholder="Value"
                 />
               </Col>
             </Row>
-            <Row gutter={16}>
-              <Col span={12}>
-                <ProFormSelect
-                  name="apiProtocol"
-                  label="API Protocol"
-                  options={[
-                    { value: 'openai_compatible', label: 'OpenAI Compatible' },
-                    { value: 'anthropic', label: 'Anthropic' },
-                    { value: 'custom', label: 'Custom' },
-                  ]}
-                />
-              </Col>
-              <Col span={12}>
-                <ProFormCheckbox
-                  name="status"
-                  label="Status"
-                >
-                  Enable
-                </ProFormCheckbox>
-              </Col>
-            </Row>
-            <ProFormText
-              name="apiUrl"
-              label="API URL"
-              rules={[{ required: true, message: 'Please enter API URL' }]}
-            />
-            <ProFormText.Password
-              name="apiKey"
-              label="API Key"
-            />
-            <ProFormText.Password
-              name="secret"
-              label="Secret"
-            />
-            <ProFormList
-              name="headers"
-              label="Headers"
-              creatorButtonProps={{
-                type: 'link',
-                icon: <PlusOutlined />,
-                creatorButtonText: '+ New header',
-              }}
-            >
-              <Row gutter={16}>
-                <Col span={12}>
-                  <ProFormText
-                    name="key"
-                    placeholder="Key"
-                  />
-                </Col>
-                <Col span={12}>
-                  <ProFormText
-                    name="value"
-                    placeholder="Value"
-                  />
-                </Col>
-              </Row>
-            </ProFormList>
-            <ProFormDigit
-              name="timeout"
-              label="Timeout(s)"
-              fieldProps={{ precision: 0, style: { width: '100%' } }}
-            />
-          </ProCard>
-        </div>
-        <div className="gay-box">
-          <ProCard size="small" title="Model Parameters">
-            <Row gutter={16}>
-              <Col span={12}>
-                <ProFormDigit
-                  name="maxContext"
-                  label="Max context"
-                  fieldProps={{ precision: 0, style: { width: '100%' } }}
-                />
-              </Col>
-              <Col span={12}>
-                <ProFormDigit
-                  name="temperature"
-                  label="Temperature"
-                  fieldProps={{ min: 0, max: 2, step: 0.1, style: { width: '100%' } }}
-                />
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col span={12}>
-                <ProFormDigit
-                  name="maxOutput"
-                  label="Max output"
-                  fieldProps={{ precision: 0, style: { width: '100%' } }}
-                />
-              </Col>
-              <Col span={12}>
-                <ProFormDigit
-                  name="topP"
-                  label="Top P"
-                  fieldProps={{ min: 0, max: 1, step: 0.1, style: { width: '100%' } }}
-                />
-              </Col>
-            </Row>
-            <ProFormText
-              name="stopSequences"
-              label="Stop sequences"
-              placeholder="Separate multiple stop words with English commas"
-            />
-          </ProCard>
-        </div>
+          </ProFormList>
+          <ProFormDigit
+            name="timeout"
+            label="Timeout(s)"
+            fieldProps={{ precision: 0, style: { width: '100%' } }}
+          />
+        </ProCard>
+        <ProCard size="small" title="Model Parameters" className="mt-[16px]">
+          <Row gutter={16}>
+            <Col span={12}>
+              <ProFormDigit
+                name="maxContext"
+                label="Max context"
+                fieldProps={{ precision: 0, style: { width: '100%' } }}
+              />
+            </Col>
+            <Col span={12}>
+              <ProFormDigit
+                name="temperature"
+                label="Temperature"
+                fieldProps={{ min: 0, max: 2, step: 0.1, style: { width: '100%' } }}
+              />
+            </Col>
+          </Row>
+          <Row gutter={16}>
+            <Col span={12}>
+              <ProFormDigit
+                name="maxOutput"
+                label="Max output"
+                fieldProps={{ precision: 0, style: { width: '100%' } }}
+              />
+            </Col>
+            <Col span={12}>
+              <ProFormDigit
+                name="topP"
+                label="Top P"
+                fieldProps={{ min: 0, max: 1, step: 0.1, style: { width: '100%' } }}
+              />
+            </Col>
+          </Row>
+          <ProFormText
+            name="stopSequences"
+            label="Stop sequences"
+            placeholder="Separate multiple stop words with English commas"
+          />
+        </ProCard>
       </ProForm>
     </DrawerContainer>
   );

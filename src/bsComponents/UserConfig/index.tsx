@@ -7,12 +7,14 @@ import {
   ProFormSelect,
   ProFormText,
   ProFormCheckbox,
+  ProFormList
 } from '@ant-design/pro-components';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { useMemoizedFn } from 'ahooks';
 
 import { DrawerContainer } from '@/components/Drawer';
 import type { UserConfigProps, UserFormValues } from './types';
+import StageItem from './stageItem';
 
 const fieldPlaceholder =
   'Please enter a shared domain group name, e.g., R&D Team';
@@ -149,6 +151,26 @@ const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
             options={roleOptions}
             rules={[{ required: true, message: 'Please select role' }]}
           />
+          <ProFormList
+            name="list"
+            initialValue={[{}]}
+            copyIconProps={false}
+            deleteIconProps={false}
+            creatorButtonProps={{
+              type: 'link',
+            }}
+          >
+            {(_, index, actions, count) => {
+              return (
+                <StageItem
+                  index={index}
+                  count={count}
+                  actions={actions}
+                />
+              )
+            }}
+
+          </ProFormList>
           <Row gutter={16}>
             <Col span={12}>
               <ProFormCheckbox name="status" label="Status">

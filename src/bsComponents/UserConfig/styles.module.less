@@ -1,0 +1,87 @@
+.flex_1 {
+  flex: 1;
+}
+
+.stage_item {
+  border-radius: 8px;
+  background: #fff;
+  padding: 24px 16px;
+  margin-bottom: 16px;
+  position: relative;
+
+  .close_btn {
+    position: absolute;
+    top: -6px;
+    right: -6px;
+    cursor: pointer;
+    font-size: 20px;
+    color: #616161;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  .flex_row {
+    display: flex;
+    gap: 16px;
+  }
+
+  .label {
+    width: 100px;
+    height: 32px;
+    line-height: 32px;
+
+    &.level {
+      padding-left: 16px;
+    }
+
+    &.required {
+      &::before {
+        content: "*";
+        color: #ff4d4f;
+        margin-right: 4px;
+        font-family: sans-serif;
+      }
+    }
+  }
+
+  .content {
+    flex: 1;
+    display: flex;
+    gap: 16px;
+
+    &.top{
+      padding: 0 22px 0 0;
+    }
+  }
+}
+
+.range_group {
+  display: flex;
+
+  .item {
+    flex: 1;
+  }
+
+  .separator {
+    margin: 0 16px;
+    padding-top: 4px;
+
+    &::before {
+      content: "-";
+    }
+
+    &.has_label {
+      padding-top: 34px;
+    }
+  }
+}
+
+.left_area {
+  width: 75%;
+}
+
+.right_area {
+  width: 25%;
+}
