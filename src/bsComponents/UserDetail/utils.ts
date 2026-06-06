@@ -60,12 +60,12 @@ export const toUserDetailData = (record: UserRecord): UserDetailData => {
 };
 
 export const assignableRoles: AssignableRole[] = [
-  { key: 'super_admin', label: 'Super Admin', dotColor: appTheme.colorError },
-  { key: 'system_admin', label: 'System Admin', dotColor: appTheme.colorPrimaryLight },
-  { key: 'security_admin', label: 'Security Admin', dotColor: appTheme.colorWarning },
-  { key: 'audit_admin', label: 'Audit Admin', dotColor: appTheme.colorSuccess },
-  { key: 'admin', label: 'Admin', dotColor: appTheme.colorInfo },
-  { key: 'cto', label: 'CTO', dotColor: appTheme.colorInfoDark },
+  { key: 'super_admin', label: 'super_admin', dotColor: appTheme.colorError },
+  { key: 'system_admin', label: 'system_admin', dotColor: appTheme.colorPrimaryLight },
+  { key: 'security_admin', label: 'security_admin', dotColor: appTheme.colorWarning },
+  { key: 'audit_admin', label: 'audit_admin', dotColor: appTheme.colorSuccess },
+  { key: 'admin', label: 'admin', dotColor: appTheme.colorInfo },
+  { key: 'cto', label: 'cto', dotColor: appTheme.colorInfoDark },
 ];
 
 export const effectivePermissions: EffectivePermission[] = [

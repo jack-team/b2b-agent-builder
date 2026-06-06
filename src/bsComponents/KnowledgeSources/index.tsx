@@ -1,8 +1,10 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import { Tag, Button, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { ProTable, ProForm } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
+import { useTranslation } from 'react-i18next';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
 import UpdateKnowledge from '@/bsComponents/UpdateKnowledge';
 import TableActions from '@/components/TableActions';
@@ -39,50 +41,52 @@ const mockData: KnowledgeSource[] = [
   }
 ];
 
-const columns: ProColumns<KnowledgeSource>[] = [
-  {
-    title: 'Document Name',
-    dataIndex: 'documentName',
-  },
-  {
-    title: 'Type',
-    dataIndex: 'type',
-  },
-  {
-    title: 'Keywords',
-    dataIndex: 'keywords',
-    render: (_dom, record) => (
-      <div className="flex flex-wrap gap-[6px]">
-        {record.keywords.map((keyword) => (
-          <Tag key={keyword}>
-            {keyword}
-          </Tag>
-        ))}
-      </div>
-    ),
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: (_dom, record) => (
-      <Tag>
-        {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
-      </Tag>
-    ),
-  },
-  {
-    align: 'center',
-    title: 'Actions',
-    hideInSearch: true,
-    dataIndex: 'actions',
-    width: 100,
-    render: () => (
-      <TableActions onDelete={() => { }} />
-    ),
-  },
-];
-
 const KnowledgeSources: FC = () => {
+  const { t } = useTranslation();
+
+  const columns: ProColumns<KnowledgeSource>[] = useMemo(() => [
+    {
+      title: t('knowledgesPage.columns.documentName'),
+      dataIndex: 'documentName',
+    },
+    {
+      title: t('knowledgesPage.columns.type'),
+      dataIndex: 'type',
+    },
+    {
+      title: t('knowledgesPage.columns.keywords'),
+      dataIndex: 'keywords',
+      render: (_dom, record) => (
+        <div className="flex flex-wrap gap-[6px]">
+          {record.keywords.map((keyword) => (
+            <Tag key={keyword}>
+              {keyword}
+            </Tag>
+          ))}
+        </div>
+      ),
+    },
+    {
+      title: t('common.status'),
+      dataIndex: 'status',
+      render: (_dom, record) => (
+        <Tag>
+          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
+        </Tag>
+      ),
+    },
+    {
+      align: 'center',
+      title: t('common.actions'),
+      hideInSearch: true,
+      dataIndex: 'actions',
+      width: 100,
+      render: () => (
+        <TableActions onDelete={() => { }} />
+      ),
+    },
+  ], [t]);
+
   const renderNewKnowledgeButton = () => (
     <Drawer
       trigger={
@@ -90,7 +94,7 @@ const KnowledgeSources: FC = () => {
           type="primary"
           icon={<PlusOutlined />}
         >
-          Update Knowledges
+          {t('knowledgesPage.updateKnowledges')}
         </Button>
       }
     >
@@ -100,7 +104,7 @@ const KnowledgeSources: FC = () => {
 
   return (
     <DrawerContainer
-      title="Knowledge Sources"
+      title={t('knowledgesPage.knowledgeSources')}
       extra={renderNewKnowledgeButton()}
     >
       <ProTable

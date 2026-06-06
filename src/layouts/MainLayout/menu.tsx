@@ -30,7 +30,7 @@ const AppMenu: FC = () => {
         <div className={styles.band}>
           <img src="/favicon.svg" className="h-[36px]" alt="logo" />
           <div className={styles.band_title}>
-            B2B Agent Builder
+            {t('layout.brandName')}
           </div>
           <div className={styles.collapsed_switch} onClick={toggleMenu}>
             {menuCollapsed ? <MenuUnfoldOutlined  /> : <MenuFoldOutlined />}

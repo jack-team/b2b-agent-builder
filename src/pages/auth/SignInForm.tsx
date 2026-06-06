@@ -2,6 +2,7 @@ import type { FC } from 'react';
 import * as uuid from 'uuid';
 import { Button } from 'antd';
 import { useMemoizedFn } from 'ahooks';
+import { useTranslation } from 'react-i18next';
 import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
 import { useUserStore } from '@/store/user';
 import EmailIcon from '@/assets/svg-icons/page/auth/email.svg?react';
@@ -9,6 +10,7 @@ import PasswordIcon from '@/assets/svg-icons/page/auth/lock.svg?react';
 import styles from './styles.module.less';
 
 const SignInForm: FC = () => {
+  const { t } = useTranslation();
   const [form] = ProForm.useForm();
   const updateUser = useUserStore(s => s.updateUser);
 
@@ -25,17 +27,16 @@ const SignInForm: FC = () => {
     >
       <ProFormText
         name="username"
-        label="Email"
+        label={t('auth.email')}
         required={false}
         allowClear={true}
         rules={[{ required: true }]}
         formItemProps={{ className: 'no-card' }}
-        fieldProps={{  prefix: <EmailIcon /> }}
-
+        fieldProps={{ prefix: <EmailIcon /> }}
       />
       <ProFormText.Password
         name="password"
-        label="Password"
+        label={t('auth.password')}
         allowClear={true}
         required={false}
         rules={[{ required: true }]}
@@ -49,9 +50,9 @@ const SignInForm: FC = () => {
             name="remember"
             initialValue={false}
           >
-            Remember me
+            {t('auth.rememberMe')}
           </ProFormCheckbox>
-          <a>Forgot password?</a>
+          <a>{t('auth.forgotPassword')}</a>
         </div>
       </ProForm.Item>
       <Button
@@ -60,7 +61,7 @@ const SignInForm: FC = () => {
         onClick={handleSubmit}
         className={styles.submitter}
       >
-        Sign In
+        {t('auth.signIn')}
       </Button>
     </ProForm>
   );

@@ -1,6 +1,7 @@
 import type { ReactElement } from 'react';
 import { Empty } from 'antd';
 import type { TableProps } from 'antd';
+import i18n from '@/i18n';
 
 type TableViewRenderProps = Pick<TableProps, 'dataSource'>;
 
@@ -13,7 +14,11 @@ export const proTableDrawerPagination = {
   pageSize: 3,
   showSizeChanger: false,
   showTotal: (total: number, range: [number, number]) =>
-    `${range[0]}-${range[1]} / ${total}`,
+    i18n.t('common.paginationTotal', {
+      start: range[0],
+      end: range[1],
+      total,
+    }),
 };
 
 export const renderProTableEmptyView = (
@@ -23,7 +28,7 @@ export const renderProTableEmptyView = (
   if (!dataSource.length) {
     return (
       <div className="py-[56px]">
-        <Empty description="Nothing found yet." />
+        <Empty description={i18n.t('common.nothingFound')} />
       </div>
     );
   }

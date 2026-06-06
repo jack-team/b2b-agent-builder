@@ -3,6 +3,7 @@ import { Button } from 'antd';
 import { useSafeState, useUpdateEffect } from 'ahooks';
 import { ProCard, ProForm, ProFormText, ProFormTextArea, ProFormCheckbox } from '@ant-design/pro-components';
 import { SaveOutlined, SearchOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import ToolItem from './tool';
 import styles from './styles.module.less';
@@ -24,6 +25,7 @@ const availableTools: ToolType[] = [
 ];
 
 const AvailableTools: FC = () => {
+  const { t } = useTranslation();
   const [form] = ProForm.useForm();
   const [selectedTool, setSelectedTool] = useSafeState<ToolType>();
   const [tools, setTools] = useSafeState<ToolType[]>(availableTools);
@@ -45,21 +47,21 @@ const AvailableTools: FC = () => {
 
   return (
     <DrawerContainer
-      title="Available Tools"
+      title={t('mcp.availableTools')}
       extra={
         <Button type="primary" icon={<SaveOutlined />}>
-          Save
+          {t('common.save')}
         </Button>
       }
     >
       <ProForm form={form} submitter={false} className="h-full">
         <div className=" h-full flex gap-[16px] overflow-hidden">
           <div className="h-full w-[40%]">
-            <ProCard title="Tools" size="small" className={styles.box}>
+            <ProCard title={t('common.tools')} size="small" className={styles.box}>
               <ProFormText
                 name="keyword"
                 fieldProps={{ prefix: <SearchOutlined /> }}
-                placeholder="Tool name / Description keyword"
+                placeholder={t('mcp.toolSearchPlaceholder')}
               />
               <div className={styles.tool_list}>
                 <ProForm.Item>
@@ -80,16 +82,16 @@ const AvailableTools: FC = () => {
             </ProCard>
           </div>
           <div className="h-full w-[60%]">
-            <ProCard title="Tool Details" size="small" className={styles.box}>
+            <ProCard title={t('mcp.toolDetails')} size="small" className={styles.box}>
               {!selectedTool ? (
                 <div className="flex items-center justify-center h-full">
-                  Select a tool to view details
+                  {t('mcp.selectToolHint')}
                 </div>
               ) : (
                 <>
-                  <ProFormText name={['tool', 'name']} label="Name" />
-                  <ProFormTextArea name={['tool', 'description']} label="Description" />
-                  <ProFormCheckbox name={['tool', 'status']} label="Status" />
+                  <ProFormText name={['tool', 'name']} label={t('common.name')} />
+                  <ProFormTextArea name={['tool', 'description']} label={t('common.description')} />
+                  <ProFormCheckbox name={['tool', 'status']} label={t('common.status')} />
                 </>
               )}
             </ProCard>

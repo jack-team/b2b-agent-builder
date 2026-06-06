@@ -1,8 +1,10 @@
 import type { FC, JSX } from 'react';
+import { useMemo } from 'react';
 import { Tag, Button, Empty } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
+import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import Drawer from '@/components/Drawer';
 import TableActions from '@/components/TableActions';
@@ -62,6 +64,7 @@ const mockData: KnowledgeType[] = [
 ];
 
 const KnowledgeTypeManager: FC = () => {
+  const { t } = useTranslation();
 
   const renderDrawerForm = (trigger: JSX.Element) => {
     return (
@@ -75,33 +78,33 @@ const KnowledgeTypeManager: FC = () => {
   }
 
   const renderCreateNew = () => (
-    renderDrawerForm(<Button type="primary" icon={<PlusOutlined />}>Create</Button>)
+    renderDrawerForm(<Button type="primary" icon={<PlusOutlined />}>{t('common.create')}</Button>)
   );
 
-  const columns: ProColumns<KnowledgeType>[] = [
+  const columns: ProColumns<KnowledgeType>[] = useMemo(() => [
     {
-      title: 'Type Name',
+      title: t('knowledgeType.columns.typeName'),
       dataIndex: 'typeName',
     },
     {
-      title: 'Code',
+      title: t('knowledgeType.columns.code'),
       dataIndex: 'code'
     },
     {
-      title: 'Description',
+      title: t('knowledgeType.columns.description'),
       dataIndex: 'description',
     },
     {
-      title: 'Status',
+      title: t('knowledgeType.columns.status'),
       dataIndex: 'status',
       render: (_dom, record) => (
         <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
-          {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
+          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
         </Tag>
       ),
     },
     {
-      title: 'Actions',
+      title: t('knowledgeType.columns.actions'),
       hideInSearch: true,
       dataIndex: 'actions',
       width: 120,
@@ -111,11 +114,11 @@ const KnowledgeTypeManager: FC = () => {
         />
       ),
     },
-  ];
+  ], [t]);
 
   return (
     <DrawerContainer
-      title="Knowledge Types"
+      title={t('knowledgeType.knowledgeTypes')}
       extra={renderCreateNew()}
     >
       <ProTable
@@ -129,13 +132,14 @@ const KnowledgeTypeManager: FC = () => {
         pagination={{
           pageSize: 6,
           showSizeChanger: false,
-          showTotal: (total, range) => `${range[0]}-${range[1]} / ${total}`,
+          showTotal: (total, range) =>
+            t('common.paginationTotal', { start: range[0], end: range[1], total }),
         }}
         tableViewRender={({ dataSource = [] }, dom) => {
           if (!dataSource.length) {
             return (
               <div className="py-[56px]">
-                <Empty description="No Data Available">
+                <Empty description={t('common.noDataAvailable')}>
                   {renderCreateNew()}
                 </Empty>
               </div>

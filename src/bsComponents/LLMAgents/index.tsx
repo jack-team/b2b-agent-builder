@@ -1,5 +1,7 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import dayjs from 'dayjs';
+import { useTranslation } from 'react-i18next';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
@@ -39,52 +41,56 @@ const mockAgents: AssociatedAgent[] = [
 
 const formatDate = (value: string) => dayjs(value).format('DD/MM/YYYY');
 
-const statusValueEnum = {
-  enabled: { text: 'Enabled', status: 'Success' as const },
-  disabled: { text: 'Disabled', status: 'Default' as const },
-};
-
-const columns: ProColumns<AssociatedAgent>[] = [
-  {
-    title: 'Agent Name',
-    dataIndex: 'agentName',
-  },
-  {
-    title: 'Created At',
-    dataIndex: 'createdAt',
-    valueType: 'date',
-    render: (_dom, record) => formatDate(record.createdAt),
-  },
-  {
-    title: 'Updated At',
-    dataIndex: 'updatedAt',
-    valueType: 'date',
-    render: (_dom, record) => formatDate(record.updatedAt),
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    valueType: 'select',
-    initialValue: 'enabled',
-    valueEnum: statusValueEnum,
-    render: (_dom, record) => <StatusTag status={record.status} />,
-  },
-  {
-    title: 'Actions',
-    dataIndex: 'actions',
-    hideInSearch: true,
-    width: 120,
-    render: () => (
-      <TableActions
-        onEdit={() => { }}
-        onDelete={() => { }}
-      />
-    ),
-  },
-];
-
 const LLMAgents: FC<LLMAgentsProps> = ({ modelName, onClose }) => {
-  const title = modelName ? `Associated Agents - ${modelName}` : 'Associated Agents';
+  const { t } = useTranslation();
+
+  const statusValueEnum = useMemo(() => ({
+    enabled: { text: t('common.enabled'), status: 'Success' as const },
+    disabled: { text: t('common.disabled'), status: 'Default' as const },
+  }), [t]);
+
+  const columns: ProColumns<AssociatedAgent>[] = useMemo(() => [
+    {
+      title: t('llmPage.columnsAgentName'),
+      dataIndex: 'agentName',
+    },
+    {
+      title: t('llmPage.columnsCreatedAt'),
+      dataIndex: 'createdAt',
+      valueType: 'date',
+      render: (_dom, record) => formatDate(record.createdAt),
+    },
+    {
+      title: t('llmPage.columnsUpdatedAt'),
+      dataIndex: 'updatedAt',
+      valueType: 'date',
+      render: (_dom, record) => formatDate(record.updatedAt),
+    },
+    {
+      title: t('llmPage.columns.status'),
+      dataIndex: 'status',
+      valueType: 'select',
+      initialValue: 'enabled',
+      valueEnum: statusValueEnum,
+      render: (_dom, record) => <StatusTag status={record.status} />,
+    },
+    {
+      title: t('llmPage.columns.actions'),
+      dataIndex: 'actions',
+      hideInSearch: true,
+      width: 120,
+      render: () => (
+        <TableActions
+          onEdit={() => { }}
+          onDelete={() => { }}
+        />
+      ),
+    },
+  ], [t, statusValueEnum]);
+
+  const title = modelName
+    ? t('llmPage.associatedAgentsWithModel', { modelName })
+    : t('llmPage.associatedAgents');
 
   return (
     <DrawerContainer

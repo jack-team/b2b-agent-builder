@@ -1,10 +1,12 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import cls from 'classnames';
 import { Tag, Input, Empty } from 'antd';
 import { TableOutlined, SearchOutlined } from '@ant-design/icons';
-import { ProTable, ProCard } from '@ant-design/pro-components';
+import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useSafeState } from 'ahooks';
+import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import TableActions from '@/components/TableActions';
 import styles from './styles.module.less';
@@ -127,47 +129,50 @@ const mockData: ContextTool[] = [
   },
 ];
 
-const columns: ProColumns<ContextTool>[] = [
-  {
-    title: 'Tool Name',
-    dataIndex: 'toolName',
-  },
-  {
-    title: 'Description',
-    dataIndex: 'description',
-    ellipsis: true,
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    valueType: 'select',
-    valueEnum: {
-      enabled: { text: 'Enabled' },
-      disabled: { text: 'Disabled' },
-    },
-    render: (_dom, record) => (
-      <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
-        {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
-      </Tag>
-    ),
-  },
-  {
-    title: 'Actions',
-    hideInSearch: true,
-    dataIndex: 'actions',
-    width: 120,
-    render: () => (
-      <TableActions
-        onEdit={() => { }}
-        onDelete={() => { }}
-      />
-    ),
-  },
-];
-
 const MCPToolContext: FC = () => {
+  const { t } = useTranslation();
   const [activeLogKey, setActiveLogKey] = useSafeState(runtimeLogItems[0].key);
   const [keyword, setKeyword] = useSafeState('');
+
+  const statusValueEnum = useMemo(() => ({
+    enabled: { text: t('common.enabled') },
+    disabled: { text: t('common.disabled') },
+  }), [t]);
+
+  const columns: ProColumns<ContextTool>[] = useMemo(() => [
+    {
+      title: t('mcp.columns.toolName'),
+      dataIndex: 'toolName',
+    },
+    {
+      title: t('mcp.columns.description'),
+      dataIndex: 'description',
+      ellipsis: true,
+    },
+    {
+      title: t('mcp.columns.status'),
+      dataIndex: 'status',
+      valueType: 'select',
+      valueEnum: statusValueEnum,
+      render: (_dom, record) => (
+        <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
+          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
+        </Tag>
+      ),
+    },
+    {
+      title: t('mcp.columns.actions'),
+      hideInSearch: true,
+      dataIndex: 'actions',
+      width: 120,
+      render: () => (
+        <TableActions
+          onEdit={() => { }}
+          onDelete={() => { }}
+        />
+      ),
+    },
+  ], [t, statusValueEnum]);
 
   const filteredData = mockData.filter((item) => {
     if (!keyword.trim()) {
@@ -181,12 +186,12 @@ const MCPToolContext: FC = () => {
   });
 
   return (
-    <DrawerContainer title="Shopify MCP Tool Context">
+    <DrawerContainer title={t('mcp.toolContextTitle')}>
       <div className={cls(styles.layout, 'h-full')}>
         <div className={cls(styles.sidebar, 'custom-pro-card-container')}>
           <Input
             allowClear
-            placeholder="Search"
+            placeholder={t('common.search')}
             prefix={<SearchOutlined />}
             value={keyword}
             onChange={(event) => setKeyword(event.target.value)}
@@ -221,13 +226,14 @@ const MCPToolContext: FC = () => {
             pagination={{
               pageSize: 3,
               showSizeChanger: false,
-              showTotal: (total, range) => `${range[0]}-${range[1]} / ${total}`,
+              showTotal: (total, range) =>
+                t('common.paginationTotal', { start: range[0], end: range[1], total }),
             }}
             tableViewRender={({ dataSource = [] }, dom) => {
               if (!dataSource.length) {
                 return (
                   <div className="py-[56px]">
-                    <Empty description="Nothing found yet." />
+                    <Empty description={t('common.nothingFound')} />
                   </div>
                 );
               }

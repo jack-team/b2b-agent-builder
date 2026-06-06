@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RobotOutlined } from '@ant-design/icons';
 import { Button, Space, Tooltip } from 'antd';
@@ -41,69 +42,69 @@ const mockData: LLMModel[] = [
   },
 ];
 
-const statusValueEnum = {
-  enabled: { text: 'Enabled', status: 'Success' as const },
-  disabled: { text: 'Disabled', status: 'Default' as const },
-};
-
-const columns: ProColumns<LLMModel>[] = [
-  {
-    title: 'Model Name',
-    dataIndex: 'modelName',
-  },
-  {
-    title: 'Model ID',
-    dataIndex: 'modelId',
-  },
-  {
-    title: 'API URL',
-    dataIndex: 'apiUrl',
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    valueType: 'select',
-    initialValue: 'enabled',
-    valueEnum: statusValueEnum,
-    render: (_dom, record) => <StatusTag status={record.status} />,
-  },
-  {
-    title: 'Actions',
-    dataIndex: 'actions',
-    hideInSearch: true,
-    width: 120,
-    render: (_dom, record) => (
-      <Space size={12}>
-        <TableActions
-          onDelete={() => { }}
-          renderEditBtn={(btn) => (
-            <Drawer size="medium" trigger={btn}>
-              <LLMModelConfig record={record} />
-            </Drawer>
-          )}
-        />
-        <Drawer
-          size="large"
-          trigger={
-            <Tooltip title="Agents">
-              <Button
-                size="small"
-                color="primary"
-                variant="filled"
-                icon={<RobotOutlined />}
-              />
-            </Tooltip>
-          }
-        >
-          <LLMAgents modelName={record.modelName} />
-        </Drawer>
-      </Space>
-    ),
-  },
-];
-
 const LLM: FC = () => {
   const { t } = useTranslation();
+
+  const statusValueEnum = useMemo(() => ({
+    enabled: { text: t('common.enabled'), status: 'Success' as const },
+    disabled: { text: t('common.disabled'), status: 'Default' as const },
+  }), [t]);
+
+  const columns: ProColumns<LLMModel>[] = useMemo(() => [
+    {
+      title: t('llmPage.columns.modelName'),
+      dataIndex: 'modelName',
+    },
+    {
+      title: t('llmPage.columns.modelId'),
+      dataIndex: 'modelId',
+    },
+    {
+      title: t('llmPage.columns.apiUrl'),
+      dataIndex: 'apiUrl',
+    },
+    {
+      title: t('llmPage.columns.status'),
+      dataIndex: 'status',
+      valueType: 'select',
+      initialValue: 'enabled',
+      valueEnum: statusValueEnum,
+      render: (_dom, record) => <StatusTag status={record.status} />,
+    },
+    {
+      title: t('llmPage.columns.actions'),
+      dataIndex: 'actions',
+      hideInSearch: true,
+      width: 120,
+      render: (_dom, record) => (
+        <Space size={12}>
+          <TableActions
+            onDelete={() => { }}
+            renderEditBtn={(btn) => (
+              <Drawer size="medium" trigger={btn}>
+                <LLMModelConfig record={record} />
+              </Drawer>
+            )}
+          />
+          <Drawer
+            size="large"
+            trigger={
+              <Tooltip title={t('common.agents')}>
+                <Button
+                  size="small"
+                  color="primary"
+                  variant="filled"
+                  icon={<RobotOutlined />}
+                />
+              </Tooltip>
+            }
+          >
+            <LLMAgents modelName={record.modelName} />
+          </Drawer>
+        </Space>
+      ),
+    },
+  ], [t, statusValueEnum]);
 
   return (
     <PageContainer
@@ -111,7 +112,7 @@ const LLM: FC = () => {
       extra={
         <Drawer
           size="medium"
-          trigger={<Button type="primary">+ New Model</Button>}
+          trigger={<Button type="primary">{t('llmPage.newModel')}</Button>}
         >
           <LLMModelConfig />
         </Drawer>

@@ -1,5 +1,6 @@
 import type { FC, ReactNode } from 'react';
 import { Tag } from 'antd';
+import { useTranslation } from 'react-i18next';
 import type { UserDetailData } from './types';
 import styles from './styles.module.less';
 
@@ -8,23 +9,25 @@ type BasicInfoTabProps = {
 };
 
 const BasicInfoTab: FC<BasicInfoTabProps> = ({ data }) => {
+  const { t } = useTranslation();
+
   const fields: { label: string; value: ReactNode }[] = [
-    { label: 'Name', value: data.name },
-    { label: 'Merchant', value: data.merchantLabel },
-    { label: 'Department', value: data.department },
-    { label: 'Job Title', value: data.jobTitle },
-    { label: 'Email', value: data.email },
-    { label: 'Phone Number', value: data.phone },
+    { label: t('userDetail.fields.name'), value: data.name },
+    { label: t('userDetail.fields.merchant'), value: data.merchantLabel },
+    { label: t('userDetail.fields.department'), value: data.department },
+    { label: t('userDetail.fields.jobTitle'), value: data.jobTitle },
+    { label: t('userDetail.fields.email'), value: data.email },
+    { label: t('userDetail.fields.phoneNumber'), value: data.phone },
     {
-      label: 'Status',
+      label: t('userDetail.fields.status'),
       value: (
         <Tag color={data.status === 'enabled' ? 'success' : 'error'}>
-          {data.status === 'enabled' ? 'Enabled' : 'Disabled'}
+          {data.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
         </Tag>
       ),
     },
-    { label: 'MFA', value: data.mfa },
-    { label: 'Created At', value: data.createdAt },
+    { label: t('userDetail.fields.mfa'), value: data.mfa },
+    { label: t('userDetail.fields.createdAt'), value: data.createdAt },
   ];
 
   return (

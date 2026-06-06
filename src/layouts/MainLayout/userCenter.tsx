@@ -1,6 +1,7 @@
 import { type FC, cloneElement, type CSSProperties } from 'react';
 import { Avatar, Dropdown, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { UserOutlined } from '@ant-design/icons';
 import { icons } from './icons';
 
@@ -12,6 +13,7 @@ type MenuElement = React.ReactElement<{
 }>;
 
 const UserCenter: FC = () => {
+  const { t } = useTranslation();
   const { token } = theme.useToken();
   const navigate = useNavigate();
   const logout = useUserStore(s => s.logout)
@@ -53,19 +55,19 @@ const UserCenter: FC = () => {
           items: [
             {
               key: 'profile',
-              label: 'Profile',
+              label: t('layout.profile'),
               icon: <UserOutlined />,
               onClick: () => navigate('/profile')
             },
             {
               key: 'permissions',
-              label: 'Permissions',
+              label: t('layout.permissions'),
               icon: <icons.permission />,
               onClick: () => navigate('/permissions')
             },
             {
               key: 'company',
-              label: 'My Company',
+              label: t('layout.myCompany'),
               icon: <icons.merchant />,
               onClick: () => navigate('/merchants')
             },
@@ -75,7 +77,7 @@ const UserCenter: FC = () => {
             },
             {
               key: 'logout',
-              label: 'Logout',
+              label: t('layout.logout'),
               onClick: logout
             }
           ]
@@ -85,7 +87,7 @@ const UserCenter: FC = () => {
           {renderAvatar(36)}
           <div className={styles.userInfo}>
             <div className={styles.userName}>Jack Jiang</div>
-            <div className={styles.userRole}>Admin</div>
+            <div className={styles.userRole}>{t('roles.admin')}</div>
           </div>
         </div>
       </Dropdown>

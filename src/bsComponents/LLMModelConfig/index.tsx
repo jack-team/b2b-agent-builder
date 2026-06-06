@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { Button, Row, Col } from 'antd';
 import { PlusOutlined, SaveOutlined } from '@ant-design/icons';
 import {
@@ -13,6 +13,7 @@ import {
 } from '@ant-design/pro-components';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { useMemoizedFn } from 'ahooks';
+import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
 import type { LLMModelConfigProps, LLMModelFormValues } from './types';
@@ -49,7 +50,14 @@ const getInitialValues = (record?: LLMModelConfigProps['record']): LLMModelFormV
 };
 
 const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
+  const { t } = useTranslation();
   const formRef = useRef<ProFormInstance<LLMModelFormValues>>(null);
+
+  const apiProtocolOptions = useMemo(() => [
+    { value: 'openai_compatible', label: t('llmPage.protocolOpenai') },
+    { value: 'anthropic', label: t('llmPage.protocolAnthropic') },
+    { value: 'custom', label: t('llmPage.protocolCustom') },
+  ], [t]);
 
   const handleFinish = useMemoizedFn((_values: LLMModelFormValues) => {
     // placeholder for API integration
@@ -61,11 +69,11 @@ const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
 
   return (
     <DrawerContainer
-      title={record ? 'Update Model' : 'Create Model'}
+      title={record ? t('llmPage.updateModel') : t('llmPage.createModel')}
       onClose={onClose}
       extra={
         <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-          Save
+          {t('common.save')}
         </Button>
       }
     >
@@ -75,20 +83,20 @@ const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
         initialValues={getInitialValues(record)}
         onFinish={handleFinish}
       >
-        <ProCard size="small" title="Basic Information">
+        <ProCard size="small" title={t('llmPage.basicInformation')}>
           <Row gutter={16}>
             <Col span={12}>
               <ProFormText
                 name="modelName"
-                label="Model name"
-                rules={[{ required: true, message: 'Please enter model name' }]}
+                label={t('llmPage.modelName')}
+                rules={[{ required: true, message: t('llmPage.validationModelName') }]}
               />
             </Col>
             <Col span={12}>
               <ProFormText
                 name="modelId"
-                label="Model ID"
-                rules={[{ required: true, message: 'Please enter model ID' }]}
+                label={t('llmPage.modelId')}
+                rules={[{ required: true, message: t('llmPage.validationModelId') }]}
               />
             </Col>
           </Row>
@@ -96,79 +104,75 @@ const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
             <Col span={12}>
               <ProFormSelect
                 name="apiProtocol"
-                label="API Protocol"
-                options={[
-                  { value: 'openai_compatible', label: 'OpenAI Compatible' },
-                  { value: 'anthropic', label: 'Anthropic' },
-                  { value: 'custom', label: 'Custom' },
-                ]}
+                label={t('llmPage.apiProtocol')}
+                options={apiProtocolOptions}
               />
             </Col>
             <Col span={12}>
               <ProFormCheckbox
                 name="status"
-                label="Status"
+                label={t('common.status')}
               >
-                Enable
+                {t('common.enable')}
               </ProFormCheckbox>
             </Col>
           </Row>
           <ProFormText
             name="apiUrl"
-            label="API URL"
-            rules={[{ required: true, message: 'Please enter API URL' }]}
+            label={t('llmPage.apiUrl')}
+            rules={[{ required: true, message: t('llmPage.validationApiUrl') }]}
           />
           <ProFormText.Password
             name="apiKey"
-            label="API Key"
+            label={t('llmPage.apiKey')}
           />
           <ProFormText.Password
             name="secret"
-            label="Secret"
+            label={t('llmPage.secret')}
           />
           <ProFormList
             name="headers"
-            label="Headers"
+            label={t('llmPage.headers')}
             creatorButtonProps={{
               type: 'link',
               icon: <PlusOutlined />,
-              creatorButtonText: '+ New header',
+              creatorButtonText: t('llmPage.newHeader'),
             }}
           >
             <Row gutter={16}>
               <Col span={12}>
                 <ProFormText
                   name="key"
-                  placeholder="Key"
+                  placeholder={t('common.key')}
                 />
               </Col>
               <Col span={12}>
                 <ProFormText
                   name="value"
-                  placeholder="Value"
+                  placeholder={t('common.value')}
                 />
               </Col>
             </Row>
           </ProFormList>
           <ProFormDigit
             name="timeout"
-            label="Timeout(s)"
+            label={t('llmPage.timeout')}
             fieldProps={{ precision: 0, style: { width: '100%' } }}
           />
         </ProCard>
-        <ProCard size="small" title="Model Parameters" className="mt-[16px]">
+        <ProCard size="small" title={t('llmPage.modelParameters')} className="mt-[16px]">
           <Row gutter={16}>
             <Col span={12}>
               <ProFormDigit
                 name="maxContext"
-                label="Max context"
+                label={t('llmPage.maxContext')}
                 fieldProps={{ precision: 0, style: { width: '100%' } }}
               />
             </Col>
             <Col span={12}>
               <ProFormDigit
                 name="temperature"
-                label="Temperature"
+                label={t('llmPage.temperature')}
                 fieldProps={{ min: 0, max: 2, step: 0.1, style: { width: '100%' } }}
               />
             </Col>
@@ -177,22 +181,22 @@ const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
             <Col span={12}>
               <ProFormDigit
                 name="maxOutput"
-                label="Max output"
+                label={t('llmPage.maxOutput')}
                 fieldProps={{ precision: 0, style: { width: '100%' } }}
               />
             </Col>
             <Col span={12}>
               <ProFormDigit
                 name="topP"
-                label="Top P"
+                label={t('llmPage.topP')}
                 fieldProps={{ min: 0, max: 1, step: 0.1, style: { width: '100%' } }}
               />
             </Col>
           </Row>
           <ProFormText
             name="stopSequences"
-            label="Stop sequences"
-            placeholder="Separate multiple stop words with English commas"
+            label={t('llmPage.stopSequences')}
+            placeholder={t('llmPage.stopSequencesPlaceholder')}
           />
         </ProCard>
       </ProForm>

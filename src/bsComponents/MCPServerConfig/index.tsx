@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import { Button, Space, Row, Col } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import {
@@ -10,6 +11,7 @@ import {
   ProFormCheckbox,
   ProFormList
 } from '@ant-design/pro-components';
+import { useTranslation } from 'react-i18next';
 
 import Drawer from '@/components/Drawer';
 import { DrawerContainer } from '@/components/Drawer';
@@ -20,12 +22,20 @@ interface MCPServerConfigProps {
 }
 
 const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
+  const { t } = useTranslation();
+
+  const transportOptions = useMemo(() => [
+    { value: 'stdio', label: t('mcp.transportStdio') },
+    { value: 'http', label: t('mcp.transportHttp') },
+    { value: 'websocket', label: t('mcp.transportWebsocket') },
+  ], [t]);
+
   return (
     <DrawerContainer
-      title="MCP Server Configuration"
+      title={t('mcp.serverConfiguration')}
       extra={
         <Space size={16}>
-          <Drawer size="medium" trigger={<Button type="primary">Next</Button>}>
+          <Drawer size="medium" trigger={<Button type="primary">{t('common.next')}</Button>}>
             <AvailableTools />
           </Drawer>
         </Space>
@@ -36,62 +46,58 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
         <ProForm submitter={false}>
           <ProFormText
             name="mcp_server_name"
-            label="MCP server name"
+            label={t('mcp.serverName')}
             initialValue="Production"
           />
           <Row gutter={16}>
             <Col span={12}>
               <ProFormCheckbox
                 name="status"
-                label="Status"
+                label={t('common.status')}
                 initialValue="enable"
               >
-                Enable
+                {t('common.enable')}
               </ProFormCheckbox>
             </Col>
             <Col span={12}>
               <ProFormText
                 name="timeout"
-                label="Timeout (ms)"
+                label={t('mcp.timeoutMs')}
                 initialValue="30000"
               />
             </Col>
           </Row>
           <ProFormSelect
             name="transport"
-            label="Transport"
+            label={t('mcp.transport')}
             initialValue="stdio"
-            options={[
-              { value: 'stdio', label: 'Stdio' },
-              { value: 'http', label: 'HTTP' },
-              { value: 'websocket', label: 'Websocket' },
-            ]}
+            options={transportOptions}
           />
           <div className="gay-box mt-[16px]">
-            <ProCard size="small" title="Standard Input/Output">
+            <ProCard size="small" title={t('mcp.standardInputOutput')}>
               <Row gutter={16}>
                 <Col span={12}>
                   <ProFormText
                     name="command"
-                    label="Command"
+                    label={t('mcp.command')}
                     initialValue="python"
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormText
                     name="working_directory"
-                    label="Working directory"
+                    label={t('mcp.workingDirectory')}
                     initialValue="/opt/workspace"
                   />
                 </Col>
               </Row>
               <ProFormList
                 name="arguments"
-                label="Arguments"
+                label={t('mcp.arguments')}
                 creatorButtonProps={{
                   type: 'link',
                   icon: <PlusOutlined />,
-                  creatorButtonText: 'Add new argument',
+                  creatorButtonText: t('mcp.addNewArgument'),
                 }}
               >
                 <ProFormText
@@ -103,10 +109,10 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
             </ProCard>
           </div>
           <div className="gay-box mt-[16px]">
-            <ProCard  size="small" title="Internalizable Connection" >
+            <ProCard size="small" title={t('mcp.internalizableConnection')}>
               <ProFormUploadDragger
                 name="internalizable_source_package"
-                label="Internalizable Source package"
+                label={t('mcp.internalizableSourcePackage')}
                 fieldProps={{
                   maxCount: 1,
                 }}
@@ -114,71 +120,71 @@ const MCPServerConfig: FC<MCPServerConfigProps> = ({ onClose }) => {
               <ProFormList
                 initialValue={[{}]}
                 name="internalizable_source_package1"
-                label="Internalizable Source package"
+                label={t('mcp.internalizableSourcePackage')}
                 creatorButtonProps={{
                   type: 'link',
                   icon: <PlusOutlined />,
-                  creatorButtonText: 'Add new variable',
+                  creatorButtonText: t('mcp.addNewVariable'),
                 }}
               >
                 <Row gutter={16}>
                   <Col span={12}>
                     <ProFormText
                       name="package_name"
-                      placeholder="Package name"
+                      placeholder={t('mcp.packageName')}
                     />
                   </Col>
                   <Col span={12}>
                     <ProFormText
                       name="class_name"
-                      placeholder="Class name"
+                      placeholder={t('mcp.className')}
                     />
                   </Col>
                 </Row>
               </ProFormList>
               <ProFormText
                 name="url_internal"
-                label="URL"
+                label={t('mcp.url')}
               />
               <ProFormText
                 name="authorization_token_internal"
-                label="Authorization token"
+                label={t('mcp.authorizationToken')}
               />
             </ProCard>
           </div>
           <div className="gay-box mt-[16px]">
-            <ProCard size="small"title="Remote Connection">
+            <ProCard size="small" title={t('mcp.remoteConnection')}>
               <ProFormText
                 name="url_remote"
-                label="URL"
+                label={t('mcp.url')}
               />
               <ProFormText
                 name="authorization_token_remote"
-                label="Authorization token"
+                label={t('mcp.authorizationToken')}
               />
             </ProCard>
           </div>
           <div className="mt-[16px]">
             <ProFormList
               name="environment_variables"
-              label="Environment variables"
+              label={t('mcp.environmentVariables')}
               creatorButtonProps={{
                 type: 'link',
                 icon: <PlusOutlined />,
-                creatorButtonText: 'Add new variable',
+                creatorButtonText: t('mcp.addNewVariable'),
               }}
             >
               <Row gutter={16}>
                 <Col span={12}>
                   <ProFormText
                     name="variable_name"
-                    placeholder="Variable name"
+                    placeholder={t('mcp.variableName')}
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormText
                     name="variable_value"
-                    placeholder="Value"
+                    placeholder={t('common.value')}
                   />
                 </Col>
               </Row>

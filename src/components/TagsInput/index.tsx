@@ -1,6 +1,7 @@
 import type { FC, ChangeEvent } from 'react';
 import { useSafeState, useMemoizedFn } from 'ahooks';
-import { Input, Tag, Space, Button, message } from 'antd'
+import { Input, Tag, Space, Button, message } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 type TagsInputProps = {
   value?: string[];
@@ -10,11 +11,12 @@ type TagsInputProps = {
 const TagsInput: FC<TagsInputProps> = (props) => {
   const { value = [], onChange } = props;
   const [text, setText] = useSafeState<string>('');
+  const { t } = useTranslation();
 
   const handleAdd = useMemoizedFn(() => {
     const txt = text.trim();
     if (value.findIndex(v => v === txt) > -1) {
-     return message.error('存在相同的标签，请勿重复添加!');
+     return message.error(t('tagsInput.duplicateError'));
     }
     onChange?.([...value, txt]);
     requestAnimationFrame(() => setText(''));
@@ -52,14 +54,14 @@ const TagsInput: FC<TagsInputProps> = (props) => {
         <Input
           value={text}
           onChange={handleChange}
-          placeholder="Please enter"
+          placeholder={t('common.pleaseEnter')}
         />
         <Button
           type="primary"
           onClick={handleAdd}
           disabled={!text.trim()}
         >
-          Add
+          {t('common.add')}
         </Button>
       </Space.Compact>
     </div>

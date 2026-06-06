@@ -1,9 +1,12 @@
 import type { FC } from 'react';
+import { useTranslation } from 'react-i18next';
 
 const GraphVisualization: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="p-[12px]">
-      GraphVisualization
+      {t('knowledgesPage.graphPlaceholder')}
     </div>
   );
 };

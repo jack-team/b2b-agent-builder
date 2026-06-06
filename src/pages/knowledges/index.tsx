@@ -27,7 +27,7 @@ const Knowledges: FC = () => {
           <Drawer
             trigger={(
               <Button icon={<ImportIcon />}>
-                Update Knowledges
+                {t('knowledgesPage.updateKnowledges')}
               </Button>
             )}
           >
@@ -39,7 +39,7 @@ const Knowledges: FC = () => {
                 type="primary"
                 icon={<TableIcon />}
               >
-                Knowledge Sources
+                {t('knowledgesPage.knowledgeSources')}
               </Button>
             )}
           >
@@ -51,7 +51,7 @@ const Knowledges: FC = () => {
       <Row gutter={[0, 16]}>
         <Col span={24}>
           <ProCard
-            title="Filters"
+            title={t('knowledgesPage.filters')}
             collapsible="icon"
           >
             <KnowledgeFilterForm
@@ -66,12 +66,12 @@ const Knowledges: FC = () => {
             items={[
               {
                 key: 'data_grid',
-                label: 'Data Grid',
+                label: t('knowledgesPage.dataGrid'),
                 children: <DataGrid />,
               },
               {
                 key: 'graph_visualization',
-                label: 'Graph Visualization',
+                label: t('knowledgesPage.graphVisualization'),
                 children: <GraphVisualization />,
               }
             ]}

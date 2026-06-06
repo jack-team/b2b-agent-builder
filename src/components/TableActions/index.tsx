@@ -1,6 +1,7 @@
 import { type FC, type PropsWithChildren, type ReactElement } from 'react';
 import { Space, Button, Tooltip } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
 type TableActionsProps = {
   onEdit?: () => void;
@@ -12,6 +13,7 @@ type TableActionsProps = {
 }
 
 const TableActions: FC<PropsWithChildren<TableActionsProps>> = (props) => {
+  const { t } = useTranslation();
   const {
     children,
     showEdit = true,
@@ -21,7 +23,7 @@ const TableActions: FC<PropsWithChildren<TableActionsProps>> = (props) => {
   } = props;
 
   const editBtn = (
-    <Tooltip title="Edit">
+    <Tooltip title={t('common.edit')}>
       <Button
         size="small"
         color="default"
@@ -34,7 +36,7 @@ const TableActions: FC<PropsWithChildren<TableActionsProps>> = (props) => {
   );
 
   const delBtn = (
-    <Tooltip title="Delete">
+    <Tooltip title={t('common.delete')}>
       <Button
         size="small"
         color="danger"

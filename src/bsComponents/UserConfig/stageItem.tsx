@@ -3,6 +3,7 @@ import cls from 'classnames';
 import type { FormListOperation } from 'antd';
 import { CloseCircleOutlined } from '@ant-design/icons';
 import { ProForm, ProFormList, ProFormText } from '@ant-design/pro-components';
+import { useTranslation } from 'react-i18next';
 import RangeGroup from './rangeGroup';
 import styles from './styles.module.less';
 
@@ -14,6 +15,7 @@ type StageItemProps = {
 
 const StageItem: FC<StageItemProps> = (props) => {
   const { index, actions } = props;
+  const { t } = useTranslation();
 
   return (
     <div className={styles.stage_item}>
@@ -24,7 +26,7 @@ const StageItem: FC<StageItemProps> = (props) => {
         <CloseCircleOutlined />
       </div>
       <div className={styles.flex_row}>
-        <div className={cls(styles.label, styles.required)}>当前等级</div>
+        <div className={cls(styles.label, styles.required)}>{t('userConfig.currentLevel')}</div>
         <div className={cls(styles.content, styles.top)}>
           <div className={styles.left_area}>
             <RangeGroup title="aaa" showLabel={false} />
@@ -41,7 +43,7 @@ const StageItem: FC<StageItemProps> = (props) => {
         {(_, index) => {
           return (
             <div className={styles.flex_row}>
-              <ProForm.Item label="等级" required>
+              <ProForm.Item label={t('userConfig.level')} required>
                 <div className={cls(styles.label, styles.level)}>{index + 1}</div>
               </ProForm.Item>
               <div className={cls(styles.content)}>
@@ -49,7 +51,7 @@ const StageItem: FC<StageItemProps> = (props) => {
                   <RangeGroup title="aaa" showLabel={!index} />
                 </div>
                 <div className={styles.right_area}>
-                  <ProFormText required name="fee" label="手续费" />
+                  <ProFormText required name="fee" label={t('userConfig.fee')} />
                 </div>
               </div>
             </div>

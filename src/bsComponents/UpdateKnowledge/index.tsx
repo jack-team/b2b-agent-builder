@@ -1,6 +1,8 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import { Button, Space, Row, Col } from 'antd';
 import { UndoOutlined, SaveOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 import {
   ProForm,
   ProCard,
@@ -18,20 +20,27 @@ import TagsInput from '@/components/TagsInput';
 import { DrawerContainer } from '@/components/Drawer';
 import KnowledgeTypeSelect from '@/bsComponents/KnowledgeTypeSelect';
 import RemoteFormItem from '@/components/RemoteFormItem';
-import { AdditionMethodMap, AdditionMethod } from './enum';
+import { AdditionMethod } from './enum';
 
 type UpdateKnowledgeProps = {
   form?: FormInstance
 }
 
 const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
+  const { t } = useTranslation();
+
+  const additionMethodValueEnum = useMemo(() => ({
+    [AdditionMethod.Manual]: t('knowledge.additionManual'),
+    [AdditionMethod.Remote]: t('knowledge.additionRemote'),
+  }), [t]);
+
   return (
     <DrawerContainer
-      title="Update Knowledge"
+      title={t('knowledge.updateKnowledge')}
       extra={
         <Space size={16}>
-          <Button icon={<UndoOutlined />}>Reset</Button>
-          <Button type="primary" icon={<SaveOutlined />} loading>Save</Button>
+          <Button icon={<UndoOutlined />}>{t('common.reset')}</Button>
+          <Button type="primary" icon={<SaveOutlined />} loading>{t('common.save')}</Button>
         </Space>
       }
     >
@@ -41,18 +50,18 @@ const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
       >
         <Row gutter={16}>
           <Col span={11}>
-            <ProCard size="small" title="Learn New Knowledge">
+            <ProCard size="small" title={t('knowledge.learnNewKnowledge')}>
               <KnowledgeTypeSelect
                 name="knowledge_type"
-                label="Knowledge Type"
+                label={t('knowledge.knowledgeType')}
                 rules={[
                   { required: true }
                 ]}
               />
               <ProFormRadio.Group
                 name="addition_method"
-                label="Addition method"
-                valueEnum={AdditionMethodMap}
+                label={t('knowledge.additionMethod')}
+                valueEnum={additionMethodValueEnum}
                 initialValue={AdditionMethod.Manual}
                 rules={[
                   { required: true }
@@ -66,7 +75,7 @@ const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
                       return (
                         <ProFormTextArea
                           name="document"
-                          label="Document"
+                          label={t('knowledge.document')}
                           rules={[
                             { required: true }
                           ]}
@@ -75,7 +84,7 @@ const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
                     case AdditionMethod.Remote:
                       return (
                         <div className="gay-box mb-[16px]">
-                          <ProCard size="small" title="Remote document">
+                          <ProCard size="small" title={t('knowledge.remoteDocument')}>
                             <RemoteFormItem name="remote_doc" />
                           </ProCard>
                         </div>
@@ -87,185 +96,185 @@ const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
               </ProFormDependency>
               <ProFormText
                 name="knowledge_name"
-                label="Title"
-                extra="不填写标题，标题将会在保存之后自动生成。"
+                label={t('knowledge.title')}
+                extra={t('knowledge.titleAutoGenerateHint')}
               />
               <ProForm.Item
                 name="knowledge_tags"
-                label="Tags"
-                extra="不填写标签，标签将会在保存之后自动生成。"
+                label={t('knowledge.tags')}
+                extra={t('knowledge.tagsAutoGenerateHint')}
               >
                 <TagsInput />
               </ProForm.Item>
               <ProFormSelect
                 name="link_to_existing_knowledge"
-                label="Link to existing knowledge"
+                label={t('knowledge.linkToExisting')}
               />
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="automatic_vectorization"
-                    label="Automatic vectorization"
+                    label={t('knowledge.automaticVectorization')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="auto_over_duplicates"
-                    label="Auto-overwrite duplicates"
+                    label={t('knowledge.autoOverwriteDuplicates')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="data_cleaning"
-                    label="Data cleaning"
+                    label={t('knowledge.dataCleaning')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
               </Row>
             </ProCard>
-            <ProCard size="small" title="Data Cleaning Rules" className="mt-[16px]">
+            <ProCard size="small" title={t('knowledge.dataCleaningRules')} className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="strip_blanks"
-                    label="Strip blanks"
+                    label={t('knowledge.stripBlanks')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="remove_special_characters"
-                    label="Remove special characters"
+                    label={t('knowledge.removeSpecialChars')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="merge_extra_line_breaks"
-                    label="Merge extra line breaks"
+                    label={t('knowledge.mergeExtraLineBreaks')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="blocked_word_filtering"
-                    label="Blocked word filtering"
+                    label={t('knowledge.blockedWordFiltering')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
               </Row>
               <ProFormText
                 name="custom_clean_regex"
-                label="Custom clean regex"
+                label={t('knowledge.customCleanRegex')}
               />
             </ProCard>
           </Col>
           <Col span={13}>
-            <ProCard size="small" title="Extraction rules">
+            <ProCard size="small" title={t('knowledge.extractionRules')}>
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="entity_extraction_rules"
-                    label="Entity extraction"
+                    label={t('knowledge.entityExtraction')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="relation_extraction_rules"
-                    label="Relation extraction"
+                    label={t('knowledge.relationExtraction')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="keyword_extraction_rules"
-                    label="Keyword extraction"
+                    label={t('knowledge.keywordExtraction')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
                 <Col span={12}>
                   <ProFormCheckbox
                     name="summarize"
-                    label="Summarize"
+                    label={t('knowledge.summarize')}
                   >
-                    Enable
+                    {t('common.enable')}
                   </ProFormCheckbox>
                 </Col>
               </Row>
               <ProFormSlider
                 name="extraction_depth"
-                label="Extraction depth"
+                label={t('knowledge.extractionDepth')}
                 min={0}
                 max={10}
                 step={1}
                 initialValue={1}
               />
             </ProCard>
-            <ProCard size="small" title="Vector config" className="mt-[16px]">
+            <ProCard size="small" title={t('knowledge.vectorConfig')} className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormSelect
                     name="vector_model"
-                    label="Model"
+                    label={t('knowledge.model')}
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormSelect
                     name="embedding_dimension"
-                    label="Embedding dimension"
+                    label={t('knowledge.embeddingDimension')}
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormText
                     name="chunk_size"
-                    label="Chunk size"
+                    label={t('knowledge.chunkSize')}
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormText
                     name="chunk_overlap_size"
-                    label="Chunk overlap size"
+                    label={t('knowledge.chunkOverlapSize')}
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormText
                     name="vector_store_type"
-                    label="Vector store type"
+                    label={t('knowledge.vectorStoreType')}
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormText
                     name="top_k"
-                    label="Top K"
+                    label={t('knowledge.topK')}
                   />
                 </Col>
               </Row>
             </ProCard>
-            <ProCard size="small" title="Knowledge Graph Schema" className="mt-[16px]">
+            <ProCard size="small" title={t('knowledge.knowledgeGraphSchema')} className="mt-[16px]">
               <Row gutter={12}>
                 <Col span={12}>
                   <ProFormSelect
                     name="entity_type"
-                    label="Entity type"
+                    label={t('knowledge.entityType')}
                   />
                 </Col>
                 <Col span={12}>
                   <ProFormSelect
                     name="entity_relation_type"
-                    label="Entity relation type"
+                    label={t('knowledge.entityRelationType')}
                   />
                 </Col>
               </Row>
@@ -273,11 +282,11 @@ const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
                 <Col span={12}>
                   <ProFormSelect
                     name="graph_store_engine"
-                    label="Graph store engine"
+                    label={t('knowledge.graphStoreEngine')}
                   />
                   <ProForm.Item
                     name="required_entity_attributes"
-                    label=" Required entity attributes"
+                    label={t('knowledge.requiredEntityAttributes')}
                   >
                     <TagsInput />
                   </ProForm.Item>
@@ -285,7 +294,7 @@ const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
                 <Col span={12}>
                   <ProFormTextArea
                     name="schema"
-                    label="Schema (JSON)"
+                    label={t('knowledge.schemaJson')}
                   />
                 </Col>
               </Row>

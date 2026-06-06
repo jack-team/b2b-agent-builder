@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { Row, Col, Button, Space } from 'antd';
+import { useTranslation } from 'react-i18next';
 import {
   ProForm,
   ProFormSelect,
@@ -15,6 +16,7 @@ type KnowledgeFilterFormProps = {
 }
 
 const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
+  const { t } = useTranslation();
   const { form } = props;
 
   const onReset = useMemoizedFn(() => {
@@ -36,7 +38,7 @@ const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
       <Row gutter={16}>
         <Col span={6}>
           <ProFormSelect
-            label="Matching method"
+            label={t('knowledgesPage.filter.matchingMethod')}
             name="matchingMethod"
             options={[
               { value: 'MATCH', label: 'MATCH' },
@@ -46,14 +48,14 @@ const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
           />
         </Col>
         <Col span={6}>
-          <ProFormText label="Node name" name="nodeName" />
+          <ProFormText label={t('knowledgesPage.filter.nodeName')} name="nodeName" />
         </Col>
         <Col span={6}>
-          <ProFormText label="Node label" name="nodeLabel" />
+          <ProFormText label={t('knowledgesPage.filter.nodeLabel')} name="nodeLabel" />
         </Col>
         <Col span={6}>
           <ProFormSelect
-            label="Relation type"
+            label={t('knowledgesPage.filter.relationType')}
             name="relationType"
             options={[
               { value: 'Has', label: 'Has' },
@@ -64,13 +66,13 @@ const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
         </Col>
         <Col span={6}>
           <ProFormText
-            label="Related Node"
+            label={t('knowledgesPage.filter.relatedNode')}
             name="relatedNode"
           />
         </Col>
         <Col span={6}>
           <ProFormSelect
-            label="Return fields"
+            label={t('knowledgesPage.filter.returnFields')}
             name="returnFields"
             mode="multiple"
             options={[
@@ -82,7 +84,7 @@ const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
         </Col>
         <Col span={6}>
           <ProFormSelect
-            label="Match conditions"
+            label={t('knowledgesPage.filter.matchConditions')}
             name="matchConditions"
             options={[
               { value: 'n.age > 18', label: 'n.age > 18' },
@@ -92,33 +94,33 @@ const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
           />
         </Col>
         <Col span={6}>
-          <ProFormText label="Max Records" name="maxRecords" />
+          <ProFormText label={t('knowledgesPage.filter.maxRecords')} name="maxRecords" />
         </Col>
       </Row>
       <Space size={12} className="mb-[16px]">
         <Button type="primary" size="small">
-          Build query statement
+          {t('knowledgesPage.filter.buildQuery')}
         </Button>
         <Button
           type="primary"
           size="small"
           onClick={onSubmit}
         >
-          Query
+          {t('common.query')}
         </Button>
         <Button
           type="default"
           size="small"
           onClick={onReset}
         >
-          Reset
+          {t('common.reset')}
         </Button>
       </Space>
       <ProFormTextArea
         rows={5}
         readonly
         name="queryStatement"
-        label="Query statement preview"
+        label={t('knowledgesPage.filter.queryPreview')}
         initialValue="MATCH (m:User)-[r:Has]->(n) WHERE n.age > 18 RETURN * LIMIT 10"
         style={{ backgroundColor: 'var(--bg-color-primary)' }}
       />

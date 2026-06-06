@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToolOutlined } from '@ant-design/icons';
 import { Tag, Button, Space, Tooltip } from 'antd';
@@ -8,6 +9,7 @@ import Drawer from '@/components/Drawer';
 import TableActions from '@/components/TableActions';
 import MCPServerConfig from '@/bsComponents/MCPServerConfig';
 import MCPTools from '@/bsComponents/MCPTools';
+import i18n from '@/i18n';
 
 interface Capability {
   key: string;
@@ -48,59 +50,59 @@ const mockData: Capability[] = [
   },
 ];
 
-const columns: ProColumns<Capability>[] = [
-  {
-    title: 'Provider Name',
-    dataIndex: 'providerName',
-  },
-  {
-    title: 'Transport',
-    dataIndex: 'transport',
-  },
-  {
-    title: 'Timeout',
-    dataIndex: 'timeout',
-    render: (_dom, record) => `${record.timeout}`,
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    render: (_dom, record) => (
-      <Tag color={record.status === 'enabled' ? 'green' : 'red'}>
-        {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
-      </Tag>
-    ),
-  },
-  {
-    width: '120px',
-    title: 'Actions',
-    dataIndex: 'actions',
-    hideInSearch: true,
-    render: () => (
-      <Space size={12}>
-        <TableActions
-          onDelete={() => { }}
-          onEdit={() => { }}
-        />
-        <Tooltip title="Tools">
-          <Drawer size="large" trigger={
-            <Button
-              size="small"
-              color="primary"
-              variant="filled"
-              icon={<ToolOutlined />}
-            />
-          }>
-            <MCPTools />
-          </Drawer>
-        </Tooltip>
-      </Space>
-    ),
-  },
-];
-
 const Capabilities: FC = () => {
   const { t } = useTranslation();
+
+  const columns: ProColumns<Capability>[] = useMemo(() => [
+    {
+      title: t('capabilitiesPage.columns.providerName'),
+      dataIndex: 'providerName',
+    },
+    {
+      title: t('capabilitiesPage.columns.transport'),
+      dataIndex: 'transport',
+    },
+    {
+      title: t('capabilitiesPage.columns.timeout'),
+      dataIndex: 'timeout',
+      render: (_dom, record) => `${record.timeout}`,
+    },
+    {
+      title: t('capabilitiesPage.columns.status'),
+      dataIndex: 'status',
+      render: (_dom, record) => (
+        <Tag color={record.status === 'enabled' ? 'green' : 'red'}>
+          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
+        </Tag>
+      ),
+    },
+    {
+      width: '120px',
+      title: t('capabilitiesPage.columns.actions'),
+      dataIndex: 'actions',
+      hideInSearch: true,
+      render: () => (
+        <Space size={12}>
+          <TableActions
+            onDelete={() => { }}
+            onEdit={() => { }}
+          />
+          <Tooltip title={t('common.tools')}>
+            <Drawer size="large" trigger={
+              <Button
+                size="small"
+                color="primary"
+                variant="filled"
+                icon={<ToolOutlined />}
+              />
+            }>
+              <MCPTools />
+            </Drawer>
+          </Tooltip>
+        </Space>
+      ),
+    },
+  ], [t]);
 
   return (
     <PageContainer
@@ -108,7 +110,7 @@ const Capabilities: FC = () => {
       extra={
         <Drawer
           size="small"
-          trigger={<Button type="primary">+ New Provider</Button>}>
+          trigger={<Button type="primary">{t('capabilitiesPage.newProvider')}</Button>}>
           <MCPServerConfig />
         </Drawer>
       }
@@ -119,7 +121,12 @@ const Capabilities: FC = () => {
         pagination={{
           showSizeChanger: true,
           pageSizeOptions: ['10', '20', '50'],
-          showTotal: (total, range) => `${range[0]}-${range[1]} / ${total}`,
+          showTotal: (total, range) =>
+            i18n.t('common.paginationTotal', {
+              start: range[0],
+              end: range[1],
+              total,
+            }),
           defaultCurrent: 1,
           defaultPageSize: 10,
           total: 17,

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
 import { Button } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
@@ -10,15 +11,23 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
+import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 
 const MCPToolConfig: FC = () => {
+  const { t } = useTranslation();
+
+  const statusOptions = useMemo(() => [
+    { value: 'enabled', label: t('common.enabled') },
+    { value: 'disabled', label: t('common.disabled') },
+  ], [t]);
+
   return (
     <DrawerContainer
-      title="MCP Tool Context"
+      title={t('mcp.toolContext')}
       extra={
         <Button type="primary" icon={<SaveOutlined />}>
-          Save
+          {t('common.save')}
         </Button>
       }
     >
@@ -26,25 +35,22 @@ const MCPToolConfig: FC = () => {
         <ProCard>
           <ProFormText
             name="name"
-            label="Name"
+            label={t('common.name')}
           />
           <ProFormTextArea
             name="description"
-            label="Description"
+            label={t('common.description')}
           />
           <ProFormSelect
             name="status"
-            label="Status"
+            label={t('common.status')}
             initialValue="enabled"
-            options={[
-              { value: 'enabled', label: 'Enabled' },
-              { value: 'disabled', label: 'Disabled' },
-            ]}
+            options={statusOptions}
           />
           <ProFormDateTimePicker
             disabled
             name="updatedAt"
-            label="Updated At"
+            label={t('llmPage.columnsUpdatedAt')}
             initialValue={dayjs('2026-04-08 15:02:51')}
             fieldProps={{
               format: 'DD/MM/YYYY HH:mm:ss',
@@ -54,7 +60,7 @@ const MCPToolConfig: FC = () => {
           <ProFormDateTimePicker
             disabled
             name="createdAt"
-            label="Created At"
+            label={t('llmPage.columnsCreatedAt')}
             initialValue={dayjs('2026-04-08 14:37:19')}
             fieldProps={{
               format: 'DD/MM/YYYY HH:mm:ss',

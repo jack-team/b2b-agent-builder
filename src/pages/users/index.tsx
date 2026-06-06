@@ -1,4 +1,5 @@
 import type { FC, ReactElement } from 'react';
+import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Button, Empty, Space, Tag, Typography } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
@@ -63,117 +64,117 @@ const merchantOptions = [
   { label: 'Magento', value: 'Magento' },
 ];
 
-const columns: ProColumns<UserRecord>[] = [
-  {
-    title: 'User',
-    dataIndex: 'name',
-    hideInTable: false,
-    render: (_dom, record) => (
-      <Drawer
-        size="large"
-        trigger={
-          <Space size={12} className="cursor-pointer">
-            <Avatar style={{ backgroundColor: record.avatarColor }}>
-              {getInitials(record.name)}
-            </Avatar>
-            <div>
-              <Typography.Text strong>{record.name}</Typography.Text>
-              <div>
-                <Typography.Text type="secondary" className="text-[12px]">
-                  {record.email}
-                </Typography.Text>
-              </div>
-            </div>
-          </Space>
-        }
-      >
-        <UserDetail record={record} />
-      </Drawer>
-    ),
-  },
-  {
-    title: 'Merchant',
-    dataIndex: 'merchant',
-    valueType: 'select',
-    initialValue: 'Shopify',
-    fieldProps: {
-      options: merchantOptions,
-    },
-  },
-  {
-    title: 'Role',
-    dataIndex: 'role',
-    valueType: 'select',
-    fieldProps: {
-      options: [
-        { label: 'Super Admin', value: 'super_admin' },
-        { label: 'Admin', value: 'admin' },
-        { label: 'Audit Admin', value: 'audit_admin' },
-      ],
-    },
-    render: (_dom, record) => <RoleTag role={record.role} />,
-  },
-  {
-    title: 'Last Login',
-    dataIndex: 'lastLogin',
-    valueType: 'date',
-    render: (_dom, record) => record.lastLogin,
-  },
-  {
-    title: 'Status',
-    dataIndex: 'status',
-    valueType: 'switch',
-    initialValue: true,
-    fieldProps: {
-      checkedChildren: 'On',
-      unCheckedChildren: 'Off',
-    },
-    render: (_dom, record) => (
-      <Tag color={record.status === 'enabled' ? 'success' : 'error'}>
-        {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
-      </Tag>
-    ),
-  },
-  {
-    title: 'Actions',
-    dataIndex: 'actions',
-    hideInSearch: true,
-    width: 120,
-    render: (_dom, record) => (
-      <TableActions
-        onDelete={() => {}}
-        renderEditBtn={(btn) => (
-          <Drawer size="small" trigger={btn}>
-            <UserDetail record={record} />
-          </Drawer>
-        )}
-      />
-    ),
-  },
-];
-
-const renderNewUserButton = () => (
-  <Drawer size="medium" trigger={<Button type="primary">+ New User</Button>}>
-    <UserConfig />
-  </Drawer>
-);
-
-const renderUsersEmptyView = (
-  { dataSource = [] }: { dataSource?: readonly UserRecord[] },
-  dom: ReactElement,
-) => {
-  if (!dataSource.length) {
-    return (
-      <div className="py-[56px]">
-        <Empty description="No Data Available">{renderNewUserButton()}</Empty>
-      </div>
-    );
-  }
-  return dom;
-};
-
 const Users: FC = () => {
   const { t } = useTranslation();
+
+  const columns: ProColumns<UserRecord>[] = useMemo(() => [
+    {
+      title: t('usersPage.columns.user'),
+      dataIndex: 'name',
+      hideInTable: false,
+      render: (_dom, record) => (
+        <Drawer
+          size="large"
+          trigger={
+            <Space size={12} className="cursor-pointer">
+              <Avatar style={{ backgroundColor: record.avatarColor }}>
+                {getInitials(record.name)}
+              </Avatar>
+              <div>
+                <Typography.Text strong>{record.name}</Typography.Text>
+                <div>
+                  <Typography.Text type="secondary" className="text-[12px]">
+                    {record.email}
+                  </Typography.Text>
+                </div>
+              </div>
+            </Space>
+          }
+        >
+          <UserDetail record={record} />
+        </Drawer>
+      ),
+    },
+    {
+      title: t('usersPage.columns.merchant'),
+      dataIndex: 'merchant',
+      valueType: 'select',
+      initialValue: 'Shopify',
+      fieldProps: {
+        options: merchantOptions,
+      },
+    },
+    {
+      title: t('usersPage.columns.role'),
+      dataIndex: 'role',
+      valueType: 'select',
+      fieldProps: {
+        options: [
+          { label: t('roles.super_admin'), value: 'super_admin' },
+          { label: t('roles.admin'), value: 'admin' },
+          { label: t('roles.audit_admin'), value: 'audit_admin' },
+        ],
+      },
+      render: (_dom, record) => <RoleTag role={record.role} />,
+    },
+    {
+      title: t('usersPage.columns.lastLogin'),
+      dataIndex: 'lastLogin',
+      valueType: 'date',
+      render: (_dom, record) => record.lastLogin,
+    },
+    {
+      title: t('usersPage.columns.status'),
+      dataIndex: 'status',
+      valueType: 'switch',
+      initialValue: true,
+      fieldProps: {
+        checkedChildren: t('common.on'),
+        unCheckedChildren: t('common.off'),
+      },
+      render: (_dom, record) => (
+        <Tag color={record.status === 'enabled' ? 'success' : 'error'}>
+          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
+        </Tag>
+      ),
+    },
+    {
+      title: t('usersPage.columns.actions'),
+      dataIndex: 'actions',
+      hideInSearch: true,
+      width: 120,
+      render: (_dom, record) => (
+        <TableActions
+          onDelete={() => {}}
+          renderEditBtn={(btn) => (
+            <Drawer size="small" trigger={btn}>
+              <UserDetail record={record} />
+            </Drawer>
+          )}
+        />
+      ),
+    },
+  ], [t]);
+
+  const renderNewUserButton = () => (
+    <Drawer size="medium" trigger={<Button type="primary">{t('usersPage.newUser')}</Button>}>
+      <UserConfig />
+    </Drawer>
+  );
+
+  const renderUsersEmptyView = (
+    { dataSource = [] }: { dataSource?: readonly UserRecord[] },
+    dom: ReactElement,
+  ) => {
+    if (!dataSource.length) {
+      return (
+        <div className="py-[56px]">
+          <Empty description={t('common.noDataAvailable')}>{renderNewUserButton()}</Empty>
+        </div>
+      );
+    }
+    return dom;
+  };
 
   return (
     <PageContainer

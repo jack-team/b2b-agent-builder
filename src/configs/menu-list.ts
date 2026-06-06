@@ -15,7 +15,7 @@ export type MenuItem = {
  * */ 
 export const menuList: MenuItem[] = [
   {
-    title: "概览",
+    title: "menu.groups.overview",
     children: [
       {
         "path": "/dashboard",
@@ -25,7 +25,7 @@ export const menuList: MenuItem[] = [
     ]
   },
   {
-    title: "AI 能力",
+    title: "menu.groups.aiCapabilities",
     children: [
       {
         "path": "/knowledges",
@@ -55,7 +55,7 @@ export const menuList: MenuItem[] = [
     ]
   },
   {
-    title: "管理",
+    title: "menu.groups.management",
     children: [
       {
         "path": "/merchants",
@@ -75,7 +75,7 @@ export const menuList: MenuItem[] = [
     ]
   },
   {
-    title: "运维",
+    title: "menu.groups.operations",
     children: [
       {
         "path": "/monitoringAndAnalysis",

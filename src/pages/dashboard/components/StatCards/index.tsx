@@ -55,7 +55,7 @@ const StatCards: FC = () => {
                     item.trendUp && styles.trendUp
                   )}
                 >
-                  {t(`dashboardPage.statsTrend.${item.key}`)}
+                  {item.trend}
                 </div>
               </div>
             </div>

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Button, Tag } from 'antd';
 import { CheckOutlined, PlusOutlined } from '@ant-design/icons';
 import { useMemoizedFn } from 'ahooks';
+import { useTranslation } from 'react-i18next';
 import type { UserRole } from '@/bsComponents/UserConfig/types';
 import type { UserDetailData } from './types';
 import { assignableRoles, isRoleKey } from './utils';
@@ -18,12 +19,16 @@ type RoleTabProps = {
   data: UserDetailData;
 };
 
-const getRoleLabel = (roleKey: string) =>
-  assignableRoles.find((item) => item.key === roleKey)?.label ?? roleKey;
-
 const RoleTab: FC<RoleTabProps> = ({ data }) => {
+  const { t } = useTranslation();
   const [assignedRoles, setAssignedRoles] = useState<string[]>(data.assignedRoles);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(data.assignedRoles);
+
+  const getRoleLabel = (roleKey: string) => {
+    const translationKey = `roles.${roleKey}`;
+    const translated = t(translationKey);
+    return translated === translationKey ? roleKey : translated;
+  };
 
   const handleRemoveRole = useMemoizedFn((roleKey: string) => {
     setAssignedRoles((prev) => prev.filter((item) => item !== roleKey));
@@ -53,7 +58,7 @@ const RoleTab: FC<RoleTabProps> = ({ data }) => {
   return (
     <div className="p-[16px]">
       <div className={styles.role_section}>
-        <h4 className={styles.section_title}>Role</h4>
+        <h4 className={styles.section_title}>{t('userDetail.tabs.role')}</h4>
         <div className={styles.role_tags}>
           {assignedRoles.map((roleKey) => (
             <Tag
@@ -66,12 +71,12 @@ const RoleTab: FC<RoleTabProps> = ({ data }) => {
             </Tag>
           ))}
           <Button type="link" icon={<PlusOutlined />} className="px-0">
-            Assign Role
+            {t('userDetail.assignRole')}
           </Button>
         </div>
       </div>
       <div>
-        <h4 className={styles.section_title}>Assignable Roles</h4>
+        <h4 className={styles.section_title}>{t('userDetail.assignableRoles')}</h4>
         {assignableRoles.map((role) => {
           const selected = selectedKeys.includes(role.key);
           return (
@@ -91,7 +96,7 @@ const RoleTab: FC<RoleTabProps> = ({ data }) => {
                 className={styles.role_dot}
                 style={{ backgroundColor: role.dotColor }}
               />
-              <span>{role.label}</span>
+              <span>{getRoleLabel(role.key)}</span>
               {selected && <CheckOutlined className={styles.role_check} />}
             </div>
           );

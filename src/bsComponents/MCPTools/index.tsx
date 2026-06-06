@@ -1,7 +1,9 @@
 import type { FC, JSX } from 'react';
+import { useMemo } from 'react';
 import { Tag, Button, Space, Empty } from 'antd';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
+import { useTranslation } from 'react-i18next';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
 import MCPToolConfig from '@/bsComponents/MCPToolConfig';
 import MCPToolContext from '@/bsComponents/MCPToolContext';
@@ -119,6 +121,8 @@ const mockData: Tool[] = [
 ];
 
 const MCPTools: FC = () => {
+  const { t } = useTranslation();
+
   const renderToolConfigDrawer = (trigger: JSX.Element) => (
     <Drawer size="small" trigger={trigger}>
       <MCPToolConfig />
@@ -131,43 +135,43 @@ const MCPTools: FC = () => {
     </Drawer>
   );
 
-  const columns: ProColumns<Tool>[] = [
+  const columns: ProColumns<Tool>[] = useMemo(() => [
     {
-      title: 'Tool Name',
+      title: t('mcp.columns.toolName'),
       dataIndex: 'toolName',
     },
     {
-      title: 'Description',
+      title: t('mcp.columns.description'),
       dataIndex: 'description',
     },
     {
-      title: 'Status',
+      title: t('mcp.columns.status'),
       dataIndex: 'status',
       render: (_dom, record) => (
         <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
-          {record.status === 'enabled' ? 'Enabled' : 'Disabled'}
+          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
         </Tag>
       ),
     },
     {
-      title: 'Actions',
+      title: t('mcp.columns.actions'),
       hideInSearch: true,
       dataIndex: 'actions',
       width: 200,
       render: () => (
         <Space size={8}>
-          {renderToolConfigDrawer(<Button size="small">Config</Button>)}
+          {renderToolConfigDrawer(<Button size="small">{t('common.config')}</Button>)}
           {renderExecutionContextDrawer(
-            <Button size="small">Execution Context</Button>,
+            <Button size="small">{t('mcp.executionContext')}</Button>,
           )}
         </Space>
       ),
     },
-  ];
+  ], [t]);
 
   return (
     <DrawerContainer
-      title="Shopify MCP Tools"
+      title={t('mcp.shopifyMcpTools')}
     >
       <ProTable
         size="medium"
@@ -180,13 +184,14 @@ const MCPTools: FC = () => {
         pagination={{
           pageSize: 6,
           showSizeChanger: false,
-          showTotal: (total, range) => `${range[0]}-${range[1]} / ${total}`,
+          showTotal: (total, range) =>
+            t('common.paginationTotal', { start: range[0], end: range[1], total }),
         }}
         tableViewRender={({ dataSource = [] }, dom) => {
           if (!dataSource.length) {
             return (
               <div className="py-[56px]">
-                <Empty description="No Data Available" />
+                <Empty description={t('common.noDataAvailable')} />
               </div>
             );
           }

@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useRef } from 'react';
+import { useRef, useMemo } from 'react';
 import { Button, Row, Col } from 'antd';
 import { SaveOutlined } from '@ant-design/icons';
 import {
@@ -11,13 +11,11 @@ import {
 } from '@ant-design/pro-components';
 import type { ProFormInstance } from '@ant-design/pro-components';
 import { useMemoizedFn } from 'ahooks';
+import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
 import type { UserConfigProps, UserFormValues } from './types';
 import StageItem from './stageItem';
-
-const fieldPlaceholder =
-  'Please enter a shared domain group name, e.g., R&D Team';
 
 const merchantOptions = [
   { value: 'shopify', label: 'Shopify' },
@@ -25,18 +23,9 @@ const merchantOptions = [
   { value: 'magento', label: 'Magento' },
 ];
 
-const departmentOptions = [
-  { value: 'engineering', label: 'Engineering' },
-  { value: 'product', label: 'Product' },
-  { value: 'operations', label: 'Operations' },
-  { value: 'sales', label: 'Sales' },
-];
+const departmentValues = ['engineering', 'product', 'operations', 'sales'] as const;
 
-const roleOptions = [
-  { value: 'super_admin', label: 'Super Admin' },
-  { value: 'admin', label: 'Admin' },
-  { value: 'audit_admin', label: 'Audit Admin' },
-];
+const roleValues = ['super_admin', 'admin', 'audit_admin'] as const;
 
 const defaultFormValues: UserFormValues = {
   name: '',
@@ -76,8 +65,25 @@ const getInitialValues = (record?: UserConfigProps['record']): UserFormValues =>
 };
 
 const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
+  const { t } = useTranslation();
   const formRef = useRef<ProFormInstance<UserFormValues>>(null);
   const isEdit = Boolean(record);
+
+  const departmentOptions = useMemo(
+    () => departmentValues.map((value) => ({
+      value,
+      label: t(`departments.${value}`),
+    })),
+    [t],
+  );
+
+  const roleOptions = useMemo(
+    () => roleValues.map((value) => ({
+      value,
+      label: t(`roles.${value}`),
+    })),
+    [t],
+  );
 
   const handleFinish = useMemoizedFn((_values: UserFormValues) => {
     // placeholder for API integration
@@ -89,11 +95,11 @@ const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
 
   return (
     <DrawerContainer
-      title={isEdit ? 'Update User' : 'Create User'}
+      title={isEdit ? t('userConfig.updateUser') : t('userConfig.createUser')}
       onClose={onClose}
       extra={
         <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-          Save
+          {t('common.save')}
         </Button>
       }
     >
@@ -107,49 +113,49 @@ const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
         <div className="gay-box p-[16px]">
           <ProFormText
             name="name"
-            label="Name"
-            placeholder={fieldPlaceholder}
-            rules={[{ required: true, message: 'Please enter name' }]}
+            label={t('userConfig.name')}
+            placeholder={t('userConfig.fieldPlaceholder')}
+            rules={[{ required: true, message: t('userConfig.validationName') }]}
           />
           <ProFormText
             name="email"
-            label="Email"
-            placeholder={fieldPlaceholder}
+            label={t('userConfig.email')}
+            placeholder={t('userConfig.fieldPlaceholder')}
             rules={[
-              { required: true, message: 'Please enter email' },
-              { type: 'email', message: 'Please enter a valid email' },
+              { required: true, message: t('userConfig.validationEmail') },
+              { type: 'email', message: t('userConfig.validationEmailFormat') },
             ]}
           />
           <ProFormText
             name="phone"
-            label="Phone Number"
-            placeholder={fieldPlaceholder}
+            label={t('userConfig.phoneNumber')}
+            placeholder={t('userConfig.fieldPlaceholder')}
           />
           <ProFormSelect
             name="merchant"
-            label="Merchant"
-            placeholder={fieldPlaceholder}
+            label={t('userConfig.merchant')}
+            placeholder={t('userConfig.fieldPlaceholder')}
             options={merchantOptions}
-            rules={[{ required: true, message: 'Please select merchant' }]}
+            rules={[{ required: true, message: t('userConfig.validationMerchant') }]}
           />
           <ProFormSelect
             name="department"
-            label="Department"
-            placeholder={fieldPlaceholder}
+            label={t('userConfig.department')}
+            placeholder={t('userConfig.fieldPlaceholder')}
             options={departmentOptions}
-            rules={[{ required: true, message: 'Please select department' }]}
+            rules={[{ required: true, message: t('userConfig.validationDepartment') }]}
           />
           <ProFormText
             name="jobTitle"
-            label="Job Title"
-            placeholder={fieldPlaceholder}
+            label={t('userConfig.jobTitle')}
+            placeholder={t('userConfig.fieldPlaceholder')}
           />
           <ProFormSelect
             name="role"
-            label="Role"
-            placeholder="Please select a department"
+            label={t('userConfig.role')}
+            placeholder={t('userConfig.selectDepartment')}
             options={roleOptions}
-            rules={[{ required: true, message: 'Please select role' }]}
+            rules={[{ required: true, message: t('userConfig.validationRole') }]}
           />
           <ProFormList
             name="list"
@@ -173,16 +179,16 @@ const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
           </ProFormList>
           <Row gutter={16}>
             <Col span={12}>
-              <ProFormCheckbox name="status" label="Status">
-                Enable
+              <ProFormCheckbox name="status" label={t('userConfig.status')}>
+                {t('common.enable')}
               </ProFormCheckbox>
             </Col>
             <Col span={12}>
               <ProFormCheckbox
                 name="welcomeEmail"
-                label="Send a welcome email to the user"
+                label={t('userConfig.welcomeEmail')}
               >
-                Enable
+                {t('common.enable')}
               </ProFormCheckbox>
             </Col>
           </Row>

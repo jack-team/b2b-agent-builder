@@ -1,5 +1,8 @@
 import type { FC } from 'react';
+import { useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { ProTable } from '@ant-design/pro-components';
+import i18n from '@/i18n';
 
 const mockData = [
   {
@@ -53,6 +56,14 @@ const mockData = [
 ];
 
 const DataGrid: FC = () => {
+  const { t } = useTranslation();
+
+  const columns = useMemo(() => [
+    { dataIndex: 'name', title: t('knowledgesPage.columns.name'), width: '33.3%' },
+    { dataIndex: 'phone', title: t('knowledgesPage.columns.phone'), width: '33.3%' },
+    { dataIndex: 'address', title: t('knowledgesPage.columns.address'), width: '33.3%' },
+  ], [t]);
+
   return (
     <ProTable
       search={false}
@@ -60,14 +71,15 @@ const DataGrid: FC = () => {
       pagination={{
         showSizeChanger: true,
         pageSizeOptions: ['10', '20', '50'],
-        showTotal: (total, range) => `${range[0]}-${range[1]} / ${total}`,
+        showTotal: (total, range) =>
+          i18n.t('common.paginationTotal', {
+            start: range[0],
+            end: range[1],
+            total,
+          }),
       }}
       dataSource={mockData}
-      columns={[
-        { dataIndex: 'name', title: 'Name', width: '33.3%' },
-        { dataIndex: 'phone', title: 'Phone', width: '33.3%' },
-        { dataIndex: 'address', title: 'Address', width: '33.3%' },
-      ]}
+      columns={columns}
     />
   );
 };

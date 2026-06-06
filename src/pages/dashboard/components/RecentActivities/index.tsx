@@ -49,7 +49,7 @@ const RecentActivities: FC = () => {
             children: (
               <div className={styles.item}>
                 <div className={styles.itemTitle}>
-                  {t(`dashboardPage.activities.${item.key}`)}
+                  {item.title}
                 </div>
                 <div className={styles.itemTime}>{item.time}</div>
               </div>

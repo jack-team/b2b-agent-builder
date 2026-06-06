@@ -1,14 +1,12 @@
 import type { FC } from 'react';
 import { Tag } from 'antd';
+import { useTranslation } from 'react-i18next';
 import type { UserRole } from '@/bsComponents/UserConfig/types';
 
-const roleConfig: Record<
-  UserRole,
-  { label: string; color: string }
-> = {
-  super_admin: { label: 'Super Admin', color: 'error' },
-  admin: { label: 'Admin', color: 'processing' },
-  audit_admin: { label: 'Audit Admin', color: 'success' },
+const roleColorMap: Record<UserRole, string> = {
+  super_admin: 'error',
+  admin: 'processing',
+  audit_admin: 'success',
 };
 
 type RoleTagProps = {
@@ -16,8 +14,9 @@ type RoleTagProps = {
 };
 
 const RoleTag: FC<RoleTagProps> = ({ role }) => {
-  const { label, color } = roleConfig[role];
-  return <Tag color={color}>{label}</Tag>;
+  const { t } = useTranslation();
+
+  return <Tag color={roleColorMap[role]}>{t(`roles.${role}`)}</Tag>;
 };
 
 export default RoleTag;

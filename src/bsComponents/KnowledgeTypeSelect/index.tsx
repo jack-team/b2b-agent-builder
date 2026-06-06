@@ -1,32 +1,29 @@
 import { Divider } from 'antd';
-import { type FC, Fragment } from 'react';
+import { type FC, Fragment, useMemo } from 'react';
 import { ProFormCascader } from '@ant-design/pro-components';
+import { useTranslation } from 'react-i18next';
 import Drawer from '@/components/Drawer';
 import KnowledgeTypeManager from '../KnowledgeTypeManager';
 import type { KnowledgeTypeSelectProps } from './types';
 
-const KnowledgeTypeSelect: FC<KnowledgeTypeSelectProps> = (props) => {
+const mediaTypeValues = ['text', 'image', 'video'] as const;
 
-  const options = [
-    {
-      label: 'Text',
-      value: 'text',
-    },
-    {
-      label: 'Image',
-      value: 'image',
-    },
-    {
-      label: 'Video',
-      value: 'video',
-    },
-  ];
+const KnowledgeTypeSelect: FC<KnowledgeTypeSelectProps> = (props) => {
+  const { t } = useTranslation();
+
+  const options = useMemo(
+    () => mediaTypeValues.map((value) => ({
+      label: t(`knowledgesPage.mediaTypes.${value}`),
+      value,
+    })),
+    [t],
+  );
 
   const renderNewTypeBtn = () => {
     return (
       <div className="py-[4px]">
-        还没有知识库类型，
-        <Drawer trigger={<a>点击添加</a>}>
+        {t('knowledgeType.noTypeYet')}
+        <Drawer trigger={<a>{t('knowledgeType.clickToAdd')}</a>}>
           <KnowledgeTypeManager />
         </Drawer>
       </div>
@@ -58,7 +55,5 @@ const KnowledgeTypeSelect: FC<KnowledgeTypeSelectProps> = (props) => {
 }
 
 export default KnowledgeTypeSelect;
-
-
 
 
