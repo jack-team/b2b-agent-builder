@@ -10,10 +10,10 @@ const OperationLogsTab: FC = () => (
         color: log.color,
         children: (
           <div>
-            <div className="text-[13px] font-medium text-[var(--primaryColor)]">
+            <div className="text-[13px] font-medium text-[var(--text-color-primary)]">
               {log.content}
             </div>
-            <div className="text-[12px] text-[#616161] mt-[4px]">{log.time}</div>
+            <div className="text-[12px] text-[var(--text-color-secondary)] mt-[4px]">{log.time}</div>
           </div>
         ),
       }))}

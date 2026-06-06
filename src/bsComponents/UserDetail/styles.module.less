@@ -1,7 +1,7 @@
 .summary {
   padding: 20px 24px;
   margin-bottom: 16px;
-  background: #fff;
+  background: var(--bg-color-surface);
   border-radius: 12px;
   border: 0.5px solid var(--border-color-primary);
   display: flex;
@@ -26,13 +26,13 @@
   font-size: 20px;
   font-weight: 700;
   line-height: 28px;
-  color: var(--primaryColor);
+  color: var(--text-color-primary);
 }
 
 .summary_job {
   margin: 0 0 12px;
   font-size: 13px;
-  color: #616161;
+  color: var(--text-color-secondary);
 }
 
 .summary_meta {
@@ -40,7 +40,7 @@
   flex-direction: column;
   gap: 4px;
   font-size: 13px;
-  color: #616161;
+  color: var(--text-color-secondary);
 }
 
 .summary_badges {
@@ -65,12 +65,12 @@
 }
 
 .stat_label {
-  color: #616161;
+  color: var(--text-color-secondary);
   white-space: nowrap;
 }
 
 .stat_value {
-  color: var(--primaryColor);
+  color: var(--text-color-primary);
   font-weight: 500;
   text-align: right;
 }
@@ -90,13 +90,13 @@
 .field_label {
   width: 140px;
   flex-shrink: 0;
-  color: #616161;
+  color: var(--text-color-secondary);
 }
 
 .field_value {
   flex: 1;
   text-align: right;
-  color: var(--primaryColor);
+  color: var(--text-color-primary);
   font-weight: 500;
 }
 
@@ -108,7 +108,7 @@
   margin: 0 0 12px;
   font-size: 14px;
   font-weight: 600;
-  color: var(--primaryColor);
+  color: var(--text-color-primary);
 }
 
 .role_tags {
@@ -123,9 +123,9 @@
   align-items: center;
   gap: 10px;
   padding: 10px 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--bg-color-secondary);
   font-size: 13px;
-  color: var(--primaryColor);
+  color: var(--text-color-primary);
 
   &:last-child {
     border-bottom: none;
@@ -141,7 +141,7 @@
 
 .role_check {
   margin-left: auto;
-  color: #22c55e;
+  color: var(--color-success);
   font-size: 14px;
 }
 
@@ -159,21 +159,21 @@
   justify-content: center;
   font-size: 11px;
   font-weight: 700;
-  color: #fff;
+  color: var(--text-color-inverse);
 }
 
 .operation_c {
-  background: #22c55e;
+  background: var(--color-success);
 }
 
 .operation_r {
-  background: #3b82f6;
+  background: var(--color-info);
 }
 
 .operation_u {
-  background: #f97316;
+  background: var(--color-warning);
 }
 
 .operation_d {
-  background: #ef4444;
+  background: var(--color-error);
 }

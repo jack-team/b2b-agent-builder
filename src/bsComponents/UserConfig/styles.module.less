@@ -4,7 +4,7 @@
 
 .stage_item {
   border-radius: 8px;
-  background: #fff;
+  background: var(--bg-color-surface);
   padding: 24px 16px;
   margin-bottom: 16px;
   position: relative;
@@ -15,10 +15,10 @@
     right: -6px;
     cursor: pointer;
     font-size: 20px;
-    color: #616161;
+    color: var(--text-color-secondary);
 
     &:hover {
-      color: #000;
+      color: var(--text-color-primary);
     }
   }
 
@@ -39,7 +39,7 @@
     &.required {
       &::before {
         content: "*";
-        color: #ff4d4f;
+        color: var(--color-error);
         margin-right: 4px;
         font-family: sans-serif;
       }

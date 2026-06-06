@@ -120,7 +120,7 @@ const KnowledgeFilterForm: FC<KnowledgeFilterFormProps> = (props) => {
         name="queryStatement"
         label="Query statement preview"
         initialValue="MATCH (m:User)-[r:Has]->(n) WHERE n.age > 18 RETURN * LIMIT 10"
-        style={{ backgroundColor: '#fafafa' }}
+        style={{ backgroundColor: 'var(--bg-color-primary)' }}
       />
     </ProForm>
   );

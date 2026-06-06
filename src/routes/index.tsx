@@ -9,6 +9,7 @@ const router = createBrowserRouter([
   {
     path: '/',
     errorElement: <RouteError />,
+    // 登录以后相关路由
     children: [
       {
         path: '/',
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
           children: mainRoutes
         }]
       },
+      // 登录前相关路由
       {
         path: '/',
         element: <AuthWrapper />,
@@ -26,10 +28,6 @@ const router = createBrowserRouter([
           path: '/auth',
           Component: lazy(() => import('@/pages/auth'))
         }]
-      },
-      {
-        path: '*',
-        Component: lazy(() => import('@/pages/notFound'))
       }
     ]
   }

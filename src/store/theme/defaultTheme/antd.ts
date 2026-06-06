@@ -6,6 +6,8 @@ const colorPrimary = appTheme.colorPrimary;
 const bgColorPrimary = appTheme.bgColorPrimary;
 const textColorSecondary = appTheme.textColorSecondary;
 
+const controlHeight = 34;
+
 export default <ConfigProviderProps['theme']>{
   token: {
     colorPrimary,
@@ -21,8 +23,8 @@ export default <ConfigProviderProps['theme']>{
       itemMarginInline: 0,
       itemBorderRadius: 6,
       groupTitleFontSize: 12,
-      itemSelectedColor: '#fff',
-      groupTitleColor: '#9CA3AF',
+      itemSelectedColor: appTheme.textColorInverse,
+      groupTitleColor: appTheme.textColorDisabled,
       itemSelectedBg: colorPrimary,
       itemColor: textColorSecondary
     },
@@ -32,27 +34,29 @@ export default <ConfigProviderProps['theme']>{
     },
     Button: {
       fontSize: 13,
-      borderRadius: 6
+      borderRadius: 6,
+      controlHeight,
     },
     Tabs: {
+      fontSize: 16,
       cardBg: bgColorPrimary,
       cardActiveBg: bgColorPrimary,
+      itemColor: textColorSecondary,
     },
     Input: {
       borderRadius: 6,
-      controlHeight: 36,
       colorTextPlaceholder: appTheme.textColorDisabled
     },
     Select: {
       borderRadius: 6,
-      controlHeight: 36,
+      controlHeight,
       colorTextPlaceholder: appTheme.textColorDisabled
     },
     Card: {
       padding: 16
     },
     Layout: {
-      headerBg: '#fff',
+      headerBg: appTheme.bgColorSurface,
       headerPadding: '0 24px'
     },
     Tag: {
@@ -65,7 +69,7 @@ export default <ConfigProviderProps['theme']>{
     },
     Cascader: {
       dropdownHeight: 'auto',
-      controlHeight: 36,
+      controlHeight,
     }
   }
 };

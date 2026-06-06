@@ -27,4 +27,8 @@ export const mainRoutes: RouteObject[] = [
     path: '/users',
     Component: lazy(() => import('@/pages/users')),
   },
+  {
+    path: '*',
+    Component: lazy(() => import('@/pages/notFound'))
+  }
 ];

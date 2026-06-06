@@ -1,14 +1,14 @@
 import type { FC } from 'react';
-import { ProForm, ProFormText } from '@ant-design/pro-components';
+import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
 import { Button, Row, Col } from 'antd';
 import { MailOutlined } from '@ant-design/icons';
+import styles from './styles.module.less';
 
 const RegisterForm: FC = () => {
   return (
     <ProForm
       layout="vertical"
       submitter={false}
-      size="large"
     >
       <ProFormText
         name="companyName"
@@ -55,7 +55,12 @@ const RegisterForm: FC = () => {
         formItemProps={{ className: 'no-card' }}
         rules={[{ required: true }]}
       />
-      <Button type="primary" block>
+      <ProForm.Item className="no-card">
+        <ProFormCheckbox noStyle name="terms">
+          I have read and agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>
+        </ProFormCheckbox>
+      </ProForm.Item>
+      <Button type="primary" block className={styles.submitter}>
         Create Account
       </Button>
     </ProForm>

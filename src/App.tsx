@@ -19,7 +19,7 @@ const App: FC = () => {
         locale={en_US}
         button={{ loadingIcon: <Spinner /> }}
       >
-        <AntApp className="h-full">
+        <AntApp className="h-[100vh]">
           <AppRouter />
         </AntApp>
       </ConfigProvider>

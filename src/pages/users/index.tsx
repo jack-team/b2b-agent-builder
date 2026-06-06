@@ -14,6 +14,7 @@ import {
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
+import appTheme from '@/store/theme/defaultTheme/app';
 
 const getInitials = (name: string) =>
   name
@@ -32,7 +33,7 @@ const mockData: UserRecord[] = [
     role: 'super_admin',
     lastLogin: '2026-05-28',
     status: 'enabled',
-    avatarColor: '#7c3aed',
+    avatarColor: appTheme.colorPrimary,
   },
   {
     key: '2',
@@ -42,7 +43,7 @@ const mockData: UserRecord[] = [
     role: 'admin',
     lastLogin: '2026-05-27',
     status: 'enabled',
-    avatarColor: '#2563eb',
+    avatarColor: appTheme.colorInfoDark,
   },
   {
     key: '3',
@@ -52,7 +53,7 @@ const mockData: UserRecord[] = [
     role: 'audit_admin',
     lastLogin: '2026-05-20',
     status: 'disabled',
-    avatarColor: '#059669',
+    avatarColor: appTheme.colorSuccessDark,
   },
 ];
 

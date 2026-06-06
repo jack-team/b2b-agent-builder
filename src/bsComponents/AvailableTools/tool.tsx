@@ -14,7 +14,7 @@ const Tool: FC<ToolProps> = ({ title, selected, onSelect }) => {
   return (
     <div
       onClick={onSelect}
-      className={cls(dcls, selected && 'bg-[var(--color-primary)] text-[#fff]')}
+      className={cls(dcls, selected && 'bg-[var(--color-primary)] text-[var(--text-color-inverse)]')}
     >
       <ToolFilled />
       <span className="text-[12px]">{title}</span>

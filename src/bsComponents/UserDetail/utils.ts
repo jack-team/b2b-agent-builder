@@ -1,4 +1,5 @@
 import type { UserRecord, UserRole } from '@/bsComponents/UserConfig/types';
+import appTheme from '@/store/theme/defaultTheme/app';
 import type {
   AssignableRole,
   EffectivePermission,
@@ -59,12 +60,12 @@ export const toUserDetailData = (record: UserRecord): UserDetailData => {
 };
 
 export const assignableRoles: AssignableRole[] = [
-  { key: 'super_admin', label: 'Super Admin', dotColor: '#ef4444' },
-  { key: 'system_admin', label: 'System Admin', dotColor: '#8b5cf6' },
-  { key: 'security_admin', label: 'Security Admin', dotColor: '#f59e0b' },
-  { key: 'audit_admin', label: 'Audit Admin', dotColor: '#22c55e' },
-  { key: 'admin', label: 'Admin', dotColor: '#3b82f6' },
-  { key: 'cto', label: 'CTO', dotColor: '#06b6d4' },
+  { key: 'super_admin', label: 'Super Admin', dotColor: appTheme.colorError },
+  { key: 'system_admin', label: 'System Admin', dotColor: appTheme.colorPrimaryLight },
+  { key: 'security_admin', label: 'Security Admin', dotColor: appTheme.colorWarning },
+  { key: 'audit_admin', label: 'Audit Admin', dotColor: appTheme.colorSuccess },
+  { key: 'admin', label: 'Admin', dotColor: appTheme.colorInfo },
+  { key: 'cto', label: 'CTO', dotColor: appTheme.colorInfoDark },
 ];
 
 export const effectivePermissions: EffectivePermission[] = [

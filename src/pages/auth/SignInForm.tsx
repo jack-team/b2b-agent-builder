@@ -4,6 +4,9 @@ import { Button } from 'antd';
 import { useMemoizedFn } from 'ahooks';
 import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
 import { useUserStore } from '@/store/user';
+import EmailIcon from '@/assets/svg-icons/page/auth/email.svg?react';
+import PasswordIcon from '@/assets/svg-icons/page/auth/lock.svg?react';
+import styles from './styles.module.less';
 
 const SignInForm: FC = () => {
   const [form] = ProForm.useForm();
@@ -19,21 +22,25 @@ const SignInForm: FC = () => {
       form={form}
       layout="vertical"
       submitter={false}
-      size="large"
     >
       <ProFormText
         name="username"
+        label="Email"
+        required={false}
         allowClear={true}
-        placeholder="Email / Username"
-        formItemProps={{ className: 'no-card' }}
         rules={[{ required: true }]}
+        formItemProps={{ className: 'no-card' }}
+        fieldProps={{  prefix: <EmailIcon /> }}
+
       />
       <ProFormText.Password
         name="password"
+        label="Password"
         allowClear={true}
-        placeholder="Password"
-        formItemProps={{ className: 'no-card' }}
+        required={false}
         rules={[{ required: true }]}
+        formItemProps={{ className: 'no-card' }}
+        fieldProps={{ prefix: <PasswordIcon /> }}
       />
       <ProForm.Item className="no-card">
         <div className="flex items-center justify-between">
@@ -41,7 +48,6 @@ const SignInForm: FC = () => {
             noStyle
             name="remember"
             initialValue={false}
-            formItemProps={{ className: 'no-card' }}
           >
             Remember me
           </ProFormCheckbox>
@@ -52,6 +58,7 @@ const SignInForm: FC = () => {
         block
         type="primary"
         onClick={handleSubmit}
+        className={styles.submitter}
       >
         Sign In
       </Button>
