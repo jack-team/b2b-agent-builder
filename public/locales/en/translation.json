@@ -294,6 +294,93 @@
       "equal": "Equal"
     }
   },
+  "privacyMasking": {
+    "title": "Privacy Masking Rules",
+    "tabs": {
+      "dataTypes": "Data Types",
+      "rules": "Rules",
+      "templates": "Templates",
+      "auditLogs": "Audit Logs"
+    },
+    "operators": {
+      "equal": "Equal"
+    },
+    "riskLevel": {
+      "critical": "Critical",
+      "high": "High",
+      "medium": "Medium"
+    },
+    "category": {
+      "identity": "Identity",
+      "personal": "Personal",
+      "location": "Location"
+    },
+    "detectionMethod": {
+      "regex": "Regex",
+      "llm": "LLM",
+      "ner": "NER",
+      "luhn": "Luhn"
+    },
+    "handlingStrategy": {
+      "generalizedRetentionVector": "Generalized Retention Vector",
+      "completeBlock": "Complete Block",
+      "hashStorage": "Hash Storage"
+    },
+    "templateStrategy": {
+      "partialMasking": "Partial Masking",
+      "generalizedRetention": "Generalized Retention",
+      "hashStorage": "Hash Storage"
+    },
+    "operationType": {
+      "create": "Create",
+      "modify": "Modify",
+      "import": "Import"
+    },
+    "actions": {
+      "new": "New",
+      "import": "Import",
+      "export": "Export",
+      "copy": "Copy",
+      "createRule": "Create Rule",
+      "preview": "Preview"
+    },
+    "dataTypes": {
+      "columns": {
+        "name": "Name",
+        "description": "Description",
+        "category": "Category",
+        "riskLevel": "Risk Level",
+        "regexPattern": "Regex Pattern",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "rules": {
+      "columns": {
+        "name": "Name",
+        "dataType": "Data Type",
+        "detectionMethod": "Detection Method",
+        "handlingStrategy": "Handling Strategy",
+        "riskLevel": "Risk Level",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "templates": {
+      "method": "Method",
+      "strategy": "Strategy",
+      "used": "Used: {{count}} times"
+    },
+    "auditLogs": {
+      "columns": {
+        "time": "Time",
+        "operationType": "Operation Type",
+        "operator": "Operator",
+        "targetRule": "Target Rule",
+        "details": "Details"
+      }
+    }
+  },
   "privateDomain": {
     "title": "Private Domain",
     "sections": {
@@ -358,6 +445,159 @@
         "approvalRequired": "Approval Required"
       }
     }
+  },
+  "sharedDomain": {
+    "title": "Shared Domain",
+    "sections": {
+      "coreRules": "Core Rule Definition",
+      "accessFlow": "Access Control Flow",
+      "sharingGroups": "Memory-Sharing Groups"
+    },
+    "rules": {
+      "boundToGroupId": {
+        "title": "Bound to Group ID",
+        "description": "Shared memory bound to group ID. Cross-user access limited by member list."
+      },
+      "memberConfig": {
+        "title": "Member Config",
+        "description": "Administrators can flexibly add/remove members in real time."
+      },
+      "outsideBlocked": {
+        "title": "Outside Blocked",
+        "description": "Non-member recall requests → ACL blocks + permission error."
+      },
+      "crossUserSharing": {
+        "title": "Cross-User Knowledge Sharing",
+        "description": "Group members can access and reference shared memories."
+      }
+    },
+    "flowSteps": {
+      "userRequest": {
+        "title": "User Initiates Request",
+        "description": "Carry User ID and request content"
+      },
+      "groupMemberVerification": {
+        "title": "Group Member Verification",
+        "description": "User has access to the group"
+      },
+      "memoryRecall": {
+        "title": "Memory Recall",
+        "description": "Return the shared memory"
+      }
+    },
+    "groups": {
+      "sales": "Sales",
+      "customerService": "Custom Service",
+      "marketing": "Marketing"
+    },
+    "roles": {
+      "leader": "Leader",
+      "member": "Member"
+    },
+    "memberCount": "{{count}} members",
+    "addMember": "Add member",
+    "removeMemberConfirm": "Remove this member from the group?"
+  },
+  "publicDomain": {
+    "title": "Public Domain",
+    "sections": {
+      "coreRules": "Core Rule Definition",
+      "approvalProcess": "Approval Process for Public Domain Memory",
+      "pendingApproval": "Memory Pending Approval",
+      "publishedKnowledge": "Published Public Knowledge"
+    },
+    "rules": {
+      "globalVisibility": {
+        "title": "Global Visibility",
+        "description": "Accessible to all users. No permission checks."
+      },
+      "superAdminsOnly": {
+        "title": "Super Admins Only",
+        "description": "Write access restricted to super admins."
+      },
+      "generalKnowledgeRepository": {
+        "title": "General Knowledge Repository",
+        "description": "Company policies, rules, processes — for everyone."
+      },
+      "approvalRequiredForPublishing": {
+        "title": "Approval Required for Publishing",
+        "description": "Any change requires approval to ensure quality."
+      }
+    },
+    "flowSteps": {
+      "createMemory": {
+        "title": "Create Memory",
+        "description": "Fill in the content and submit."
+      },
+      "contentReview": {
+        "title": "Content Review",
+        "description": "Admin reviews for accuracy."
+      },
+      "complianceCheck": {
+        "title": "Compliance Check",
+        "description": "Legal / Compliance approves."
+      },
+      "officialPublishing": {
+        "title": "Official Publishing",
+        "description": "Becomes globally visible."
+      }
+    },
+    "categories": {
+      "policiesRegulations": "Policies & Regulations",
+      "businessProcesses": "Business Processes",
+      "marketingStrategy": "Marketing Strategy"
+    },
+    "pendingMeta": "Applicant: {{applicant}} | Submitted: {{submittedAt}} | Category: {{category}}",
+    "actions": {
+      "approve": "Approve",
+      "reject": "Reject"
+    },
+    "knowledgeFooter": "{{visitCount}} visits | Updated at {{updatedAt}}"
+  },
+  "createSharedDomain": {
+    "title": "Create Shared Domain",
+    "createButton": "Create Shared Domain",
+    "sections": {
+      "basicInformation": "Basic Information",
+      "initializeMembers": "Initialize group members",
+      "accessPermissions": "Access Permissions & Security"
+    },
+    "name": "Name",
+    "namePlaceholder": "Please enter a shared domain group name, e.g., R&D Team",
+    "description": "Description",
+    "descriptionPlaceholder": "Briefly describe the purpose and scope of this shared domain group",
+    "department": "Department",
+    "departmentPlaceholder": "Please select a department",
+    "status": "Status",
+    "members": "Members",
+    "memberSearchPlaceholder": "Search by username or user ID",
+    "groupMemberPermissions": "Group Member Permissions",
+    "groupMemberPermissionsPlaceholder": "Read & Write / Read only / Manage",
+    "groupMemberPermissionOptions": {
+      "read_write": "Read & Write",
+      "read_only": "Read only",
+      "manage": "Manage"
+    },
+    "memoryCreationPermission": "Memory Creation Permission",
+    "memoryCreationPermissionOptions": {
+      "all_members": "All members can create",
+      "admins_only": "Only admins can create"
+    },
+    "privacyMasking": "Privacy Masking",
+    "privacyMaskingOption": "Enable automatic masking",
+    "accessLogs": "Access Logs",
+    "accessLogsOption": "Log all access and operations",
+    "validationName": "Please enter a shared domain group name",
+    "validationDepartment": "Please select a department",
+    "validationMembers": "Please select at least one member",
+    "validationGroupMemberPermissions": "Please select group member permissions",
+    "validationMemoryCreationPermission": "Please select memory creation permission"
+  },
+  "addMemberToGroup": {
+    "title": "Add member to group",
+    "availableUsers": "Available Users",
+    "userCount": "{{count}} members",
+    "addToGroup": "Add to group"
   },
   "memoryLifecyclePolicy": {
     "title": "Memory Lifecycle Policy",

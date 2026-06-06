@@ -12,6 +12,8 @@ import { useTranslation } from 'react-i18next';
 
 import Drawer from '@/components/Drawer';
 import PrivateDomain from '@/bsComponents/PrivateDomain';
+import PublicDomain from '@/bsComponents/PublicDomain';
+import SharedDomain from '@/bsComponents/SharedDomain';
 import type { DomainStatItem, DomainStatKey } from './types';
 import styles from './styles.module.less';
 
@@ -71,10 +73,28 @@ const DomainStatCards: FC<DomainStatCardsProps> = ({ items }) => {
                 >
                   <PrivateDomain />
                 </Drawer>
+              ) : item.key === 'sharedDomain' ? (
+                <Drawer
+                  size="large"
+                  trigger={(
+                    <Button icon={actionIcon}>
+                      {t(`permissionDomain.stats.${item.action}`)}
+                    </Button>
+                  )}
+                >
+                  <SharedDomain />
+                </Drawer>
               ) : (
-                <Button icon={actionIcon}>
-                  {t(`permissionDomain.stats.${item.action}`)}
-                </Button>
+                <Drawer
+                  size="large"
+                  trigger={(
+                    <Button icon={actionIcon}>
+                      {t(`permissionDomain.stats.${item.action}`)}
+                    </Button>
+                  )}
+                >
+                  <PublicDomain />
+                </Drawer>
               )}
             </div>
           </Col>

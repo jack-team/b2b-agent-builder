@@ -50,7 +50,7 @@ const PageActions: FC = () => {
         <PermissionDomain />
       </Drawer>
       <Drawer
-        size="medium"
+        size="large"
         trigger={(
           <Button type="primary" icon={<EyeInvisibleOutlined />}>
             {t('memoriesPage.privacyMasking')}

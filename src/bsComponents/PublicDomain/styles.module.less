@@ -1,0 +1,216 @@
+.section {
+  margin-bottom: 16px;
+}
+
+.rule_card {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  height: 100%;
+  padding: 20px 24px;
+  background: var(--bg-color-surface);
+  border: 0.5px solid var(--border-color-primary);
+  border-radius: 12px;
+}
+
+.rule_icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-lg);
+  background: #10b98114;
+  color: #10b981;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.rule_content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.rule_title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-color-primary);
+  line-height: var(--leading-tight);
+}
+
+.rule_description {
+  font-size: var(--text-sm);
+  color: var(--text-color-secondary);
+  line-height: var(--leading-normal);
+}
+
+.flow {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.flow_step {
+  display: flex;
+  flex: 1;
+  min-width: 160px;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 16px;
+  background: var(--bg-color-surface);
+  border: 0.5px solid var(--border-color-primary);
+  border-radius: 12px;
+}
+
+.flow_step_number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #10b981;
+  color: #fff;
+  font-size: var(--text-sm);
+  font-weight: var(--font-bold);
+}
+
+.flow_step_title {
+  font-size: var(--text-sm);
+  font-weight: var(--font-semibold);
+  color: var(--text-color-primary);
+  line-height: var(--leading-tight);
+}
+
+.flow_step_description {
+  font-size: var(--text-sm);
+  color: var(--text-color-secondary);
+  line-height: var(--leading-normal);
+}
+
+.flow_arrow {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: #10b981;
+  font-size: 16px;
+}
+
+.pending_list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pending_item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--bg-color-surface);
+  border: 0.5px solid var(--border-color-primary);
+  border-radius: 12px;
+}
+
+.pending_content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.pending_title {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-color-primary);
+  line-height: var(--leading-tight);
+}
+
+.pending_meta {
+  font-size: var(--text-sm);
+  color: var(--text-color-secondary);
+  line-height: var(--leading-normal);
+}
+
+.pending_actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.approve_btn {
+  background: #52c41a;
+  border-color: #52c41a;
+
+  &:hover {
+    background: #73d13d !important;
+    border-color: #73d13d !important;
+  }
+}
+
+.reject_btn {
+  color: #ff4d4f;
+  border-color: #ff4d4f;
+
+  &:hover {
+    color: #ff7875 !important;
+    border-color: #ff7875 !important;
+  }
+}
+
+.knowledge_list {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.knowledge_card {
+  display: flex;
+  flex: 1;
+  min-width: 280px;
+  flex-direction: column;
+  background: var(--bg-color-surface);
+  border: 0.5px solid var(--border-color-primary);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.knowledge_body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  padding: 20px 24px;
+}
+
+.knowledge_title {
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  color: var(--text-color-primary);
+  line-height: var(--leading-tight);
+}
+
+.knowledge_description {
+  font-size: var(--text-sm);
+  color: var(--text-color-secondary);
+  line-height: var(--leading-normal);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.knowledge_footer {
+  padding: 12px 24px;
+  background: var(--bg-color-layout);
+  font-size: var(--text-sm);
+  color: var(--text-color-secondary);
+  line-height: var(--leading-normal);
+}

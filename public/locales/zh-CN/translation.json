@@ -294,6 +294,93 @@
       "equal": "等于"
     }
   },
+  "privacyMasking": {
+    "title": "隐私脱敏规则",
+    "tabs": {
+      "dataTypes": "数据类型",
+      "rules": "规则",
+      "templates": "模板",
+      "auditLogs": "审计日志"
+    },
+    "operators": {
+      "equal": "等于"
+    },
+    "riskLevel": {
+      "critical": "严重",
+      "high": "高",
+      "medium": "中"
+    },
+    "category": {
+      "identity": "身份",
+      "personal": "个人",
+      "location": "位置"
+    },
+    "detectionMethod": {
+      "regex": "正则",
+      "llm": "LLM",
+      "ner": "NER",
+      "luhn": "Luhn"
+    },
+    "handlingStrategy": {
+      "generalizedRetentionVector": "泛化保留向量",
+      "completeBlock": "完全屏蔽",
+      "hashStorage": "哈希存储"
+    },
+    "templateStrategy": {
+      "partialMasking": "部分脱敏",
+      "generalizedRetention": "泛化保留",
+      "hashStorage": "哈希存储"
+    },
+    "operationType": {
+      "create": "创建",
+      "modify": "修改",
+      "import": "导入"
+    },
+    "actions": {
+      "new": "新建",
+      "import": "导入",
+      "export": "导出",
+      "copy": "复制",
+      "createRule": "创建规则",
+      "preview": "预览"
+    },
+    "dataTypes": {
+      "columns": {
+        "name": "名称",
+        "description": "描述",
+        "category": "分类",
+        "riskLevel": "风险等级",
+        "regexPattern": "正则表达式",
+        "status": "状态",
+        "actions": "操作"
+      }
+    },
+    "rules": {
+      "columns": {
+        "name": "名称",
+        "dataType": "数据类型",
+        "detectionMethod": "检测方法",
+        "handlingStrategy": "处理策略",
+        "riskLevel": "风险等级",
+        "status": "状态",
+        "actions": "操作"
+      }
+    },
+    "templates": {
+      "method": "方法",
+      "strategy": "策略",
+      "used": "已使用 {{count}} 次"
+    },
+    "auditLogs": {
+      "columns": {
+        "time": "时间",
+        "operationType": "操作类型",
+        "operator": "操作人",
+        "targetRule": "目标规则",
+        "details": "详情"
+      }
+    }
+  },
   "privateDomain": {
     "title": "私有域",
     "sections": {
@@ -358,6 +445,159 @@
         "approvalRequired": "需审批"
       }
     }
+  },
+  "sharedDomain": {
+    "title": "共享域",
+    "sections": {
+      "coreRules": "核心规则定义",
+      "accessFlow": "访问控制流程",
+      "sharingGroups": "记忆共享组"
+    },
+    "rules": {
+      "boundToGroupId": {
+        "title": "绑定组 ID",
+        "description": "共享记忆绑定组 ID，跨用户访问受成员列表限制。"
+      },
+      "memberConfig": {
+        "title": "成员配置",
+        "description": "管理员可实时灵活添加/移除成员。"
+      },
+      "outsideBlocked": {
+        "title": "外部拦截",
+        "description": "非成员召回请求 → ACL 拦截 + 权限错误。"
+      },
+      "crossUserSharing": {
+        "title": "跨用户知识共享",
+        "description": "组成员可访问并引用共享记忆。"
+      }
+    },
+    "flowSteps": {
+      "userRequest": {
+        "title": "用户发起请求",
+        "description": "携带用户 ID 与请求内容"
+      },
+      "groupMemberVerification": {
+        "title": "组成员校验",
+        "description": "用户拥有该组的访问权限"
+      },
+      "memoryRecall": {
+        "title": "记忆召回",
+        "description": "返回共享记忆"
+      }
+    },
+    "groups": {
+      "sales": "销售",
+      "customerService": "客服",
+      "marketing": "市场"
+    },
+    "roles": {
+      "leader": "负责人",
+      "member": "成员"
+    },
+    "memberCount": "{{count}} 名成员",
+    "addMember": "添加成员",
+    "removeMemberConfirm": "确定从该组移除此成员？"
+  },
+  "publicDomain": {
+    "title": "公共域",
+    "sections": {
+      "coreRules": "核心规则定义",
+      "approvalProcess": "公共域记忆审批流程",
+      "pendingApproval": "待审批记忆",
+      "publishedKnowledge": "已发布公共知识"
+    },
+    "rules": {
+      "globalVisibility": {
+        "title": "全局可见",
+        "description": "所有用户均可访问，无需权限校验。"
+      },
+      "superAdminsOnly": {
+        "title": "仅超级管理员",
+        "description": "写入权限仅限超级管理员。"
+      },
+      "generalKnowledgeRepository": {
+        "title": "通用知识库",
+        "description": "公司政策、规章制度、业务流程——面向所有人。"
+      },
+      "approvalRequiredForPublishing": {
+        "title": "发布需审批",
+        "description": "任何变更均需审批，确保内容质量。"
+      }
+    },
+    "flowSteps": {
+      "createMemory": {
+        "title": "创建记忆",
+        "description": "填写内容并提交。"
+      },
+      "contentReview": {
+        "title": "内容审核",
+        "description": "管理员审核内容准确性。"
+      },
+      "complianceCheck": {
+        "title": "合规审查",
+        "description": "法务 / 合规部门审批。"
+      },
+      "officialPublishing": {
+        "title": "正式发布",
+        "description": "全球可见。"
+      }
+    },
+    "categories": {
+      "policiesRegulations": "政策与法规",
+      "businessProcesses": "业务流程",
+      "marketingStrategy": "营销策略"
+    },
+    "pendingMeta": "申请人：{{applicant}} | 提交时间：{{submittedAt}} | 分类：{{category}}",
+    "actions": {
+      "approve": "通过",
+      "reject": "驳回"
+    },
+    "knowledgeFooter": "{{visitCount}} 次访问 | 更新于 {{updatedAt}}"
+  },
+  "createSharedDomain": {
+    "title": "创建共享域",
+    "createButton": "创建共享域",
+    "sections": {
+      "basicInformation": "基本信息",
+      "initializeMembers": "初始化组成员",
+      "accessPermissions": "访问权限与安全"
+    },
+    "name": "名称",
+    "namePlaceholder": "请输入共享域组名称，例如：研发团队",
+    "description": "描述",
+    "descriptionPlaceholder": "简要描述该共享域组的用途和范围",
+    "department": "部门",
+    "departmentPlaceholder": "请选择部门",
+    "status": "状态",
+    "members": "成员",
+    "memberSearchPlaceholder": "按用户名或用户 ID 搜索",
+    "groupMemberPermissions": "组成员权限",
+    "groupMemberPermissionsPlaceholder": "读写 / 只读 / 管理",
+    "groupMemberPermissionOptions": {
+      "read_write": "读写",
+      "read_only": "只读",
+      "manage": "管理"
+    },
+    "memoryCreationPermission": "记忆创建权限",
+    "memoryCreationPermissionOptions": {
+      "all_members": "所有成员可创建",
+      "admins_only": "仅管理员可创建"
+    },
+    "privacyMasking": "隐私脱敏",
+    "privacyMaskingOption": "启用自动脱敏",
+    "accessLogs": "访问日志",
+    "accessLogsOption": "记录所有访问与操作",
+    "validationName": "请输入共享域组名称",
+    "validationDepartment": "请选择部门",
+    "validationMembers": "请至少选择一名成员",
+    "validationGroupMemberPermissions": "请选择组成员权限",
+    "validationMemoryCreationPermission": "请选择记忆创建权限"
+  },
+  "addMemberToGroup": {
+    "title": "添加成员到组",
+    "availableUsers": "可用用户",
+    "userCount": "{{count}} 名成员",
+    "addToGroup": "添加到组"
   },
   "memoryLifecyclePolicy": {
     "title": "记忆生命周期策略",

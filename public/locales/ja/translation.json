@@ -294,6 +294,93 @@
       "equal": "等しい"
     }
   },
+  "privacyMasking": {
+    "title": "プライバシーマスキングルール",
+    "tabs": {
+      "dataTypes": "データタイプ",
+      "rules": "ルール",
+      "templates": "テンプレート",
+      "auditLogs": "監査ログ"
+    },
+    "operators": {
+      "equal": "等しい"
+    },
+    "riskLevel": {
+      "critical": "重大",
+      "high": "高",
+      "medium": "中"
+    },
+    "category": {
+      "identity": "身元",
+      "personal": "個人",
+      "location": "位置"
+    },
+    "detectionMethod": {
+      "regex": "正規表現",
+      "llm": "LLM",
+      "ner": "NER",
+      "luhn": "Luhn"
+    },
+    "handlingStrategy": {
+      "generalizedRetentionVector": "汎用保持ベクトル",
+      "completeBlock": "完全ブロック",
+      "hashStorage": "ハッシュ保存"
+    },
+    "templateStrategy": {
+      "partialMasking": "部分マスキング",
+      "generalizedRetention": "汎用保持",
+      "hashStorage": "ハッシュ保存"
+    },
+    "operationType": {
+      "create": "作成",
+      "modify": "変更",
+      "import": "インポート"
+    },
+    "actions": {
+      "new": "新規",
+      "import": "インポート",
+      "export": "エクスポート",
+      "copy": "コピー",
+      "createRule": "ルール作成",
+      "preview": "プレビュー"
+    },
+    "dataTypes": {
+      "columns": {
+        "name": "名前",
+        "description": "説明",
+        "category": "カテゴリ",
+        "riskLevel": "リスクレベル",
+        "regexPattern": "正規表現パターン",
+        "status": "ステータス",
+        "actions": "操作"
+      }
+    },
+    "rules": {
+      "columns": {
+        "name": "名前",
+        "dataType": "データタイプ",
+        "detectionMethod": "検出方法",
+        "handlingStrategy": "処理戦略",
+        "riskLevel": "リスクレベル",
+        "status": "ステータス",
+        "actions": "操作"
+      }
+    },
+    "templates": {
+      "method": "方法",
+      "strategy": "戦略",
+      "used": "使用回数: {{count}}回"
+    },
+    "auditLogs": {
+      "columns": {
+        "time": "時間",
+        "operationType": "操作タイプ",
+        "operator": "操作者",
+        "targetRule": "対象ルール",
+        "details": "詳細"
+      }
+    }
+  },
   "privateDomain": {
     "title": "プライベートドメイン",
     "sections": {
@@ -358,6 +445,159 @@
         "approvalRequired": "承認が必要"
       }
     }
+  },
+  "sharedDomain": {
+    "title": "共有ドメイン",
+    "sections": {
+      "coreRules": "コアルール定義",
+      "accessFlow": "アクセス制御フロー",
+      "sharingGroups": "メモリー共有グループ"
+    },
+    "rules": {
+      "boundToGroupId": {
+        "title": "グループ ID にバインド",
+        "description": "共有メモリーはグループ ID にバインド。メンバーリストによりクロスユーザーアクセスを制限。"
+      },
+      "memberConfig": {
+        "title": "メンバー設定",
+        "description": "管理者はリアルタイムでメンバーの追加/削除が可能。"
+      },
+      "outsideBlocked": {
+        "title": "外部ブロック",
+        "description": "非メンバーのリコール要求 → ACL ブロック + 権限エラー。"
+      },
+      "crossUserSharing": {
+        "title": "クロスユーザーナレッジ共有",
+        "description": "グループメンバーは共有メモリーにアクセス・参照可能。"
+      }
+    },
+    "flowSteps": {
+      "userRequest": {
+        "title": "ユーザーがリクエストを開始",
+        "description": "ユーザー ID とリクエスト内容を付与"
+      },
+      "groupMemberVerification": {
+        "title": "グループメンバー検証",
+        "description": "ユーザーがグループへのアクセス権を持つ"
+      },
+      "memoryRecall": {
+        "title": "メモリーリコール",
+        "description": "共有メモリーを返却"
+      }
+    },
+    "groups": {
+      "sales": "営業",
+      "customerService": "カスタマーサービス",
+      "marketing": "マーケティング"
+    },
+    "roles": {
+      "leader": "リーダー",
+      "member": "メンバー"
+    },
+    "memberCount": "{{count}} 名のメンバー",
+    "addMember": "メンバーを追加",
+    "removeMemberConfirm": "このメンバーをグループから削除しますか？"
+  },
+  "publicDomain": {
+    "title": "パブリックドメイン",
+    "sections": {
+      "coreRules": "コアルール定義",
+      "approvalProcess": "パブリックドメインメモリー承認プロセス",
+      "pendingApproval": "承認待ちメモリー",
+      "publishedKnowledge": "公開済み公共知識"
+    },
+    "rules": {
+      "globalVisibility": {
+        "title": "グローバル可視性",
+        "description": "全ユーザーがアクセス可能。権限チェック不要。"
+      },
+      "superAdminsOnly": {
+        "title": "スーパー管理者のみ",
+        "description": "書き込み権限はスーパー管理者に限定。"
+      },
+      "generalKnowledgeRepository": {
+        "title": "汎用ナレッジリポジトリ",
+        "description": "会社方針、規則、プロセス——全員向け。"
+      },
+      "approvalRequiredForPublishing": {
+        "title": "公開には承認が必要",
+        "description": "すべての変更は品質確保のため承認が必要。"
+      }
+    },
+    "flowSteps": {
+      "createMemory": {
+        "title": "メモリー作成",
+        "description": "内容を入力して提出。"
+      },
+      "contentReview": {
+        "title": "コンテンツレビュー",
+        "description": "管理者が正確性を確認。"
+      },
+      "complianceCheck": {
+        "title": "コンプライアンスチェック",
+        "description": "法務 / コンプライアンスが承認。"
+      },
+      "officialPublishing": {
+        "title": "公式公開",
+        "description": "グローバルに可視化。"
+      }
+    },
+    "categories": {
+      "policiesRegulations": "方針・規則",
+      "businessProcesses": "業務プロセス",
+      "marketingStrategy": "マーケティング戦略"
+    },
+    "pendingMeta": "申請者：{{applicant}} | 提出：{{submittedAt}} | カテゴリ：{{category}}",
+    "actions": {
+      "approve": "承認",
+      "reject": "却下"
+    },
+    "knowledgeFooter": "{{visitCount}} 回アクセス | 更新：{{updatedAt}}"
+  },
+  "createSharedDomain": {
+    "title": "共有ドメインを作成",
+    "createButton": "共有ドメインを作成",
+    "sections": {
+      "basicInformation": "基本情報",
+      "initializeMembers": "グループメンバーを初期化",
+      "accessPermissions": "アクセス権限とセキュリティ"
+    },
+    "name": "名前",
+    "namePlaceholder": "共有ドメイングループ名を入力してください（例：開発チーム）",
+    "description": "説明",
+    "descriptionPlaceholder": "この共有ドメイングループの目的と範囲を簡潔に説明してください",
+    "department": "部門",
+    "departmentPlaceholder": "部門を選択してください",
+    "status": "ステータス",
+    "members": "メンバー",
+    "memberSearchPlaceholder": "ユーザー名またはユーザー ID で検索",
+    "groupMemberPermissions": "グループメンバー権限",
+    "groupMemberPermissionsPlaceholder": "読み書き / 読み取り専用 / 管理",
+    "groupMemberPermissionOptions": {
+      "read_write": "読み書き",
+      "read_only": "読み取り専用",
+      "manage": "管理"
+    },
+    "memoryCreationPermission": "メモリ作成権限",
+    "memoryCreationPermissionOptions": {
+      "all_members": "全メンバーが作成可能",
+      "admins_only": "管理者のみ作成可能"
+    },
+    "privacyMasking": "プライバシーマスキング",
+    "privacyMaskingOption": "自動マスキングを有効化",
+    "accessLogs": "アクセスログ",
+    "accessLogsOption": "すべてのアクセスと操作を記録",
+    "validationName": "共有ドメイングループ名を入力してください",
+    "validationDepartment": "部門を選択してください",
+    "validationMembers": "少なくとも1名のメンバーを選択してください",
+    "validationGroupMemberPermissions": "グループメンバー権限を選択してください",
+    "validationMemoryCreationPermission": "メモリ作成権限を選択してください"
+  },
+  "addMemberToGroup": {
+    "title": "グループにメンバーを追加",
+    "availableUsers": "利用可能なユーザー",
+    "userCount": "{{count}} 名のメンバー",
+    "addToGroup": "グループに追加"
   },
   "memoryLifecyclePolicy": {
     "title": "メモリーライフサイクルポリシー",
