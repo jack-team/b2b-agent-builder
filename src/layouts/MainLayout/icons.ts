@@ -23,3 +23,5 @@ export const icons = {
   permission: permissionIcon,
   orchestration: orchestrationIcon
 }
+
+export type IconNameType = keyof typeof icons;

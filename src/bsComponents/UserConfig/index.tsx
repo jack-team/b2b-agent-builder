@@ -156,6 +156,7 @@ const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
             initialValue={[{}]}
             copyIconProps={false}
             deleteIconProps={false}
+            alwaysShowItemLabel
             creatorButtonProps={{
               type: 'link',
             }}
@@ -169,7 +170,6 @@ const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
                 />
               )
             }}
-
           </ProFormList>
           <Row gutter={16}>
             <Col span={12}>

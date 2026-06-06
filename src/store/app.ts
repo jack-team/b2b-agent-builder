@@ -7,7 +7,7 @@ type AppState = {
 };
 
 export const useAppStore = create<AppState>((set, get) => ({
-  menuCollapsed: true,
+  menuCollapsed: false,
   setMenuCollapsed: s => set({ menuCollapsed: s }),
   toggleMenu: () => set({ menuCollapsed: !get().menuCollapsed }),
 }));

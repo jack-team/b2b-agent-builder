@@ -9,9 +9,13 @@ export const useMenu = () => {
 
   const selectedKeys = useMemo(() => {
     const keys: string[] = [];
+    
     for (const item of menuList) {
-      const regexp = pathToRegexp(item.path, { end: false });
-      if (regexp.test(pathname)) keys.push(item.path);
+      const children = item.children || [];
+      for (const child of children) {
+        const childRegexp = pathToRegexp(child.path, { end: false });
+        if (childRegexp.test(pathname)) keys.push(child.path);
+      }
     }
     return keys;
   }, [pathname]);
