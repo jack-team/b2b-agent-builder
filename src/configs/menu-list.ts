@@ -1,4 +1,19 @@
-export const menuList = [
+export type MenuItem = {
+  path?: string;
+  title: string;
+  icon?: string;
+  children?: MenuItem[];
+}
+
+
+/**
+ * 注意：菜单路径必须以 / 开头，没有path的情况只会出现在顶层，顶层为一个大的分组；
+ * 并且分组下的菜单最多只有一层子菜单；
+ * 
+ * @description 菜单列表
+ * @returns {MenuItem[]} 菜单列表
+ * */ 
+export const menuList: MenuItem[] = [
   {
     title: "概览",
     children: [

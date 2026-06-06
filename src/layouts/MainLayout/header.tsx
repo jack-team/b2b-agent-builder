@@ -1,18 +1,31 @@
 import { type FC } from 'react';
-import { Button, Layout  } from 'antd';
-import { useAppStore } from '@/store/app';
-import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
-import UserCenter from './userCenter';
+import { Link } from 'react-router-dom';
+import { Layout, Breadcrumb, Space } from 'antd';
+import { QuestionCircleOutlined, BellOutlined } from '@ant-design/icons';
+import { useBreadcrumb } from './hooks';
+import styles from './styles.module.less';
 
 const LayoutHeader: FC = () => {
-  const { menuCollapsed, toggleMenu } = useAppStore();
+  const { breadcrumbItems } = useBreadcrumb();
 
   return (
     <Layout.Header className="flex items-center justify-between border-b border-[var(--border-color-primary)]">
-      <Button type="text" onClick={toggleMenu} size="large">
-        {menuCollapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
-      </Button>
-      <UserCenter />
+      <Breadcrumb
+        items={breadcrumbItems}
+        itemRender={(item) => (
+          <Link to={item.path}>
+            {item.title}
+          </Link>
+        )}
+      />
+      <Space size={16}>
+        <div className={styles.header_tool_btn}>
+          <BellOutlined />
+        </div>
+        <div className={styles.header_tool_btn}>
+          <QuestionCircleOutlined />
+        </div>
+      </Space>
     </Layout.Header>
   );
 }

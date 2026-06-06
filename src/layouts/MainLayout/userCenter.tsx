@@ -1,6 +1,11 @@
-import { type FC, cloneElement } from 'react';
+import { type FC, cloneElement, type CSSProperties } from 'react';
 import { Avatar, Dropdown, theme } from 'antd';
+import { useNavigate } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons';
+import { icons } from './icons';
+
 import { useUserStore } from '@/store/user';
+import styles from './styles.module.less';
 
 type MenuElement = React.ReactElement<{
   style: React.CSSProperties;
@@ -8,54 +13,84 @@ type MenuElement = React.ReactElement<{
 
 const UserCenter: FC = () => {
   const { token } = theme.useToken();
+  const navigate = useNavigate();
   const logout = useUserStore(s => s.logout)
 
   const renderAvatar = (size: number) => {
     return (
       <Avatar
         size={size}
-        src="https://picsum.photos/200/300?grayscale"
+        src="https://picsum.photos/200/300"
+        className="border-[var(--border-color-primary)]"
       />
     );
   }
 
+  const menuStyle: CSSProperties = {
+    minWidth: 200,
+    boxShadow: 'none',
+    borderRadius: 0
+  }
+
+  const popupStyle: CSSProperties = {
+    overflow: 'hidden',
+    borderRadius: token.borderRadiusLG,
+    boxShadow: token.boxShadowSecondary,
+    backgroundColor: token.colorBgElevated
+  }
+
   return (
-    <Dropdown
-      menu={{
-        items: [
-          {
-            key: 'logout',
-            label: 'Logout',
-            onClick: logout
-          }
-        ]
-      }}
-      popupRender={(menu) => (
-        <div style={{
-          overflow: 'hidden',
-          borderRadius: token.borderRadiusLG,
-          boxShadow: token.boxShadowSecondary,
-          backgroundColor: token.colorBgElevated
-        }}>
-          {cloneElement(
-            menu as MenuElement,
+    <div className={styles.userCenter}>
+      <Dropdown
+        trigger={['click']}
+        openClassName={styles.openDropdown}
+        popupRender={(menu: MenuElement) => (
+          <div style={popupStyle}>
+            {cloneElement(menu, { style: menuStyle })}
+          </div>
+        )}
+        menu={{
+          items: [
             {
-              style: {
-                minWidth: 200,
-                boxShadow: 'none',
-                borderRadius: 0
-              }
+              key: 'profile',
+              label: 'Profile',
+              icon: <UserOutlined />,
+              onClick: () => navigate('/profile')
             },
-          )}
+            {
+              key: 'permissions',
+              label: 'Permissions',
+              icon: <icons.permission />,
+              onClick: () => navigate('/permissions')
+            },
+            {
+              key: 'company',
+              label: 'My Company',
+              icon: <icons.merchant />,
+              onClick: () => navigate('/merchants')
+            },
+            {
+              type: 'divider',
+              style: { margin: '4px 0' }
+            },
+            {
+              key: 'logout',
+              label: 'Logout',
+              onClick: logout
+            }
+          ]
+        }}
+      >
+        <div className={styles.userProfile}>
+          {renderAvatar(36)}
+          <div className={styles.userInfo}>
+            <div className={styles.userName}>Jack Jiang</div>
+            <div className={styles.userRole}>Admin</div>
+          </div>
         </div>
-      )}
-    >
-      <div className="h-full flex items-center cursor-pointer gap-[8px]">
-        {renderAvatar(28)}
-        <span>Jack Jiang</span>
-      </div>
-    </Dropdown>
-  )
+      </Dropdown>
+    </div>
+  );
 }
 
 export default UserCenter;

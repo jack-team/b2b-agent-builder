@@ -1,17 +1,19 @@
 import { type FC } from 'react';
 import cls from 'classnames';
 import { Menu, Layout } from 'antd';
-import { useNavigate, Link } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
+import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { useAppStore } from '@/store/app';
 import { useMenu } from './hooks';
 import { icons, type IconNameType } from './icons';
+import UserCenter from './userCenter';
 import styles from './styles.module.less';
 
 const AppMenu: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { menuCollapsed } = useAppStore();
+  const { menuCollapsed, toggleMenu } = useAppStore();
   const { menus, selectedKeys } = useMenu();
 
   return (
@@ -20,19 +22,22 @@ const AppMenu: FC = () => {
       width={240}
       collapsed={menuCollapsed}
       className={cls(
-        menuCollapsed && styles.menu_collapsed,
+        menuCollapsed && styles.collapsed,
         'border-r-[1px] border-[var(--border-color-primary)]'
       )}
     >
-      <div className="h-full flex flex-col">
+      <div className="h-full flex flex-col overflow-hidden">
         <div className={styles.band}>
           <img src="/favicon.svg" className="h-[36px]" alt="logo" />
           <div className={styles.band_title}>
             B2B Agent Builder
           </div>
+          <div className={styles.collapsed_switch} onClick={toggleMenu}>
+            {menuCollapsed ? <MenuUnfoldOutlined  /> : <MenuFoldOutlined />}
+          </div>
         </div>
         <Menu
-          className={cls('flex-1 border-none!', styles.menu)}
+          className={styles.menu}
           selectedKeys={selectedKeys}
           items={menus.map(item => {
             return {
@@ -51,6 +56,7 @@ const AppMenu: FC = () => {
             };
           })}
         />
+        <UserCenter />
       </div>
     </Layout.Sider>
   );
