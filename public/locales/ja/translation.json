@@ -649,6 +649,22 @@
       "actions": "操作"
     }
   },
+  "orchestrationsPage": {
+    "operators": {
+      "equal": "等しい"
+    },
+    "columns": {
+      "name": "オーケストレーション名",
+      "description": "説明",
+      "updatedAt": "更新日時",
+      "status": "ステータス",
+      "actions": "操作"
+    },
+    "actions": {
+      "view": "表示",
+      "transfer": "転送"
+    }
+  },
   "knowledgesPage": {
     "updateKnowledges": "ナレッジを更新",
     "knowledgeSources": "ナレッジソース",

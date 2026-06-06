@@ -649,6 +649,22 @@
       "actions": "操作"
     }
   },
+  "orchestrationsPage": {
+    "operators": {
+      "equal": "等於"
+    },
+    "columns": {
+      "name": "編排名稱",
+      "description": "描述",
+      "updatedAt": "更新時間",
+      "status": "狀態",
+      "actions": "操作"
+    },
+    "actions": {
+      "view": "查看",
+      "transfer": "轉移"
+    }
+  },
   "knowledgesPage": {
     "updateKnowledges": "更新知識庫",
     "knowledgeSources": "知識來源",

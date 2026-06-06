@@ -649,6 +649,22 @@
       "actions": "Actions"
     }
   },
+  "orchestrationsPage": {
+    "operators": {
+      "equal": "Equal"
+    },
+    "columns": {
+      "name": "Orchestration Name",
+      "description": "Description",
+      "updatedAt": "Updated At",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "actions": {
+      "view": "View",
+      "transfer": "Transfer"
+    }
+  },
   "knowledgesPage": {
     "updateKnowledges": "Update Knowledges",
     "knowledgeSources": "Knowledge Sources",

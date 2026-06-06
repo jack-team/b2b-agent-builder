@@ -28,6 +28,10 @@ export const mainRoutes: RouteObject[] = [
     Component: lazy(() => import('@/pages/llm')),
   },
   {
+    path: '/orchestrations',
+    Component: lazy(() => import('@/pages/orchestrations')),
+  },
+  {
     path: '/users',
     Component: lazy(() => import('@/pages/users')),
   },

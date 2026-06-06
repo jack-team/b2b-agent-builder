@@ -649,6 +649,22 @@
       "actions": "操作"
     }
   },
+  "orchestrationsPage": {
+    "operators": {
+      "equal": "等于"
+    },
+    "columns": {
+      "name": "编排名称",
+      "description": "描述",
+      "updatedAt": "更新时间",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "actions": {
+      "view": "查看",
+      "transfer": "转移"
+    }
+  },
   "knowledgesPage": {
     "updateKnowledges": "更新知识库",
     "knowledgeSources": "知识来源",
