@@ -34,6 +34,51 @@
   "activeUsers": "アクティブユーザー",
   "growth": "成長率",
   "recentActivity": "最近のアクティビティ",
+  "dashboardPage": {
+    "welcomeBack": "おかえりなさい、{{name}}",
+    "workspaceOverview": "個人ワークスペースの概要です。",
+    "frequentlyUsed": "よく使う機能",
+    "agents": "エージェント",
+    "searchPlaceholder": "名前 / 説明...",
+    "filter": "フィルター",
+    "sort": "並び替え",
+    "newOrchestration": "新規オーケストレーション",
+    "newAgent": "新規エージェント",
+    "newCapability": "新規ケイパビリティ",
+    "noResults": "一致する項目がありません",
+    "run": "実行",
+    "edit": "編集",
+    "nodes": "{{count}} ノード",
+    "status": {
+      "processing": "実行中",
+      "stopped": "停止",
+      "draft": "下書き"
+    },
+    "tabs": {
+      "orchestration": "マイオーケストレーション",
+      "agent": "マイエージェント",
+      "capability": "マイケイパビリティ"
+    },
+    "stats": {
+      "knowledges": "ナレッジ",
+      "memories": "メモリー",
+      "models": "モデル",
+      "tokens": "トークン合計"
+    },
+    "statsTrend": {
+      "knowledges": "先週比 +15%",
+      "memories": "先週比 +8%",
+      "models": "今週 2 件追加",
+      "tokens": "今週 +27%"
+    },
+    "activities": {
+      "1": "ナレッジベースを更新",
+      "2": "オーケストレーション実行中",
+      "3": "タスクレビュー待ち",
+      "4": "ケイパビリティを設定",
+      "5": "メモリ競合を解決中"
+    }
+  },
   "pageNotFound": "ページが見つかりません",
   "pageNotFoundDesc": "申し訳ありません、お探しのページは存在しません。",
   "menu": {

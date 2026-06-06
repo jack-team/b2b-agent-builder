@@ -34,6 +34,51 @@
   "activeUsers": "Active Users",
   "growth": "Growth Rate",
   "recentActivity": "Recent Activity",
+  "dashboardPage": {
+    "welcomeBack": "Welcome back, {{name}}",
+    "workspaceOverview": "Here's your personal workspace overview.",
+    "frequentlyUsed": "Frequently Used",
+    "agents": "Agents",
+    "searchPlaceholder": "Name / Description...",
+    "filter": "Filter",
+    "sort": "Sort",
+    "newOrchestration": "New Orchestration",
+    "newAgent": "New Agent",
+    "newCapability": "New Capability",
+    "noResults": "No matching items",
+    "run": "Run",
+    "edit": "Edit",
+    "nodes": "{{count}} nodes",
+    "status": {
+      "processing": "Processing",
+      "stopped": "Stopped",
+      "draft": "Draft"
+    },
+    "tabs": {
+      "orchestration": "My Orchestrations",
+      "agent": "My Agents",
+      "capability": "My Capabilities"
+    },
+    "stats": {
+      "knowledges": "Knowledges",
+      "memories": "Memories",
+      "models": "Models",
+      "tokens": "Total Tokens"
+    },
+    "statsTrend": {
+      "knowledges": "+15% from last week",
+      "memories": "+8% from last week",
+      "models": "2 new this week",
+      "tokens": "+27% this week"
+    },
+    "activities": {
+      "1": "Knowledge base updated",
+      "2": "Orchestration running",
+      "3": "Task pending review",
+      "4": "Capability configured",
+      "5": "Resolving Memory Conflicts"
+    }
+  },
   "pageNotFound": "Page Not Found",
   "pageNotFoundDesc": "Sorry, the page you are looking for does not exist.",
   "menu": {

@@ -34,6 +34,51 @@
   "activeUsers": "活躍用戶",
   "growth": "增長率",
   "recentActivity": "最近活動",
+  "dashboardPage": {
+    "welcomeBack": "歡迎回來，{{name}}",
+    "workspaceOverview": "這是您的個人工作區概覽。",
+    "frequentlyUsed": "常用功能",
+    "agents": "智能體",
+    "searchPlaceholder": "名稱 / 描述...",
+    "filter": "篩選",
+    "sort": "排序",
+    "newOrchestration": "新建編排",
+    "newAgent": "新建智能體",
+    "newCapability": "新建能力",
+    "noResults": "暫無匹配項",
+    "run": "執行",
+    "edit": "編輯",
+    "nodes": "{{count}} 個節點",
+    "status": {
+      "processing": "執行中",
+      "stopped": "已停止",
+      "draft": "草稿"
+    },
+    "tabs": {
+      "orchestration": "我的編排",
+      "agent": "我的智能體",
+      "capability": "我的能力"
+    },
+    "stats": {
+      "knowledges": "知識庫",
+      "memories": "記憶庫",
+      "models": "模型",
+      "tokens": "Token 總量"
+    },
+    "statsTrend": {
+      "knowledges": "較上週 +15%",
+      "memories": "較上週 +8%",
+      "models": "本週新增 2 個",
+      "tokens": "本週 +27%"
+    },
+    "activities": {
+      "1": "知識庫已更新",
+      "2": "編排正在執行",
+      "3": "任務待審核",
+      "4": "能力已配置",
+      "5": "正在解決記憶衝突"
+    }
+  },
   "pageNotFound": "頁面未找到",
   "pageNotFoundDesc": "抱歉，您訪問的頁面不存在。",
   "menu": {
