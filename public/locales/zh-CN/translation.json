@@ -227,6 +227,178 @@
     "columnsCreatedAt": "创建时间",
     "columnsUpdatedAt": "更新时间"
   },
+  "memoriesPage": {
+    "columns": {
+      "user": "用户",
+      "memory": "记忆",
+      "type": "类型",
+      "graphs": "图谱",
+      "clarity": "清晰度",
+      "status": "状态",
+      "actions": "操作"
+    },
+    "types": {
+      "semantics": "语义",
+      "scenario": "场景"
+    },
+    "actions": {
+      "pin": "置顶",
+      "history": "历史",
+      "details": "详情"
+    },
+    "lifecyclePolicy": "记忆生命周期策略",
+    "permissionDomain": "权限域",
+    "privacyMasking": "隐私脱敏",
+    "conflictResolution": "冲突记忆解析"
+  },
+  "conflictMemoryResolution": {
+    "title": "冲突记忆解析",
+    "conflictTitle": "冲突记忆 #{{id}}",
+    "oldMemory": "旧记忆",
+    "newMemory": "新记忆",
+    "vs": "VS",
+    "decayScore": "衰减分数：{{score}}",
+    "accessedCount": "访问次数：{{count}} 次",
+    "sourceDialog": "来源对话：{{dialog}}",
+    "keepThisMemory": "保留此记忆",
+    "useThisMemory": "使用此记忆",
+    "status": {
+      "pending": "待处理"
+    }
+  },
+  "permissionDomain": {
+    "title": "用户与权限域治理",
+    "stats": {
+      "privateMemory": "私有记忆",
+      "sharedDomain": "共享域",
+      "publicDomain": "公共域",
+      "rules": "规则",
+      "manage": "管理"
+    },
+    "alerts": {
+      "quotaWarning": "用户 {{userId}} 的配额即将耗尽，使用率已达 {{usage}}%，建议尽快调整配额。",
+      "processNow": "立即处理",
+      "interceptionInfo": "日均配额拦截统计：今日已拦截 {{count}} 次超额写入。"
+    },
+    "columns": {
+      "userId": "用户 ID",
+      "userName": "用户名",
+      "quota": "配额",
+      "usedQuota": "已用配额",
+      "usagePercent": "使用率",
+      "interceptionCount": "拦截次数",
+      "actions": "操作"
+    },
+    "adjustQuota": "调整配额",
+    "operators": {
+      "equal": "等于"
+    }
+  },
+  "privateDomain": {
+    "title": "私有域",
+    "sections": {
+      "coreRules": "核心规则定义",
+      "accessFlow": "访问控制流程",
+      "permissionMatrix": "权限操作矩阵"
+    },
+    "rules": {
+      "autoBindUserId": {
+        "title": "自动绑定用户 ID",
+        "description": "记忆自动绑定用户 ID，实现精确归属映射"
+      },
+      "crossDomainForbidden": {
+        "title": "禁止跨域转移",
+        "description": "禁止跨用户转移，即使在同一组织内也严格禁止"
+      },
+      "accessibleOnlyToUser": {
+        "title": "仅用户本人可访问",
+        "description": "ACL 强制执行，仅可召回与用户匹配的记忆，其余全部拦截"
+      },
+      "automaticPrivacyMasking": {
+        "title": "自动隐私脱敏",
+        "description": "写入时自动脱敏，PII（身份证 / 银行卡 / 手机号）自动处理"
+      }
+    },
+    "flowSteps": {
+      "userRequest": {
+        "title": "用户发起请求",
+        "description": "携带用户 ID 与请求内容"
+      },
+      "permissionVerification": {
+        "title": "权限校验",
+        "description": "校验用户 ID 与记忆绑定关系"
+      },
+      "desensitization": {
+        "title": "脱敏处理",
+        "description": "PII 自动脱敏"
+      },
+      "memoryRecall": {
+        "title": "记忆召回",
+        "description": "返回用户私有记忆"
+      }
+    },
+    "matrix": {
+      "columns": {
+        "operation": "操作",
+        "user": "用户",
+        "administrator": "管理员",
+        "superAdministrator": "超级管理员"
+      },
+      "operations": {
+        "view": "查看",
+        "create": "创建",
+        "modify": "修改",
+        "delete": "删除",
+        "export": "导出",
+        "transfer": "转移"
+      },
+      "status": {
+        "allowed": "允许",
+        "forbidden": "禁止",
+        "approvalRequired": "需审批"
+      }
+    }
+  },
+  "memoryLifecyclePolicy": {
+    "title": "记忆生命周期策略",
+    "sections": {
+      "decayRate": "衰减率",
+      "archiveThreshold": "归档阈值",
+      "reflectionMergeStrategy": "反思合并策略"
+    },
+    "decayCurveType": "衰减曲线类型",
+    "decayCurveTypeOptions": {
+      "ebbinghausStandard": "艾宾浩斯标准曲线"
+    },
+    "memoryHalfLife": "记忆半衰期",
+    "memoryHalfLifeHint": "记忆衰减至 50% 所需时间",
+    "dormantThreshold": "休眠阈值",
+    "dormantThresholdHint": "衰减分数达到此值时转为休眠状态",
+    "archiveTriggerCondition": "归档触发条件",
+    "mergeTriggerCondition": "合并触发条件",
+    "mergeTriggerOptions": {
+      "sameTypeDormantGt30": "同类型休眠记忆 > 30 时触发"
+    },
+    "offlineMergeSwitch": "离线合并开关",
+    "mergeStrategy": "合并策略",
+    "mergeStrategyOptions": {
+      "semanticSimilarity": "语义相似度合并"
+    },
+    "units": {
+      "days": "天",
+      "hours": "小时",
+      "weeks": "周",
+      "daysOfInactivity": "天不活跃"
+    },
+    "validationDecayCurveType": "请选择衰减曲线类型",
+    "validationMemoryHalfLife": "请输入记忆半衰期",
+    "validationMemoryHalfLifeUnit": "请选择时间单位",
+    "validationDormantThreshold": "请设置休眠阈值",
+    "validationArchiveTriggerValue": "请输入归档触发值",
+    "validationArchiveTriggerUnit": "请选择归档触发单位",
+    "validationMergeTriggerCondition": "请选择合并触发条件",
+    "validationMergeStrategy": "请选择合并策略"
+  },
   "capabilitiesPage": {
     "newProvider": "+ 新建 Provider",
     "columns": {

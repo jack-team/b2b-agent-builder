@@ -227,6 +227,178 @@
     "columnsCreatedAt": "Created At",
     "columnsUpdatedAt": "Updated At"
   },
+  "memoriesPage": {
+    "columns": {
+      "user": "User",
+      "memory": "Memory",
+      "type": "Type",
+      "graphs": "Graphs",
+      "clarity": "Clarity",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "types": {
+      "semantics": "Semantics",
+      "scenario": "Scenario"
+    },
+    "actions": {
+      "pin": "Pin",
+      "history": "History",
+      "details": "Details"
+    },
+    "lifecyclePolicy": "Memory Lifecycle Policy",
+    "permissionDomain": "Permission Domain",
+    "privacyMasking": "Privacy Masking",
+    "conflictResolution": "Conflict Memory Resolution"
+  },
+  "conflictMemoryResolution": {
+    "title": "Conflict Memory Resolution",
+    "conflictTitle": "Conflict Memory #{{id}}",
+    "oldMemory": "Old Memory",
+    "newMemory": "New Memory",
+    "vs": "VS",
+    "decayScore": "Decay score: {{score}}",
+    "accessedCount": "Accessed: {{count}} times",
+    "sourceDialog": "Source Dialog: {{dialog}}",
+    "keepThisMemory": "Keep This Memory",
+    "useThisMemory": "Use This Memory",
+    "status": {
+      "pending": "Pending"
+    }
+  },
+  "permissionDomain": {
+    "title": "User and Permission Domain Governance",
+    "stats": {
+      "privateMemory": "Private Memory",
+      "sharedDomain": "Shared Domain",
+      "publicDomain": "Public Domain",
+      "rules": "Rules",
+      "manage": "Manage"
+    },
+    "alerts": {
+      "quotaWarning": "Quota for {{userId}} is nearly exhausted. Usage rate has reached {{usage}}%. It is recommended to adjust the quota as soon as possible.",
+      "processNow": "Process Now",
+      "interceptionInfo": "Daily Average Quota Interception Statistics. {{count}} quota-exceeding writes have been intercepted today."
+    },
+    "columns": {
+      "userId": "User ID",
+      "userName": "User Name",
+      "quota": "Quota",
+      "usedQuota": "Used Quota",
+      "usagePercent": "Usage %",
+      "interceptionCount": "Interception Count",
+      "actions": "Actions"
+    },
+    "adjustQuota": "Adjust Quota",
+    "operators": {
+      "equal": "Equal"
+    }
+  },
+  "privateDomain": {
+    "title": "Private Domain",
+    "sections": {
+      "coreRules": "Core Rule Definition",
+      "accessFlow": "Access Control Flow",
+      "permissionMatrix": "Permission Operations Matrix"
+    },
+    "rules": {
+      "autoBindUserId": {
+        "title": "Automatically bound to user ID",
+        "description": "Memory auto-bound to user ID for precise ownership mapping"
+      },
+      "crossDomainForbidden": {
+        "title": "Cross-Domain Transfer Forbidden",
+        "description": "No cross-user transfer. Strictly prohibited even within the same organization."
+      },
+      "accessibleOnlyToUser": {
+        "title": "Accessible Only to the User",
+        "description": "ACL enforced. Only user matched memories are recallable. All others blocked."
+      },
+      "automaticPrivacyMasking": {
+        "title": "Automatic Privacy Masking",
+        "description": "Auto-desensitization on write. PII (ID / Bank card / Phone) auto-processed."
+      }
+    },
+    "flowSteps": {
+      "userRequest": {
+        "title": "User Initiates Request",
+        "description": "Carry User ID and request content"
+      },
+      "permissionVerification": {
+        "title": "Permission Verification",
+        "description": "Verify user ID and memory binding"
+      },
+      "desensitization": {
+        "title": "Desensitization Processing",
+        "description": "PII is automatically desensitized"
+      },
+      "memoryRecall": {
+        "title": "Memory Recall",
+        "description": "Return the user's private memory"
+      }
+    },
+    "matrix": {
+      "columns": {
+        "operation": "Operation",
+        "user": "User",
+        "administrator": "Administrator",
+        "superAdministrator": "Super Administrator"
+      },
+      "operations": {
+        "view": "View",
+        "create": "Create",
+        "modify": "Modify",
+        "delete": "Delete",
+        "export": "Export",
+        "transfer": "Transfer"
+      },
+      "status": {
+        "allowed": "Allowed",
+        "forbidden": "Forbidden",
+        "approvalRequired": "Approval Required"
+      }
+    }
+  },
+  "memoryLifecyclePolicy": {
+    "title": "Memory Lifecycle Policy",
+    "sections": {
+      "decayRate": "Decay Rate",
+      "archiveThreshold": "Archive Threshold",
+      "reflectionMergeStrategy": "Reflection Merge Strategy"
+    },
+    "decayCurveType": "Decay Curve Type",
+    "decayCurveTypeOptions": {
+      "ebbinghausStandard": "Ebbinghaus Standard Curve"
+    },
+    "memoryHalfLife": "Memory Half-Life",
+    "memoryHalfLifeHint": "Time required for memory to decay to 50%",
+    "dormantThreshold": "Dormant Threshold",
+    "dormantThresholdHint": "Transition to Dormant state when decay score reaches this value",
+    "archiveTriggerCondition": "Archive Trigger Condition",
+    "mergeTriggerCondition": "Merge Trigger Condition",
+    "mergeTriggerOptions": {
+      "sameTypeDormantGt30": "Trigger when same-type Dormant > 30"
+    },
+    "offlineMergeSwitch": "Offline Merge Switch",
+    "mergeStrategy": "Merge Strategy",
+    "mergeStrategyOptions": {
+      "semanticSimilarity": "Semantic Similarity Merge"
+    },
+    "units": {
+      "days": "days",
+      "hours": "hours",
+      "weeks": "weeks",
+      "daysOfInactivity": "days of inactivity"
+    },
+    "validationDecayCurveType": "Please select a decay curve type",
+    "validationMemoryHalfLife": "Please enter memory half-life",
+    "validationMemoryHalfLifeUnit": "Please select a time unit",
+    "validationDormantThreshold": "Please set dormant threshold",
+    "validationArchiveTriggerValue": "Please enter archive trigger value",
+    "validationArchiveTriggerUnit": "Please select archive trigger unit",
+    "validationMergeTriggerCondition": "Please select merge trigger condition",
+    "validationMergeStrategy": "Please select merge strategy"
+  },
   "capabilitiesPage": {
     "newProvider": "+ New Provider",
     "columns": {

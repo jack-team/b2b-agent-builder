@@ -227,6 +227,178 @@
     "columnsCreatedAt": "建立時間",
     "columnsUpdatedAt": "更新時間"
   },
+  "memoriesPage": {
+    "columns": {
+      "user": "使用者",
+      "memory": "記憶",
+      "type": "類型",
+      "graphs": "圖譜",
+      "clarity": "清晰度",
+      "status": "狀態",
+      "actions": "操作"
+    },
+    "types": {
+      "semantics": "語義",
+      "scenario": "場景"
+    },
+    "actions": {
+      "pin": "置頂",
+      "history": "歷史",
+      "details": "詳情"
+    },
+    "lifecyclePolicy": "記憶生命週期策略",
+    "permissionDomain": "權限域",
+    "privacyMasking": "隱私脫敏",
+    "conflictResolution": "衝突記憶解析"
+  },
+  "conflictMemoryResolution": {
+    "title": "衝突記憶解析",
+    "conflictTitle": "衝突記憶 #{{id}}",
+    "oldMemory": "舊記憶",
+    "newMemory": "新記憶",
+    "vs": "VS",
+    "decayScore": "衰減分數：{{score}}",
+    "accessedCount": "存取次數：{{count}} 次",
+    "sourceDialog": "來源對話：{{dialog}}",
+    "keepThisMemory": "保留此記憶",
+    "useThisMemory": "使用此記憶",
+    "status": {
+      "pending": "待處理"
+    }
+  },
+  "permissionDomain": {
+    "title": "使用者與權限域治理",
+    "stats": {
+      "privateMemory": "私有記憶",
+      "sharedDomain": "共享域",
+      "publicDomain": "公共域",
+      "rules": "規則",
+      "manage": "管理"
+    },
+    "alerts": {
+      "quotaWarning": "使用者 {{userId}} 的配額即將耗盡，使用率已達 {{usage}}%，建議儘快調整配額。",
+      "processNow": "立即處理",
+      "interceptionInfo": "日均配額攔截統計：今日已攔截 {{count}} 次超額寫入。"
+    },
+    "columns": {
+      "userId": "使用者 ID",
+      "userName": "使用者名稱",
+      "quota": "配額",
+      "usedQuota": "已用配額",
+      "usagePercent": "使用率",
+      "interceptionCount": "攔截次數",
+      "actions": "操作"
+    },
+    "adjustQuota": "調整配額",
+    "operators": {
+      "equal": "等於"
+    }
+  },
+  "privateDomain": {
+    "title": "私有域",
+    "sections": {
+      "coreRules": "核心規則定義",
+      "accessFlow": "存取控制流程",
+      "permissionMatrix": "權限操作矩陣"
+    },
+    "rules": {
+      "autoBindUserId": {
+        "title": "自動綁定使用者 ID",
+        "description": "記憶自動綁定使用者 ID，實現精確歸屬映射"
+      },
+      "crossDomainForbidden": {
+        "title": "禁止跨域轉移",
+        "description": "禁止跨使用者轉移，即使在同一組織內也嚴格禁止"
+      },
+      "accessibleOnlyToUser": {
+        "title": "僅使用者本人可存取",
+        "description": "ACL 強制執行，僅可召回與使用者匹配的記憶，其餘全部攔截"
+      },
+      "automaticPrivacyMasking": {
+        "title": "自動隱私脫敏",
+        "description": "寫入時自動脫敏，PII（身分證 / 銀行卡 / 手機號）自動處理"
+      }
+    },
+    "flowSteps": {
+      "userRequest": {
+        "title": "使用者發起請求",
+        "description": "攜帶使用者 ID 與請求內容"
+      },
+      "permissionVerification": {
+        "title": "權限校驗",
+        "description": "校驗使用者 ID 與記憶綁定關係"
+      },
+      "desensitization": {
+        "title": "脫敏處理",
+        "description": "PII 自動脫敏"
+      },
+      "memoryRecall": {
+        "title": "記憶召回",
+        "description": "返回使用者私有記憶"
+      }
+    },
+    "matrix": {
+      "columns": {
+        "operation": "操作",
+        "user": "使用者",
+        "administrator": "管理員",
+        "superAdministrator": "超級管理員"
+      },
+      "operations": {
+        "view": "查看",
+        "create": "建立",
+        "modify": "修改",
+        "delete": "刪除",
+        "export": "匯出",
+        "transfer": "轉移"
+      },
+      "status": {
+        "allowed": "允許",
+        "forbidden": "禁止",
+        "approvalRequired": "需審批"
+      }
+    }
+  },
+  "memoryLifecyclePolicy": {
+    "title": "記憶生命週期策略",
+    "sections": {
+      "decayRate": "衰減率",
+      "archiveThreshold": "歸檔閾值",
+      "reflectionMergeStrategy": "反思合併策略"
+    },
+    "decayCurveType": "衰減曲線類型",
+    "decayCurveTypeOptions": {
+      "ebbinghausStandard": "艾賓浩斯標準曲線"
+    },
+    "memoryHalfLife": "記憶半衰期",
+    "memoryHalfLifeHint": "記憶衰減至 50% 所需時間",
+    "dormantThreshold": "休眠閾值",
+    "dormantThresholdHint": "衰減分數達到此值時轉為休眠狀態",
+    "archiveTriggerCondition": "歸檔觸發條件",
+    "mergeTriggerCondition": "合併觸發條件",
+    "mergeTriggerOptions": {
+      "sameTypeDormantGt30": "同類型休眠記憶 > 30 時觸發"
+    },
+    "offlineMergeSwitch": "離線合併開關",
+    "mergeStrategy": "合併策略",
+    "mergeStrategyOptions": {
+      "semanticSimilarity": "語義相似度合併"
+    },
+    "units": {
+      "days": "天",
+      "hours": "小時",
+      "weeks": "週",
+      "daysOfInactivity": "天不活躍"
+    },
+    "validationDecayCurveType": "請選擇衰減曲線類型",
+    "validationMemoryHalfLife": "請輸入記憶半衰期",
+    "validationMemoryHalfLifeUnit": "請選擇時間單位",
+    "validationDormantThreshold": "請設定休眠閾值",
+    "validationArchiveTriggerValue": "請輸入歸檔觸發值",
+    "validationArchiveTriggerUnit": "請選擇歸檔觸發單位",
+    "validationMergeTriggerCondition": "請選擇合併觸發條件",
+    "validationMergeStrategy": "請選擇合併策略"
+  },
   "capabilitiesPage": {
     "newProvider": "+ 新建 Provider",
     "columns": {

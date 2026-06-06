@@ -227,6 +227,178 @@
     "columnsCreatedAt": "作成日時",
     "columnsUpdatedAt": "更新日時"
   },
+  "memoriesPage": {
+    "columns": {
+      "user": "ユーザー",
+      "memory": "メモリー",
+      "type": "タイプ",
+      "graphs": "グラフ",
+      "clarity": "明瞭度",
+      "status": "ステータス",
+      "actions": "操作"
+    },
+    "types": {
+      "semantics": "セマンティクス",
+      "scenario": "シナリオ"
+    },
+    "actions": {
+      "pin": "ピン留め",
+      "history": "履歴",
+      "details": "詳細"
+    },
+    "lifecyclePolicy": "メモリーライフサイクルポリシー",
+    "permissionDomain": "パーミッションドメイン",
+    "privacyMasking": "プライバシーマスキング",
+    "conflictResolution": "競合メモリー解決"
+  },
+  "conflictMemoryResolution": {
+    "title": "競合メモリー解決",
+    "conflictTitle": "競合メモリー #{{id}}",
+    "oldMemory": "旧メモリー",
+    "newMemory": "新メモリー",
+    "vs": "VS",
+    "decayScore": "減衰スコア：{{score}}",
+    "accessedCount": "アクセス回数：{{count}} 回",
+    "sourceDialog": "ソースダイアログ：{{dialog}}",
+    "keepThisMemory": "このメモリーを保持",
+    "useThisMemory": "このメモリーを使用",
+    "status": {
+      "pending": "保留中"
+    }
+  },
+  "permissionDomain": {
+    "title": "ユーザーとパーミッションドメイン管理",
+    "stats": {
+      "privateMemory": "プライベートメモリー",
+      "sharedDomain": "共有ドメイン",
+      "publicDomain": "パブリックドメイン",
+      "rules": "ルール",
+      "manage": "管理"
+    },
+    "alerts": {
+      "quotaWarning": "ユーザー {{userId}} のクォータがほぼ使い切られました。使用率は {{usage}}% に達しています。できるだけ早くクォータを調整することをお勧めします。",
+      "processNow": "今すぐ処理",
+      "interceptionInfo": "日次平均クォータインターセプト統計：本日 {{count}} 件のクォータ超過書き込みをインターセプトしました。"
+    },
+    "columns": {
+      "userId": "ユーザー ID",
+      "userName": "ユーザー名",
+      "quota": "クォータ",
+      "usedQuota": "使用済みクォータ",
+      "usagePercent": "使用率",
+      "interceptionCount": "インターセプト回数",
+      "actions": "操作"
+    },
+    "adjustQuota": "クォータ調整",
+    "operators": {
+      "equal": "等しい"
+    }
+  },
+  "privateDomain": {
+    "title": "プライベートドメイン",
+    "sections": {
+      "coreRules": "コアルール定義",
+      "accessFlow": "アクセス制御フロー",
+      "permissionMatrix": "権限操作マトリックス"
+    },
+    "rules": {
+      "autoBindUserId": {
+        "title": "ユーザー ID に自動バインド",
+        "description": "メモリーをユーザー ID に自動バインドし、正確な所有権マッピングを実現"
+      },
+      "crossDomainForbidden": {
+        "title": "クロスドメイン転送禁止",
+        "description": "ユーザー間転送不可。同一組織内でも厳格に禁止"
+      },
+      "accessibleOnlyToUser": {
+        "title": "ユーザー本人のみアクセス可能",
+        "description": "ACL 強制。ユーザーに一致するメモリーのみリコール可能。それ以外はすべてブロック"
+      },
+      "automaticPrivacyMasking": {
+        "title": "自動プライバシーマスキング",
+        "description": "書き込み時に自動脱敏。PII（ID / 銀行カード / 電話番号）を自動処理"
+      }
+    },
+    "flowSteps": {
+      "userRequest": {
+        "title": "ユーザーがリクエストを開始",
+        "description": "ユーザー ID とリクエスト内容を付与"
+      },
+      "permissionVerification": {
+        "title": "権限検証",
+        "description": "ユーザー ID とメモリーバインドを検証"
+      },
+      "desensitization": {
+        "title": "脱敏処理",
+        "description": "PII を自動的に脱敏"
+      },
+      "memoryRecall": {
+        "title": "メモリーリコール",
+        "description": "ユーザーのプライベートメモリーを返却"
+      }
+    },
+    "matrix": {
+      "columns": {
+        "operation": "操作",
+        "user": "ユーザー",
+        "administrator": "管理者",
+        "superAdministrator": "スーパー管理者"
+      },
+      "operations": {
+        "view": "閲覧",
+        "create": "作成",
+        "modify": "変更",
+        "delete": "削除",
+        "export": "エクスポート",
+        "transfer": "転送"
+      },
+      "status": {
+        "allowed": "許可",
+        "forbidden": "禁止",
+        "approvalRequired": "承認が必要"
+      }
+    }
+  },
+  "memoryLifecyclePolicy": {
+    "title": "メモリーライフサイクルポリシー",
+    "sections": {
+      "decayRate": "減衰率",
+      "archiveThreshold": "アーカイブ閾値",
+      "reflectionMergeStrategy": "リフレクションマージ戦略"
+    },
+    "decayCurveType": "減衰曲線タイプ",
+    "decayCurveTypeOptions": {
+      "ebbinghausStandard": "エビングハウス標準曲線"
+    },
+    "memoryHalfLife": "メモリー半減期",
+    "memoryHalfLifeHint": "メモリーが50%に減衰するまでの時間",
+    "dormantThreshold": "休眠閾値",
+    "dormantThresholdHint": "減衰スコアがこの値に達したとき休眠状態に移行",
+    "archiveTriggerCondition": "アーカイブトリガー条件",
+    "mergeTriggerCondition": "マージトリガー条件",
+    "mergeTriggerOptions": {
+      "sameTypeDormantGt30": "同タイプの休眠 > 30 でトリガー"
+    },
+    "offlineMergeSwitch": "オフラインマージスイッチ",
+    "mergeStrategy": "マージ戦略",
+    "mergeStrategyOptions": {
+      "semanticSimilarity": "意味的類似度マージ"
+    },
+    "units": {
+      "days": "日",
+      "hours": "時間",
+      "weeks": "週",
+      "daysOfInactivity": "日間非アクティブ"
+    },
+    "validationDecayCurveType": "減衰曲線タイプを選択してください",
+    "validationMemoryHalfLife": "メモリー半減期を入力してください",
+    "validationMemoryHalfLifeUnit": "時間単位を選択してください",
+    "validationDormantThreshold": "休眠閾値を設定してください",
+    "validationArchiveTriggerValue": "アーカイブトリガー値を入力してください",
+    "validationArchiveTriggerUnit": "アーカイブトリガー単位を選択してください",
+    "validationMergeTriggerCondition": "マージトリガー条件を選択してください",
+    "validationMergeStrategy": "マージ戦略を選択してください"
+  },
   "capabilitiesPage": {
     "newProvider": "+ 新規プロバイダー",
     "columns": {

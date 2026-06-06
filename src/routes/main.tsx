@@ -16,6 +16,10 @@ export const mainRoutes: RouteObject[] = [
     Component: lazy(() => import('@/pages/knowledges')),
   },
   {
+    path: '/memories',
+    Component: lazy(() => import('@/pages/memories')),
+  },
+  {
     path: '/capabilities',
     Component: lazy(() => import('@/pages/capabilities')),
   },
