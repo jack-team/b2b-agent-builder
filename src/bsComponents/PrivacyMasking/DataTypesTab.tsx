@@ -12,36 +12,50 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import {
+  getOperatorSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
 import { mockDataTypes } from './mock';
 import RiskLevelTag from './RiskLevelTag';
 import type { DataTypeRecord } from './types';
-import { useSearchField } from './useSearchField';
 import styles from './styles.module.less';
 
 const DataTypesTab: FC = () => {
   const { t } = useTranslation();
-  const renderSearchField = useSearchField();
+
+  const operatorOptions = useMemo(
+    () => [{ value: 'equal', label: t('privacyMasking.operators.equal') }],
+    [t],
+  );
+
+  const searchFieldProps = useMemo(
+    () =>
+      getOperatorSearchFieldProps({
+        placeholder: t('common.pleaseEnter'),
+        operatorOptions,
+        operatorClassName: styles.search_operator,
+      }),
+    [t, operatorOptions],
+  );
 
   const columns: ProColumns<DataTypeRecord>[] = useMemo(
     () => [
       {
         title: t('privacyMasking.dataTypes.columns.name'),
         dataIndex: 'name',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.dataTypes.columns.description'),
         dataIndex: 'description',
         ellipsis: true,
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.dataTypes.columns.category'),
         dataIndex: 'category',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) => (
           <Tag>{t(`privacyMasking.category.${record.category}`)}</Tag>
         ),
@@ -49,14 +63,14 @@ const DataTypesTab: FC = () => {
       {
         title: t('privacyMasking.dataTypes.columns.riskLevel'),
         dataIndex: 'riskLevel',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) => <RiskLevelTag level={record.riskLevel} />,
       },
       {
         title: t('privacyMasking.dataTypes.columns.regexPattern'),
         dataIndex: 'regexPattern',
         ellipsis: true,
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) => (
           <code className={styles.regex_pattern}>{record.regexPattern}</code>
         ),
@@ -64,7 +78,8 @@ const DataTypesTab: FC = () => {
       {
         title: t('privacyMasking.dataTypes.columns.status'),
         dataIndex: 'enabled',
-        renderFormItem: () => <Switch defaultChecked />,
+        valueType: 'switch',
+        initialValue: true,
         render: (_dom, record) => (
           <Switch checked={record.enabled} size="small" />
         ),
@@ -95,7 +110,7 @@ const DataTypesTab: FC = () => {
         ),
       },
     ],
-    [t, renderSearchField],
+    [t, searchFieldProps],
   );
 
   const renderEmptyView = (

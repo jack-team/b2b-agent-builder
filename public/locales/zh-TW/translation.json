@@ -650,6 +650,7 @@
     }
   },
   "orchestrationsPage": {
+    "newOrchestration": "新建編排",
     "operators": {
       "equal": "等於"
     },
@@ -663,6 +664,61 @@
     "actions": {
       "view": "查看",
       "transfer": "轉移"
+    }
+  },
+  "orchestrationFlowEditor": {
+    "defaultTitle": "編排編輯器",
+    "run": "執行",
+    "saveSuccess": "工作流儲存成功",
+    "runStarted": "工作流已開始執行",
+    "customVariables": "自訂變數",
+    "variable": "變數",
+    "type": "類型",
+    "addVariable": "新增變數",
+    "noProperties": "此節點暫無可設定屬性。",
+    "zoomIn": "放大",
+    "zoomOut": "縮小",
+    "fitView": "適應畫布",
+    "interactive": "互動模式",
+    "viewMode": {
+      "workflow": "工作流",
+      "chat": "對話"
+    },
+    "palette": {
+      "logics": "邏輯",
+      "agents": "智慧體",
+      "branch": "分支",
+      "loop": "迴圈",
+      "batch": "批次",
+      "shipping": "物流",
+      "product": "產品",
+      "price": "價格",
+      "order": "訂單",
+      "inventory": "庫存",
+      "newAgent": "新建智慧體"
+    },
+    "variableTypes": {
+      "string": "字串",
+      "number": "數字",
+      "boolean": "布林值",
+      "object": "物件"
+    }
+  },
+  "orchestrationBasicInfo": {
+    "title": "基本資訊",
+    "sectionTitle": "編排",
+    "sectionDescription": "在畫布上自訂和編排工作流，實現複雜業務邏輯，支援多種節點類型和條件分支，適用於自動化任務處理場景。",
+    "type": "類型",
+    "avatar": "編排頭像",
+    "constraint": "約束條件",
+    "addNewConstraint": "新增約束",
+    "validationName": "請輸入編排名稱",
+    "validationType": "請選擇編排類型",
+    "typeOptions": {
+      "internet_ecommerce": "網際網路 / 電子商務",
+      "manufacturing": "製造業",
+      "finance": "金融",
+      "healthcare": "醫療健康"
     }
   },
   "knowledgesPage": {

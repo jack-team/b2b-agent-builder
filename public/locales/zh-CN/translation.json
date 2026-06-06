@@ -650,6 +650,7 @@
     }
   },
   "orchestrationsPage": {
+    "newOrchestration": "新建编排",
     "operators": {
       "equal": "等于"
     },
@@ -663,6 +664,61 @@
     "actions": {
       "view": "查看",
       "transfer": "转移"
+    }
+  },
+  "orchestrationFlowEditor": {
+    "defaultTitle": "编排编辑器",
+    "run": "运行",
+    "saveSuccess": "工作流保存成功",
+    "runStarted": "工作流已开始运行",
+    "customVariables": "自定义变量",
+    "variable": "变量",
+    "type": "类型",
+    "addVariable": "添加新变量",
+    "noProperties": "该节点暂无可配置属性。",
+    "zoomIn": "放大",
+    "zoomOut": "缩小",
+    "fitView": "适应画布",
+    "interactive": "交互模式",
+    "viewMode": {
+      "workflow": "工作流",
+      "chat": "对话"
+    },
+    "palette": {
+      "logics": "逻辑",
+      "agents": "智能体",
+      "branch": "分支",
+      "loop": "循环",
+      "batch": "批处理",
+      "shipping": "物流",
+      "product": "产品",
+      "price": "价格",
+      "order": "订单",
+      "inventory": "库存",
+      "newAgent": "新建智能体"
+    },
+    "variableTypes": {
+      "string": "字符串",
+      "number": "数字",
+      "boolean": "布尔值",
+      "object": "对象"
+    }
+  },
+  "orchestrationBasicInfo": {
+    "title": "基本信息",
+    "sectionTitle": "编排",
+    "sectionDescription": "在画布上自定义和编排工作流，实现复杂业务逻辑，支持多种节点类型和条件分支，适用于自动化任务处理场景。",
+    "type": "类型",
+    "avatar": "编排头像",
+    "constraint": "约束条件",
+    "addNewConstraint": "添加新约束",
+    "validationName": "请输入编排名称",
+    "validationType": "请选择编排类型",
+    "typeOptions": {
+      "internet_ecommerce": "互联网 / 电子商务",
+      "manufacturing": "制造业",
+      "finance": "金融",
+      "healthcare": "医疗健康"
     }
   },
   "knowledgesPage": {

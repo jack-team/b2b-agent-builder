@@ -1,14 +1,14 @@
 import type { FC, ReactElement } from 'react';
 import { useMemo } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Empty, Input, Progress, Select, Space } from 'antd';
+import { Button, Empty, Progress } from 'antd';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
-import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
 import {
+  getOperatorSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
@@ -92,53 +92,42 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
     [t],
   );
 
-  const renderSearchField = useMemoizedFn((
-    _schema: unknown,
-    config: { value?: string; onChange?: (value: string) => void },
-  ) => (
-    <Space.Compact className={styles.search_compact}>
-      <Select
-        className={styles.search_operator}
-        defaultValue="equal"
-        options={operatorOptions}
-      />
-      <Input
-        value={config.value}
-        onChange={(event) => config.onChange?.(event.target.value)}
-        placeholder={t('common.pleaseEnter')}
-      />
-    </Space.Compact>
-  ));
+  const searchFieldProps = useMemo(
+    () =>
+      getOperatorSearchFieldProps({
+        placeholder: t('common.pleaseEnter'),
+        operatorOptions,
+        operatorClassName: styles.search_operator,
+      }),
+    [t, operatorOptions],
+  );
 
   const columns: ProColumns<UserQuotaRecord>[] = useMemo(
     () => [
       {
         title: t('permissionDomain.columns.userId'),
         dataIndex: 'userId',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
       {
         title: t('permissionDomain.columns.userName'),
         dataIndex: 'userName',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
       {
         title: t('permissionDomain.columns.quota'),
         dataIndex: 'quota',
         valueType: 'digit',
-        renderFormItem: renderSearchField,
       },
       {
         title: t('permissionDomain.columns.usedQuota'),
         dataIndex: 'usedQuota',
         valueType: 'digit',
-        renderFormItem: renderSearchField,
       },
       {
         title: t('permissionDomain.columns.usagePercent'),
         dataIndex: 'usagePercent',
         valueType: 'digit',
-        renderFormItem: renderSearchField,
         render: (_dom, record) => (
           <div className={styles.usage_cell}>
             <Progress
@@ -158,7 +147,6 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
         title: t('permissionDomain.columns.interceptionCount'),
         dataIndex: 'interceptionCount',
         valueType: 'digit',
-        renderFormItem: renderSearchField,
         render: (_dom, record) => (
           <span
             className={record.interceptionCount > 0 ? styles.interception_high : undefined}
@@ -179,7 +167,7 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
         ),
       },
     ],
-    [t, operatorOptions, renderSearchField],
+    [t, searchFieldProps],
   );
 
   const renderQuotaEmptyView = (

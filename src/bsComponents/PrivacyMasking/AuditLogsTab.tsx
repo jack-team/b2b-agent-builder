@@ -1,22 +1,37 @@
 import type { FC, ReactElement } from 'react';
 import { useMemo } from 'react';
-import { Button, DatePicker, Empty, Tag } from 'antd';
+import { Button, Empty, Tag } from 'antd';
 import { ExportOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import {
+  getOperatorSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
 import { mockAuditLogs } from './mock';
 import type { AuditLogRecord } from './types';
-import { useSearchField } from './useSearchField';
+import styles from './styles.module.less';
 
 const AuditLogsTab: FC = () => {
   const { t } = useTranslation();
-  const renderSearchField = useSearchField();
+
+  const operatorOptions = useMemo(
+    () => [{ value: 'equal', label: t('privacyMasking.operators.equal') }],
+    [t],
+  );
+
+  const searchFieldProps = useMemo(
+    () =>
+      getOperatorSearchFieldProps({
+        placeholder: t('common.pleaseEnter'),
+        operatorOptions,
+        operatorClassName: styles.search_operator,
+      }),
+    [t, operatorOptions],
+  );
 
   const columns: ProColumns<AuditLogRecord>[] = useMemo(
     () => [
@@ -24,12 +39,15 @@ const AuditLogsTab: FC = () => {
         title: t('privacyMasking.auditLogs.columns.time'),
         dataIndex: 'time',
         valueType: 'dateTime',
-        renderFormItem: () => <DatePicker showTime className="w-full" />,
+        fieldProps: {
+          showTime: true,
+          className: 'w-full',
+        },
       },
       {
         title: t('privacyMasking.auditLogs.columns.operationType'),
         dataIndex: 'operationType',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) => (
           <Tag>{t(`privacyMasking.operationType.${record.operationType}`)}</Tag>
         ),
@@ -37,22 +55,22 @@ const AuditLogsTab: FC = () => {
       {
         title: t('privacyMasking.auditLogs.columns.operator'),
         dataIndex: 'operator',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) => <Tag>{record.operator}</Tag>,
       },
       {
         title: t('privacyMasking.auditLogs.columns.targetRule'),
         dataIndex: 'targetRule',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.auditLogs.columns.details'),
         dataIndex: 'details',
         ellipsis: true,
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
     ],
-    [t, renderSearchField],
+    [t, searchFieldProps],
   );
 
   const renderEmptyView = (

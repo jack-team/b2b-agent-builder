@@ -650,6 +650,7 @@
     }
   },
   "orchestrationsPage": {
+    "newOrchestration": "New Orchestration",
     "operators": {
       "equal": "Equal"
     },
@@ -663,6 +664,61 @@
     "actions": {
       "view": "View",
       "transfer": "Transfer"
+    }
+  },
+  "orchestrationFlowEditor": {
+    "defaultTitle": "Orchestration Editor",
+    "run": "Run",
+    "saveSuccess": "Workflow saved successfully",
+    "runStarted": "Workflow run started",
+    "customVariables": "Custom Variables",
+    "variable": "Variable",
+    "type": "Type",
+    "addVariable": "Add new variable",
+    "noProperties": "No configurable properties for this node yet.",
+    "zoomIn": "Zoom in",
+    "zoomOut": "Zoom out",
+    "fitView": "Fit view",
+    "interactive": "Interactive mode",
+    "viewMode": {
+      "workflow": "Workflow",
+      "chat": "Chat"
+    },
+    "palette": {
+      "logics": "Logics",
+      "agents": "Agents",
+      "branch": "Branch",
+      "loop": "Loop",
+      "batch": "Batch",
+      "shipping": "Shipping",
+      "product": "Product",
+      "price": "Price",
+      "order": "Order",
+      "inventory": "Inventory",
+      "newAgent": "New Agent"
+    },
+    "variableTypes": {
+      "string": "String",
+      "number": "Number",
+      "boolean": "Boolean",
+      "object": "Object"
+    }
+  },
+  "orchestrationBasicInfo": {
+    "title": "Basic Information",
+    "sectionTitle": "Orchestration",
+    "sectionDescription": "Customize and orchestrate workflows on a canvas to implement complex business logic, supporting multiple node types and conditional branches, ideal for automated task processing scenarios.",
+    "type": "Type",
+    "avatar": "Orchestration Avatar",
+    "constraint": "Constraint",
+    "addNewConstraint": "Add new constraint",
+    "validationName": "Please enter orchestration name",
+    "validationType": "Please select orchestration type",
+    "typeOptions": {
+      "internet_ecommerce": "Internet / E-commerce",
+      "manufacturing": "Manufacturing",
+      "finance": "Finance",
+      "healthcare": "Healthcare"
     }
   },
   "knowledgesPage": {

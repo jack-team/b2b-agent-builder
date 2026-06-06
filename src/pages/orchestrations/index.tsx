@@ -7,18 +7,21 @@ import {
   EyeOutlined,
   SwapOutlined,
 } from '@ant-design/icons';
-import { Button, DatePicker, Space, Tooltip } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
+import Drawer from '@/components/Drawer';
+import OrchestrationBasicInfo from '@/bsComponents/OrchestrationBasicInfo';
+import OrchestrationFlowEditor from '@/bsComponents/OrchestrationFlowEditor';
 import {
+  getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
   renderProTableEmptyView,
 } from '@/utils/proTable';
 import type { OrchestrationRecord } from './types';
-import { useSearchField } from './useSearchField';
 
 const mockData: OrchestrationRecord[] = [
   {
@@ -37,7 +40,7 @@ const mockData: OrchestrationRecord[] = [
   },
   {
     key: '3',
-    name: 'Shipping Process',
+    name: 'Harmonization',
     description: 'The workflow from order picking and packing through carrier handoff, tracking, and delivery confirmation.',
     updatedAt: '2026-04-01T09:11:19',
     status: 'disabled',
@@ -49,7 +52,11 @@ const formatUpdatedAt = (value: string) =>
 
 const Orchestrations: FC = () => {
   const { t } = useTranslation();
-  const renderSearchField = useSearchField();
+
+  const textSearchFieldProps = useMemo(
+    () => getTextSearchFieldProps(t('common.pleaseEnter')),
+    [t],
+  );
 
   const statusValueEnum = useMemo(
     () => ({
@@ -64,19 +71,22 @@ const Orchestrations: FC = () => {
       {
         title: t('orchestrationsPage.columns.name'),
         dataIndex: 'name',
-        renderFormItem: renderSearchField,
+        fieldProps: textSearchFieldProps,
       },
       {
         title: t('orchestrationsPage.columns.description'),
         dataIndex: 'description',
         ellipsis: true,
-        renderFormItem: renderSearchField,
+        fieldProps: textSearchFieldProps,
       },
       {
         title: t('orchestrationsPage.columns.updatedAt'),
         dataIndex: 'updatedAt',
         valueType: 'dateTime',
-        renderFormItem: () => <DatePicker showTime className="w-full" />,
+        fieldProps: {
+          showTime: true,
+          className: 'w-full',
+        },
         render: (_dom, record) => formatUpdatedAt(record.updatedAt),
       },
       {
@@ -95,17 +105,31 @@ const Orchestrations: FC = () => {
         dataIndex: 'actions',
         hideInSearch: true,
         width: 180,
-        render: () => (
+        render: (_dom, record) => (
           <Space size={12}>
             <Tooltip title={t('orchestrationsPage.actions.view')}>
-              <Button size="small" color="default" variant="filled">
-                <EyeOutlined />
-              </Button>
+              <Drawer
+                size="large"
+                trigger={(
+                  <Button size="small" color="default" variant="filled">
+                    <EyeOutlined />
+                  </Button>
+                )}
+              >
+                <OrchestrationFlowEditor record={record} />
+              </Drawer>
             </Tooltip>
             <Tooltip title={t('common.edit')}>
-              <Button size="small" color="default" variant="filled">
-                <EditOutlined />
-              </Button>
+              <Drawer
+                size="medium"
+                trigger={(
+                  <Button size="small" color="default" variant="filled">
+                    <EditOutlined />
+                  </Button>
+                )}
+              >
+                <OrchestrationBasicInfo record={record} />
+              </Drawer>
             </Tooltip>
             <Tooltip title={t('orchestrationsPage.actions.transfer')}>
               <Button size="small" color="default" variant="filled">
@@ -121,11 +145,27 @@ const Orchestrations: FC = () => {
         ),
       },
     ],
-    [t, renderSearchField, statusValueEnum],
+    [t, textSearchFieldProps, statusValueEnum],
+  );
+
+  const renderNewOrchestrationButton = () => (
+    <Drawer
+      size="medium"
+      trigger={(
+        <Button type="primary">
+          {t('orchestrationsPage.newOrchestration')}
+        </Button>
+      )}
+    >
+      <OrchestrationBasicInfo />
+    </Drawer>
   );
 
   return (
-    <PageContainer title={t('menu.orchestrations')}>
+    <PageContainer
+      title={t('menu.orchestrations')}
+      extra={renderNewOrchestrationButton()}
+    >
       <ProTable<OrchestrationRecord>
         columns={columns}
         dataSource={mockData}

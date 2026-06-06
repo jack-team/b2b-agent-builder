@@ -14,13 +14,14 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import {
+  getOperatorSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
 import { mockMaskingRules } from './mock';
 import RiskLevelTag from './RiskLevelTag';
 import type { DetectionMethod, MaskingRuleRecord } from './types';
-import { useSearchField } from './useSearchField';
+import styles from './styles.module.less';
 
 const detectionMethodColorMap: Record<DetectionMethod, string> = {
   regex: 'blue',
@@ -31,24 +32,38 @@ const detectionMethodColorMap: Record<DetectionMethod, string> = {
 
 const RulesTab: FC = () => {
   const { t } = useTranslation();
-  const renderSearchField = useSearchField();
+
+  const operatorOptions = useMemo(
+    () => [{ value: 'equal', label: t('privacyMasking.operators.equal') }],
+    [t],
+  );
+
+  const searchFieldProps = useMemo(
+    () =>
+      getOperatorSearchFieldProps({
+        placeholder: t('common.pleaseEnter'),
+        operatorOptions,
+        operatorClassName: styles.search_operator,
+      }),
+    [t, operatorOptions],
+  );
 
   const columns: ProColumns<MaskingRuleRecord>[] = useMemo(
     () => [
       {
         title: t('privacyMasking.rules.columns.name'),
         dataIndex: 'name',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.rules.columns.dataType'),
         dataIndex: 'dataType',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.rules.columns.detectionMethod'),
         dataIndex: 'detectionMethods',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) => (
           <Space size={4} wrap>
             {record.detectionMethods.map((method) => (
@@ -63,20 +78,21 @@ const RulesTab: FC = () => {
         title: t('privacyMasking.rules.columns.handlingStrategy'),
         dataIndex: 'handlingStrategy',
         ellipsis: true,
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) =>
           t(`privacyMasking.handlingStrategy.${record.handlingStrategy}`),
       },
       {
         title: t('privacyMasking.rules.columns.riskLevel'),
         dataIndex: 'riskLevel',
-        renderFormItem: renderSearchField,
+        fieldProps: searchFieldProps,
         render: (_dom, record) => <RiskLevelTag level={record.riskLevel} />,
       },
       {
         title: t('privacyMasking.rules.columns.status'),
         dataIndex: 'enabled',
-        renderFormItem: () => <Switch defaultChecked />,
+        valueType: 'switch',
+        initialValue: true,
         render: (_dom, record) => (
           <Switch checked={record.enabled} size="small" />
         ),
@@ -107,7 +123,7 @@ const RulesTab: FC = () => {
         ),
       },
     ],
-    [t, renderSearchField],
+    [t, searchFieldProps],
   );
 
   const renderEmptyView = (

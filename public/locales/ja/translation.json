@@ -650,6 +650,7 @@
     }
   },
   "orchestrationsPage": {
+    "newOrchestration": "新規オーケストレーション",
     "operators": {
       "equal": "等しい"
     },
@@ -663,6 +664,61 @@
     "actions": {
       "view": "表示",
       "transfer": "転送"
+    }
+  },
+  "orchestrationFlowEditor": {
+    "defaultTitle": "オーケストレーションエディター",
+    "run": "実行",
+    "saveSuccess": "ワークフローを保存しました",
+    "runStarted": "ワークフローの実行を開始しました",
+    "customVariables": "カスタム変数",
+    "variable": "変数",
+    "type": "タイプ",
+    "addVariable": "変数を追加",
+    "noProperties": "このノードには設定可能なプロパティがありません。",
+    "zoomIn": "拡大",
+    "zoomOut": "縮小",
+    "fitView": "画面に合わせる",
+    "interactive": "インタラクティブモード",
+    "viewMode": {
+      "workflow": "ワークフロー",
+      "chat": "チャット"
+    },
+    "palette": {
+      "logics": "ロジック",
+      "agents": "エージェント",
+      "branch": "分岐",
+      "loop": "ループ",
+      "batch": "バッチ",
+      "shipping": "配送",
+      "product": "商品",
+      "price": "価格",
+      "order": "注文",
+      "inventory": "在庫",
+      "newAgent": "新規エージェント"
+    },
+    "variableTypes": {
+      "string": "文字列",
+      "number": "数値",
+      "boolean": "真偽値",
+      "object": "オブジェクト"
+    }
+  },
+  "orchestrationBasicInfo": {
+    "title": "基本情報",
+    "sectionTitle": "オーケストレーション",
+    "sectionDescription": "キャンバス上でワークフローをカスタマイズ・編成し、複雑なビジネスロジックを実装します。複数のノードタイプと条件分岐をサポートし、自動化タスク処理シナリオに最適です。",
+    "type": "タイプ",
+    "avatar": "オーケストレーションアバター",
+    "constraint": "制約",
+    "addNewConstraint": "新しい制約を追加",
+    "validationName": "オーケストレーション名を入力してください",
+    "validationType": "オーケストレーションタイプを選択してください",
+    "typeOptions": {
+      "internet_ecommerce": "インターネット / Eコマース",
+      "manufacturing": "製造業",
+      "finance": "金融",
+      "healthcare": "ヘルスケア"
     }
   },
   "knowledgesPage": {
