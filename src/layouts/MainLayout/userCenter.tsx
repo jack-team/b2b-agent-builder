@@ -52,6 +52,7 @@ const UserCenter: FC = () => {
           </div>
         )}
         menu={{
+          inlineCollapsed: false,
           items: [
             {
               key: 'profile',

@@ -62,31 +62,6 @@
   }
 }
 
-.collapsed {
-  .band {
-    gap: 0;
-    justify-content: center;
-
-    .band_title {
-      display: none;
-    }
-  }
-
-  .menu {
-    :global {
-      .ant-menu-item-group {
-        .ant-menu-item-group-title {
-          display: none;
-        }
-
-        &+.ant-menu-item-group {
-          margin-top: 0;
-        }
-      }
-    }
-  }
-}
-
 .userCenter {
   padding: var(--space2) var(--space3);
   border-top: 1px solid var(--border-color-primary);
@@ -137,5 +112,42 @@
 
   &:active {
     background: var(--bg-color-secondary);
+  }
+}
+
+
+.collapsed {
+  .band {
+    gap: 0;
+    justify-content: center;
+
+    .band_title {
+      display: none;
+    }
+  }
+
+  .menu {
+    :global {
+      .ant-menu-item-group {
+        .ant-menu-item-group-title {
+          display: none;
+        }
+
+        &+.ant-menu-item-group {
+          margin-top: 0;
+        }
+      }
+    }
+  }
+
+  .userCenter {
+    .userProfile {
+      gap: 0;
+      justify-content: center;
+    }
+
+    .userInfo {
+      display: none;
+    }
   }
 }
