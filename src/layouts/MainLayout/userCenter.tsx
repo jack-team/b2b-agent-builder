@@ -1,20 +1,14 @@
-import { type FC, cloneElement, type CSSProperties } from 'react';
-import { Avatar, Dropdown, theme } from 'antd';
+import { type FC } from 'react';
+import { Avatar } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { UserOutlined } from '@ant-design/icons';
-import { IconPermission, IconMerchant } from '@/components/BaseIcons';
-
+import Dropdown from '@/components/Dropdown';
 import { useUserStore } from '@/store/user';
+import { UserOutlined, IconPermission, IconMerchant } from '@/components/BaseIcons';
 import styles from './styles.module.less';
-
-type MenuElement = React.ReactElement<{
-  style: React.CSSProperties;
-}>;
 
 const UserCenter: FC = () => {
   const { t } = useTranslation();
-  const { token } = theme.useToken();
   const navigate = useNavigate();
   const logout = useUserStore(s => s.logout)
 
@@ -28,29 +22,11 @@ const UserCenter: FC = () => {
     );
   }
 
-  const menuStyle: CSSProperties = {
-    minWidth: 200,
-    boxShadow: 'none',
-    borderRadius: 0
-  }
-
-  const popupStyle: CSSProperties = {
-    overflow: 'hidden',
-    borderRadius: token.borderRadiusLG,
-    boxShadow: token.boxShadowSecondary,
-    backgroundColor: token.colorBgElevated
-  }
-
   return (
     <div className={styles.userCenter}>
       <Dropdown
         trigger={['click']}
         openClassName={styles.openDropdown}
-        popupRender={(menu) => (
-          <div style={popupStyle}>
-            {cloneElement(menu as MenuElement, { style: menuStyle })}
-          </div>
-        )}
         menu={{
           inlineCollapsed: false,
           items: [

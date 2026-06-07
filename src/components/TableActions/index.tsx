@@ -1,6 +1,6 @@
 import { type FC, type PropsWithChildren, type ReactElement } from 'react';
 import { Space, Button, Tooltip } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined } from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 
 type TableActionsProps = {

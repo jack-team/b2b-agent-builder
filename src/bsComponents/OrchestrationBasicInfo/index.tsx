@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import {
   ArrowRightOutlined,
   PlusOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Col, Row } from 'antd';
 import {
   ProCard,

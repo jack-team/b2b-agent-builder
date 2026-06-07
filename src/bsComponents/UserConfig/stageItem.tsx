@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import cls from 'classnames';
 import type { FormListOperation } from 'antd';
-import { CloseCircleOutlined } from '@ant-design/icons';
+import { CloseCircleOutlined } from '@/components/BaseIcons';
 import { ProForm, ProFormList, ProFormText } from '@ant-design/pro-components';
 import { useTranslation } from 'react-i18next';
 import RangeGroup from './rangeGroup';

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import cls from 'classnames';
 import { Input, Empty } from 'antd';
-import { TableOutlined, SearchOutlined } from '@ant-design/icons';
+import { TableOutlined, SearchOutlined } from '@/components/BaseIcons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useSafeState } from 'ahooks';

@@ -9,7 +9,7 @@ import {
   LockOutlined,
   MinusCircleOutlined,
   UserOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Col, Row, Table } from 'antd';
 import type { ColumnsType } from 'antd/es/table';
 import { ProCard } from '@ant-design/pro-components';

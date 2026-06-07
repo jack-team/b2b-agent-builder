@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { Button, Space, Row, Col } from 'antd';
-import { UndoOutlined, SaveOutlined } from '@ant-design/icons';
+import { UndoOutlined, SaveOutlined } from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 import {
   ProForm,

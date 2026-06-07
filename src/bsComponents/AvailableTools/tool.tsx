@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import cls from 'classnames';
-import { ToolFilled } from '@ant-design/icons';
+import { ToolFilled } from '@/components/BaseIcons';
 
 type ToolProps = {
   title: string;

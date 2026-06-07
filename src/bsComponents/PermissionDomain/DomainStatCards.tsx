@@ -6,7 +6,7 @@ import {
   SettingOutlined,
   TeamOutlined,
   UserOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Col, Row } from 'antd';
 import { useTranslation } from 'react-i18next';
 

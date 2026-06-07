@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { lazy, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { RobotOutlined } from '@ant-design/icons';
+import { RobotOutlined } from '@/components/BaseIcons';
 import { Button, Space, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';

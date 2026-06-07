@@ -5,7 +5,7 @@ import {
   EyeInvisibleOutlined,
   MergeCellsOutlined,
   UserSwitchOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 

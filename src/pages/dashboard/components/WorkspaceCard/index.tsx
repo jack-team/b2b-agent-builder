@@ -6,7 +6,7 @@ import {
   EyeOutlined,
   ApartmentOutlined,
   LinkOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 import type { WorkspaceItem, WorkspaceItemStatus } from '../../types';
 import styles from './styles.module.less';

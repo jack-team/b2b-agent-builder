@@ -3,6 +3,7 @@ import type { BaseIconNameType } from '@/components/BaseIcons';
 export type MenuItem = {
   path?: string;
   title: string;
+  disabled?: boolean;
   icon?: BaseIconNameType;
   children?: MenuItem[];
 }

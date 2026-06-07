@@ -5,7 +5,7 @@ import {
   LockOutlined,
   ZoomInOutlined,
   ZoomOutOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Segmented, Tooltip } from 'antd';
 import { useReactFlow, useStore } from '@xyflow/react';
 import { useTranslation } from 'react-i18next';

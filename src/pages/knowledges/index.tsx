@@ -9,8 +9,7 @@ import Drawer from '@/components/Drawer';
 import LazyDrawerContent from '@/components/LazyDrawerContent';
 import KnowledgeFilterForm from './components/KnowledgeFilterForm';
 import GraphVisualization from './components/GraphVisualization';
-import { IconImport } from '@/components/BaseIcons';
-import { IconTable } from '@/components/BaseIcons';
+import { IconImport, IconTable } from '@/components/BaseIcons';
 import DataGrid from './components/DataGrid';
 
 const KnowledgeSources = lazy(() => import('@/bsComponents/KnowledgeSources'));

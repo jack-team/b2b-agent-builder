@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
-import { EditOutlined } from '@ant-design/icons';
+import { EditOutlined } from '@/components/BaseIcons';
 import { Button, Progress } from 'antd';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';

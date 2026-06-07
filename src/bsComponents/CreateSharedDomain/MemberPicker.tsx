@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useMemo, useState } from 'react';
-import { CloseOutlined, SearchOutlined } from '@ant-design/icons';
+import { CloseOutlined, SearchOutlined } from '@/components/BaseIcons';
 import { Avatar, Checkbox, Input, Tag } from 'antd';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';

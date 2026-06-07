@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { Button } from 'antd';
 import { useSafeState, useUpdateEffect } from 'ahooks';
 import { ProCard, ProForm, ProFormText, ProFormTextArea, ProFormCheckbox } from '@ant-design/pro-components';
-import { SaveOutlined, SearchOutlined } from '@ant-design/icons';
+import { SaveOutlined, SearchOutlined } from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import ToolItem from './tool';

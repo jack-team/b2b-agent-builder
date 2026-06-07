@@ -7,7 +7,7 @@ import {
   ExclamationCircleFilled,
   CloseCircleFilled,
   BulbOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 import { recentActivities } from '../../mockData';
 import type { ActivityIconType } from '../../types';

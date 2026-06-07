@@ -1,6 +1,6 @@
 import { type FC, useMemo } from 'react';
 import classNames from 'classnames';
-import Icon from '@ant-design/icons';
+import { Icon } from '@/components/BaseIcons';
 import { InfinitySpin, RotatingLines } from 'react-loader-spinner';
 import type { SpinnerProps } from './types';
 import SpinnerSvg from './spinner.svg?react';

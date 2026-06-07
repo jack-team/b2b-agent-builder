@@ -31,7 +31,6 @@ export const useMenu = () => {
 
 /**
  * 用于获取当前选中的菜单项的面包屑
- * @returns {MenuItem[]} 面包屑列表
  */
 export const useBreadcrumb = () => {
   const { t } = useTranslation();
@@ -53,6 +52,7 @@ export const useBreadcrumb = () => {
         items.push({
           ...menu,
           path: '/',
+          disabled: true,
           title: t(menu.title),
         }, ..._items);
       }

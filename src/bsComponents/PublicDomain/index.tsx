@@ -6,7 +6,7 @@ import {
   CrownOutlined,
   GlobalOutlined,
   SendOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Col, Row, Space } from 'antd';
 import { ProCard } from '@ant-design/pro-components';
 import { useTranslation } from 'react-i18next';

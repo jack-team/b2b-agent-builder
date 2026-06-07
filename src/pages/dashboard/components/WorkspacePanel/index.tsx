@@ -8,7 +8,7 @@ import {
   SortAscendingOutlined,
   PlusOutlined,
   SearchOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 import { workspaceItems } from '../../mockData';
 import type { WorkspaceItemType } from '../../types';

@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 import { Button, Row, Col, Space, Input } from 'antd';
-import { SaveOutlined } from '@ant-design/icons';
+import { SaveOutlined } from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import KnowledgeTypeSelect from '../KnowledgeTypeSelect';

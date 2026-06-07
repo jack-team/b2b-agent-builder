@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useState } from 'react';
 import { Button, Tag } from 'antd';
-import { CheckOutlined, PlusOutlined } from '@ant-design/icons';
+import { CheckOutlined, PlusOutlined } from '@/components/BaseIcons';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 import type { UserRole } from '@/bsComponents/UserConfig/types';

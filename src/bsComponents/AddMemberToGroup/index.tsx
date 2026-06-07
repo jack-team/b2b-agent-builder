@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
-import { ArrowDownOutlined, DeleteOutlined, PlusOutlined, SaveOutlined } from '@ant-design/icons';
+import { ArrowDownOutlined, DeleteOutlined, PlusOutlined, SaveOutlined } from '@/components/BaseIcons';
 import { Button, Popconfirm } from 'antd';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';

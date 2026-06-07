@@ -12,7 +12,7 @@ import {
   RetweetOutlined,
   RobotOutlined,
   StopOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Dropdown } from 'antd';
 import type { NodeProps } from '@xyflow/react';
 import { Handle, Position } from '@xyflow/react';

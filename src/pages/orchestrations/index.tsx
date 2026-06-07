@@ -6,7 +6,7 @@ import {
   EditOutlined,
   EyeOutlined,
   SwapOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Space, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';

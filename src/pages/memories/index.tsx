@@ -7,7 +7,7 @@ import {
   EditOutlined,
   HistoryOutlined,
   PushpinOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Progress, Space, Tag, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';

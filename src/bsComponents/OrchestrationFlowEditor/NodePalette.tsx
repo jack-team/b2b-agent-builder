@@ -11,7 +11,7 @@ import {
   RetweetOutlined,
   RobotOutlined,
   SearchOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Input, Typography } from 'antd';
 import cls from 'classnames';
 import { useTranslation } from 'react-i18next';

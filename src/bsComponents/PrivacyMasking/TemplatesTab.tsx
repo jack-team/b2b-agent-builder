@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { Button, Space, Tag } from 'antd';
-import { EyeOutlined, PlusOutlined } from '@ant-design/icons';
+import { EyeOutlined, PlusOutlined } from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 
 import { mockMaskingTemplates } from './mock';

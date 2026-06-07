@@ -1,7 +1,7 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { Button, Tag } from 'antd';
-import { ExportOutlined } from '@ant-design/icons';
+import { ExportOutlined } from '@/components/BaseIcons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';

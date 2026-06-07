@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { DeleteOutlined, PlusOutlined } from '@ant-design/icons';
+import { DeleteOutlined, PlusOutlined } from '@/components/BaseIcons';
 import { Avatar, Button, Popconfirm } from 'antd';
 import { useTranslation } from 'react-i18next';
 

@@ -2,7 +2,7 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
 import { Button, Row, Col } from 'antd';
-import { MailOutlined } from '@ant-design/icons';
+import { MailOutlined } from '@/components/BaseIcons';
 import styles from './styles.module.less';
 
 const RegisterForm: FC = () => {

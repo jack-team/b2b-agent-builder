@@ -7,7 +7,7 @@ import {
   ShareAltOutlined,
   StopOutlined,
   TeamOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Col, Row } from 'antd';
 import { ProCard } from '@ant-design/pro-components';
 import { useTranslation } from 'react-i18next';

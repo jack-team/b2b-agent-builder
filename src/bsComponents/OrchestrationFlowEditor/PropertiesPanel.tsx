@@ -9,7 +9,7 @@ import {
   DeleteOutlined,
   PlaySquareOutlined,
   PlusOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { Button, Input, Select, Typography } from 'antd';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';

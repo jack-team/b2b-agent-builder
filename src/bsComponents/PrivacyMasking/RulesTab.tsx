@@ -8,7 +8,7 @@ import {
   ExportOutlined,
   ImportOutlined,
   PlusOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';

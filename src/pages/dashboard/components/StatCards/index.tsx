@@ -6,7 +6,7 @@ import {
   BulbOutlined,
   SettingOutlined,
   BarChartOutlined,
-} from '@ant-design/icons';
+} from '@/components/BaseIcons';
 import { useTranslation } from 'react-i18next';
 import { statCards } from '../../mockData';
 import type { StatCardIconType } from '../../types';

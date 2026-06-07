@@ -4,7 +4,7 @@
  */
 import type { FC, MouseEvent } from 'react';
 import { memo, useCallback } from 'react';
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@/components/BaseIcons';
 import { Handle, Position, useNodeId } from '@xyflow/react';
 
 import { useFlowCanvasContext } from '../context';

@@ -11,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { DrawerContainer } from '@/components/Drawer';
 import { useDrawerClose } from '@/components/Drawer';
-import { CaretRightOutlined, SaveOutlined } from '@ant-design/icons';
+import { CaretRightOutlined, SaveOutlined } from '@/components/BaseIcons';
 import { Button, Space } from 'antd';
 import FlowCanvas from './FlowCanvas';
 import { initialEdges, initialNodes } from './constants';
