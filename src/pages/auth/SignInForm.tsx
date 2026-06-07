@@ -5,8 +5,7 @@ import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
 import { useUserStore } from '@/store/user';
-import EmailIcon from '@/assets/svg-icons/page/auth/email.svg?react';
-import PasswordIcon from '@/assets/svg-icons/page/auth/lock.svg?react';
+import { IconEmail, IconLock } from '@/components/BaseIcons';
 import styles from './styles.module.less';
 
 const SignInForm: FC = () => {
@@ -32,7 +31,7 @@ const SignInForm: FC = () => {
         allowClear={true}
         rules={[{ required: true }]}
         formItemProps={{ className: 'no-card' }}
-        fieldProps={{ prefix: <EmailIcon /> }}
+        fieldProps={{ prefix: <IconEmail /> }}
       />
       <ProFormText.Password
         name="password"
@@ -41,7 +40,7 @@ const SignInForm: FC = () => {
         required={false}
         rules={[{ required: true }]}
         formItemProps={{ className: 'no-card' }}
-        fieldProps={{ prefix: <PasswordIcon /> }}
+        fieldProps={{ prefix: <IconLock /> }}
       />
       <ProForm.Item className="no-card">
         <div className="flex items-center justify-between">

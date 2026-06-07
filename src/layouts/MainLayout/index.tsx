@@ -8,8 +8,8 @@ import MainMenu from './menu';
 
 const MainLayout: FC = () => {
   const renderLoading = () => (
-    <div className="h-full flex items-center justify-center text-[48px] text-[var(--color-primary)]">
-      <Spinner />
+    <div className="h-full flex items-center justify-center text-[150px] text-[var(--color-primary)]">
+      <Spinner type="infinity-spin" />
     </div>
   );
 
