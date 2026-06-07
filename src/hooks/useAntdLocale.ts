@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
+import en_US from 'antd/es/locale/en_US';
 import { useTranslation } from 'react-i18next';
-import zhCN from 'antd/es/locale/zh_CN';
 import type { Locale } from 'antd/es/locale';
 
 type AntdLocaleLoader = () => Promise<{ default: Locale }>;
 
 const antdLocaleLoaders: Record<string, AntdLocaleLoader> = {
+  'en': () => import('antd/es/locale/en_US'),
+  'ja': () => import('antd/es/locale/ja_JP'),
   'zh-CN': () => import('antd/es/locale/zh_CN'),
-  'zh-TW': () => import('antd/es/locale/zh_TW'),
-  en: () => import('antd/es/locale/en_US'),
-  ja: () => import('antd/es/locale/ja_JP'),
+  'zh-TW': () => import('antd/es/locale/zh_TW')
 };
 
 const resolveAntdLocaleKey = (language: string) => {
@@ -18,16 +18,17 @@ const resolveAntdLocaleKey = (language: string) => {
   }
 
   const baseLanguage = language.split('-')[0];
+  
   if (antdLocaleLoaders[baseLanguage]) {
     return baseLanguage;
   }
 
-  return 'zh-CN';
+  return 'en-US';
 };
 
 export const useAntdLocale = () => {
   const { i18n } = useTranslation();
-  const [locale, setLocale] = useState<Locale>(zhCN);
+  const [locale, setLocale] = useState<Locale>(en_US);
 
   useEffect(() => {
     const localeKey = resolveAntdLocaleKey(i18n.language);
@@ -41,7 +42,7 @@ export const useAntdLocale = () => {
       })
       .catch(() => {
         if (!cancelled) {
-          setLocale(zhCN);
+          setLocale(en_US);
         }
       });
 
