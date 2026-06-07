@@ -1,31 +1,10 @@
 import type { ReactElement, ReactNode } from 'react';
-import { Empty, Select } from 'antd';
+import { Empty } from 'antd';
 import type { InputProps, TableProps } from 'antd';
 import i18n from '@/i18n';
 
-type OperatorOption = { value: string; label: string };
-
 export const getTextSearchFieldProps = (placeholder: string): InputProps => ({
   placeholder,
-});
-
-export const getOperatorSearchFieldProps = ({
-  placeholder,
-  operatorOptions,
-  operatorClassName,
-}: {
-  placeholder: string;
-  operatorOptions: OperatorOption[];
-  operatorClassName?: string;
-}): InputProps => ({
-  placeholder,
-  addonBefore: (
-    <Select
-      defaultValue={operatorOptions[0]?.value}
-      options={operatorOptions}
-      className={operatorClassName}
-    />
-  ),
 });
 
 type TableViewRenderProps = Pick<TableProps, 'dataSource'>;

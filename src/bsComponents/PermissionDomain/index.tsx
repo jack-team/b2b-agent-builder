@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import {
   createProTableEmptyViewRenderer,
-  getOperatorSearchFieldProps,
+  getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
@@ -88,19 +88,9 @@ const getUsageStrokeColor = (value: number) => {
 const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
-  const operatorOptions = useMemo(
-    () => [{ value: 'equal', label: t('permissionDomain.operators.equal') }],
-    [t],
-  );
-
   const searchFieldProps = useMemo(
-    () =>
-      getOperatorSearchFieldProps({
-        placeholder: t('common.pleaseEnter'),
-        operatorOptions,
-        operatorClassName: styles.search_operator,
-      }),
-    [t, operatorOptions],
+    () => getTextSearchFieldProps(t('common.pleaseEnter')),
+    [t],
   );
 
   const columns: ProColumns<UserQuotaRecord>[] = useMemo(

@@ -15,14 +15,13 @@ import { useTranslation } from 'react-i18next';
 
 import {
   createProTableEmptyViewRenderer,
-  getOperatorSearchFieldProps,
+  getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
 import { mockMaskingRules } from './mock';
 import RiskLevelTag from './RiskLevelTag';
 import type { DetectionMethod, MaskingRuleRecord } from './types';
-import styles from './styles.module.less';
 
 const detectionMethodColorMap: Record<DetectionMethod, string> = {
   regex: 'blue',
@@ -34,19 +33,9 @@ const detectionMethodColorMap: Record<DetectionMethod, string> = {
 const RulesTab: FC = () => {
   const { t } = useTranslation();
 
-  const operatorOptions = useMemo(
-    () => [{ value: 'equal', label: t('privacyMasking.operators.equal') }],
-    [t],
-  );
-
   const searchFieldProps = useMemo(
-    () =>
-      getOperatorSearchFieldProps({
-        placeholder: t('common.pleaseEnter'),
-        operatorOptions,
-        operatorClassName: styles.search_operator,
-      }),
-    [t, operatorOptions],
+    () => getTextSearchFieldProps(t('common.pleaseEnter')),
+    [t],
   );
 
   const columns: ProColumns<MaskingRuleRecord>[] = useMemo(
