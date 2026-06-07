@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { Avatar } from 'antd';
 
-import { getInitials } from '@/bsComponents/UserDetail/utils';
+import { getInitials } from '@/utils/user';
 import styles from './styles.module.less';
 
 interface UserRowProps {

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 import Drawer from '@/components/Drawer';
 import AddMemberToGroup from '@/bsComponents/AddMemberToGroup';
-import { getInitials } from '@/bsComponents/UserDetail/utils';
+import { getInitials } from '@/utils/user';
 import type { GroupCardProps } from './types';
 import styles from './styles.module.less';
 

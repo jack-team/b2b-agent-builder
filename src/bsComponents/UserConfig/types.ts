@@ -1,9 +1,10 @@
+import type { BaseRecord, EnableStatus } from '@/types/common';
+
 export type UserRole = 'super_admin' | 'admin' | 'audit_admin';
 
-export type UserStatus = 'enabled' | 'disabled';
+export type UserStatus = EnableStatus;
 
-export interface UserRecord {
-  key: string;
+export interface UserRecord extends BaseRecord {
   name: string;
   email: string;
   phone?: string;

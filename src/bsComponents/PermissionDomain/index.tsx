@@ -1,13 +1,14 @@
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { useMemo } from 'react';
 import { EditOutlined } from '@ant-design/icons';
-import { Button, Empty, Progress } from 'antd';
+import { Button, Progress } from 'antd';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
 import {
+  createProTableEmptyViewRenderer,
   getOperatorSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
@@ -170,19 +171,10 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
     [t, searchFieldProps],
   );
 
-  const renderQuotaEmptyView = (
-    { dataSource = [] }: { dataSource?: readonly UserQuotaRecord[] },
-    dom: ReactElement,
-  ) => {
-    if (!dataSource.length) {
-      return (
-        <div className="py-[56px]">
-          <Empty description={t('common.noDataAvailable')} />
-        </div>
-      );
-    }
-    return dom;
-  };
+  const tableEmptyViewRenderer = useMemo(
+    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
+    [t],
+  );
 
   return (
     <DrawerContainer title={t('permissionDomain.title')} onClose={onClose}>
@@ -202,7 +194,7 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
           ...proTableDrawerPagination,
           total: 17,
         }}
-        tableViewRender={renderQuotaEmptyView}
+        tableViewRender={tableEmptyViewRenderer}
       />
     </DrawerContainer>
   );

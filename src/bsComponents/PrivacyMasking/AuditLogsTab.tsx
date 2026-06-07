@@ -1,12 +1,13 @@
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { useMemo } from 'react';
-import { Button, Empty, Tag } from 'antd';
+import { Button, Tag } from 'antd';
 import { ExportOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import {
+  createProTableEmptyViewRenderer,
   getOperatorSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
@@ -73,19 +74,10 @@ const AuditLogsTab: FC = () => {
     [t, searchFieldProps],
   );
 
-  const renderEmptyView = (
-    { dataSource = [] }: { dataSource?: readonly AuditLogRecord[] },
-    dom: ReactElement,
-  ) => {
-    if (!dataSource.length) {
-      return (
-        <div className="py-[56px]">
-          <Empty description={t('common.noDataAvailable')} />
-        </div>
-      );
-    }
-    return dom;
-  };
+  const tableEmptyViewRenderer = useMemo(
+    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
+    [t],
+  );
 
   return (
     <ProTable<AuditLogRecord>
@@ -106,7 +98,7 @@ const AuditLogsTab: FC = () => {
         ...proTableDrawerPagination,
         total: 17,
       }}
-      tableViewRender={renderEmptyView}
+      tableViewRender={tableEmptyViewRenderer}
     />
   );
 };

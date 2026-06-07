@@ -12,7 +12,9 @@ import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
+import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import Drawer from '@/components/Drawer';
+import StatusTag from '@/components/StatusTag';
 import OrchestrationBasicInfo from '@/bsComponents/OrchestrationBasicInfo';
 import OrchestrationFlowEditor from '@/bsComponents/OrchestrationFlowEditor';
 import {
@@ -58,13 +60,7 @@ const Orchestrations: FC = () => {
     [t],
   );
 
-  const statusValueEnum = useMemo(
-    () => ({
-      enabled: { text: t('common.enabled') },
-      disabled: { text: t('common.disabled') },
-    }),
-    [t],
-  );
+  const statusValueEnum = useStatusValueEnum();
 
   const columns: ProColumns<OrchestrationRecord>[] = useMemo(
     () => [
@@ -95,10 +91,7 @@ const Orchestrations: FC = () => {
         valueType: 'select',
         initialValue: 'enabled',
         valueEnum: statusValueEnum,
-        render: (_dom, record) =>
-          record.status === 'enabled'
-            ? t('common.enabled')
-            : t('common.disabled'),
+        render: (_dom, record) => <StatusTag status={record.status} />,
       },
       {
         title: t('orchestrationsPage.columns.actions'),

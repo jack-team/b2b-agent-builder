@@ -1,4 +1,4 @@
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
@@ -8,11 +8,14 @@ import {
   HistoryOutlined,
   PushpinOutlined,
 } from '@ant-design/icons';
-import { Button, Empty, Progress, Space, Tag, Tooltip } from 'antd';
+import { Button, Progress, Space, Tag, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
+import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
+import StatusTag from '@/components/StatusTag';
 import {
+  createProTableEmptyViewRenderer,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
@@ -72,10 +75,7 @@ const Memories: FC = () => {
     scenario: { text: t('memoriesPage.types.scenario') },
   }), [t]);
 
-  const statusValueEnum = useMemo(() => ({
-    enabled: { text: t('common.enabled'), status: 'Success' as const },
-    disabled: { text: t('common.disabled'), status: 'Default' as const },
-  }), [t]);
+  const statusValueEnum = useStatusValueEnum();
 
   const columns: ProColumns<MemoryRecord>[] = useMemo(() => [
     {
@@ -132,11 +132,7 @@ const Memories: FC = () => {
       valueType: 'select',
       initialValue: 'enabled',
       valueEnum: statusValueEnum,
-      render: (_dom, record) => (
-        <Tag color={record.status === 'enabled' ? 'success' : 'default'}>
-          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
-        </Tag>
-      ),
+      render: (_dom, record) => <StatusTag status={record.status} />,
     },
     {
       title: t('memoriesPage.columns.actions'),
@@ -195,19 +191,10 @@ const Memories: FC = () => {
     },
   ], [t, typeValueEnum, statusValueEnum]);
 
-  const renderMemoriesEmptyView = (
-    { dataSource = [] }: { dataSource?: readonly MemoryRecord[] },
-    dom: ReactElement,
-  ) => {
-    if (!dataSource.length) {
-      return (
-        <div className="py-[56px]">
-          <Empty description={t('common.noDataAvailable')} />
-        </div>
-      );
-    }
-    return dom;
-  };
+  const tableEmptyViewRenderer = useMemo(
+    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
+    [t],
+  );
 
   return (
     <PageContainer
@@ -224,7 +211,7 @@ const Memories: FC = () => {
           ...proTableDrawerPagination,
           total: 17,
         }}
-        tableViewRender={renderMemoriesEmptyView}
+        tableViewRender={tableEmptyViewRenderer}
       />
     </PageContainer>
   );

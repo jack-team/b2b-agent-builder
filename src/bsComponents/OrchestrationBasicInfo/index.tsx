@@ -1,5 +1,5 @@
 import type { ComponentType, FC } from 'react';
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 import {
   ArrowRightOutlined,
   PlusOutlined,
@@ -15,12 +15,11 @@ import {
   ProFormTextArea,
   ProFormUploadButton,
 } from '@ant-design/pro-components';
-import type { ProFormInstance } from '@ant-design/pro-components';
 import type { ProFormUploadButtonProps } from '@ant-design/pro-form';
-import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
+import { useDrawerForm } from '@/hooks/useDrawerForm';
 import type {
   OrchestrationBasicInfoFormValues,
   OrchestrationBasicInfoProps,
@@ -69,7 +68,11 @@ const OrchestrationBasicInfo: FC<OrchestrationBasicInfoProps> = ({
   record,
 }) => {
   const { t } = useTranslation();
-  const formRef = useRef<ProFormInstance<OrchestrationBasicInfoFormValues>>(null);
+  const { formRef, handleFinish, submit } = useDrawerForm<OrchestrationBasicInfoFormValues>({
+    onFinish: (values) => {
+      onNext?.(values);
+    },
+  });
 
   const typeOptions = useMemo(
     () => orchestrationTypeValues.map((value) => ({
@@ -81,20 +84,12 @@ const OrchestrationBasicInfo: FC<OrchestrationBasicInfoProps> = ({
 
   const initialValues = useMemo(() => getInitialValues(record), [record]);
 
-  const handleFinish = useMemoizedFn((values: OrchestrationBasicInfoFormValues) => {
-    onNext?.(values);
-  });
-
-  const handleNext = useMemoizedFn(() => {
-    formRef.current?.submit();
-  });
-
   return (
     <DrawerContainer
       title={t('orchestrationBasicInfo.title')}
       onClose={onClose}
       extra={(
-        <Button type="primary" icon={<ArrowRightOutlined />} onClick={handleNext}>
+        <Button type="primary" icon={<ArrowRightOutlined />} onClick={submit}>
           {t('common.next')}
         </Button>
       )}

@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
+import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import { DrawerContainer } from '@/components/Drawer';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
@@ -44,10 +45,7 @@ const formatDate = (value: string) => dayjs(value).format('DD/MM/YYYY');
 const LLMAgents: FC<LLMAgentsProps> = ({ modelName, onClose }) => {
   const { t } = useTranslation();
 
-  const statusValueEnum = useMemo(() => ({
-    enabled: { text: t('common.enabled'), status: 'Success' as const },
-    disabled: { text: t('common.disabled'), status: 'Default' as const },
-  }), [t]);
+  const statusValueEnum = useStatusValueEnum();
 
   const columns: ProColumns<AssociatedAgent>[] = useMemo(() => [
     {

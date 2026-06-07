@@ -6,6 +6,7 @@ import { Button, Space, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
+import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import Drawer from '@/components/Drawer';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
@@ -45,10 +46,7 @@ const mockData: LLMModel[] = [
 const LLM: FC = () => {
   const { t } = useTranslation();
 
-  const statusValueEnum = useMemo(() => ({
-    enabled: { text: t('common.enabled'), status: 'Success' as const },
-    disabled: { text: t('common.disabled'), status: 'Default' as const },
-  }), [t]);
+  const statusValueEnum = useStatusValueEnum();
 
   const columns: ProColumns<LLMModel>[] = useMemo(() => [
     {

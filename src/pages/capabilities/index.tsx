@@ -2,10 +2,11 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToolOutlined } from '@ant-design/icons';
-import { Tag, Button, Space, Tooltip } from 'antd';
+import { Button, Space, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import Drawer from '@/components/Drawer';
+import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import MCPServerConfig from '@/bsComponents/MCPServerConfig';
 import MCPTools from '@/bsComponents/MCPTools';
@@ -70,11 +71,7 @@ const Capabilities: FC = () => {
     {
       title: t('capabilitiesPage.columns.status'),
       dataIndex: 'status',
-      render: (_dom, record) => (
-        <Tag color={record.status === 'enabled' ? 'green' : 'red'}>
-          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
-        </Tag>
-      ),
+      render: (_dom, record) => <StatusTag status={record.status} />,
     },
     {
       width: '120px',

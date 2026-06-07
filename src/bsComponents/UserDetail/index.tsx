@@ -1,8 +1,9 @@
 import type { FC } from 'react';
-import { Avatar, Tabs, Tag } from 'antd';
+import { Avatar, Tabs } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import RoleTag from '@/components/RoleTag';
+import StatusTag from '@/components/StatusTag';
 import type { UserDetailProps } from './types';
 import BasicInfoTab from './BasicInfoTab';
 import RoleTab from './RoleTab';
@@ -31,9 +32,7 @@ const UserDetail: FC<UserDetailProps> = ({ record, onClose }) => {
               <span>{data.phone}</span>
             </div>
             <div className={styles.summary_badges}>
-              <Tag color={data.status === 'enabled' ? 'success' : 'error'}>
-                {data.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
-              </Tag>
+              <StatusTag status={data.status} />
               {isRoleKey(primaryRole) && <RoleTag role={primaryRole} />}
             </div>
           </div>

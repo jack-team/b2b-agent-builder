@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import { useRef, useMemo } from 'react';
-import { Button, Col, Row, Space } from 'antd';
-import { SaveOutlined } from '@ant-design/icons';
+import { useMemo } from 'react';
+import { Col, Row, Space } from 'antd';
 import {
   ProForm,
   ProCard,
@@ -11,11 +10,10 @@ import {
   ProFormCheckbox,
   ProFormDependency,
 } from '@ant-design/pro-components';
-import type { ProFormInstance } from '@ant-design/pro-components';
-import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
+import { useDrawerForm } from '@/hooks/useDrawerForm';
 import type {
   MemoryLifecyclePolicyFormValues,
   MemoryLifecyclePolicyProps,
@@ -43,7 +41,11 @@ const getInitialValues = (
 
 const MemoryLifecyclePolicy: FC<MemoryLifecyclePolicyProps> = ({ onClose, record }) => {
   const { t } = useTranslation();
-  const formRef = useRef<ProFormInstance<MemoryLifecyclePolicyFormValues>>(null);
+  const { formRef, handleFinish, saveButton } = useDrawerForm<MemoryLifecyclePolicyFormValues>({
+    onFinish: () => {
+      // placeholder for API integration
+    },
+  });
 
   const decayCurveTypeOptions = useMemo(
     () => [
@@ -94,23 +96,11 @@ const MemoryLifecyclePolicy: FC<MemoryLifecyclePolicyProps> = ({ onClose, record
     [t],
   );
 
-  const handleFinish = useMemoizedFn((_values: MemoryLifecyclePolicyFormValues) => {
-    // placeholder for API integration
-  });
-
-  const handleSave = useMemoizedFn(() => {
-    formRef.current?.submit();
-  });
-
   return (
     <DrawerContainer
       title={t('memoryLifecyclePolicy.title')}
       onClose={onClose}
-      extra={
-        <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-          {t('common.save')}
-        </Button>
-      }
+      extra={saveButton}
     >
       <ProForm<MemoryLifecyclePolicyFormValues>
         formRef={formRef}

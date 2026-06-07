@@ -122,13 +122,7 @@ export const operationLogs: OperationLogItem[] = [
   },
 ];
 
-export const getInitials = (name: string) =>
-  name
-    .split(' ')
-    .map((part) => part[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
+export { getInitials } from '@/utils/user';
 
 export const isRoleKey = (key: string): key is UserRole =>
   key === 'super_admin' || key === 'admin' || key === 'audit_admin';

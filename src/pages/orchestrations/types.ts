@@ -1,7 +1,8 @@
-export type OrchestrationStatus = 'enabled' | 'disabled';
+import type { BaseRecord, EnableStatus } from '@/types/common';
 
-export interface OrchestrationRecord {
-  key: string;
+export type OrchestrationStatus = EnableStatus;
+
+export interface OrchestrationRecord extends BaseRecord {
   name: string;
   description: string;
   updatedAt: string;

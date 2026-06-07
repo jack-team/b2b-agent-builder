@@ -1,29 +1,24 @@
-import type { FC, ReactElement } from 'react';
+import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Avatar, Button, Empty, Space, Tag, Typography } from 'antd';
+import { Avatar, Button, Space, Typography } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
 import Drawer from '@/components/Drawer';
 import RoleTag from '@/components/RoleTag';
+import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import UserConfig from '@/bsComponents/UserConfig';
 import UserDetail from '@/bsComponents/UserDetail';
 import type { UserRecord } from '@/bsComponents/UserConfig/types';
 import {
+  createProTableEmptyViewRenderer,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
+import { getInitials } from '@/utils/user';
 import appTheme from '@/store/theme/defaultTheme/app';
-
-const getInitials = (name: string) =>
-  name
-    .split(' ')
-    .map((part) => part[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
 
 const mockData: UserRecord[] = [
   {
@@ -132,11 +127,7 @@ const Users: FC = () => {
         checkedChildren: t('common.on'),
         unCheckedChildren: t('common.off'),
       },
-      render: (_dom, record) => (
-        <Tag color={record.status === 'enabled' ? 'success' : 'error'}>
-          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
-        </Tag>
-      ),
+      render: (_dom, record) => <StatusTag status={record.status} />,
     },
     {
       title: t('usersPage.columns.actions'),
@@ -156,30 +147,24 @@ const Users: FC = () => {
     },
   ], [t]);
 
-  const renderNewUserButton = () => (
+  const newUserButton = (
     <Drawer size="medium" trigger={<Button type="primary">{t('usersPage.newUser')}</Button>}>
       <UserConfig />
     </Drawer>
   );
 
-  const renderUsersEmptyView = (
-    { dataSource = [] }: { dataSource?: readonly UserRecord[] },
-    dom: ReactElement,
-  ) => {
-    if (!dataSource.length) {
-      return (
-        <div className="py-[56px]">
-          <Empty description={t('common.noDataAvailable')}>{renderNewUserButton()}</Empty>
-        </div>
-      );
-    }
-    return dom;
-  };
+  const tableEmptyViewRenderer = useMemo(
+    () => createProTableEmptyViewRenderer({
+      description: t('common.noDataAvailable'),
+      action: newUserButton,
+    }),
+    [t],
+  );
 
   return (
     <PageContainer
       title={t('menu.users')}
-      extra={renderNewUserButton()}
+      extra={newUserButton}
     >
       <ProTable<UserRecord>
         columns={columns}
@@ -191,7 +176,7 @@ const Users: FC = () => {
           ...proTableDrawerPagination,
           total: 17,
         }}
-        tableViewRender={renderUsersEmptyView}
+        tableViewRender={tableEmptyViewRenderer}
       />
     </PageContainer>
   );

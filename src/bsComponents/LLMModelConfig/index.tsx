@@ -1,7 +1,7 @@
 import type { FC } from 'react';
-import { useRef, useMemo } from 'react';
-import { Button, Row, Col } from 'antd';
-import { PlusOutlined, SaveOutlined } from '@ant-design/icons';
+import { useMemo } from 'react';
+import { Row, Col } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import {
   ProForm,
   ProCard,
@@ -11,11 +11,10 @@ import {
   ProFormList,
   ProFormDigit,
 } from '@ant-design/pro-components';
-import type { ProFormInstance } from '@ant-design/pro-components';
-import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
+import { useDrawerForm } from '@/hooks/useDrawerForm';
 import type { LLMModelConfigProps, LLMModelFormValues } from './types';
 
 const defaultFormValues: LLMModelFormValues = {
@@ -51,7 +50,11 @@ const getInitialValues = (record?: LLMModelConfigProps['record']): LLMModelFormV
 
 const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
   const { t } = useTranslation();
-  const formRef = useRef<ProFormInstance<LLMModelFormValues>>(null);
+  const { formRef, handleFinish, saveButton } = useDrawerForm<LLMModelFormValues>({
+    onFinish: () => {
+      // placeholder for API integration
+    },
+  });
 
   const apiProtocolOptions = useMemo(() => [
     { value: 'openai_compatible', label: t('llmPage.protocolOpenai') },
@@ -59,23 +62,11 @@ const LLMModelConfig: FC<LLMModelConfigProps> = ({ onClose, record }) => {
     { value: 'custom', label: t('llmPage.protocolCustom') },
   ], [t]);
 
-  const handleFinish = useMemoizedFn((_values: LLMModelFormValues) => {
-    // placeholder for API integration
-  });
-
-  const handleSave = useMemoizedFn(() => {
-    formRef.current?.submit();
-  });
-
   return (
     <DrawerContainer
       title={record ? t('llmPage.updateModel') : t('llmPage.createModel')}
       onClose={onClose}
-      extra={
-        <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-          {t('common.save')}
-        </Button>
-      }
+      extra={saveButton}
     >
       <ProForm<LLMModelFormValues>
         formRef={formRef}

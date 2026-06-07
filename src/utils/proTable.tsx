@@ -1,4 +1,4 @@
-import type { ReactElement } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { Empty, Select } from 'antd';
 import type { InputProps, TableProps } from 'antd';
 import i18n from '@/i18n';
@@ -46,16 +46,29 @@ export const proTableDrawerPagination = {
     }),
 };
 
-export const renderProTableEmptyView = (
-  { dataSource = [] }: TableViewRenderProps,
-  dom: ReactElement,
-) => {
-  if (!dataSource.length) {
-    return (
-      <div className="py-[56px]">
-        <Empty description={i18n.t('common.nothingFound')} />
-      </div>
-    );
-  }
-  return dom;
+type ProTableEmptyViewOptions = {
+  description?: string;
+  action?: ReactNode;
 };
+
+export const createProTableEmptyViewRenderer = (options?: ProTableEmptyViewOptions) => {
+  const description = options?.description ?? i18n.t('common.nothingFound');
+
+  return (
+    { dataSource = [] }: TableViewRenderProps,
+    dom: ReactElement,
+  ) => {
+    if (!dataSource.length) {
+      return (
+        <div className="py-[56px]">
+          <Empty description={description}>
+            {options?.action}
+          </Empty>
+        </div>
+      );
+    }
+    return dom;
+  };
+};
+
+export const renderProTableEmptyView = createProTableEmptyViewRenderer();

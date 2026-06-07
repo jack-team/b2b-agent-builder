@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import { useMemo, useRef } from 'react';
-import { SaveOutlined } from '@ant-design/icons';
-import { Button, Col, Row } from 'antd';
+import { useMemo } from 'react';
+import { Col, Row } from 'antd';
 import {
   ProCard,
   ProForm,
@@ -11,11 +10,10 @@ import {
   ProFormText,
   ProFormTextArea,
 } from '@ant-design/pro-components';
-import type { ProFormInstance } from '@ant-design/pro-components';
-import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
+import { useDrawerForm } from '@/hooks/useDrawerForm';
 import MemberPicker from './MemberPicker';
 import { defaultSelectedMemberIds, mockMemberCandidates } from './mock';
 import type { CreateSharedDomainFormValues, CreateSharedDomainProps } from './types';
@@ -41,7 +39,11 @@ const defaultFormValues: CreateSharedDomainFormValues = {
 
 const CreateSharedDomain: FC<CreateSharedDomainProps> = ({ onClose }) => {
   const { t } = useTranslation();
-  const formRef = useRef<ProFormInstance<CreateSharedDomainFormValues>>(null);
+  const { formRef, handleFinish, saveButton } = useDrawerForm<CreateSharedDomainFormValues>({
+    onFinish: () => {
+      onClose?.();
+    },
+  });
 
   const departmentOptions = useMemo(
     () => departmentValues.map((value) => ({
@@ -67,23 +69,11 @@ const CreateSharedDomain: FC<CreateSharedDomainProps> = ({ onClose }) => {
     [t],
   );
 
-  const handleFinish = useMemoizedFn((_values: CreateSharedDomainFormValues) => {
-    onClose?.();
-  });
-
-  const handleSave = useMemoizedFn(() => {
-    formRef.current?.submit();
-  });
-
   return (
     <DrawerContainer
       title={t('createSharedDomain.title')}
       onClose={onClose}
-      extra={(
-        <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-          {t('common.save')}
-        </Button>
-      )}
+      extra={saveButton}
     >
       <ProForm<CreateSharedDomainFormValues>
         formRef={formRef}

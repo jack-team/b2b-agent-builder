@@ -1,13 +1,15 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
-import { Tag, Button, Empty } from 'antd';
+import { Tag, Button } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
 import UpdateKnowledge from '@/bsComponents/UpdateKnowledge';
+import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
+import { createProTableEmptyViewRenderer } from '@/utils/proTable';
 
 interface KnowledgeSource {
   key: string;
@@ -69,11 +71,7 @@ const KnowledgeSources: FC = () => {
     {
       title: t('common.status'),
       dataIndex: 'status',
-      render: (_dom, record) => (
-        <Tag>
-          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
-        </Tag>
-      ),
+      render: (_dom, record) => <StatusTag status={record.status} />,
     },
     {
       align: 'center',
@@ -87,7 +85,7 @@ const KnowledgeSources: FC = () => {
     },
   ], [t]);
 
-  const renderNewKnowledgeButton = () => (
+  const newKnowledgeButton = (
     <Drawer
       trigger={
         <Button
@@ -102,10 +100,15 @@ const KnowledgeSources: FC = () => {
     </Drawer>
   );
 
+  const tableEmptyViewRenderer = useMemo(
+    () => createProTableEmptyViewRenderer({ action: newKnowledgeButton }),
+    [t],
+  );
+
   return (
     <DrawerContainer
       title={t('knowledgesPage.knowledgeSources')}
-      extra={renderNewKnowledgeButton()}
+      extra={newKnowledgeButton}
     >
       <ProTable
         size="medium"
@@ -113,16 +116,7 @@ const KnowledgeSources: FC = () => {
         toolBarRender={false}
         dataSource={mockData}
         search={{ layout: 'vertical' }}
-        tableViewRender={({ dataSource = [] }, dom) => {
-          if (!dataSource.length) {
-            return (
-              <div className="py-[56px]">
-                <Empty>{renderNewKnowledgeButton()}</Empty>
-              </div>
-            );
-          }
-          return dom;
-        }}
+        tableViewRender={tableEmptyViewRenderer}
       />
     </DrawerContainer>
   );

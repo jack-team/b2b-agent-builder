@@ -1,7 +1,6 @@
 import type { FC } from 'react';
-import { useRef, useMemo } from 'react';
-import { Button, Row, Col } from 'antd';
-import { SaveOutlined } from '@ant-design/icons';
+import { useMemo } from 'react';
+import { Row, Col } from 'antd';
 import {
   ProForm,
   ProFormSelect,
@@ -9,11 +8,10 @@ import {
   ProFormCheckbox,
   ProFormList
 } from '@ant-design/pro-components';
-import type { ProFormInstance } from '@ant-design/pro-components';
-import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
+import { useDrawerForm } from '@/hooks/useDrawerForm';
 import type { UserConfigProps, UserFormValues } from './types';
 import StageItem from './stageItem';
 
@@ -66,7 +64,11 @@ const getInitialValues = (record?: UserConfigProps['record']): UserFormValues =>
 
 const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
   const { t } = useTranslation();
-  const formRef = useRef<ProFormInstance<UserFormValues>>(null);
+  const { formRef, handleFinish, saveButton } = useDrawerForm<UserFormValues>({
+    onFinish: () => {
+      // placeholder for API integration
+    },
+  });
   const isEdit = Boolean(record);
 
   const departmentOptions = useMemo(
@@ -85,23 +87,11 @@ const UserConfig: FC<UserConfigProps> = ({ onClose, record }) => {
     [t],
   );
 
-  const handleFinish = useMemoizedFn((_values: UserFormValues) => {
-    // placeholder for API integration
-  });
-
-  const handleSave = useMemoizedFn(() => {
-    formRef.current?.submit();
-  });
-
   return (
     <DrawerContainer
       title={isEdit ? t('userConfig.updateUser') : t('userConfig.createUser')}
       onClose={onClose}
-      extra={
-        <Button type="primary" icon={<SaveOutlined />} onClick={handleSave}>
-          {t('common.save')}
-        </Button>
-      }
+      extra={saveButton}
     >
       <ProForm<UserFormValues>
         formRef={formRef}

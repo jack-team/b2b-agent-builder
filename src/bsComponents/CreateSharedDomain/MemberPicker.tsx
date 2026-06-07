@@ -5,7 +5,7 @@ import { Avatar, Checkbox, Input, Tag } from 'antd';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 
-import { getInitials } from '@/bsComponents/UserDetail/utils';
+import { getInitials } from '@/utils/user';
 import type { MemberCandidate } from './types';
 import styles from './styles.module.less';
 

@@ -1,13 +1,15 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import cls from 'classnames';
-import { Tag, Input, Empty } from 'antd';
+import { Input, Empty } from 'antd';
 import { TableOutlined, SearchOutlined } from '@ant-design/icons';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useSafeState } from 'ahooks';
 import { useTranslation } from 'react-i18next';
+import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import { DrawerContainer } from '@/components/Drawer';
+import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import styles from './styles.module.less';
 
@@ -134,10 +136,7 @@ const MCPToolContext: FC = () => {
   const [activeLogKey, setActiveLogKey] = useSafeState(runtimeLogItems[0].key);
   const [keyword, setKeyword] = useSafeState('');
 
-  const statusValueEnum = useMemo(() => ({
-    enabled: { text: t('common.enabled') },
-    disabled: { text: t('common.disabled') },
-  }), [t]);
+  const statusValueEnum = useStatusValueEnum();
 
   const columns: ProColumns<ContextTool>[] = useMemo(() => [
     {
@@ -154,11 +153,7 @@ const MCPToolContext: FC = () => {
       dataIndex: 'status',
       valueType: 'select',
       valueEnum: statusValueEnum,
-      render: (_dom, record) => (
-        <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
-          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
-        </Tag>
-      ),
+      render: (_dom, record) => <StatusTag status={record.status} />,
     },
     {
       title: t('mcp.columns.actions'),

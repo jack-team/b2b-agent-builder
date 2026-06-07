@@ -1,10 +1,12 @@
 import type { FC, JSX } from 'react';
 import { useMemo } from 'react';
-import { Tag, Button, Space, Empty } from 'antd';
+import { Button, Space } from 'antd';
 import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
+import StatusTag from '@/components/StatusTag';
+import { createProTableEmptyViewRenderer } from '@/utils/proTable';
 import MCPToolConfig from '@/bsComponents/MCPToolConfig';
 import MCPToolContext from '@/bsComponents/MCPToolContext';
 
@@ -147,11 +149,7 @@ const MCPTools: FC = () => {
     {
       title: t('mcp.columns.status'),
       dataIndex: 'status',
-      render: (_dom, record) => (
-        <Tag color={record.status === 'enabled' ? 'success' : 'warning'}>
-          {record.status === 'enabled' ? t('common.enabled') : t('common.disabled')}
-        </Tag>
-      ),
+      render: (_dom, record) => <StatusTag status={record.status} />,
     },
     {
       title: t('mcp.columns.actions'),
@@ -168,6 +166,11 @@ const MCPTools: FC = () => {
       ),
     },
   ], [t]);
+
+  const tableEmptyViewRenderer = useMemo(
+    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
+    [t],
+  );
 
   return (
     <DrawerContainer
@@ -187,16 +190,7 @@ const MCPTools: FC = () => {
           showTotal: (total, range) =>
             t('common.paginationTotal', { start: range[0], end: range[1], total }),
         }}
-        tableViewRender={({ dataSource = [] }, dom) => {
-          if (!dataSource.length) {
-            return (
-              <div className="py-[56px]">
-                <Empty description={t('common.noDataAvailable')} />
-              </div>
-            );
-          }
-          return dom;
-        }}
+        tableViewRender={tableEmptyViewRenderer}
       />
     </DrawerContainer>
   );
