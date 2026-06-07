@@ -1,10 +1,10 @@
 import type { BackendModule, ReadCallback } from 'i18next';
-import zhCN from './locales/zh-CN.json';
 
 const lazyLocaleLoaders = {
-  en: () => import('./locales/en.json'),
-  'zh-TW': () => import('./locales/zh-TW.json'),
-  ja: () => import('./locales/ja.json'),
+  'en': () => import('@/locales/en.json'),
+  'ja': () => import('@/locales/ja.json'),
+  'zh-CN': () => import('@/locales/zh-CN.json'),
+  'zh-TW': () => import('@/locales/zh-TW.json')
 } as const;
 
 type LazyLocaleKey = keyof typeof lazyLocaleLoaders;
@@ -12,13 +12,9 @@ type LazyLocaleKey = keyof typeof lazyLocaleLoaders;
 const localeBackend: BackendModule = {
   type: 'backend',
   init: () => undefined,
-  read: (language: string, namespace: string, callback: ReadCallback) => {
-    if (language === 'zh-CN' && namespace === 'translation') {
-      callback(null, zhCN);
-      return;
-    }
-
+  read: (language: string, _namespace: string, callback: ReadCallback) => {
     const loader = lazyLocaleLoaders[language as LazyLocaleKey];
+
     if (!loader) {
       callback(new Error(`Missing locale: ${language}`), null);
       return;

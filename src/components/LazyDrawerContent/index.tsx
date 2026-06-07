@@ -1,22 +1,8 @@
-import type { FC, ReactNode } from 'react';
-import { Suspense } from 'react';
-import Spinner from '@/components/Spinner';
-import styles from './styles.module.less';
+import type { FC, PropsWithChildren } from 'react';
+import Suspense from '@/components/Suspense';
 
-type LazyDrawerContentProps = {
-  children: ReactNode;
-};
-
-const LazyDrawerContent: FC<LazyDrawerContentProps> = ({ children }) => (
-  <Suspense
-    fallback={(
-      <div className={styles.fallback}>
-        <Spinner type="infinity-spin" />
-      </div>
-    )}
-  >
-    {children}
-  </Suspense>
+const LazyDrawerContent: FC<PropsWithChildren> = (props) => (
+  <Suspense>{props.children}</Suspense>
 );
 
 export default LazyDrawerContent;

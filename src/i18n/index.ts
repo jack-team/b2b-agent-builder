@@ -2,7 +2,6 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import localeBackend from './localeBackend';
-import zhCN from './locales/zh-CN.json';
 
 i18n
   .use(localeBackend)
@@ -26,12 +25,6 @@ i18n
     supportedLngs: ['zh-CN', 'zh-TW', 'en', 'ja'],
     defaultNS: 'translation',
     nonExplicitSupportedLngs: false,
-    partialBundledLanguages: true,
-    resources: {
-      'zh-CN': {
-        translation: zhCN,
-      },
-    },
     react: {
       useSuspense: true,
     },

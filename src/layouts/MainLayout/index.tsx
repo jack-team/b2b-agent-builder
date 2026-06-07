@@ -1,25 +1,18 @@
 import type { FC } from 'react';
-import { Suspense } from 'react';
 import { Layout } from 'antd';
+import Suspense from '@/components/Suspense';
 import AnimatedOutlet from '@/components/AnimatedOutlet';
-import Spinner from '@/components/Spinner';
 import LayoutHeader from './header';
 import MainMenu from './menu';
 
 const MainLayout: FC = () => {
-  const renderLoading = () => (
-    <div className="h-full flex items-center justify-center text-[150px] text-[var(--color-primary)]">
-      <Spinner type="infinity-spin" />
-    </div>
-  );
-
   return (
     <Layout className="h-full">
       <MainMenu />
       <Layout className="bg-[var(--bg-color-primary)]">
         <LayoutHeader />
         <Layout.Content>
-          <Suspense fallback={renderLoading()}>
+          <Suspense>
             <AnimatedOutlet />
           </Suspense>
         </Layout.Content>
