@@ -59,7 +59,13 @@ export default defineConfig(conf => {
             if (id.includes('@ant-design/pro')) {
               return 'pro-components';
             }
-            if (id.includes('node_modules/antd') || id.includes('node_modules/@ant-design/icons')) {
+            if (id.includes('node_modules/@ant-design/icons')) {
+              return 'antd-icons';
+            }
+            if (id.includes('node_modules/antd/es/locale')) {
+              return 'antd-locale';
+            }
+            if (id.includes('node_modules/antd')) {
               return 'antd';
             }
             if (id.includes('node_modules/react-router') || id.includes('node_modules/@remix-run')) {
@@ -67,6 +73,9 @@ export default defineConfig(conf => {
             }
             if (id.includes('node_modules/i18next') || id.includes('node_modules/react-i18next')) {
               return 'i18n';
+            }
+            if (id.includes('/src/i18n/locales/')) {
+              return 'app-locales';
             }
           },
         },

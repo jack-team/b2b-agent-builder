@@ -46,9 +46,9 @@ const UserCenter: FC = () => {
       <Dropdown
         trigger={['click']}
         openClassName={styles.openDropdown}
-        popupRender={(menu: MenuElement) => (
+        popupRender={(menu) => (
           <div style={popupStyle}>
-            {cloneElement(menu, { style: menuStyle })}
+            {cloneElement(menu as MenuElement, { style: menuStyle })}
           </div>
         )}
         menu={{

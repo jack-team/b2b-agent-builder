@@ -1,5 +1,5 @@
 import cls from 'classnames';
-import { Menu, Layout } from 'antd';
+import { Menu, Layout, type MenuProps } from 'antd';
 import { type FC, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
@@ -17,25 +17,29 @@ const AppMenu: FC = () => {
   const { menus, selectedKeys } = useMenu();
   const { menuCollapsed, toggleMenu } = useAppStore();
 
-  const menuItems = useMemo(
-    () => menus.map(item => ({
-      key: item.title,
-      type: 'group' as const,
-      label: t(item.title),
-      children: (item.children ?? []).map(child => {
-        const Icon = BaseIcons[child.icon];
-        return {
-          key: child.path,
-          label: t(child.title),
-          icon: Icon ? <Icon /> : null,
-          onClick: () => navigate(child.path),
-          onFocus: () => prefetchRoute(child.path),
-          onMouseEnter: () => prefetchRoute(child.path)
-        };
-      }),
-    })),
-    [menus, navigate, t],
-  );
+  const menuItems = useMemo(() => {
+    return menus.map(item => {
+      const childs = item.children || [];
+      return {
+        key: item.title,
+        type: 'group' as const,
+        label: t(item.title),
+        children: childs.map(child => {
+          const iconName = child.icon;
+          const path = child.path || '/';
+          const Icon = iconName ? BaseIcons[iconName] : null;
+          return {
+            key: child.path,
+            label: t(child.title),
+            icon: Icon ? <Icon /> : null,
+            onClick: () => navigate(path),
+            onFocus: () => prefetchRoute(path),
+            onMouseEnter: () => prefetchRoute(path)
+          };
+        }),
+      }
+    }) as MenuProps['items'];
+  }, [menus, navigate, t]);
 
   return (
     <Layout.Sider

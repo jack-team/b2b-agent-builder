@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Row, Col } from 'antd';
 import Icon1 from '@/assets/svg-icons/page/auth/icon_1.svg?react';
 import Icon2 from '@/assets/svg-icons/page/auth/icon_2.svg?react';
 import Icon3 from '@/assets/svg-icons/page/auth/icon_3.svg?react';

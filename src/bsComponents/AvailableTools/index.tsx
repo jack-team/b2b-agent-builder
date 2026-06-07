@@ -28,7 +28,7 @@ const AvailableTools: FC = () => {
   const { t } = useTranslation();
   const [form] = ProForm.useForm();
   const [selectedTool, setSelectedTool] = useSafeState<ToolType>();
-  const [tools, setTools] = useSafeState<ToolType[]>(availableTools);
+  const [tools] = useSafeState<ToolType[]>(availableTools);
   const toolValues = ProForm.useWatch(['tool'], form);
 
   useUpdateEffect(() => {

@@ -12,7 +12,7 @@ const LayoutHeader: FC = () => {
     <Layout.Header className="flex items-center justify-between border-b border-[var(--border-color-primary)]">
       <Breadcrumb
         items={breadcrumbItems}
-        itemRender={(item) => <Link to={item.path}>{item.title}</Link>}
+        itemRender={(item) => <Link to={item.path!}>{item.title}</Link>}
       />
       <Space size={16}>
         <div className={styles.header_tool_btn}>

@@ -15,6 +15,7 @@ export const useMenu = () => {
       const children = item.children || [];
       for (const child of children) {
         const path = child.path;
+        if (!path) continue;
         const childRegexp = pathToRegexp(path, { end: false });
         if (childRegexp.test(pathname)) keys.push(path);
       }
@@ -48,7 +49,7 @@ export const useBreadcrumb = () => {
         return _items.length > 0;
       });
 
-      if (_items.length > 0) {
+      if (menu && _items.length > 0) {
         items.push({
           ...menu,
           path: '/',
