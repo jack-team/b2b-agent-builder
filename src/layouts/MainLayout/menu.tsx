@@ -1,20 +1,41 @@
-import { type FC } from 'react';
 import cls from 'classnames';
 import { Menu, Layout } from 'antd';
+import { type FC, useMemo } from 'react';
 import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons';
 import { useAppStore } from '@/store/app';
+import { prefetchRoute } from '@/router/helper';
+import { BaseIcons } from '@/components/BaseIcons';
 import { useMenu } from './hooks';
-import { icons, type IconNameType } from './icons';
 import UserCenter from './userCenter';
 import styles from './styles.module.less';
 
 const AppMenu: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
-  const { menuCollapsed, toggleMenu } = useAppStore();
   const { menus, selectedKeys } = useMenu();
+  const { menuCollapsed, toggleMenu } = useAppStore();
+
+  const menuItems = useMemo(
+    () => menus.map(item => ({
+      key: item.title,
+      type: 'group' as const,
+      label: t(item.title),
+      children: (item.children ?? []).map(child => {
+        const Icon = BaseIcons[child.icon];
+        return {
+          key: child.path,
+          label: t(child.title),
+          icon: Icon ? <Icon /> : null,
+          onClick: () => navigate(child.path),
+          onFocus: () => prefetchRoute(child.path),
+          onMouseEnter: () => prefetchRoute(child.path)
+        };
+      }),
+    })),
+    [menus, navigate, t],
+  );
 
   return (
     <Layout.Sider
@@ -33,28 +54,13 @@ const AppMenu: FC = () => {
             {t('layout.brandName')}
           </div>
           <div className={styles.collapsed_switch} onClick={toggleMenu}>
-            {menuCollapsed ? <MenuUnfoldOutlined  /> : <MenuFoldOutlined />}
+            {menuCollapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </div>
         </div>
         <Menu
           className={styles.menu}
           selectedKeys={selectedKeys}
-          items={menus.map(item => {
-            return {
-              key: item.title,
-              type: 'group',
-              label: t(item.title),
-              children: item.children.map(child => {
-                const Icon = icons[child.icon as IconNameType];
-                return {
-                  key: child.path,
-                  icon: <Icon />,
-                  label: t(child.title),
-                  onClick: () => navigate(child.path),
-                };
-              }),
-            };
-          })}
+          items={menuItems}
         />
         <UserCenter />
       </div>

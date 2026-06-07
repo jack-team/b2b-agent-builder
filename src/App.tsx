@@ -4,7 +4,7 @@ import { ConfigProvider, App as AntApp } from 'antd';
 import Spinner from '@/components/Spinner';
 import StyledVariables from '@/components/StyledVariables';
 import { useThemeStore } from '@/store/theme';
-import { AppRouter } from '@/routes';
+import { AppRouter } from '@/router';
 import '@/App.less';
 
 const App: FC = () => {

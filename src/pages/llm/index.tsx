@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { lazy, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RobotOutlined } from '@ant-design/icons';
 import { Button, Space, Tooltip } from 'antd';
@@ -8,16 +8,18 @@ import type { ProColumns } from '@ant-design/pro-table';
 
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import Drawer from '@/components/Drawer';
+import LazyDrawerContent from '@/components/LazyDrawerContent';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
-import LLMModelConfig from '@/bsComponents/LLMModelConfig';
-import LLMAgents from '@/bsComponents/LLMAgents';
 import type { LLMModel } from '@/bsComponents/LLMModelConfig/types';
 import {
   proTableDrawerPagination,
   proTableSearchConfig,
   renderProTableEmptyView,
 } from '@/utils/proTable';
+
+const LLMModelConfig = lazy(() => import('@/bsComponents/LLMModelConfig'));
+const LLMAgents = lazy(() => import('@/bsComponents/LLMAgents'));
 
 const mockData: LLMModel[] = [
   {
@@ -80,7 +82,9 @@ const LLM: FC = () => {
             onDelete={() => { }}
             renderEditBtn={(btn) => (
               <Drawer size="medium" trigger={btn}>
-                <LLMModelConfig record={record} />
+                <LazyDrawerContent>
+                  <LLMModelConfig record={record} />
+                </LazyDrawerContent>
               </Drawer>
             )}
           />
@@ -97,7 +101,9 @@ const LLM: FC = () => {
               </Tooltip>
             }
           >
-            <LLMAgents modelName={record.modelName} />
+            <LazyDrawerContent>
+              <LLMAgents modelName={record.modelName} />
+            </LazyDrawerContent>
           </Drawer>
         </Space>
       ),
@@ -112,7 +118,9 @@ const LLM: FC = () => {
           size="medium"
           trigger={<Button type="primary">{t('llmPage.newModel')}</Button>}
         >
-          <LLMModelConfig />
+          <LazyDrawerContent>
+            <LLMModelConfig />
+          </LazyDrawerContent>
         </Drawer>
       }
     >

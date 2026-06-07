@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { pathToRegexp } from 'path-to-regexp';
 import { useLocation } from 'react-router-dom';
-import { menuList, type MenuItem } from '@/configs/menu-list';
+import { menuList, type MenuItem } from '@/configs/menus';
 
 // 用于获取当前选中的菜单项的路径
 export const useMenu = () => {
@@ -28,7 +28,10 @@ export const useMenu = () => {
   };
 };
 
-
+/**
+ * 用于获取当前选中的菜单项的面包屑
+ * @returns {MenuItem[]} 面包屑列表
+ */
 export const useBreadcrumb = () => {
   const { t } = useTranslation();
   const { menus, selectedKeys } = useMenu();

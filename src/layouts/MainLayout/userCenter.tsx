@@ -3,7 +3,7 @@ import { Avatar, Dropdown, theme } from 'antd';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { UserOutlined } from '@ant-design/icons';
-import { icons } from './icons';
+import { IconPermission, IconMerchant } from '@/components/BaseIcons';
 
 import { useUserStore } from '@/store/user';
 import styles from './styles.module.less';
@@ -63,13 +63,13 @@ const UserCenter: FC = () => {
             {
               key: 'permissions',
               label: t('layout.permissions'),
-              icon: <icons.permission />,
+              icon: <IconPermission />,
               onClick: () => navigate('/permissions')
             },
             {
               key: 'company',
               label: t('layout.myCompany'),
-              icon: <icons.merchant />,
+              icon: <IconMerchant />,
               onClick: () => navigate('/merchants')
             },
             {

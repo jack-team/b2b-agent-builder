@@ -3,7 +3,8 @@ import { useMemoizedFn } from 'ahooks';
 import { useDrawerClose } from './hooks';
 import Spinner from '@/components/Spinner';
 import type { DrawerContainerProps } from './types';
-import IconBack from '@/assets/icon_back.svg?react';
+import { IconBack } from '@/components/BaseIcons';
+
 import styles from './styles.module.less';
 
 const DrawerContainer: FC<PropsWithChildren<DrawerContainerProps>> = (props) => {

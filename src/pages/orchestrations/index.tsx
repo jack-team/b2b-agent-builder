@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { lazy, useMemo } from 'react';
 import dayjs from 'dayjs';
 import {
   DeleteOutlined,
@@ -14,9 +14,8 @@ import { useTranslation } from 'react-i18next';
 
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import Drawer from '@/components/Drawer';
+import LazyDrawerContent from '@/components/LazyDrawerContent';
 import StatusTag from '@/components/StatusTag';
-import OrchestrationBasicInfo from '@/bsComponents/OrchestrationBasicInfo';
-import OrchestrationFlowEditor from '@/bsComponents/OrchestrationFlowEditor';
 import {
   getTextSearchFieldProps,
   proTableDrawerPagination,
@@ -24,6 +23,9 @@ import {
   renderProTableEmptyView,
 } from '@/utils/proTable';
 import type { OrchestrationRecord } from './types';
+
+const OrchestrationBasicInfo = lazy(() => import('@/bsComponents/OrchestrationBasicInfo'));
+const OrchestrationFlowEditor = lazy(() => import('@/bsComponents/OrchestrationFlowEditor'));
 
 const mockData: OrchestrationRecord[] = [
   {
@@ -109,7 +111,9 @@ const Orchestrations: FC = () => {
                   </Button>
                 )}
               >
-                <OrchestrationFlowEditor record={record} />
+                <LazyDrawerContent>
+                  <OrchestrationFlowEditor record={record} />
+                </LazyDrawerContent>
               </Drawer>
             </Tooltip>
             <Tooltip title={t('common.edit')}>
@@ -121,7 +125,9 @@ const Orchestrations: FC = () => {
                   </Button>
                 )}
               >
-                <OrchestrationBasicInfo record={record} />
+                <LazyDrawerContent>
+                  <OrchestrationBasicInfo record={record} />
+                </LazyDrawerContent>
               </Drawer>
             </Tooltip>
             <Tooltip title={t('orchestrationsPage.actions.transfer')}>
@@ -150,7 +156,9 @@ const Orchestrations: FC = () => {
         </Button>
       )}
     >
-      <OrchestrationBasicInfo />
+      <LazyDrawerContent>
+        <OrchestrationBasicInfo />
+      </LazyDrawerContent>
     </Drawer>
   );
 

@@ -1,10 +1,11 @@
+import type { BaseIconNameType } from '@/components/BaseIcons';
+
 export type MenuItem = {
   path?: string;
   title: string;
-  icon?: string;
+  icon?: BaseIconNameType;
   children?: MenuItem[];
 }
-
 
 /**
  * 注意：菜单路径必须以 / 开头，没有path的情况只会出现在顶层，顶层为一个大的分组；
@@ -20,7 +21,7 @@ export const menuList: MenuItem[] = [
       {
         "path": "/dashboard",
         "title": "menu.dashboard",
-        "icon": "dashboard"
+        "icon": "IconDashboard"
       }
     ]
   },
@@ -30,27 +31,27 @@ export const menuList: MenuItem[] = [
       {
         "path": "/knowledges",
         "title": "menu.knowledges",
-        "icon": "knowledge"
+        "icon": "IconKnowledge"
       },
       {
         "path": "/memories",
         "title": "menu.memories",
-        "icon": "memories"
+        "icon": "IconMemories"
       },
       {
         "path": "/capabilities",
         "title": "menu.capabilities",
-        "icon": "capability"
+        "icon": "IconCapability"
       },
       {
         "path": "/llm",
         "title": "menu.largeLanguageModels",
-        "icon": "llm"
+        "icon": "LLMIcon"
       },
       {
         path: "/orchestrations",
         title: "menu.orchestrations",
-        icon: "orchestration"
+        icon: "IconOrchestration"
       }
     ]
   },
@@ -60,17 +61,17 @@ export const menuList: MenuItem[] = [
       {
         "path": "/merchants",
         "title": "menu.merchants",
-        "icon": "merchant"
+        "icon": "IconMerchant"
       },
       {
         "path": "/users",
         "title": "menu.users",
-        "icon": "users"
+        "icon": "IconUsers"
       },
       {
         "path": "/permissions",
         "title": "menu.permissions",
-        "icon": "permission"
+        "icon": "IconPermission"
       }
     ]
   },
@@ -80,12 +81,12 @@ export const menuList: MenuItem[] = [
       {
         "path": "/monitoringAndAnalysis",
         "title": "menu.monitoringAndAnalysis",
-        "icon": "analysis"
+        "icon": "IconAnalysis"
       },
       {
         "path": "/settings",
         "title": "menu.systemSetting",
-        "icon": "setting"
+        "icon": "IconSetting"
       },
     ]
   }

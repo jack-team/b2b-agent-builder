@@ -18,6 +18,7 @@ const PrivacyMasking: FC<PrivacyMaskingProps> = ({ onClose }) => {
     <DrawerContainer title={t('privacyMasking.title')} onClose={onClose}>
       <Tabs
         className={cls(styles.tabs, 'card-tabs')}
+        destroyOnHidden
         items={[
           {
             key: 'dataTypes',

@@ -1,16 +1,15 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { lazy, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Button, Space, Typography } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
 import Drawer from '@/components/Drawer';
+import LazyDrawerContent from '@/components/LazyDrawerContent';
 import RoleTag from '@/components/RoleTag';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
-import UserConfig from '@/bsComponents/UserConfig';
-import UserDetail from '@/bsComponents/UserDetail';
 import type { UserRecord } from '@/bsComponents/UserConfig/types';
 import {
   createProTableEmptyViewRenderer,
@@ -19,6 +18,9 @@ import {
 } from '@/utils/proTable';
 import { getInitials } from '@/utils/user';
 import appTheme from '@/store/theme/defaultTheme/app';
+
+const UserConfig = lazy(() => import('@/bsComponents/UserConfig'));
+const UserDetail = lazy(() => import('@/bsComponents/UserDetail'));
 
 const mockData: UserRecord[] = [
   {
@@ -86,7 +88,9 @@ const Users: FC = () => {
             </Space>
           }
         >
-          <UserDetail record={record} />
+          <LazyDrawerContent>
+            <UserDetail record={record} />
+          </LazyDrawerContent>
         </Drawer>
       ),
     },
@@ -139,7 +143,9 @@ const Users: FC = () => {
           onDelete={() => {}}
           renderEditBtn={(btn) => (
             <Drawer size="small" trigger={btn}>
-              <UserDetail record={record} />
+              <LazyDrawerContent>
+                <UserDetail record={record} />
+              </LazyDrawerContent>
             </Drawer>
           )}
         />
@@ -149,7 +155,9 @@ const Users: FC = () => {
 
   const newUserButton = (
     <Drawer size="medium" trigger={<Button type="primary">{t('usersPage.newUser')}</Button>}>
-      <UserConfig />
+      <LazyDrawerContent>
+        <UserConfig />
+      </LazyDrawerContent>
     </Drawer>
   );
 

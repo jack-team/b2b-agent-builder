@@ -1,16 +1,18 @@
 import type { FC } from 'react';
-import { useMemo } from 'react';
+import { lazy, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToolOutlined } from '@ant-design/icons';
 import { Button, Space, Tooltip } from 'antd';
 import { PageContainer, ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import Drawer from '@/components/Drawer';
+import LazyDrawerContent from '@/components/LazyDrawerContent';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
-import MCPServerConfig from '@/bsComponents/MCPServerConfig';
-import MCPTools from '@/bsComponents/MCPTools';
 import i18n from '@/i18n';
+
+const MCPServerConfig = lazy(() => import('@/bsComponents/MCPServerConfig'));
+const MCPTools = lazy(() => import('@/bsComponents/MCPTools'));
 
 interface Capability {
   key: string;
@@ -93,7 +95,9 @@ const Capabilities: FC = () => {
                 icon={<ToolOutlined />}
               />
             }>
-              <MCPTools />
+              <LazyDrawerContent>
+                <MCPTools />
+              </LazyDrawerContent>
             </Drawer>
           </Tooltip>
         </Space>
@@ -108,7 +112,9 @@ const Capabilities: FC = () => {
         <Drawer
           size="small"
           trigger={<Button type="primary">{t('capabilitiesPage.newProvider')}</Button>}>
-          <MCPServerConfig />
+          <LazyDrawerContent>
+            <MCPServerConfig />
+          </LazyDrawerContent>
         </Drawer>
       }
     >

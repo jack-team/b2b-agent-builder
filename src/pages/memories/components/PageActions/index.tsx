@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { lazy } from 'react';
 import {
   ControlOutlined,
   EyeInvisibleOutlined,
@@ -9,10 +10,12 @@ import { Button, Space } from 'antd';
 import { useTranslation } from 'react-i18next';
 
 import Drawer from '@/components/Drawer';
-import ConflictMemoryResolution from '@/bsComponents/ConflictMemoryResolution';
-import MemoryLifecyclePolicy from '@/bsComponents/MemoryLifecyclePolicy';
-import PermissionDomain from '@/bsComponents/PermissionDomain';
-import PrivacyMasking from '@/bsComponents/PrivacyMasking';
+import LazyDrawerContent from '@/components/LazyDrawerContent';
+
+const ConflictMemoryResolution = lazy(() => import('@/bsComponents/ConflictMemoryResolution'));
+const MemoryLifecyclePolicy = lazy(() => import('@/bsComponents/MemoryLifecyclePolicy'));
+const PermissionDomain = lazy(() => import('@/bsComponents/PermissionDomain'));
+const PrivacyMasking = lazy(() => import('@/bsComponents/PrivacyMasking'));
 
 const PageActions: FC = () => {
   const { t } = useTranslation();
@@ -27,7 +30,9 @@ const PageActions: FC = () => {
           </Button>
         )}
       >
-        <ConflictMemoryResolution />
+        <LazyDrawerContent>
+          <ConflictMemoryResolution />
+        </LazyDrawerContent>
       </Drawer>
       <Drawer
         size="medium"
@@ -37,7 +42,9 @@ const PageActions: FC = () => {
           </Button>
         )}
       >
-        <MemoryLifecyclePolicy />
+        <LazyDrawerContent>
+          <MemoryLifecyclePolicy />
+        </LazyDrawerContent>
       </Drawer>
       <Drawer
         size="large"
@@ -47,7 +54,9 @@ const PageActions: FC = () => {
           </Button>
         )}
       >
-        <PermissionDomain />
+        <LazyDrawerContent>
+          <PermissionDomain />
+        </LazyDrawerContent>
       </Drawer>
       <Drawer
         size="large"
@@ -57,7 +66,9 @@ const PageActions: FC = () => {
           </Button>
         )}
       >
-        <PrivacyMasking />
+        <LazyDrawerContent>
+          <PrivacyMasking />
+        </LazyDrawerContent>
       </Drawer>
     </Space>
   );

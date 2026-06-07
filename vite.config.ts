@@ -49,5 +49,28 @@ export default defineConfig(conf => {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
       },
     },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            if (id.includes('@xyflow')) {
+              return 'xyflow';
+            }
+            if (id.includes('@ant-design/pro')) {
+              return 'pro-components';
+            }
+            if (id.includes('node_modules/antd') || id.includes('node_modules/@ant-design/icons')) {
+              return 'antd';
+            }
+            if (id.includes('node_modules/react-router') || id.includes('node_modules/@remix-run')) {
+              return 'router';
+            }
+            if (id.includes('node_modules/i18next') || id.includes('node_modules/react-i18next')) {
+              return 'i18n';
+            }
+          },
+        },
+      },
+    },
   }
 })
