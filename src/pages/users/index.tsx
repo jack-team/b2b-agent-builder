@@ -17,7 +17,7 @@ import {
   proTableSearchConfig,
 } from '@/utils/proTable';
 import { getInitials } from '@/utils/user';
-import appTheme from '@/store/theme/defaultTheme/app';
+import { brandTokens } from '@/theme';
 
 const UserConfig = lazy(() => import('@/bsComponents/UserConfig'));
 const UserDetail = lazy(() => import('@/bsComponents/UserDetail'));
@@ -31,7 +31,7 @@ const mockData: UserRecord[] = [
     role: 'super_admin',
     lastLogin: '2026-05-28',
     status: 'enabled',
-    avatarColor: appTheme.colorPrimary,
+    avatarColor: brandTokens.colorPrimary,
   },
   {
     key: '2',
@@ -41,7 +41,7 @@ const mockData: UserRecord[] = [
     role: 'admin',
     lastLogin: '2026-05-27',
     status: 'enabled',
-    avatarColor: appTheme.colorInfoDark,
+    avatarColor: brandTokens.colorInfoDark,
   },
   {
     key: '3',
@@ -51,7 +51,7 @@ const mockData: UserRecord[] = [
     role: 'audit_admin',
     lastLogin: '2026-05-20',
     status: 'disabled',
-    avatarColor: appTheme.colorSuccessDark,
+    avatarColor: brandTokens.colorSuccessDark,
   },
 ];
 

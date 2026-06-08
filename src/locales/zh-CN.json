@@ -112,6 +112,11 @@
     "feature4Title": "安全多租户架构",
     "feature4Desc": "企业级安全，数据隔离与基于角色的访问控制"
   },
+  "theme": {
+    "switch": "切换主题",
+    "light": "浅色模式",
+    "dark": "深色模式"
+  },
   "layout": {
     "brandName": "Banyan OS",
     "profile": "个人资料",

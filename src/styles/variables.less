@@ -1,3 +1,13 @@
 :root {
-  --gay-box-color: rgba(0, 0, 0, 0.03);
+  /* 兼容历史变量名，实际值由 StyledVariables 注入的 --box-color 驱动 */
+  --gay-box-color: var(--box-color, rgba(0, 0, 0, 0.03));
+}
+
+/* 配合 App.tsx 设置的 data-theme，控制浏览器原生深色/浅色渲染 */
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+[data-theme='light'] {
+  color-scheme: light;
 }

@@ -112,6 +112,11 @@
     "feature4Title": "安全多租戶架構",
     "feature4Desc": "企業級安全，資料隔離與基於角色的存取控制"
   },
+  "theme": {
+    "switch": "切換主題",
+    "light": "淺色模式",
+    "dark": "深色模式"
+  },
   "layout": {
     "brandName": "Banyan OS",
     "profile": "個人資料",

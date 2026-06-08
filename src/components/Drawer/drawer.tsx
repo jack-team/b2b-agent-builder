@@ -55,7 +55,7 @@ const Drawer: FC<CustomDrawerProps> = (props) => {
         destroyOnHidden
         push={{ distance: 0 }}
         afterOpenChange={afterOpenChange}
-        size={`var( --drawer-width-${size})`}
+        size={`var(--drawer-width-${size})`}
         mask={{ closable: false, blur: false }}
         rootClassName={cls(
           styles.drawer, 

@@ -1,0 +1,20 @@
+/** 品牌色与功能色，浅色/深色模式下保持一致 */
+export const brandTokens = {
+  colorPrimary: '#52B788',
+  colorPrimaryLight: '#6BC49A',
+  colorPrimaryDark: '#40916C',
+  colorPrimaryBg: 'rgba(82, 183, 136, 0.12)',
+  colorSecondary: '#74C69D',
+  colorSuccess: '#10B981',
+  colorSuccessLight: '#D1FAE5',
+  colorSuccessDark: '#059669',
+  colorWarning: '#F59E0B',
+  colorWarningLight: '#FEF3C7',
+  colorWarningDark: '#D97706',
+  colorError: '#EF4444',
+  colorErrorLight: '#FEE2E2',
+  colorErrorDark: '#DC2626',
+  colorInfo: '#3B82F6',
+  colorInfoLight: '#DBEAFE',
+  colorInfoDark: '#2563EB',
+} as const;

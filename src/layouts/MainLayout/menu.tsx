@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import { BaseIcons, MenuFoldOutlined, MenuUnfoldOutlined } from '@/components/BaseIcons';
 import { useAppStore } from '@/store/app';
+import { useThemeStore } from '@/store/theme';
 import { prefetchRoute } from '@/router/helper';
 import { useMenu } from './hooks';
 import UserCenter from './userCenter';
@@ -15,6 +16,7 @@ const AppMenu: FC = () => {
   const navigate = useNavigate();
   const { menus, selectedKeys } = useMenu();
   const { menuCollapsed, toggleMenu } = useAppStore();
+  const mode = useThemeStore(s => s.mode);
 
   const menuItems = useMemo(() => {
     return menus.map(item => {
@@ -42,7 +44,8 @@ const AppMenu: FC = () => {
 
   return (
     <Layout.Sider
-      theme="light"
+      // 侧边栏内置样式需与当前主题一致
+      theme={mode === 'dark' ? 'dark' : 'light'}
       width={240}
       collapsed={menuCollapsed}
       className={cls(

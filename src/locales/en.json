@@ -112,6 +112,11 @@
     "feature4Title": "Secure Multi-Tenant Architecture",
     "feature4Desc": "Enterprise-grade security with isolated data and role-based access"
   },
+  "theme": {
+    "switch": "Switch theme",
+    "light": "Light mode",
+    "dark": "Dark mode"
+  },
   "layout": {
     "brandName": "Banyan OS",
     "profile": "Profile",

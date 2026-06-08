@@ -112,6 +112,11 @@
     "feature4Title": "セキュアなマルチテナントアーキテクチャ",
     "feature4Desc": "エンタープライズグレードのセキュリティ、データ分離、ロールベースのアクセス制御"
   },
+  "theme": {
+    "switch": "テーマを切り替え",
+    "light": "ライトモード",
+    "dark": "ダークモード"
+  },
   "layout": {
     "brandName": "Banyan OS",
     "profile": "プロフィール",
