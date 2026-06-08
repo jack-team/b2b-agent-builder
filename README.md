@@ -1,4 +1,4 @@
-# B2B Agent Builder
+# Banyan OS
 
 基于 React + TypeScript + Vite 的 B2B 智能代理构建平台。
 

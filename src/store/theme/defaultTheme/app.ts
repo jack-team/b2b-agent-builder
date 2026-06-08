@@ -1,4 +1,5 @@
-const colorPrimary = '#7C3AED';
+// const colorPrimary = '#7C3AED'; // 紫色
+const colorPrimary = '#52B788'; // 绿色
 
 export default {
   // 品牌色

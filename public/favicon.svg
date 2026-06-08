@@ -1,35 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="96" height="96">
-                                            <defs>
-                                                <linearGradient id="v2Main" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                    <stop offset="0%" style="stop-color:#7C3AED"></stop>
-                                                    <stop offset="50%" style="stop-color:#8B5CF6"></stop>
-                                                    <stop offset="100%" style="stop-color:#A78BFA"></stop>
-                                                </linearGradient>
-                                                <linearGradient id="v2Accent" x1="0%" y1="0%" x2="100%" y2="100%">
-                                                    <stop offset="0%" style="stop-color:#3B82F6"></stop>
-                                                    <stop offset="100%" style="stop-color:#06B6D4"></stop>
-                                                </linearGradient>
-                                            </defs>
-                                            <polygon points="64,12 108,38 108,90 64,116 20,90 20,38" fill="none" stroke="url(#v2Main)" stroke-width="4" stroke-linejoin="round"></polygon>
-                                            <polygon points="64,28 92,46 92,82 64,100 36,82 36,46" fill="url(#v2Main)" opacity="0.15"></polygon>
-                                            <circle cx="64" cy="64" r="20" fill="url(#v2Main)"></circle>
-                                            <circle cx="64" cy="64" r="10" fill="white" opacity="0.9"></circle>
-                                            <line x1="64" y1="44" x2="64" y2="32" stroke="url(#v2Main)" stroke-width="3" stroke-linecap="round"></line>
-                                            <line x1="80" y1="54" x2="90" y2="48" stroke="url(#v2Main)" stroke-width="3" stroke-linecap="round"></line>
-                                            <line x1="80" y1="74" x2="90" y2="80" stroke="url(#v2Main)" stroke-width="3" stroke-linecap="round"></line>
-                                            <line x1="64" y1="84" x2="64" y2="96" stroke="url(#v2Main)" stroke-width="3" stroke-linecap="round"></line>
-                                            <line x1="48" y1="74" x2="38" y2="80" stroke="url(#v2Main)" stroke-width="3" stroke-linecap="round"></line>
-                                            <line x1="48" y1="54" x2="38" y2="48" stroke="url(#v2Main)" stroke-width="3" stroke-linecap="round"></line>
-                                            <circle cx="64" cy="28" r="6" fill="url(#v2Accent)"></circle>
-                                            <circle cx="94" cy="50" r="5" fill="url(#v2Accent)"></circle>
-                                            <circle cx="94" cy="78" r="5" fill="url(#v2Accent)"></circle>
-                                            <circle cx="64" cy="100" r="6" fill="url(#v2Accent)"></circle>
-                                            <circle cx="34" cy="78" r="5" fill="url(#v2Accent)"></circle>
-                                            <circle cx="34" cy="50" r="5" fill="url(#v2Accent)"></circle>
-                                            <circle cx="64" cy="28" r="2.5" fill="white"></circle>
-                                            <circle cx="94" cy="50" r="2" fill="white"></circle>
-                                            <circle cx="94" cy="78" r="2" fill="white"></circle>
-                                            <circle cx="64" cy="100" r="2.5" fill="white"></circle>
-                                            <circle cx="34" cy="78" r="2" fill="white"></circle>
-                                            <circle cx="34" cy="50" r="2" fill="white"></circle>
-                                        </svg>
+<svg width="24" height="24" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="ug5" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" style="stop-color:#1B4332"></stop>
+            <stop offset="100%" style="stop-color:#40916C"></stop>
+        </linearGradient>
+    </defs>
+    <g transform="translate(0, 5)">
+        <path d="M35 70 L35 40 L40 35 L45 40 L45 70 Z" fill="url(#ug5)"></path>
+        <ellipse cx="40" cy="22" rx="32" ry="22" fill="#52B788" opacity="0.9"></ellipse>
+        <ellipse cx="26" cy="30" rx="20" ry="15" fill="#52B788" opacity="0.7"></ellipse>
+        <ellipse cx="54" cy="30" rx="20" ry="15" fill="#52B788" opacity="0.7"></ellipse>
+    </g>
+</svg>

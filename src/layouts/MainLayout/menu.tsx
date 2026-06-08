@@ -52,7 +52,7 @@ const AppMenu: FC = () => {
     >
       <div className="h-full flex flex-col overflow-hidden">
         <div className={styles.band}>
-          <img src="/favicon.svg" className="h-[36px]" alt="logo" />
+          <img src="/logo.svg" className="h-[30px]" alt="logo" />
           <div className={styles.band_title}>
             {t('layout.brandName')}
           </div>

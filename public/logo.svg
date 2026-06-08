@@ -1,0 +1,21 @@
+<svg width="40" height="40" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="ug1" x1="0%" y1="100%" x2="0%" y2="0%">
+            <stop offset="0%" style="stop-color:#1B4332"></stop>
+            <stop offset="100%" style="stop-color:#40916C"></stop>
+        </linearGradient>
+        <linearGradient id="ug2" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#52B788"></stop>
+            <stop offset="100%" style="stop-color:#74C69D"></stop>
+        </linearGradient>
+    </defs>
+    <g transform="translate(0, 5)">
+        <path d="M35 70 L35 40 L40 35 L45 40 L45 70 Z" fill="url(#ug1)"></path>
+        <path d="M28 65 Q22 55 26 42" stroke="#2D6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+        <path d="M52 65 Q58 55 54 42" stroke="#2D6A4F" stroke-width="2.5" fill="none" stroke-linecap="round"></path>
+        <ellipse cx="40" cy="22" rx="32" ry="22" fill="url(#ug2)" opacity="0.9"></ellipse>
+        <ellipse cx="26" cy="30" rx="20" ry="15" fill="url(#ug2)" opacity="0.7"></ellipse>
+        <ellipse cx="54" cy="30" rx="20" ry="15" fill="url(#ug2)" opacity="0.7"></ellipse>
+        <circle cx="40" cy="5" r="7" fill="#74C69D"></circle>
+    </g>
+</svg>

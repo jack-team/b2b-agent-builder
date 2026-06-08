@@ -36,6 +36,7 @@ export default <ConfigProviderProps['theme']>{
       fontSize: 13,
       borderRadius: 6,
       controlHeight,
+      boxShadow: 'none',
     },
     Tabs: {
       fontSize: 16,
