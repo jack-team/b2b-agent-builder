@@ -8,7 +8,7 @@ export const darkColorPalette: ThemeColorPalette = {
   textColorInverse: '#111827',
   bgColorPrimary: '#0F172A',
   bgColorSecondary: '#1E293B',
-  bgColorSurface: '#1E293B',
+  bgColorSurface: '#0F172A',
   bgColorHover: '#334155',
   bgColorActive: '#475569',
   colorBorder: '#334155',
