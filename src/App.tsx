@@ -1,4 +1,4 @@
-import { type FC, useEffect } from 'react';
+import { type FC, useEffect, Fragment } from 'react';
 import { ConfigProvider, App as AntApp } from 'antd';
 import Spinner from '@/components/Spinner';
 import Suspense from '@/components/Suspense';
@@ -41,13 +41,13 @@ const App: FC = () => {
   }, [mode]);
 
   return (
-    <>
+    <Fragment>
       {/* 将 appTheme 注入为 :root CSS 变量，供 Less/Tailwind 引用 */}
       <StyledVariables variables={appTheme} />
       <Suspense>
         <AppContent />
       </Suspense>
-    </>
+    </Fragment>
   );
 };
 

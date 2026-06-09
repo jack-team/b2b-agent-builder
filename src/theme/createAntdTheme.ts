@@ -9,8 +9,7 @@ const BORDER_RADIUS = 6;
 
 const createComponentTokens = (appTheme: AppTheme, mode: ThemeMode) => {
   const isDark = mode === 'dark';
-
-  return {
+  return <AntdThemeConfig['components']>{
     Menu: {
       iconSize: 20,
       itemHeight: 36,
@@ -70,24 +69,29 @@ const createComponentTokens = (appTheme: AppTheme, mode: ThemeMode) => {
       dropdownHeight: 'auto',
       controlHeight: CONTROL_HEIGHT,
     },
-  }
+    Table: {
+      borderColor: appTheme.borderColorPrimary
+    }
+  };
 };
 
 /** 基于 appTheme 生成 Ant Design ConfigProvider 主题配置 */
-export const createAntdTheme = (appTheme: AppTheme, mode: ThemeMode): AntdThemeConfig => ({
-  token: {
-    colorPrimary: appTheme.colorPrimary,
-    colorBorder: appTheme.colorBorder,
-    colorBorderDisabled: appTheme.colorBorder,
-    colorText: appTheme.textColorPrimary,
-    colorTextSecondary: appTheme.textColorSecondary,
-    colorBgContainer: appTheme.bgColorSurface,
-    colorBgLayout: appTheme.bgColorPrimary,
-    colorBgElevated: appTheme.bgColorSurface,
-  },
-  components: createComponentTokens(appTheme, mode),
-  // 深色模式使用 darkAlgorithm 自动推导组件色值
-  algorithm: mode === 'dark' ?
-    antdThemeAlgorithm.darkAlgorithm :
-    antdThemeAlgorithm.defaultAlgorithm,
-});
+export const createAntdTheme = (appTheme: AppTheme, mode: ThemeMode) => {
+  return <AntdThemeConfig>{
+    token: {
+      colorPrimary: appTheme.colorPrimary,
+      colorBorder: appTheme.colorBorder,
+      colorBorderDisabled: appTheme.colorBorder,
+      colorText: appTheme.textColorPrimary,
+      colorTextSecondary: appTheme.textColorSecondary,
+      colorBgContainer: appTheme.bgColorSurface,
+      colorBgLayout: appTheme.bgColorPrimary,
+      colorBgElevated: appTheme.bgColorSurface,
+    },
+    components: createComponentTokens(appTheme, mode),
+    // 深色模式使用 darkAlgorithm 自动推导组件色值
+    algorithm: mode === 'dark' ?
+      antdThemeAlgorithm.darkAlgorithm :
+      antdThemeAlgorithm.defaultAlgorithm,
+  }
+};
