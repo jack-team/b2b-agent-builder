@@ -3,8 +3,8 @@ import Spinner from '@/components/Spinner';
 
 const Suspense: React.FC<React.PropsWithChildren> = ({ children }) => {
   const renderSpinner = () => (
-    <div className="h-full grid place-items-center text-[48px] text-[var(--color-primary)]">
-      <Spinner type="spinner" />
+    <div className="h-full grid place-items-center text-[160px]">
+      <Spinner type="infinity-spin" />
     </div>
   );
 

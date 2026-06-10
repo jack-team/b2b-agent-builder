@@ -40,7 +40,7 @@ const UpdateKnowledge: FC<UpdateKnowledgeProps> = (props) => {
       extra={
         <Space size={16}>
           <Button icon={<UndoOutlined />}>{t('common.reset')}</Button>
-          <Button type="primary" icon={<SaveOutlined />} loading>{t('common.save')}</Button>
+          <Button type="primary" icon={<SaveOutlined />}>{t('common.save')}</Button>
         </Space>
       }
     >

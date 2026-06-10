@@ -1,15 +1,23 @@
 import { create } from 'zustand';
+import { persist, createJSONStorage } from 'zustand/middleware';
+import { DexieStorage } from '@/utils/dexieStorage';
 
 type AppState = {
   menuCollapsed: boolean;
   toggleMenu: () => void;
-  setMenuCollapsed: (s: boolean) => void;
 };
 
-export const useAppStore = create<AppState>((set, get) => ({
-  menuCollapsed: false,
-  setMenuCollapsed: s => set({ menuCollapsed: s }),
-  toggleMenu: () => set({ menuCollapsed: !get().menuCollapsed }),
-}));
+const storage = new DexieStorage('app');
+
+export const useAppStore = create(persist<AppState>(
+  (set) => ({
+    menuCollapsed: false,
+    toggleMenu: () => set(s => ({ menuCollapsed: !s.menuCollapsed })),
+  }),
+  {
+    name: 'app-store',
+    storage: createJSONStorage(() => storage)
+  }
+));
 
 export default useAppStore;

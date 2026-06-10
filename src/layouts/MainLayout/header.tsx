@@ -1,7 +1,6 @@
 import { type FC } from 'react';
 import { Link } from 'react-router-dom';
 import { Layout, Breadcrumb, Space } from 'antd';
-import { QuestionCircleOutlined, BellOutlined } from '@/components/BaseIcons';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 import ThemeSwitcher from '@/components/ThemeSwitcher';
 import type { MenuItem } from '@/configs/menus';
@@ -22,14 +21,8 @@ const LayoutHeader: FC = () => {
         }}
       />
       <Space size={16}>
-        <ThemeSwitcher className={styles.header_tool_btn} />
         <LanguageSwitcher className={styles.header_tool_btn} />
-        <div className={styles.header_tool_btn}>
-          <BellOutlined />
-        </div>
-        <div className={styles.header_tool_btn}>
-          <QuestionCircleOutlined />
-        </div>
+        <ThemeSwitcher className={styles.header_tool_btn} />
       </Space>
     </Layout.Header>
   );

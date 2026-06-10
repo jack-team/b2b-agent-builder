@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useSafeState } from 'ahooks';
 import { useMemoizedFn } from 'ahooks';
-import cls from 'classnames';
 import { Button, Empty, Input, Space, Tabs } from 'antd';
 import {
   FilterOutlined,
@@ -106,13 +105,12 @@ const WorkspacePanel: FC = () => {
   }));
 
   return (
-    <div className={cls(styles.panel, 'card-tabs')}>
-      <Tabs
-        activeKey={activeTab}
-        items={tabItems}
-        onChange={key => setActiveTab(key as TabKey)}
-      />
-    </div>
+    <Tabs
+      activeKey={activeTab}
+      items={tabItems}
+      className="card-tabs"
+      onChange={key => setActiveTab(key as TabKey)}
+    />
   );
 };
 

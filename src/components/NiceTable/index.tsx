@@ -56,6 +56,7 @@ function NiceTable<D extends object = NiceTableData>(props: NiceTableProps<D>) {
       request={cachedRequest}
       search={search !== false && {
         ...search,
+        layout: 'vertical',
         searchText: t('common.search'),
         resetText: t('common.reset')
       }}
