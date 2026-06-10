@@ -17,11 +17,6 @@ import Drawer from '@/components/Drawer';
 import LazyDrawerContent from '@/components/LazyDrawerContent';
 import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
-import {
-  getTextSearchFieldProps,
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 import type { OrchestrationRecord } from './types';
 
 const OrchestrationBasicInfo = lazy(() => import('@/bsComponents/OrchestrationBasicInfo'));
@@ -57,11 +52,6 @@ const formatUpdatedAt = (value: string) =>
 const Orchestrations: FC = () => {
   const { t } = useTranslation();
 
-  const textSearchFieldProps = useMemo(
-    () => getTextSearchFieldProps(t('common.pleaseEnter')),
-    [t],
-  );
-
   const statusValueEnum = useStatusValueEnum();
 
   const columns: ProColumns<OrchestrationRecord>[] = useMemo(
@@ -69,13 +59,11 @@ const Orchestrations: FC = () => {
       {
         title: t('orchestrationsPage.columns.name'),
         dataIndex: 'name',
-        fieldProps: textSearchFieldProps,
       },
       {
         title: t('orchestrationsPage.columns.description'),
         dataIndex: 'description',
         ellipsis: true,
-        fieldProps: textSearchFieldProps,
       },
       {
         title: t('orchestrationsPage.columns.updatedAt'),
@@ -144,7 +132,7 @@ const Orchestrations: FC = () => {
         ),
       },
     ],
-    [t, textSearchFieldProps, statusValueEnum],
+    [t, statusValueEnum],
   );
 
   const renderNewOrchestrationButton = () => (
@@ -173,15 +161,6 @@ const Orchestrations: FC = () => {
         dataSource={mockData}
         rowKey="key"
         toolBarRender={false}
-        search={{
-          ...proTableSearchConfig,
-          searchText: t('common.search'),
-          resetText: t('common.reset'),
-        }}
-        pagination={{
-          ...proTableDrawerPagination,
-          total: 17,
-        }}
       />
     </PageContainer>
   );

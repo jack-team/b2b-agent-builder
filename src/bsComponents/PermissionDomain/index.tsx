@@ -4,14 +4,8 @@ import { EditOutlined } from '@/components/BaseIcons';
 import { Button, Progress } from 'antd';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
-
 import { DrawerContainer } from '@/components/Drawer';
 import NiceTable from '@/components/NiceTable';
-import {
-  getTextSearchFieldProps,
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 import DomainStatCards from './DomainStatCards';
 import QuotaAlertList from './QuotaAlertList';
 import type {
@@ -87,22 +81,16 @@ const getUsageStrokeColor = (value: number) => {
 const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
   const { t } = useTranslation();
 
-  const searchFieldProps = useMemo(
-    () => getTextSearchFieldProps(t('common.pleaseEnter')),
-    [t],
-  );
 
   const columns: ProColumns<UserQuotaRecord>[] = useMemo(
     () => [
       {
         title: t('permissionDomain.columns.userId'),
         dataIndex: 'userId',
-        fieldProps: searchFieldProps,
       },
       {
         title: t('permissionDomain.columns.userName'),
         dataIndex: 'userName',
-        fieldProps: searchFieldProps,
       },
       {
         title: t('permissionDomain.columns.quota'),
@@ -157,7 +145,7 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
         ),
       },
     ],
-    [t, searchFieldProps],
+    [t],
   );
 
   return (
@@ -170,15 +158,6 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
         dataSource={mockQuotaRecords}
         rowKey="key"
         toolBarRender={false}
-        search={{
-          ...proTableSearchConfig,
-          searchText: t('common.search'),
-          resetText: t('common.reset'),
-        }}
-        pagination={{
-          ...proTableDrawerPagination,
-          total: 17,
-        }}
       />
     </DrawerContainer>
   );

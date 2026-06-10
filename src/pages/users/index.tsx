@@ -12,10 +12,6 @@ import RoleTag from '@/components/RoleTag';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import type { UserRecord } from '@/bsComponents/UserConfig/types';
-import {
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 import { getInitials } from '@/utils/user';
 import { brandTokens } from '@/theme';
 
@@ -172,11 +168,6 @@ const Users: FC = () => {
         dataSource={mockData}
         rowKey="key"
         toolBarRender={false}
-        search={proTableSearchConfig}
-        pagination={{
-          ...proTableDrawerPagination,
-          total: 17,
-        }}
         renderEmptyAction={() => newUserButton}
       />
     </PageContainer>

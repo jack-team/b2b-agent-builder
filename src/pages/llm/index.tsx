@@ -13,10 +13,6 @@ import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import type { LLMModel } from '@/bsComponents/LLMModelConfig/types';
-import {
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 
 const LLMModelConfig = lazy(() => import('@/bsComponents/LLMModelConfig'));
 const LLMAgents = lazy(() => import('@/bsComponents/LLMAgents'));
@@ -130,11 +126,6 @@ const LLM: FC = () => {
         dataSource={mockData}
         rowKey="key"
         toolBarRender={false}
-        search={proTableSearchConfig}
-        pagination={{
-          ...proTableDrawerPagination,
-          total: mockData.length,
-        }}
       />
     </PageContainer>
   );

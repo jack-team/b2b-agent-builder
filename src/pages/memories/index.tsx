@@ -15,10 +15,6 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
-import {
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 import PageActions from './components/PageActions';
 import type { MemoryRecord, MemoryType } from './types';
 
@@ -202,11 +198,6 @@ const Memories: FC = () => {
         dataSource={mockData}
         rowKey="key"
         toolBarRender={false}
-        search={proTableSearchConfig}
-        pagination={{
-          ...proTableDrawerPagination,
-          total: 17,
-        }}
       />
     </PageContainer>
   );

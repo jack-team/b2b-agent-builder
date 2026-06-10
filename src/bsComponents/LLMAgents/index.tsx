@@ -9,10 +9,6 @@ import { DrawerContainer } from '@/components/Drawer';
 import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
-import {
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 import type { AssociatedAgent, LLMAgentsProps } from './types';
 
 const mockAgents: AssociatedAgent[] = [
@@ -101,8 +97,6 @@ const LLMAgents: FC<LLMAgentsProps> = ({ modelName, onClose }) => {
         dataSource={mockAgents}
         rowKey="key"
         toolBarRender={false}
-        search={proTableSearchConfig}
-        pagination={proTableDrawerPagination}
       />
     </DrawerContainer>
   );

@@ -4,12 +4,11 @@ import { ProTable } from '@ant-design/pro-components';
 import Spinner from '@/components/Spinner';
 import { useRequestCache } from './useRequestCache';
 import type { NiceTableProps, NiceTableData } from './types';
-
 import styles from './styles.module.less';
 
 function NiceTable<D extends object = NiceTableData>(props: NiceTableProps<D>) {
   const { t } = useTranslation();
-  const { renderEmptyAction, tableName, request, pagination, ...rest } = props;
+  const { renderEmptyAction, tableName, request, pagination, search, ...rest } = props;
 
   const { ready, enableCache, cachedData, request: cachedRequest } = useRequestCache({
     tableName,
@@ -37,13 +36,13 @@ function NiceTable<D extends object = NiceTableData>(props: NiceTableProps<D>) {
     if (spinning) return renderSkeleton();
 
     return (
-     <div className="p-[24px]">
-       <Empty
-        image={Empty.PRESENTED_IMAGE_SIMPLE}
-        children={renderEmptyAction?.(props)}
-        description={t('common.noDataAvailable')}
-      />
-     </div>
+      <div className="p-[24px]">
+        <Empty
+          image={Empty.PRESENTED_IMAGE_SIMPLE}
+          children={renderEmptyAction?.(props)}
+          description={t('common.noDataAvailable')}
+        />
+      </div>
     );
   };
 
@@ -55,12 +54,17 @@ function NiceTable<D extends object = NiceTableData>(props: NiceTableProps<D>) {
     <ProTable
       {...rest}
       request={cachedRequest}
+      search={search !== false && {
+        ...search,
+        searchText: t('common.search'),
+        resetText: t('common.reset')
+      }}
+      loading={{ indicator: renderLoading() }}
       defaultData={enableCache ? cachedData : undefined}
       pagination={{ showSizeChanger: true, ...pagination }}
-      loading={{ indicator: renderLoading() }}
       tableViewRender={(props, dom) => {
-        const { dataSource = [] } = props;
-        if (dataSource.length) return dom;
+        const { dataSource: d } = props;
+        if (d?.length) return dom;
         return renderEmpty(props);
       }}
     />

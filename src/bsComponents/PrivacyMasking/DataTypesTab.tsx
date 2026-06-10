@@ -11,11 +11,6 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import NiceTable from '@/components/NiceTable';
-import {
-  getTextSearchFieldProps,
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 import { mockDataTypes } from './mock';
 import RiskLevelTag from './RiskLevelTag';
 import type { DataTypeRecord } from './types';
@@ -24,28 +19,20 @@ import styles from './styles.module.less';
 const DataTypesTab: FC = () => {
   const { t } = useTranslation();
 
-  const searchFieldProps = useMemo(
-    () => getTextSearchFieldProps(t('common.pleaseEnter')),
-    [t],
-  );
-
   const columns: ProColumns<DataTypeRecord>[] = useMemo(
     () => [
       {
         title: t('privacyMasking.dataTypes.columns.name'),
         dataIndex: 'name',
-        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.dataTypes.columns.description'),
         dataIndex: 'description',
         ellipsis: true,
-        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.dataTypes.columns.category'),
         dataIndex: 'category',
-        fieldProps: searchFieldProps,
         render: (_dom, record) => (
           <Tag>{t(`privacyMasking.category.${record.category}`)}</Tag>
         ),
@@ -53,14 +40,12 @@ const DataTypesTab: FC = () => {
       {
         title: t('privacyMasking.dataTypes.columns.riskLevel'),
         dataIndex: 'riskLevel',
-        fieldProps: searchFieldProps,
         render: (_dom, record) => <RiskLevelTag level={record.riskLevel} />,
       },
       {
         title: t('privacyMasking.dataTypes.columns.regexPattern'),
         dataIndex: 'regexPattern',
         ellipsis: true,
-        fieldProps: searchFieldProps,
         render: (_dom, record) => (
           <code className={styles.regex_pattern}>{record.regexPattern}</code>
         ),
@@ -100,7 +85,7 @@ const DataTypesTab: FC = () => {
         ),
       },
     ],
-    [t, searchFieldProps],
+    [t],
   );
 
   return (
@@ -114,15 +99,6 @@ const DataTypesTab: FC = () => {
           {t('privacyMasking.actions.new')}
         </Button>,
       ]}
-      search={{
-        ...proTableSearchConfig,
-        searchText: t('common.search'),
-        resetText: t('common.reset'),
-      }}
-      pagination={{
-        ...proTableDrawerPagination,
-        total: 17,
-      }}
     />
   );
 };

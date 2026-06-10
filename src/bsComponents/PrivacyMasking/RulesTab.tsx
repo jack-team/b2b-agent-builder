@@ -13,11 +13,6 @@ import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import NiceTable from '@/components/NiceTable';
-import {
-  getTextSearchFieldProps,
-  proTableDrawerPagination,
-  proTableSearchConfig,
-} from '@/utils/proTable';
 import { mockMaskingRules } from './mock';
 import RiskLevelTag from './RiskLevelTag';
 import type { DetectionMethod, MaskingRuleRecord } from './types';
@@ -32,27 +27,19 @@ const detectionMethodColorMap: Record<DetectionMethod, string> = {
 const RulesTab: FC = () => {
   const { t } = useTranslation();
 
-  const searchFieldProps = useMemo(
-    () => getTextSearchFieldProps(t('common.pleaseEnter')),
-    [t],
-  );
-
   const columns: ProColumns<MaskingRuleRecord>[] = useMemo(
     () => [
       {
         title: t('privacyMasking.rules.columns.name'),
         dataIndex: 'name',
-        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.rules.columns.dataType'),
         dataIndex: 'dataType',
-        fieldProps: searchFieldProps,
       },
       {
         title: t('privacyMasking.rules.columns.detectionMethod'),
         dataIndex: 'detectionMethods',
-        fieldProps: searchFieldProps,
         render: (_dom, record) => (
           <Space size={4} wrap>
             {record.detectionMethods.map((method) => (
@@ -67,14 +54,12 @@ const RulesTab: FC = () => {
         title: t('privacyMasking.rules.columns.handlingStrategy'),
         dataIndex: 'handlingStrategy',
         ellipsis: true,
-        fieldProps: searchFieldProps,
         render: (_dom, record) =>
           t(`privacyMasking.handlingStrategy.${record.handlingStrategy}`),
       },
       {
         title: t('privacyMasking.rules.columns.riskLevel'),
         dataIndex: 'riskLevel',
-        fieldProps: searchFieldProps,
         render: (_dom, record) => <RiskLevelTag level={record.riskLevel} />,
       },
       {
@@ -112,7 +97,7 @@ const RulesTab: FC = () => {
         ),
       },
     ],
-    [t, searchFieldProps],
+    [t],
   );
 
   return (
@@ -132,15 +117,6 @@ const RulesTab: FC = () => {
           {t('privacyMasking.actions.export')}
         </Button>,
       ]}
-      search={{
-        ...proTableSearchConfig,
-        searchText: t('common.search'),
-        resetText: t('common.reset'),
-      }}
-      pagination={{
-        ...proTableDrawerPagination,
-        total: 17,
-      }}
     />
   );
 };
