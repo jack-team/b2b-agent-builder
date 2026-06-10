@@ -1,14 +1,14 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import cls from 'classnames';
-import { Input, Empty } from 'antd';
+import { Input } from 'antd';
 import { TableOutlined, SearchOutlined } from '@/components/BaseIcons';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useSafeState } from 'ahooks';
 import { useTranslation } from 'react-i18next';
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import { DrawerContainer } from '@/components/Drawer';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import styles from './styles.module.less';
@@ -208,7 +208,8 @@ const MCPToolContext: FC = () => {
           </div>
         </div>
         <div className={cls(styles.main, 'custom-pro-card-container')}>
-          <ProTable<ContextTool>
+          <NiceTable<ContextTool>
+            tableName="mcp-tool-context"
             size="medium"
             rowKey="key"
             columns={columns}
@@ -223,16 +224,6 @@ const MCPToolContext: FC = () => {
               showSizeChanger: false,
               showTotal: (total, range) =>
                 t('common.paginationTotal', { start: range[0], end: range[1], total }),
-            }}
-            tableViewRender={({ dataSource = [] }, dom) => {
-              if (!dataSource.length) {
-                return (
-                  <div className="py-[56px]">
-                    <Empty description={t('common.nothingFound')} />
-                  </div>
-                );
-              }
-              return dom;
             }}
           />
         </div>

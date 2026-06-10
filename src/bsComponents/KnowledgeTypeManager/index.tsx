@@ -2,14 +2,13 @@ import type { FC, JSX } from 'react';
 import { useMemo } from 'react';
 import { Button } from 'antd';
 import { PlusOutlined } from '@/components/BaseIcons';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 import { DrawerContainer } from '@/components/Drawer';
 import Drawer from '@/components/Drawer';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
-import { createProTableEmptyViewRenderer } from '@/utils/proTable';
 import KnowledgeTypeEdit from './edit';
 
 interface KnowledgeType {
@@ -114,20 +113,13 @@ const KnowledgeTypeManager: FC = () => {
     },
   ], [t]);
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({
-      description: t('common.noDataAvailable'),
-      action: renderCreateNew(),
-    }),
-    [t],
-  );
-
   return (
     <DrawerContainer
       title={t('knowledgeType.knowledgeTypes')}
       extra={renderCreateNew()}
     >
-      <ProTable
+      <NiceTable<KnowledgeType>
+        tableName="knowledge-types"
         size="medium"
         columns={columns}
         toolBarRender={false}
@@ -141,7 +133,7 @@ const KnowledgeTypeManager: FC = () => {
           showTotal: (total, range) =>
             t('common.paginationTotal', { start: range[0], end: range[1], total }),
         }}
-        tableViewRender={tableEmptyViewRenderer}
+        renderEmptyAction={() => renderCreateNew()}
       />
     </DrawerContainer>
   );

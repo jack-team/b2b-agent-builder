@@ -9,12 +9,11 @@ import {
   ImportOutlined,
   PlusOutlined,
 } from '@/components/BaseIcons';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
+import NiceTable from '@/components/NiceTable';
 import {
-  createProTableEmptyViewRenderer,
   getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
@@ -116,13 +115,9 @@ const RulesTab: FC = () => {
     [t, searchFieldProps],
   );
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
-    [t],
-  );
-
   return (
-    <ProTable<MaskingRuleRecord>
+    <NiceTable<MaskingRuleRecord>
+      tableName="privacy-masking-rules"
       columns={columns}
       dataSource={mockMaskingRules}
       rowKey="key"
@@ -146,7 +141,6 @@ const RulesTab: FC = () => {
         ...proTableDrawerPagination,
         total: 17,
       }}
-      tableViewRender={tableEmptyViewRenderer}
     />
   );
 };

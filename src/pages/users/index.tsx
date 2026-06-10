@@ -2,17 +2,17 @@ import type { FC } from 'react';
 import { lazy, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Avatar, Button, Space, Typography } from 'antd';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
 import Drawer from '@/components/Drawer';
 import LazyDrawerContent from '@/components/LazyDrawerContent';
+import NiceTable from '@/components/NiceTable';
 import RoleTag from '@/components/RoleTag';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import type { UserRecord } from '@/bsComponents/UserConfig/types';
 import {
-  createProTableEmptyViewRenderer,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
@@ -161,20 +161,13 @@ const Users: FC = () => {
     </Drawer>
   );
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({
-      description: t('common.noDataAvailable'),
-      action: newUserButton,
-    }),
-    [t],
-  );
-
   return (
     <PageContainer
       title={t('menu.users')}
       extra={newUserButton}
     >
-      <ProTable<UserRecord>
+      <NiceTable<UserRecord>
+        tableName="users"
         columns={columns}
         dataSource={mockData}
         rowKey="key"
@@ -184,7 +177,7 @@ const Users: FC = () => {
           ...proTableDrawerPagination,
           total: 17,
         }}
-        tableViewRender={tableEmptyViewRenderer}
+        renderEmptyAction={() => newUserButton}
       />
     </PageContainer>
   );

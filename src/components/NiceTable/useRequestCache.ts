@@ -1,11 +1,11 @@
 import { useMemoizedFn, useSafeState, useMount } from 'ahooks';
 import type { RequestData } from '@ant-design/pro-table';
 import { DexieStorage } from '@/utils/dexieStorage';
-import type { NiceTableData, RequestCacheParams, TableRequest } from './types';
+import type { RequestCacheParams, TableRequest } from './types';
 
 const tableCacheStorage = new DexieStorage('nice-table', true);
 
-export function useRequestCache<D extends NiceTableData, U>(params: RequestCacheParams<D, U>) {
+export function useRequestCache<D extends object, U>(params: RequestCacheParams<D, U>) {
   const { tableName, request } = params;
   const [cachedData, setCachedData] = useSafeState<D[]>();
   const [ready, setReady] = useSafeState(!tableName);

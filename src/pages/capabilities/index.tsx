@@ -3,10 +3,11 @@ import { lazy, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ToolOutlined } from '@/components/BaseIcons';
 import { Button, Space, Tooltip } from 'antd';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import Drawer from '@/components/Drawer';
 import LazyDrawerContent from '@/components/LazyDrawerContent';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import i18n from '@/i18n';
@@ -118,7 +119,8 @@ const Capabilities: FC = () => {
         </Drawer>
       }
     >
-      <ProTable
+      <NiceTable<Capability>
+        tableName="capabilities"
         columns={columns}
         dataSource={mockData}
         pagination={{

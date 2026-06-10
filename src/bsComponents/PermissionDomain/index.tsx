@@ -2,13 +2,12 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { EditOutlined } from '@/components/BaseIcons';
 import { Button, Progress } from 'antd';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import { DrawerContainer } from '@/components/Drawer';
+import NiceTable from '@/components/NiceTable';
 import {
-  createProTableEmptyViewRenderer,
   getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
@@ -161,16 +160,12 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
     [t, searchFieldProps],
   );
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
-    [t],
-  );
-
   return (
     <DrawerContainer title={t('permissionDomain.title')} onClose={onClose}>
       <DomainStatCards items={domainStats} />
       <QuotaAlertList items={quotaAlerts} />
-      <ProTable<UserQuotaRecord>
+      <NiceTable<UserQuotaRecord>
+        tableName="permission-domain-quotas"
         columns={columns}
         dataSource={mockQuotaRecords}
         rowKey="key"
@@ -184,7 +179,6 @@ const PermissionDomain: FC<PermissionDomainProps> = ({ onClose }) => {
           ...proTableDrawerPagination,
           total: 17,
         }}
-        tableViewRender={tableEmptyViewRenderer}
       />
     </DrawerContainer>
   );

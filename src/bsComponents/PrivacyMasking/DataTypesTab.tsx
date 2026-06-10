@@ -7,12 +7,11 @@ import {
   EditOutlined,
   PlusOutlined,
 } from '@/components/BaseIcons';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
+import NiceTable from '@/components/NiceTable';
 import {
-  createProTableEmptyViewRenderer,
   getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
@@ -104,13 +103,9 @@ const DataTypesTab: FC = () => {
     [t, searchFieldProps],
   );
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
-    [t],
-  );
-
   return (
-    <ProTable<DataTypeRecord>
+    <NiceTable<DataTypeRecord>
+      tableName="privacy-masking-data-types"
       columns={columns}
       dataSource={mockDataTypes}
       rowKey="key"
@@ -128,7 +123,6 @@ const DataTypesTab: FC = () => {
         ...proTableDrawerPagination,
         total: 17,
       }}
-      tableViewRender={tableEmptyViewRenderer}
     />
   );
 };

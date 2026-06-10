@@ -9,13 +9,13 @@ import {
   PushpinOutlined,
 } from '@/components/BaseIcons';
 import { Button, Progress, Space, Tag, Tooltip } from 'antd';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import {
-  createProTableEmptyViewRenderer,
   proTableDrawerPagination,
   proTableSearchConfig,
 } from '@/utils/proTable';
@@ -191,17 +191,13 @@ const Memories: FC = () => {
     },
   ], [t, typeValueEnum, statusValueEnum]);
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
-    [t],
-  );
-
   return (
     <PageContainer
       title={t('menu.memories')}
       extra={<PageActions />}
     >
-      <ProTable<MemoryRecord>
+      <NiceTable<MemoryRecord>
+        tableName="memories"
         columns={columns}
         dataSource={mockData}
         rowKey="key"
@@ -211,7 +207,6 @@ const Memories: FC = () => {
           ...proTableDrawerPagination,
           total: 17,
         }}
-        tableViewRender={tableEmptyViewRenderer}
       />
     </PageContainer>
   );

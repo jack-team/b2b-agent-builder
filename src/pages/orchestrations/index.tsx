@@ -8,19 +8,19 @@ import {
   SwapOutlined,
 } from '@/components/BaseIcons';
 import { Button, Space, Tooltip } from 'antd';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import Drawer from '@/components/Drawer';
 import LazyDrawerContent from '@/components/LazyDrawerContent';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import {
   getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
-  renderProTableEmptyView,
 } from '@/utils/proTable';
 import type { OrchestrationRecord } from './types';
 
@@ -167,7 +167,8 @@ const Orchestrations: FC = () => {
       title={t('menu.orchestrations')}
       extra={renderNewOrchestrationButton()}
     >
-      <ProTable<OrchestrationRecord>
+      <NiceTable<OrchestrationRecord>
+        tableName="orchestrations"
         columns={columns}
         dataSource={mockData}
         rowKey="key"
@@ -181,7 +182,6 @@ const Orchestrations: FC = () => {
           ...proTableDrawerPagination,
           total: 17,
         }}
-        tableViewRender={renderProTableEmptyView}
       />
     </PageContainer>
   );

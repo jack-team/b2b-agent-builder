@@ -2,12 +2,11 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { Button, Tag } from 'antd';
 import { ExportOutlined } from '@/components/BaseIcons';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 
+import NiceTable from '@/components/NiceTable';
 import {
-  createProTableEmptyViewRenderer,
   getTextSearchFieldProps,
   proTableDrawerPagination,
   proTableSearchConfig,
@@ -63,13 +62,9 @@ const AuditLogsTab: FC = () => {
     [t, searchFieldProps],
   );
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
-    [t],
-  );
-
   return (
-    <ProTable<AuditLogRecord>
+    <NiceTable<AuditLogRecord>
+      tableName="privacy-masking-audit-logs"
       columns={columns}
       dataSource={mockAuditLogs}
       rowKey="key"
@@ -87,7 +82,6 @@ const AuditLogsTab: FC = () => {
         ...proTableDrawerPagination,
         total: 17,
       }}
-      tableViewRender={tableEmptyViewRenderer}
     />
   );
 };

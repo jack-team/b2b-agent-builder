@@ -65,6 +65,7 @@ const DataGrid: FC = () => {
 
   return (
     <NiceTable
+      tableName="knowledge-data-grid"
       search={false}
       toolBarRender={false}
       dataSource={mockData}

@@ -2,14 +2,13 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import { Tag, Button } from 'antd';
 import { PlusOutlined } from '@/components/BaseIcons';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
+import NiceTable from '@/components/NiceTable';
 import UpdateKnowledge from '@/bsComponents/UpdateKnowledge';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
-import { createProTableEmptyViewRenderer } from '@/utils/proTable';
 
 interface KnowledgeSource {
   key: string;
@@ -100,23 +99,19 @@ const KnowledgeSources: FC = () => {
     </Drawer>
   );
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({ action: newKnowledgeButton }),
-    [t],
-  );
-
   return (
     <DrawerContainer
       title={t('knowledgesPage.knowledgeSources')}
       extra={newKnowledgeButton}
     >
-      <ProTable
+      <NiceTable<KnowledgeSource>
+        tableName="knowledge-sources"
         size="medium"
         columns={columns}
         toolBarRender={false}
         dataSource={mockData}
         search={{ layout: 'vertical' }}
-        tableViewRender={tableEmptyViewRenderer}
+        renderEmptyAction={() => newKnowledgeButton}
       />
     </DrawerContainer>
   );

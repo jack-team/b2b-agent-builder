@@ -3,19 +3,19 @@ import { lazy, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { RobotOutlined } from '@/components/BaseIcons';
 import { Button, Space, Tooltip } from 'antd';
-import { PageContainer, ProTable } from '@ant-design/pro-components';
+import { PageContainer } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import Drawer from '@/components/Drawer';
 import LazyDrawerContent from '@/components/LazyDrawerContent';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import type { LLMModel } from '@/bsComponents/LLMModelConfig/types';
 import {
   proTableDrawerPagination,
   proTableSearchConfig,
-  renderProTableEmptyView,
 } from '@/utils/proTable';
 
 const LLMModelConfig = lazy(() => import('@/bsComponents/LLMModelConfig'));
@@ -124,7 +124,8 @@ const LLM: FC = () => {
         </Drawer>
       }
     >
-      <ProTable<LLMModel>
+      <NiceTable<LLMModel>
+        tableName="llm-models"
         columns={columns}
         dataSource={mockData}
         rowKey="key"
@@ -134,7 +135,6 @@ const LLM: FC = () => {
           ...proTableDrawerPagination,
           total: mockData.length,
         }}
-        tableViewRender={renderProTableEmptyView}
       />
     </PageContainer>
   );

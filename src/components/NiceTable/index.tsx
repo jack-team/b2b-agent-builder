@@ -7,9 +7,9 @@ import type { NiceTableProps, NiceTableData } from './types';
 
 import styles from './styles.module.less';
 
-function NiceTable<D extends NiceTableData = NiceTableData>(props: NiceTableProps<D>) {
+function NiceTable<D extends object = NiceTableData>(props: NiceTableProps<D>) {
   const { t } = useTranslation();
-  const { renderEmptyAction, tableName, request, defaultData, ...rest } = props;
+  const { renderEmptyAction, tableName, request, pagination, ...rest } = props;
 
   const { ready, enableCache, cachedData, request: cachedRequest } = useRequestCache({
     tableName,
@@ -55,8 +55,8 @@ function NiceTable<D extends NiceTableData = NiceTableData>(props: NiceTableProp
     <ProTable
       {...rest}
       request={cachedRequest}
-      defaultData={defaultData ?? (enableCache ? cachedData : undefined)}
-      pagination={{ showSizeChanger: true }}
+      defaultData={enableCache ? cachedData : undefined}
+      pagination={{ showSizeChanger: true, ...pagination }}
       loading={{ indicator: renderLoading() }}
       tableViewRender={(props, dom) => {
         const { dataSource = [] } = props;

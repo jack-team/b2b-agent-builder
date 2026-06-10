@@ -2,17 +2,16 @@ import type { FC } from 'react';
 import { useMemo } from 'react';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 
 import { useStatusValueEnum } from '@/hooks/useStatusValueEnum';
 import { DrawerContainer } from '@/components/Drawer';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
 import TableActions from '@/components/TableActions';
 import {
   proTableDrawerPagination,
   proTableSearchConfig,
-  renderProTableEmptyView,
 } from '@/utils/proTable';
 import type { AssociatedAgent, LLMAgentsProps } from './types';
 
@@ -95,7 +94,8 @@ const LLMAgents: FC<LLMAgentsProps> = ({ modelName, onClose }) => {
       title={title}
       onClose={onClose}
     >
-      <ProTable<AssociatedAgent>
+      <NiceTable<AssociatedAgent>
+        tableName="llm-agents"
         size="medium"
         columns={columns}
         dataSource={mockAgents}
@@ -103,7 +103,6 @@ const LLMAgents: FC<LLMAgentsProps> = ({ modelName, onClose }) => {
         toolBarRender={false}
         search={proTableSearchConfig}
         pagination={proTableDrawerPagination}
-        tableViewRender={renderProTableEmptyView}
       />
     </DrawerContainer>
   );

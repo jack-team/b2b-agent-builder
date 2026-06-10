@@ -1,12 +1,11 @@
 import type { FC, JSX } from 'react';
 import { useMemo } from 'react';
 import { Button, Space } from 'antd';
-import { ProTable } from '@ant-design/pro-components';
 import type { ProColumns } from '@ant-design/pro-table';
 import { useTranslation } from 'react-i18next';
 import Drawer, { DrawerContainer } from '@/components/Drawer';
+import NiceTable from '@/components/NiceTable';
 import StatusTag from '@/components/StatusTag';
-import { createProTableEmptyViewRenderer } from '@/utils/proTable';
 import MCPToolConfig from '@/bsComponents/MCPToolConfig';
 import MCPToolContext from '@/bsComponents/MCPToolContext';
 
@@ -167,16 +166,12 @@ const MCPTools: FC = () => {
     },
   ], [t]);
 
-  const tableEmptyViewRenderer = useMemo(
-    () => createProTableEmptyViewRenderer({ description: t('common.noDataAvailable') }),
-    [t],
-  );
-
   return (
     <DrawerContainer
       title={t('mcp.shopifyMcpTools')}
     >
-      <ProTable
+      <NiceTable<Tool>
+        tableName="mcp-tools"
         size="medium"
         columns={columns}
         toolBarRender={false}
@@ -190,7 +185,6 @@ const MCPTools: FC = () => {
           showTotal: (total, range) =>
             t('common.paginationTotal', { start: range[0], end: range[1], total }),
         }}
-        tableViewRender={tableEmptyViewRenderer}
       />
     </DrawerContainer>
   );
