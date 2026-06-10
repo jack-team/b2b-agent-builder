@@ -1,8 +1,7 @@
 import type { FC } from 'react';
 import { useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProTable } from '@ant-design/pro-components';
-import i18n from '@/i18n';
+import NiceTable from '@/components/NiceTable';
 
 const mockData = [
   {
@@ -65,19 +64,9 @@ const DataGrid: FC = () => {
   ], [t]);
 
   return (
-    <ProTable
+    <NiceTable
       search={false}
       toolBarRender={false}
-      pagination={{
-        showSizeChanger: true,
-        pageSizeOptions: ['10', '20', '50'],
-        showTotal: (total, range) =>
-          i18n.t('common.paginationTotal', {
-            start: range[0],
-            end: range[1],
-            total,
-          }),
-      }}
       dataSource={mockData}
       columns={columns}
     />

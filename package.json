@@ -31,7 +31,8 @@
     "react-router-dom": "^7.15.0",
     "tailwindcss": "^4.2.4",
     "uuid": "^14.0.0",
-    "zustand": "^5.0.13"
+    "zustand": "^5.0.13",
+    "dexie": "^4.2.1"
   },
   "devDependencies": {
     "@babel/core": "^7.29.0",
