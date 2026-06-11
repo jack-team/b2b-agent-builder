@@ -14,9 +14,10 @@ import styles from './styles.module.less';
 const AppMenu: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const mode = useThemeStore(s => s.mode);
   const { menus, selectedKeys } = useMenu();
   const { menuCollapsed, toggleMenu } = useAppStore();
-  const mode = useThemeStore(s => s.mode);
+  const sidebarWidth = useThemeStore(s => s.appTheme.sidebarWidth);
 
   const menuItems = useMemo(() => {
     return menus.map(item => {
@@ -34,6 +35,7 @@ const AppMenu: FC = () => {
             label: t(child.title),
             icon: Icon ? <Icon /> : null,
             onClick: () => navigate(path),
+            // 预加载路由
             onFocus: () => prefetchRoute(path),
             onMouseEnter: () => prefetchRoute(path)
           };
@@ -45,8 +47,8 @@ const AppMenu: FC = () => {
   return (
     <Layout.Sider
       // 侧边栏内置样式需与当前主题一致
-      theme={mode === 'dark' ? 'dark' : 'light'}
-      width={240}
+      theme={mode}
+      width={sidebarWidth}
       collapsed={menuCollapsed}
       className={cls(
         menuCollapsed && styles.collapsed,
@@ -55,7 +57,7 @@ const AppMenu: FC = () => {
     >
       <div className="h-full flex flex-col overflow-hidden">
         <div className={styles.band}>
-          <img src="/logo.svg" className="h-[30px]" alt="logo" />
+          <img src="/logo.svg" className="h-[34px]" alt="logo" />
           <div className={styles.band_title}>
             {t('layout.brandName')}
           </div>

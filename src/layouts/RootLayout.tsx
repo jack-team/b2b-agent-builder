@@ -1,6 +1,6 @@
 import type { FC } from 'react';
-import { Outlet } from 'react-router-dom';
+import AnimatedOutlet from '@/components/AnimatedOutlet';
 
-const RootLayout: FC = () => <Outlet />;
+const RootLayout: FC = () => <AnimatedOutlet />;
 
 export default RootLayout;

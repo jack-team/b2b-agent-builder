@@ -2,12 +2,12 @@ import { type FC } from 'react';
 import classNames from 'classnames';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
-import { MoonOutlined, SunOutlined } from '@/components/BaseIcons';
+import { MoonFilled, SunOutlined } from '@/components/BaseIcons';
 import { useThemeStore } from '@/store/theme';
 
 const icons = {
   light: SunOutlined,
-  dark: MoonOutlined,
+  dark: MoonFilled,
 }
 
 type ThemeSwitcherProps = {

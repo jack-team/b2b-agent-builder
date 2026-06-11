@@ -109,7 +109,7 @@ const KnowledgeSources: FC = () => {
         size="medium"
         columns={columns}
         toolBarRender={false}
-        // dataSource={mockData}
+        dataSource={mockData}
         search={{ layout: 'vertical' }}
         renderEmptyAction={() => newKnowledgeButton}
       />
