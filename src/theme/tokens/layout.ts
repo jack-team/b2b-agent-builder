@@ -58,4 +58,6 @@ export const layoutTokens = {
   headerHeight: '64px',
   /** 最大内容宽度 */
   maxContentWidth: '1280px',
+  /**logo 高度 */
+  logoHeight: '28px',
 } as const;

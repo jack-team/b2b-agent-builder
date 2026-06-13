@@ -54,6 +54,7 @@ const createComponentTokens = (appTheme: AppTheme, mode: ThemeMode) => {
       headerBg: appTheme.bgColorSurface,
       bodyBg: appTheme.bgColorPrimary,
       siderBg: appTheme.bgColorSurface,
+      headerHeight: appTheme.headerHeight,
       headerPadding: '0 24px',
     },
     Tag: {
