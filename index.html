@@ -5,6 +5,22 @@
     <link rel="icon" type="image/svg+xml" href="/logo.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title><%-appName%></title>
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem('theme-store');
+          var mode = 'light';
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            var stored = parsed.state && parsed.state.mode;
+            if (stored === 'dark' || stored === 'light') mode = stored;
+          }
+          var doc = document.documentElement;
+          doc.setAttribute('data-theme', mode);
+          doc.style.colorScheme = mode;
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

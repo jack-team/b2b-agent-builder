@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import { BaseIcons, MenuFoldOutlined, MenuUnfoldOutlined } from '@/components/BaseIcons';
 import { useAppStore } from '@/store/app';
 import { useThemeStore } from '@/store/theme';
+import { layoutTokens } from '@/theme/tokens';
 import { prefetchRoute } from '@/router/helper';
 import { useMenu } from './hooks';
 import UserCenter from './userCenter';
@@ -17,7 +18,7 @@ const AppMenu: FC = () => {
   const mode = useThemeStore(s => s.mode);
   const { menus, selectedKeys } = useMenu();
   const { menuCollapsed, toggleMenu } = useAppStore();
-  const sidebarWidth = useThemeStore(s => s.appTheme.sidebarWidth);
+  const sidebarWidth = layoutTokens.sidebarWidth;
 
   const menuItems = useMemo(() => {
     return menus.map(item => {

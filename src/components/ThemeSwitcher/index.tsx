@@ -1,4 +1,4 @@
-import { type FC } from 'react';
+import { type FC, startTransition } from 'react';
 import classNames from 'classnames';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
@@ -20,7 +20,9 @@ const ThemeSwitcher: FC<ThemeSwitcherProps> = ({ className }) => {
   const setMode = useThemeStore(s => s.setMode);
 
   const toggleTheme = useMemoizedFn(() => {
-    setMode(mode === 'light' ? 'dark' : 'light');
+    startTransition(() => {
+      setMode(mode === 'light' ? 'dark' : 'light');
+    });
   });
 
   const ActiveIcon = icons[mode];
