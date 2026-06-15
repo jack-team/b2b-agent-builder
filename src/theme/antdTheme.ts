@@ -9,9 +9,10 @@ const BORDER_RADIUS = 6;
 
 const createComponentTokens = (appTheme: AppTheme, mode: ThemeMode) => {
   const isDark = mode === 'dark';
+  
   return <AntdThemeConfig['components']>{
     Menu: {
-      iconSize: 20,
+      iconSize: 18,
       itemHeight: 36,
       itemMarginInline: 0,
       groupTitleFontSize: 12,

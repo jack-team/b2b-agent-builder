@@ -32,5 +32,5 @@ export type AppTheme = BrandTokens & LayoutTokens & ThemeColorPalette;
 export type ThemeBundle = {
   mode: ThemeMode;
   appTheme: AppTheme;
-  antdTheme: import('./createAntdTheme').AntdThemeConfig;
+  antdTheme: import('./antdTheme').AntdThemeConfig;
 };

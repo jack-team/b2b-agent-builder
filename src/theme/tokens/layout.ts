@@ -53,7 +53,7 @@ export const layoutTokens = {
   inputHeightMd: '36px',
   inputHeightLg: '44px',
   /** 侧边栏 */
-  sidebarWidth: '240px',
+  sidebarWidth: '224px',
   /** 头部 */
   headerHeight: '64px',
   /** 最大内容宽度 */

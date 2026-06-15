@@ -1,6 +1,6 @@
 import { DEFAULT_THEME_MODE } from './constants';
-import { createAntdTheme } from './createAntdTheme';
-import { createAppTheme } from './createAppTheme';
+import { createAppTheme } from './appTheme';
+import { createAntdTheme } from './antdTheme';
 import type { ThemeBundle, ThemeMode } from './types';
 
 /** 根据 mode 一次性生成完整主题 bundle，保证 appTheme 与 antdTheme 同步 */

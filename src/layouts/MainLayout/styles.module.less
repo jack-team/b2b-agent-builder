@@ -42,6 +42,7 @@
 .menu {
   flex: 1;
   padding: 12px;
+  overflow-x: hidden;
   overflow-y: auto;
   border: none !important;
 
@@ -61,6 +62,15 @@
           display: flex;
           align-items: center;
           padding-inline-start: var(--ant-padding);
+        }
+
+        .ant-menu-title-content {
+          --ant-menu-icon-margin-inline-end: 12px;
+
+          flex: 1;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
         }
       }
     }

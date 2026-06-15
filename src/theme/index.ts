@@ -1,7 +1,7 @@
-export { createAppTheme } from './createAppTheme';
-export { createAntdTheme } from './createAntdTheme';
+export { createAppTheme } from './appTheme';
+export { createAntdTheme } from './antdTheme';
 export { buildTheme, defaultTheme } from './buildTheme';
-export type { AntdThemeConfig } from './createAntdTheme';
+export type { AntdThemeConfig } from './antdTheme';
 export { brandTokens, colorPalettes, layoutTokens } from './tokens';
 export { DEFAULT_THEME_MODE, THEME_STORAGE_KEY } from './constants';
 
