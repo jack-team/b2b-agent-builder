@@ -53,10 +53,11 @@ const Drawer: FC<CustomDrawerProps> = (props) => {
         {...rest}
         open={open}
         destroyOnHidden
+        closable={closable}
         push={{ distance: 0 }}
         afterOpenChange={afterOpenChange}
         size={`var(--drawer-width-${size})`}
-        mask={{ closable: false, blur: false }}
+        mask={{ closable: true, blur: true }}
         rootClassName={cls(
           styles.drawer, 
           !isTopMost && styles.transparent,
