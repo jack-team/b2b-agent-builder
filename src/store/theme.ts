@@ -53,7 +53,7 @@ export const useThemeStore = create(persist<ThemeStoreType>(
       return { mode: s.mode } as ThemeStoreType;
     },
     onRehydrateStorage: () => s => {
-      applyThemeToDom(s?.mode);
+      applyThemeToDom(s?.mode || DEFAULT_THEME_MODE);
     },
   }
 ));
