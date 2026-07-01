@@ -1,6 +1,5 @@
 import type { FC } from 'react';
 import { Row, Col } from 'antd';
-import { PageContainer } from '@ant-design/pro-components';
 import WelcomeSection from './components/WelcomeSection';
 import FrequentlyUsed from './components/FrequentlyUsed';
 import StatCards from './components/StatCards';
@@ -10,10 +9,7 @@ import styles from './styles.module.less';
 
 const Dashboard: FC = () => {
   return (
-    <PageContainer
-      title={false}
-      breadcrumb={undefined}
-    >
+    <div className={styles.pageContainer}>
       <div className={styles.page}>
         <WelcomeSection />
         <FrequentlyUsed />
@@ -27,7 +23,7 @@ const Dashboard: FC = () => {
           </Col>
         </Row>
       </div>
-    </PageContainer>
+    </div>
   );
 };
 

@@ -1,9 +1,11 @@
+import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
-import { MainLayout } from '@/layouts';
 import RouteError from '@/components/RouteError';
 import { NoAuthWrapper, AuthWrapper } from '@/components/AuthWrapper';
 import { authPage, mainRoutes } from '@/configs/routes';
 import { toLazyRoute } from './helper';
+
+const MainLayout = lazy(() => import('@/layouts/MainLayout'));
 
 const router = createBrowserRouter([
   {

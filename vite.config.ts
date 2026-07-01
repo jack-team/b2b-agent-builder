@@ -53,12 +53,28 @@ export default defineConfig(conf => {
       rollupOptions: {
         output: {
           manualChunks(id) {
+            // React 核心需优先于 pro-components，避免 jsx-runtime 被误打入 pro-components chunk
+            if (id.includes('node_modules/react-dom')) {
+              return 'react-dom';
+            }
+            if (
+              id.includes('node_modules/react/jsx-runtime')
+              || id.includes('node_modules/react/jsx-dev-runtime')
+              || id.includes('node_modules/react/cjs/react-jsx-runtime')
+              || id.includes('node_modules/react/cjs/react-jsx-dev-runtime')
+            ) {
+              return 'react-jsx';
+            }
+            if (id.includes('node_modules/react/') || id.includes('node_modules/react\\')) {
+              return 'react';
+            }
+            if (id.includes('node_modules/scheduler')) {
+              return 'react';
+            }
             if (id.includes('@xyflow')) {
               return 'xyflow';
             }
-            if (id.includes('@ant-design/pro')) {
-              return 'pro-components';
-            }
+            // pro-components 不做强制合包，避免 jsx-runtime 被绑定到该 chunk 导致首屏误加载
             if (id.includes('node_modules/@ant-design/icons')) {
               return 'antd-icons';
             }

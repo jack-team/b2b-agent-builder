@@ -1,7 +1,6 @@
 import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
-import { Button, Row, Col } from 'antd';
+import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { MailOutlined } from '@/components/BaseIcons';
 import styles from './styles.module.less';
 
@@ -9,67 +8,70 @@ const RegisterForm: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <ProForm
-      layout="vertical"
-      submitter={false}
-    >
-      <ProFormText
+    <Form layout="vertical" size="large">
+      <Form.Item
         name="companyName"
-        placeholder={t('auth.companyName')}
-        formItemProps={{ className: 'no-card' }}
+        className="no-card"
         rules={[{ required: true }]}
-      />
-      <ProFormText
+      >
+        <Input placeholder={t('auth.companyName')} />
+      </Form.Item>
+      <Form.Item
         name="adminName"
-        placeholder={t('auth.adminName')}
-        formItemProps={{ className: 'no-card' }}
+        className="no-card"
         rules={[{ required: true }]}
-      />
-      <ProFormText
+      >
+        <Input placeholder={t('auth.adminName')} />
+      </Form.Item>
+      <Form.Item
         name="contactPhone"
-        placeholder={t('auth.contactPhone')}
-        formItemProps={{ className: 'no-card' }}
+        className="no-card"
         rules={[{ required: true }]}
-      />
-      <ProFormText
+      >
+        <Input placeholder={t('auth.contactPhone')} />
+      </Form.Item>
+      <Form.Item
         name="businessEmail"
-        placeholder={t('auth.businessEmail')}
-        formItemProps={{ className: 'no-card' }}
+        className="no-card"
         rules={[{ required: true }]}
-      />
+      >
+        <Input placeholder={t('auth.businessEmail')} />
+      </Form.Item>
       <Row gutter={12}>
         <Col flex="auto">
-          <ProFormText
+          <Form.Item
             name="code"
-            placeholder={t('auth.code')}
-            formItemProps={{ className: 'no-card' }}
+            className="no-card"
             rules={[{ required: true }]}
-          />
+          >
+            <Input placeholder={t('auth.code')} />
+          </Form.Item>
         </Col>
         <Col flex="none">
-          <ProForm.Item className="no-card">
+          <Form.Item className="no-card">
             <Button type="primary" icon={<MailOutlined />}>{t('auth.sendCode')}</Button>
-          </ProForm.Item>
+          </Form.Item>
         </Col>
       </Row>
-      <ProFormText.Password
+      <Form.Item
         name="password"
-        placeholder={t('auth.password')}
-        formItemProps={{ className: 'no-card' }}
+        className="no-card"
         rules={[{ required: true }]}
-      />
-      <ProForm.Item className="no-card">
-        <ProFormCheckbox noStyle name="terms">
+      >
+        <Input.Password placeholder={t('auth.password')} />
+      </Form.Item>
+      <Form.Item className="no-card" name="terms" valuePropName="checked" rules={[{ required: true }]}>
+        <Checkbox>
           {t('auth.termsPrefix')}{' '}
           <a>{t('auth.termsOfService')}</a>{' '}
           {t('auth.termsAnd')}{' '}
           <a>{t('auth.privacyPolicy')}</a>
-        </ProFormCheckbox>
-      </ProForm.Item>
+        </Checkbox>
+      </Form.Item>
       <Button type="primary" block className={styles.submitter}>
         {t('auth.createAccount')}
       </Button>
-    </ProForm>
+    </Form>
   );
 };
 

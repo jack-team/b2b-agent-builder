@@ -1,13 +1,28 @@
-import type { FC } from 'react';
+import { lazy, Suspense, useEffect, type FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Tabs } from 'antd';
+import Spinner from '@/components/Spinner';
+import { prefetchRoute } from '@/router/helper';
 import SignInForm from './SignInForm';
-import RegisterForm from './RegisterForm';
 import RightPanel from './rightPanel';
 import styles from './styles.module.less';
 
+const RegisterForm = lazy(() => import('./RegisterForm'));
+
 const AuthPage: FC = () => {
   const { t } = useTranslation();
+
+  useEffect(() => {
+    const prefetchDashboard = () => prefetchRoute('/dashboard');
+
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(prefetchDashboard);
+      return () => window.cancelIdleCallback(id);
+    }
+
+    const id = window.setTimeout(prefetchDashboard, 2000);
+    return () => window.clearTimeout(id);
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -31,7 +46,17 @@ const AuthPage: FC = () => {
               {
                 key: 'register',
                 label: t('auth.register'),
-                children: <RegisterForm />,
+                children: (
+                  <Suspense
+                    fallback={
+                      <div className="flex justify-center py-8 text-[24px]">
+                        <Spinner type="rotating-lines" />
+                      </div>
+                    }
+                  >
+                    <RegisterForm />
+                  </Suspense>
+                ),
               },
             ]}
           />

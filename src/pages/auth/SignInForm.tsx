@@ -1,59 +1,50 @@
 import type { FC } from 'react';
 import * as uuid from 'uuid';
-import { Button } from 'antd';
+import { Button, Checkbox, Form, Input } from 'antd';
 import { useMemoizedFn } from 'ahooks';
 import { useTranslation } from 'react-i18next';
-import { ProForm, ProFormText, ProFormCheckbox } from '@ant-design/pro-components';
 import { useUserStore } from '@/store/user';
+import { prefetchRoute } from '@/router/helper';
 import { IconEmail, IconLock } from '@/components/BaseIcons';
 import styles from './styles.module.less';
 
 const SignInForm: FC = () => {
   const { t } = useTranslation();
-  const [form] = ProForm.useForm();
+  const [form] = Form.useForm();
   const updateUser = useUserStore(s => s.updateUser);
 
   const handleSubmit = useMemoizedFn(async () => {
     const formData = await form.validateFields();
     updateUser({ userId: uuid.v4(), email: formData.username });
+    prefetchRoute('/dashboard');
   });
 
   return (
-    <ProForm
-      form={form}
-      layout="vertical"
-      submitter={false}
-    >
-      <ProFormText
+    <Form form={form} layout="vertical">
+      <Form.Item
         name="username"
         label={t('auth.email')}
-        required={false}
-        allowClear={true}
+        className="no-card"
         rules={[{ required: true }]}
-        formItemProps={{ className: 'no-card' }}
-        fieldProps={{ prefix: <IconEmail /> }}
-      />
-      <ProFormText.Password
+      >
+        <Input prefix={<IconEmail />} allowClear />
+      </Form.Item>
+      <Form.Item
         name="password"
         label={t('auth.password')}
-        allowClear={true}
-        required={false}
+        className="no-card"
         rules={[{ required: true }]}
-        formItemProps={{ className: 'no-card' }}
-        fieldProps={{ prefix: <IconLock /> }}
-      />
-      <ProForm.Item className="no-card">
+      >
+        <Input.Password prefix={<IconLock />} allowClear />
+      </Form.Item>
+      <Form.Item className="no-card">
         <div className="flex items-center justify-between">
-          <ProFormCheckbox
-            noStyle
-            name="remember"
-            initialValue={false}
-          >
-            {t('auth.rememberMe')}
-          </ProFormCheckbox>
+          <Form.Item name="remember" valuePropName="checked" noStyle initialValue={false}>
+            <Checkbox>{t('auth.rememberMe')}</Checkbox>
+          </Form.Item>
           <a>{t('auth.forgotPassword')}</a>
         </div>
-      </ProForm.Item>
+      </Form.Item>
       <Button
         block
         type="primary"
@@ -62,7 +53,7 @@ const SignInForm: FC = () => {
       >
         {t('auth.signIn')}
       </Button>
-    </ProForm>
+    </Form>
   );
 };
 
