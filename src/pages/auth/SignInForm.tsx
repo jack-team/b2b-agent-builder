@@ -6,7 +6,6 @@ import { useTranslation } from 'react-i18next';
 import { useUserStore } from '@/store/user';
 import { prefetchRoute } from '@/router/helper';
 import { IconEmail, IconLock } from '@/components/BaseIcons';
-import styles from './styles.module.less';
 
 const SignInForm: FC = () => {
   const { t } = useTranslation();
@@ -23,19 +22,25 @@ const SignInForm: FC = () => {
     <Form form={form} layout="vertical">
       <Form.Item
         name="username"
-        label={t('auth.email')}
         className="no-card"
         rules={[{ required: true }]}
       >
-        <Input prefix={<IconEmail />} allowClear />
+        <Input
+          allowClear
+          prefix={<IconEmail />}
+          placeholder={t('auth.email')}
+        />
       </Form.Item>
       <Form.Item
         name="password"
-        label={t('auth.password')}
         className="no-card"
         rules={[{ required: true }]}
       >
-        <Input.Password prefix={<IconLock />} allowClear />
+        <Input.Password
+          allowClear
+          prefix={<IconLock />}
+          placeholder={t('auth.password')}
+        />
       </Form.Item>
       <Form.Item className="no-card">
         <div className="flex items-center justify-between">
@@ -49,7 +54,6 @@ const SignInForm: FC = () => {
         block
         type="primary"
         onClick={handleSubmit}
-        className={styles.submitter}
       >
         {t('auth.signIn')}
       </Button>

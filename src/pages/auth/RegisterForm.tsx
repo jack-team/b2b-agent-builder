@@ -2,7 +2,6 @@ import type { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Button, Checkbox, Col, Form, Input, Row } from 'antd';
 import { MailOutlined } from '@/components/BaseIcons';
-import styles from './styles.module.less';
 
 const RegisterForm: FC = () => {
   const { t } = useTranslation();
@@ -68,7 +67,7 @@ const RegisterForm: FC = () => {
           <a>{t('auth.privacyPolicy')}</a>
         </Checkbox>
       </Form.Item>
-      <Button type="primary" block className={styles.submitter}>
+      <Button type="primary" block>
         {t('auth.createAccount')}
       </Button>
     </Form>
