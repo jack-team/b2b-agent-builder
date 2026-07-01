@@ -58,14 +58,17 @@ export default defineConfig(conf => {
               return 'react-dom';
             }
             if (
-              id.includes('node_modules/react/jsx-runtime')
-              || id.includes('node_modules/react/jsx-dev-runtime')
-              || id.includes('node_modules/react/cjs/react-jsx-runtime')
-              || id.includes('node_modules/react/cjs/react-jsx-dev-runtime')
+              id.includes('node_modules/react/jsx-runtime') ||
+              id.includes('node_modules/react/jsx-dev-runtime') ||
+              id.includes('node_modules/react/cjs/react-jsx-runtime') ||
+              id.includes('node_modules/react/cjs/react-jsx-dev-runtime')
             ) {
               return 'react-jsx';
             }
-            if (id.includes('node_modules/react/') || id.includes('node_modules/react\\')) {
+            if (
+              id.includes('node_modules/react/') ||
+              id.includes('node_modules/react\\')
+            ) {
               return 'react';
             }
             if (id.includes('node_modules/scheduler')) {
@@ -84,10 +87,16 @@ export default defineConfig(conf => {
             if (id.includes('node_modules/antd')) {
               return 'antd';
             }
-            if (id.includes('node_modules/react-router') || id.includes('node_modules/@remix-run')) {
+            if (
+              id.includes('node_modules/react-router') ||
+              id.includes('node_modules/@remix-run')
+            ) {
               return 'router';
             }
-            if (id.includes('node_modules/i18next') || id.includes('node_modules/react-i18next')) {
+            if (
+              id.includes('node_modules/i18next') ||
+              id.includes('node_modules/react-i18next')
+            ) {
               return 'i18n';
             }
             if (id.includes('/src/i18n/locales/')) {
