@@ -58,7 +58,7 @@ export const useBreadcrumb = () => {
       }
     }
     return items;
-  }, [menus, selectedKeys]);
+  }, [menus, selectedKeys, t]);
 
   return {
     breadcrumbItems,
