@@ -17,6 +17,7 @@ type LanguageSwitcherProps = {
   className?: string;
 };
 
+// 语言切换器
 const LanguageSwitcher: FC<LanguageSwitcherProps> = ({ className }) => {
   const { t, i18n } = useTranslation();
 

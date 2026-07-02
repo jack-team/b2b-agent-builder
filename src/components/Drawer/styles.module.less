@@ -1,8 +1,8 @@
 .drawer {
+  --drawer-width-full: 100vw;
   --drawer-width-large: calc(100vw * 0.75);
   --drawer-width-medium: calc(100vw * 0.5);
   --drawer-width-small: calc(100vw * 0.382);
-  --drawer-width-full: 100vw;
 
   :global {
     .ant-drawer-header {
@@ -55,6 +55,8 @@
 .drawer_header_back {
   width: 32px;
   height: 32px;
+  padding: 0;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   background-color: var(--bg-color-primary);
@@ -99,7 +101,7 @@
   background: color-mix(in srgb, var(--bg-color-surface) 80%, transparent);
 }
 
-
+// 暗色模式下，移除 Drawer 阴影
 html[data-theme='dark'] {
   .drawer {
     :global {
